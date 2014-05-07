@@ -1,3 +1,0 @@
-[submodule "vector-tile-js"]
-	path = vector-tile-js
-	url = https://github.com/mapbox/vector-tile-js.git
