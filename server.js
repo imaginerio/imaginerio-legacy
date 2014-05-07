@@ -6,7 +6,7 @@ var app = express();
 
 app.get( '/timeline', meta.timeline );
 app.get( '/layers/:year', meta.layers );
-//app.get( '/countries/:id/polygon', geo.polygon);
+app.get( '/names/:year/:word', meta.names );
 //app.get( '/countries/:id/polygon/:srid', geo.polygonSrid);
 
 app.listen( 3000 );

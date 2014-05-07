@@ -44,3 +44,27 @@ exports.layers = function( req, res )
 		res.send( layers );
 	});
 }
+
+exports.names = function( req, res )
+{
+	var client = new pg.Client( conn );
+	client.connect();
+
+	var year = req.params.year,
+		word = req.params.word;
+		
+	var q = "SELECT array_agg( gid ) as gid, namecomple FROM ( SELECT gid, namecomple FROM basepoint WHERE namecomple ILIKE '%" + word + "%' UNION SELECT gid, namecomple FROM baseline WHERE namecomple ILIKE '%" + word + "%' UNION SELECT gid, namecomple FROM basepoly WHERE namecomple ILIKE '%" + word + "%' ) as q GROUP BY namecomple";
+	
+	var query = client.query( q ),
+		names = {};
+	
+	query.on( 'row', function( result )
+	{
+		names[ result.namecomple ] = result.gid;
+	});
+	
+	query.on( 'end', function()
+	{
+		res.send( names );
+	});
+}
