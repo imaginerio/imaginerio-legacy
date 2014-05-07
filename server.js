@@ -5,7 +5,7 @@ var express = require( 'express' ),
 var app = express();
 
 app.get( '/timeline', meta.timeline );
-//app.get( '/countries/:id/bbox/:srid', geo.bboxSrid);
+app.get( '/layers/:year', meta.layers );
 //app.get( '/countries/:id/polygon', geo.polygon);
 //app.get( '/countries/:id/polygon/:srid', geo.polygonSrid);
 
