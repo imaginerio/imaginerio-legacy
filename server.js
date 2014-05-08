@@ -26,6 +26,7 @@ app.use(function (req, res, next) {
 app.get( '/timeline', meta.timeline );
 app.get( '/layers/:year', meta.layers );
 app.get( '/names/:year/:word', meta.names );
+app.get( '/bounds/:year', geo.bounds );
 //app.get( '/countries/:id/polygon/:srid', geo.polygonSrid);
 
 app.listen( 3000 );

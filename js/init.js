@@ -1,3 +1,5 @@
+var year = 2013;
+
 function init()
 {
 	resize();

@@ -2,12 +2,21 @@ var map;
 
 function build_map()
 {
-	var map = L.map( 'map', {
+	map = L.map( 'map', {
 		center: [ -22.9046, -43.1919 ],
 		zoom: 14,
 		minZoom : 14,
 		maxZoom : 17
-	});
+	})
+	map.whenReady( get_maxBounds );
 	
-	L.tileLayer( 'tiles/2013/{z}/{x}/{y}.png' ).addTo( map );
+	L.tileLayer( 'tiles/' + year + '/{z}/{x}/{y}.png' ).addTo( map );
+}
+
+function get_maxBounds()
+{
+	$.getJSON( "http://localhost:3000/bounds/" + year, function( json )
+	{
+		map.setMaxBounds( json )
+	});
 }
