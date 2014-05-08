@@ -17,26 +17,36 @@ nav{
 	line-height: 60px;
 }
 
+#plans{
+	float: left;
+	background-color:rgb(102,102,102);
+	width: 130px;
+	height:36px;
+	line-height: 36px;
+	text-align: center;
+	margin: 12px 10px 0 10px;
+	color: white;
+	-moz-border-radius:9px ;
+	-webkit-border-radius:9px ;
+	border-radius:9px ;
+	-moz-box-shadow:0px 0px 2px 1px rgba(0,0,0,0.15);
+	-webkit-box-shadow:0px 0px 2px 1px rgba(0,0,0,0.15);
+	box-shadow:0px 0px 2px 1px rgba(0,0,0,0.15);
+	-ms-filter:"progid:DXImageTransform.Microsoft.Glow(Color=#ff000000,Strength=3)";
+	filter:progid:DXImageTransform.Microsoft.Glow(Color=#ff000000,Strength=3);
+}
+
 #year{
 	float: left;
-	width: 175px;
+	width: 100px;
 	text-align: center;
 	font-size: 32px;
 	font-weight: bold;
 	color: white;
 }
 
-.next{
-	font-size: 24px;
-	color: rgb(153,153,153);
-}
-
-#prev{
-	font-size: 27px;
-}
-
 #timeline{
-	margin: 0 370px 0 175px;
+	margin: 0 370px 0 260px;
 }
 
 .tick, .minor{
