@@ -5,7 +5,7 @@ var years = [],
 
 function build_timeline()
 {
-	$( "#timeline" ).empty();
+	$( "#track" ).empty();
 	if( years.length == 0 )
 	{
 		get_timeline();
@@ -24,7 +24,7 @@ function build_timeline()
 	
 	for( var i = y; i <= max; i += gap )
 	{
-		$( "#timeline" ).append( add_tick( i ) );
+		$( "#track" ).append( add_tick( i ) );
 	}
 	
 	function get_timeline()
