@@ -12,6 +12,56 @@ nav{
 	z-index: 5;
 }
 
+#year, #timeline, #search input{
+	height: 60px;
+	line-height: 60px;
+}
+
+#year{
+	float: left;
+	width: 175px;
+	text-align: center;
+	font-size: 32px;
+	font-weight: bold;
+	color: white;
+}
+
+.next{
+	font-size: 24px;
+	color: rgb(153,153,153);
+}
+
+#prev{
+	font-size: 27px;
+}
+
+#timeline{
+	margin: 0 370px 0 175px;
+}
+
+.tick, .minor{
+	float: left;
+	border-right: 1px solid #999;
+	font-size: 12px;
+	font-weight: bold;
+	height: 35px;
+}
+
+.tick span{
+	display: block;
+	width: 30px;
+	float: right;
+	position: relative;
+	text-align: center;
+	top: 15px;
+	left: 15px;
+	color: #999;
+}
+
+.minor{
+	width: 50%;
+	height: 20px;
+}
 
 #search{
 	background-color: white;
@@ -22,9 +72,7 @@ nav{
 	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=3,Color=#40000000,Positive=true);
 }
 
-input{
-	height: 100%;
-	line-height: 100%;
+#search input{
 	text-indent: 45px;
 	width: 100%;
 	padding: 0;

@@ -15,10 +15,11 @@
 	<body>
 		<header>imagineRio</header>
 		<nav>
-			<div id="timeline"></div>
 			<form id="search">
 				<input type="text" placeholder="Search..." />
 			</form>
+			<div id="year"><span class="next" id="prev">&#9664;</span> <span class="display">2013</span> <span class="next" id="next">&#9654;</span></div>
+			<div id="timeline"></div>
 		</nav>
 		<div id="map"></div>
 		<div id="layers"></div>
@@ -26,6 +27,7 @@
 		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 		<script src="lib/leaflet-custom.js"></script>
+		<script src="node_modules/underscore/underscore-min.js"></script>
 		
 		<script src="js/layers.js"></script>
 		<script src="js/map.js"></script>

@@ -4,7 +4,7 @@ function build_map()
 {
 	map = L.map( 'map', {
 		center: [ -22.9046, -43.1919 ],
-		zoom: 14,
+		zoom: 15,
 		minZoom : 14,
 		maxZoom : 17
 	})
