@@ -3,10 +3,14 @@
   "description": "imagineRio Interactive Map",
   "version": "0.0.1",
   "private": true,
+  "engines":{
+  	"node": "0.6.x"
+  },
   "dependencies": {
     "express": "4.1.1",
     "logfmt" : "1.*",
     "pg": "3.0.3",
+    "mapnik": "git://github.com/springmeyer/node-mapnik-heroku.git",
     "underscore": "1.6"
   },
   "main": "web.js",
