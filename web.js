@@ -9,7 +9,7 @@ app.use( logfmt.requestLogger() );
 app.get( '/timeline', meta.timeline );
 app.get( '/layers/:year', meta.layers );
 app.get( '/names/:year/:word', meta.names );
-app.get( '/mapnik', geo.mapnik );
+app.get( '/mapnik', geo.mapnik_test );
 
 var port = Number( process.env.PORT || 5000 );
 app.listen( port, function()

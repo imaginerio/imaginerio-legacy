@@ -1,6 +1,6 @@
 var mapnik = require( 'mapnik' );
 
-exports.mapnik = function( req, res )
+exports.mapnik_test = function( req, res )
 {
 	res.writeHead( 500, { 'Content-Type': 'text/plain' } );
 	var map = new mapnik.Map( 256, 256 );
