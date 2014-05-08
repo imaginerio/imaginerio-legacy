@@ -15,5 +15,6 @@ exports.bounds = function( req, res )
 		var bounds = result.extent.replace( /(BOX\(|\))/gi, "" ).split( "," );
 		bounds = _.map( bounds, function( d ){ return _.map( d.split( " " ).reverse(), function( n ){ return parseFloat( n ) } ) } );
 		res.send( bounds );
+		client.end();
 	});
 }

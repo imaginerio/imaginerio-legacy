@@ -20,6 +20,7 @@ exports.timeline = function( req, res )
 	{
 		years.pop();
 		res.send( years );
+		client.end();
 	});
 }
 
@@ -50,6 +51,7 @@ exports.layers = function( req, res )
 		});
 		
 		res.send( layers );
+		client.end();
 	});
 }
 
@@ -74,5 +76,6 @@ exports.names = function( req, res )
 	query.on( 'end', function()
 	{
 		res.send( names );
+		client.end();
 	});
 }
