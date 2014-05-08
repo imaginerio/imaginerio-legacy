@@ -7,11 +7,19 @@ exports.timeline = function( req, res )
 	var client = new pg.Client( conn );
 	client.connect();
 	
-	var query = client.query( "SELECT MIN( firstdispl ) AS min, MAX( firstdispl ) as max FROM ( SELECT firstdispl FROM basepoint UNION SELECT firstdispl FROM baseline UNION SELECT firstdispl FROM basepoly ) as q" );
+	var years = [];
+	
+	var query = client.query( "SELECT * FROM ( SELECT firstdispl  AS year FROM basepoint UNION SELECT lastdispla + 1 AS year FROM basepoint UNION SELECT firstdispl  AS year FROM baseline UNION SELECT lastdispla + 1 AS year FROM baseline UNION SELECT firstdispl  AS year FROM basepoly UNION SELECT lastdispla + 1 AS year FROM basepoly ) as q ORDER BY year" );
 	
 	query.on( 'row', function( result )
 	{
-		res.send( result );
+		years.push( result.year );
+	});
+	
+	query.on( 'end', function()
+	{
+		years.pop();
+		res.send( years );
 	});
 }
 
