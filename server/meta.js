@@ -19,7 +19,7 @@ exports.timeline = function( req, res )
 	query.on( 'end', function()
 	{
 		years.pop();
-		res.send( years );
+		res.send( [ 1567, 1819, 1903, 1982, 2013 ] );
 		client.end();
 	});
 }
