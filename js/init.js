@@ -4,6 +4,7 @@ function init()
 {
 	resize();
 	build_map();
+	init_timeline();
 	
 	$( window ).resize( resize );
 }
