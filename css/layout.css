@@ -1,0 +1,23 @@
+body{
+	font-family: "Helvetica Neue", HelveticaNeue, TeXGyreHeros, FreeSans, "Nimbus Sans L", "Liberation Sans", Arimo, Helvetica, Arial, sans-serif;
+	margin: 0;
+}
+
+header{
+	line-height: 99px;
+}
+
+nav{
+	height: 60px;
+}
+
+#search{
+	width: 350px;
+	height: 100%;
+	float: right;
+}
+
+#map{
+	width: 100%;
+	bottom: 60px;
+}
