@@ -40,7 +40,7 @@ function show_tiles( tile )
 
 function get_maxBounds()
 {
-	$.getJSON( "http://localhost:3000/bounds/" + year, function( json )
+	$.getJSON( server + "/bounds/" + year, function( json )
 	{
 		map.setMaxBounds( json )
 	});
@@ -51,7 +51,7 @@ function probe( e )
 	cursor_loading( true, e.containerPoint );
 	if( map.hasLayer( highlight ) ) map.removeLayer( highlight );
 	
-	highlight = omnivore.geojson( "http://localhost:3000/probe/" + year + "/" + e.latlng.lng + "," + e.latlng.lat )
+	highlight = omnivore.geojson( server + "/probe/" + year + "/" + e.latlng.lng + "," + e.latlng.lat )
 		.on( 'ready', function()
 		{
 			cursor_loading( false );

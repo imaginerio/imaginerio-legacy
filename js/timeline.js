@@ -7,7 +7,7 @@ var year = 0,
 
 function init_timeline()
 {
-	$.getJSON( "http://localhost:3000/timeline", function( json )
+	$.getJSON( server + "/timeline", function( json )
 	{
 		years = json;
 		min = _.first( years ),

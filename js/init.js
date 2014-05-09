@@ -1,3 +1,5 @@
+var server = "http://ec2-54-186-6-23.us-west-2.compute.amazonaws.com:3000";
+
 function init()
 {
 	resize();
@@ -25,15 +27,11 @@ function cursor_loading( show, p )
 					"top" : p.y + 100,
 					"left" : p.x
 				})
-		)
-		$( "#click" ).fadeIn();
+		);
 	}
 	else
 	{
-		$( "#click" ).fadeOut( function()
-		{
-			$( this ).remove();
-		});
+		$( "#click" ).remove();
 	}
 }
 
