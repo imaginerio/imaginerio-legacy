@@ -1,9 +1,6 @@
-var year = 2013;
-
 function init()
 {
 	resize();
-	build_map();
 	init_timeline();
 	
 	$( window ).resize( resize );
