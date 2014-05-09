@@ -29,6 +29,7 @@ app.get( '/layers/:year', meta.layers );
 app.get( '/names/:year/:word', meta.names );
 app.get( '/bounds/:year', geo.bounds );
 app.get( '/probe/:year/:coords', geo.probe );
+app.get( '/draw/:id', geo.draw );
 
 app.listen( 3000 );
 console.log( 'Listening on port 3000...' );
