@@ -4,7 +4,8 @@ var express = require( 'express' ),
 
 var app = express();
 
-app.use(function (req, res, next) {
+app.use( function( req, res, next )
+{
 
     // Website you wish to allow to connect
     res.setHeader( 'Access-Control-Allow-Origin', 'http://localhost' );
@@ -27,7 +28,7 @@ app.get( '/timeline', meta.timeline );
 app.get( '/layers/:year', meta.layers );
 app.get( '/names/:year/:word', meta.names );
 app.get( '/bounds/:year', geo.bounds );
-//app.get( '/countries/:id/polygon/:srid', geo.polygonSrid);
+app.get( '/probe/:year/:coords', geo.probe );
 
 app.listen( 3000 );
 console.log( 'Listening on port 3000...' );

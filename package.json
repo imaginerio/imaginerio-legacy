@@ -7,6 +7,7 @@
 		"express": "4.1.1",
 		"pg" : "3.0.3",
 		"underscore" : "1.6",
-		"mapnik" : "*"
+		"mapnik" : "*",
+		"postgeo" : "*"
 	}
 }
