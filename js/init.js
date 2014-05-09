@@ -1,6 +1,7 @@
 function init()
 {
 	resize();
+	init_map();
 	init_timeline();
 	
 	$( window ).resize( resize );

@@ -1,16 +1,39 @@
-var map;
+var map,
+	tiles = {},
+	shown;
 
-function build_map()
+function init_map()
 {
 	map = L.map( 'map', {
 		center: [ -22.9046, -43.1919 ],
 		zoom: 15,
 		minZoom : 14,
 		maxZoom : 17
-	})
-	map.whenReady( get_maxBounds );
-	
-	L.tileLayer( 'tiles/' + year + '/{z}/{x}/{y}.png' ).addTo( map );
+	});
+}
+
+function load_tiles()
+{
+	if( tiles[ year ] )
+	{
+		show_tiles( tiles[ year ] );
+	}
+	else
+	{
+		tiles[ year ] = L.tileLayer( 'tiles/' + year + '/{z}/{x}/{y}.png' )
+							.addTo( map )
+							.on( "load", function()
+							{
+								show_tiles( this );
+								this.off( "load" );
+							});
+	}
+}
+
+function show_tiles( tile )
+{
+	if( shown ) tile_fadeOut( shown );
+	shown = tile_fadeIn( tile );
 }
 
 function get_maxBounds()
@@ -19,4 +42,30 @@ function get_maxBounds()
 	{
 		map.setMaxBounds( json )
 	});
+}
+
+function tile_fadeOut( tile_out )
+{
+	var i = 1;
+	var timer = setInterval( function()
+	{
+		i -= 0.1;
+		if( i <= 0 ) clearInterval( timer );
+		tile_out.setOpacity( Math.max( 0, i ) );
+	}, 5 );
+	
+	return tile_out;
+}
+
+function tile_fadeIn( tile_in )
+{
+	var i = 0;
+	var timer = setInterval( function()
+	{
+		i += 0.1;
+		if( i >= 1 ) clearInterval( timer );
+		tile_in.setOpacity( Math.min( 1, i ) );
+	}, 5 );
+	
+	return tile_in;
 }

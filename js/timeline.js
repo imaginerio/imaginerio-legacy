@@ -14,8 +14,8 @@ function init_timeline()
 		max = _.last( years ),
 		year = min;
 		
-		build_map();
 		build_timeline();
+		update_year();
 	});
 	
 	$( "#puck" ).mousedown( function()
@@ -32,8 +32,17 @@ function init_timeline()
 			$( window ).unbind( "mouseup" );
 			
 			year = snap_timeline();
+			update_year();
 		})
 	});
+}
+
+function update_year()
+{
+	$( "#year" ).html( year );
+	
+	load_tiles();
+	get_maxBounds();
 }
 
 function build_timeline()
@@ -90,7 +99,6 @@ function get_timeline_year()
 function snap_timeline()
 {
 	var y = get_timeline_year();
-	console.log( "-" + year + "-   " + y );
 	if( y > year )
 	{
 		y = _.find( years, function( d ){ return d >= y } );
@@ -99,8 +107,6 @@ function snap_timeline()
 	{
 		y = _.find( _.clone( years ).reverse(), function( d ){ return d <= y } );
 	}
-	
-	console.log( y );
 	
 	$( "#puck" ).stop().animate( { "left" : ( y - min ) * px }, "fast" );
 	
