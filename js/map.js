@@ -1,6 +1,7 @@
 var map,
 	tiles = {},
-	shown;
+	shown,
+	highlight;
 
 function init_map()
 {
@@ -9,7 +10,8 @@ function init_map()
 		zoom: 15,
 		minZoom : 14,
 		maxZoom : 17
-	});
+	})
+	.on( "click", probe );
 }
 
 function load_tiles()
@@ -42,6 +44,19 @@ function get_maxBounds()
 	{
 		map.setMaxBounds( json )
 	});
+}
+
+function probe( e )
+{
+	cursor_loading( true, e.containerPoint );
+	if( map.hasLayer( highlight ) ) map.removeLayer( highlight );
+	
+	highlight = omnivore.geojson( "http://localhost:3000/probe/" + year + "/" + e.latlng.lng + "," + e.latlng.lat )
+		.on( 'ready', function()
+		{
+			cursor_loading( false );
+		})
+		.addTo( map );
 }
 
 function tile_fadeOut( tile_out )
