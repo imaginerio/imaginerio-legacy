@@ -1,6 +1,6 @@
 var pg = require( 'pg' ),
 	_ = require( 'underscore' ),
-	conn = "postgres://localhost/rio";
+	conn = "postgres://axismaps:U6glEdd0igS2@rio2.c1juezxtnbot.us-west-2.rds.amazonaws.com/rio";
 	
 exports.timeline = function( req, res )
 {
