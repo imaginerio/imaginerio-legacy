@@ -1,4 +1,5 @@
-var server = "http://ec2-54-186-6-23.us-west-2.compute.amazonaws.com:3000";
+var server = "http://ec2-54-186-6-23.us-west-2.compute.amazonaws.com:3000",
+	tileserver = "http://ec2-54-187-78-253.us-west-2.compute.amazonaws.com/"
 
 function init()
 {
@@ -32,6 +33,20 @@ function cursor_loading( show, p )
 	else
 	{
 		$( "#click" ).remove();
+	}
+}
+
+function map_loading( show )
+{
+	if( show && $( "#loading" ).length == 0 )
+	{
+		$( "#map" ).append(
+			$( document.createElement( 'div' ) ).attr( "id", "loading" )
+		);
+	}
+	else if( show === false )
+	{
+		$( "#loading" ).remove();
 	}
 }
 

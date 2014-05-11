@@ -5,6 +5,7 @@ var map,
 
 function init_map()
 {
+	map_loading( true );
 	map = L.map( 'map', {
 		center: [ -22.9046, -43.1919 ],
 		zoom: 15,
@@ -16,14 +17,17 @@ function init_map()
 
 function load_tiles()
 {
+	clear_highlight();
+	map_loading( true );
 	if( tiles[ year ] )
 	{
 		show_tiles( tiles[ year ] );
 	}
 	else
 	{
-		tiles[ year ] = L.tileLayer( 'tiles/' + year + '/{z}/{x}/{y}.png' )
+		tiles[ year ] = L.tileLayer( tileserver + 'tiles/' + year + '/{z}/{x}/{y}.png' )
 							.addTo( map )
+							.setOpacity( 0  )
 							.on( "load", function()
 							{
 								show_tiles( this );
@@ -49,7 +53,7 @@ function get_maxBounds()
 function probe( e )
 {
 	cursor_loading( true, e.containerPoint );
-	if( map.hasLayer( highlight ) ) map.removeLayer( highlight );
+	clear_highlight();
 	
 	highlight = omnivore.geojson( server + "/probe/" + year + "/" + e.latlng.lng + "," + e.latlng.lat )
 		.on( 'ready', function()
@@ -78,9 +82,19 @@ function tile_fadeIn( tile_in )
 	var timer = setInterval( function()
 	{
 		i += 0.1;
-		if( i >= 1 ) clearInterval( timer );
+		if( i >= 1 )
+		{
+			clearInterval( timer );
+			map_loading( false );
+		}
 		tile_in.setOpacity( Math.min( 1, i ) );
 	}, 5 );
 	
 	return tile_in;
+}
+
+function clear_highlight()
+{
+	if( !map.hasLayer( highlight ) ) return false;
+	map.removeLayer( highlight );
 }
