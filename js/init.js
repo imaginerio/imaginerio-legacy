@@ -6,6 +6,7 @@ function init()
 	resize();
 	init_map();
 	init_timeline();
+	init_search();
 	
 	$( window ).resize( resize );
 }

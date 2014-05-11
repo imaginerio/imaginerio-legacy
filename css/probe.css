@@ -1,0 +1,13 @@
+#probe{
+	height: auto;
+	position: absolute;
+	top: 160px;
+	right: 0;
+	z-index: 999;
+	background-color: #eee;
+}
+
+.result{
+	padding: 10px 20px;
+	border-bottom: 1px solid #ccc;
+}

@@ -15,28 +15,32 @@
 	<body>
 		<header>imagineRio</header>
 		<nav>
-			<form id="search">
-				<input type="text" placeholder="Search..." />
+			<form id="search" class="shadow">
+				<input type="text" placeholder="Search..." class="typeahead" />
 			</form>
 			<div id="plans">Plans for Rio &nbsp;&#9662;</div>
-			<div id="year">2013</div>
+			<div id="year"></div>
 			<div id="timeline">
 				<div id="track"></div>
 				<div id="puck"></div>
 			</div>
 		</nav>
-		<div id="map"></div>
+		<div class="wrapper">
+			<div id="map"></div>
+		</div>
 		<div id="layers"></div>
-		<div id="probe"></div>
+		<div id="probe" class="shadow"></div>
 		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 		<script src="lib/leaflet.js"></script>
 		<script src="lib/leaflet-omnivore.min.js"></script>
 		<script src="lib/underscore-min.js"></script>
+		<script src="lib/bloodhound.js"></script>
 		
 		<script src="js/layers.js"></script>
 		<script src="js/map.js"></script>
 		<script src="js/timeline.js"></script>
+		<script src="js/search.js"></script>
 		<script src="js/init.js"></script>
 	</body>
 </html>
