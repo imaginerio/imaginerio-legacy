@@ -1,13 +1,23 @@
-#probe{
+#results{
 	height: auto;
 	position: absolute;
 	top: 160px;
 	right: 0;
 	z-index: 999;
-	background-color: #eee;
+}
+
+#instruction{
+	line-height: 40px;
+	color: white;
+	font-style: italic;
+	text-indent: 70px;
+	background: #666 url(../img/probe_icon.png) 20px center no-repeat;
+	margin-top: 10px;
+	position: relative;
 }
 
 .result{
 	padding: 10px 20px;
 	border-bottom: 1px solid #ccc;
+	background-color: #eee;
 }

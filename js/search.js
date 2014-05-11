@@ -25,18 +25,18 @@ function init_search()
 			search.get( $( this ).val(), function( d )
 			{
 				$( "#probe" ).empty();
-				_.each( d, function( val ){ add_result( val.name, val.id, new RegExp( q, "gi" ), $( "#probe" ) ) } );
+				_.each( d, function( val ){ add_result( val.name, val.id, $( "#results .search" ), new RegExp( q, "gi" ) ) } );
 			});
 		}
 	});
 }
 
-function add_result( name, id, reg, div )
+function add_result( name, id, div, reg )
 {
 	div.append( 
 		$( document.createElement( 'div' ) )
-			.attr( "data-id", id.join( "," ) )
+			.attr( "data-id", _.isArray( id ) ? id.join( "," ) : id )
 			.addClass( "result" )
-			.html( name.replace( reg, function( m ){ return "<b>" + m + "</b>" } ) )
+			.html( reg ? name.replace( reg, function( m ){ return "<b>" + m + "</b>" } ) : name )
 	);
 }

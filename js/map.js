@@ -58,6 +58,10 @@ function probe( e )
 	highlight = omnivore.geojson( server + "/probe/" + year + "/" + e.latlng.lng + "," + e.latlng.lat )
 		.on( 'ready', function()
 		{
+			_.each( this.getLayers(), function( l )
+			{
+				add_result( l.feature.properties.name, l.feature.properties.id, $( "#results .probe" ) );
+			});
 			cursor_loading( false );
 		})
 		.addTo( map );

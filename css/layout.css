@@ -17,7 +17,7 @@ header{
 	line-height: 99px;
 }
 
-#search, #probe{
+#search, #results{
 	width: 350px;
 	height: 100%;
 	float: right;
