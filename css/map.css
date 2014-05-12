@@ -44,6 +44,10 @@
 	top: 60px;
 }
 
+.leaflet-control-zoom.open{
+	left: 320px;
+}
+
 .leaflet-control-zoom a, .leaflet-control-zoom a:hover{
 	background-color:rgba(255,255,255,0.9);
 	width:50px;

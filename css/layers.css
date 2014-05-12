@@ -1,0 +1,55 @@
+#layers{
+	background-color: #eee;
+	z-index: 5;
+	line-height: 40px;
+	font-size: 16px;
+}
+
+#switch{
+	font-size: 16px;
+	font-weight: bold;
+	background: white url(../img/layers.png) 15px center no-repeat;
+	text-indent: 60px;
+	-webkit-border-radius: 0 10px 10px 0;
+	border-radius: 0 10px 10px 0;
+	padding-right: 10px;
+	width: 100%;
+	position: relative;
+}
+
+#layers h4{
+	margin: 0 0 0 45px;
+	font-size: 16px;
+}
+
+.folder{
+	border-bottom: 1px solid #ccc;
+	background-color: white;
+}
+
+label{
+	display: block;
+	padding-left: 20px;
+}
+
+#layers input{
+	margin-right: 10px;
+}
+
+.geodb{
+	font-weight: bold;
+	font-style: italic;
+}
+
+.layer{
+	padding-left: 40px;
+}
+
+.feature{
+	line-height: 24px;
+	background-color: #eee;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	margin: 8px 20px 8px 65px;
+	padding: 0 10px;
+}

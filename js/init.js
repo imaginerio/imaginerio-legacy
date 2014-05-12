@@ -5,6 +5,7 @@ function init()
 {
 	resize();
 	init_map();
+	init_layers();
 	init_timeline();
 	init_search();
 	
@@ -15,6 +16,7 @@ function resize()
 {
 	var h = $( window ).height();
 	$( "#map" ).height( h - 100 );
+	$( "#layers" ).height( h - 160 );
 	build_timeline();
 }
 

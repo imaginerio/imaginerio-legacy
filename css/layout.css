@@ -27,3 +27,10 @@ header{
 	width: 100%;
 	bottom: 60px;
 }
+
+#layers{
+	position: absolute;
+	left: 0;
+	top: 170px;
+	width: 300px;
+}

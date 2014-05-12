@@ -43,6 +43,7 @@ function update_year()
 	
 	load_tiles();
 	get_maxBounds();
+	build_layers();
 }
 
 function build_timeline()
