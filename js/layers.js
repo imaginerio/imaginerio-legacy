@@ -11,7 +11,18 @@ function init_layers()
 		{
 			$( "#layers, #switch, .leaflet-control-zoom" ).addClass( "open" );
 		}
-	})
+	});
+	$( "#layers" ).on( "click", ".folder", function()
+	{
+		if( $( this ).hasClass( "open" ) )
+		{
+			$( this ).removeClass( "open" );
+		}
+		else
+		{
+			$( this ).addClass( "open" );
+		}
+	});
 }
 
 function build_layers()

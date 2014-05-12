@@ -69,6 +69,49 @@
 .folder{
 	border-bottom: 1px solid #ccc;
 	background-color: white;
+	height: 40px;
+	overflow: hidden;
+	cursor: pointer;
+/*
+	-webkit-transition: all 500ms ease-in;
+	-moz-transition: all 500ms ease-in;
+	-ms-transition: all 500ms ease-in;
+	-o-transition: all 500ms ease-in;
+	transition: all 500ms ease-in;
+*/
+}
+
+.folder.open{
+	height: auto;
+}
+
+.folder:before{
+	content: "◢";
+	display: block;
+	float: left;
+	font-size: 10px;
+	-moz-transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	position: relative;
+	left: 15px;
+/*
+	-webkit-transition: all 500ms ease-in;
+	-moz-transition: all 500ms ease-in;
+	-ms-transition: all 500ms ease-in;
+	-o-transition: all 500ms ease-in;
+	transition: all 500ms ease-in;
+*/
+}
+
+.folder.open:before{
+	-moz-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
 }
 
 label{
