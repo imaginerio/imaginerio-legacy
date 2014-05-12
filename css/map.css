@@ -42,6 +42,12 @@
 	filter:progid:DXImageTransform.Microsoft.Glow(Color=#ff000000,Strength=4);
 	width: 100px;
 	top: 60px;
+	left: 70px;
+	-webkit-transition: left 500ms ease-in;
+	-moz-transition: left 500ms ease-in;
+	-ms-transition: left 500ms ease-in;
+	-o-transition: left 500ms ease-in;
+	transition: left 500ms ease-in;
 }
 
 .leaflet-control-zoom.open{

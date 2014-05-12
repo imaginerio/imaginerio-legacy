@@ -1,6 +1,17 @@
 function init_layers()
 {
 	build_layers();
+	$( "#switch" ).click( function()
+	{
+		if( $( "#layers" ).hasClass( "open" ) )
+		{
+			$( "#layers, #switch, .leaflet-control-zoom" ).removeClass( "open" );
+		}
+		else
+		{
+			$( "#layers, #switch, .leaflet-control-zoom" ).addClass( "open" );
+		}
+	})
 }
 
 function build_layers()
