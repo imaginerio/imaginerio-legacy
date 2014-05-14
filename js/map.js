@@ -1,6 +1,7 @@
 var map,
 	tiles = {},
-	shown,
+	visual = {},
+	shown = {},
 	highlight;
 
 function init_map()
@@ -34,12 +35,26 @@ function load_tiles()
 								this.off( "load" );
 							});
 	}
+	if( visual[ year ] )
+	{
+		if( map.hasLayer( visual[ year ] ) ) map.removeLayer( visual[ year ] );
+		map.addLayer( visual[ year ] );
+	}
+	else
+	{
+		visual[ year ] = omnivore.geojson( server + "/visual/" + year )
+			.on( 'ready', function()
+			{
+				_.each( this.getLayers(), draw_visual );
+			})
+			.addTo( map );
+	}
 }
 
 function show_tiles( tile )
 {
-	if( shown ) tile_fadeOut( shown );
-	shown = tile_fadeIn( tile );
+	if( shown.tiles ) tile_fadeOut( shown.tiles );
+	shown.tiles = tile_fadeIn( tile );
 }
 
 function get_maxBounds()
@@ -101,4 +116,19 @@ function clear_highlight()
 {
 	if( !map.hasLayer( highlight ) ) return false;
 	map.removeLayer( highlight );
+}
+
+function draw_visual( layer )
+{
+	_.each( layer.getLayers(), function( l )
+	{
+		if( l instanceof L.Marker )
+		{
+			l.setIcon( new L.icon({
+				iconUrl : "img/viewpoint.png",
+				iconSize : [ 22, 22 ],
+				iconAnchor : [ 11, 11 ]
+			}));
+		}
+	});
 }
