@@ -51,7 +51,7 @@ exports.visual = function( req, res )
 	
 	var year = req.params.year;
 	
-	postgeo.query( "SELECT ssid AS id, ST_AsGeoJSON( ST_Collect( ST_SetSRID( ST_MakePoint( longitude, latitude ), 4326 ), geom ) ) AS geometry FROM visualpoly WHERE layer = 'ImageViewshedsPoly'", "geojson", function( data )
+	postgeo.query( "SELECT ssid AS id, ST_AsGeoJSON( ST_Collect( ST_SetSRID( ST_MakePoint( longitude, latitude ), 4326 ), geom ) ) AS geometry FROM visualpoly WHERE layer = 'ImageViewshedsPoly' AND earliestda <= " + year + " AND latestdate >= " + year, "geojson", function( data )
 	{
 		res.send( data );
 	});

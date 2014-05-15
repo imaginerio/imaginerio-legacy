@@ -120,15 +120,38 @@ function clear_highlight()
 
 function draw_visual( layer )
 {
+	layer.on( "click", function( e )
+	{
+		if( visual.active ) visual.active.setStyle( { fillOpacity : 0 } );
+		
+		this.bringToFront();
+		_.each( this.getLayers(), function( l )
+		{
+			if( l instanceof L.Marker === false )
+			{
+				l.setStyle( { fillOpacity : 0.65 } );
+				visual.active = l;
+			}
+		} )
+	});
+
 	_.each( layer.getLayers(), function( l )
 	{
 		if( l instanceof L.Marker )
 		{
 			l.setIcon( new L.icon({
 				iconUrl : "img/viewpoint.png",
-				iconSize : [ 22, 22 ],
-				iconAnchor : [ 11, 11 ]
+				iconSize : [ 25, 22 ],
+				iconAnchor : [ 12, 11 ]
 			}));
+		}
+		else
+		{
+			l.setStyle({
+				fillColor : "#FFFFFF",
+				fillOpacity : 0,
+				opacity : 0
+			});
 		}
 	});
 }

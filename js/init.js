@@ -1,5 +1,8 @@
-var server = "http://ec2-54-186-6-23.us-west-2.compute.amazonaws.com:3000",
-	tileserver = "http://ec2-54-187-78-253.us-west-2.compute.amazonaws.com/"
+//var server = "http://ec2-54-186-6-23.us-west-2.compute.amazonaws.com:3000",
+//	tileserver = "http://ec2-54-187-78-253.us-west-2.compute.amazonaws.com/"
+	
+var server = "http://localhost:3000",
+	tileserver = ""
 
 function init()
 {
