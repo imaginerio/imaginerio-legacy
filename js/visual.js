@@ -1,4 +1,4 @@
-load_visual()
+function load_visual()
 {
 	if( visual[ year ] )
 	{
@@ -30,7 +30,8 @@ function draw_visual( layer )
 				l.setStyle( { fillOpacity : 0.65 } );
 				visual.active = l;
 			}
-		} )
+		});
+		show_visual_details( this.feature.properties.id );
 	});
 
 	_.each( layer.getLayers(), function( l )
@@ -50,6 +51,17 @@ function draw_visual( layer )
 				fillOpacity : 0,
 				opacity : 0
 			});
+		}
+	});
+}
+
+function show_visual_details( ssid )
+{
+	$.ajax( "http://www.sscommons.org/openlibrary/secure/collections/7729935",{
+		dataType : "json",
+		success : function( json )
+		{
+			console.log( json );
 		}
 	});
 }
