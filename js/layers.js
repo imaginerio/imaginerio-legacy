@@ -29,6 +29,8 @@ function build_layers()
 {
 	$.getJSON( server + "/layers/" + year, function( json )
 	{
+		$( "#list" ).empty();
+		
 		_.each( json, function( val, key )
 		{
 			var folder = $( document.createElement( 'div' ) )

@@ -63,7 +63,7 @@ exports.plan = function( req, res )
 	
 	var plan = decodeURI( req.params.name );
 	
-	postgeo.query( "SELECT globalidco AS id, namecomple AS name, ST_AsGeoJSON( geom ) AS geometry FROM plannedline WHERE planname = '" + plan + "' UNION SELECT globalidco AS id, namecomple AS name, ST_AsGeoJSON( geom ) AS geometry FROM plannedline WHERE planname = '" + plan + "'", "geojson", function( data )
+	postgeo.query( "SELECT globalidco AS id, namecomple AS name, ST_AsGeoJSON( geom ) AS geometry FROM plannedline WHERE planname = '" + plan + "' UNION SELECT globalidco AS id, namecomple AS name, ST_AsGeoJSON( geom ) AS geometry FROM plannedpoly WHERE planname = '" + plan + "'", "geojson", function( data )
 	{
 		res.send( data );
 	});
