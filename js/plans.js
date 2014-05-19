@@ -63,13 +63,17 @@ function load_plan( plan )
 
 function draw_plan( plan )
 {
+	var styles = get_styles( "#875353" );
+	
 	if( plan.geo )
 	{
 		map.addLayer( plan.geo );
+		map.addLayer( plan.geo2 );
 	}
 	else
 	{
-		plan.geo = omnivore.geojson( server + "/plan/" + encodeURI( plan.planname ) ).addTo( map );
+		plan.geo = omnivore.geojson( server + "/plan/" + encodeURI( plan.planname ), null, styles.bottom ).addTo( map );
+		plan.geo2 = omnivore.geojson( server + "/plan/" + encodeURI( plan.planname ), null, styles.top ).addTo( map );
 	}
 }
 
@@ -77,7 +81,8 @@ function clear_plan()
 {
 	_.each( plans, function( p )
 	{
-		if( p.geo && map.hasLayer( p.geo ) ) map.removeLayer( p.geo )
+		if( p.geo && map.hasLayer( p.geo ) ) map.removeLayer( p.geo );
+		if( p.geo2 && map.hasLayer( p.geo2 ) ) map.removeLayer( p.geo2 );
 	});
 	
 	$( "#plans" )

@@ -2,7 +2,7 @@ var map,
 	tiles = {},
 	visual = {},
 	shown = {},
-	highlight;
+	highlight = {};
 
 function init_map()
 {
@@ -68,12 +68,15 @@ function probe( e )
 function draw( id )
 {
 	clear_highlight();
-	highlight = omnivore.geojson( server + "/draw/" + id )
+	var styles = get_styles( "#1a1a1a" );
+	
+	highlight.bottom = omnivore.geojson( server + "/draw/" + id, null, styles.bottom )
 				.on( 'ready', function()
 				{
 					map.fitBounds( this.getBounds() );
 				})
 				.addTo( map );
+	highlight.top = omnivore.geojson( server + "/draw/" + id, null, styles.top ).addTo( map );
 }
 
 function tile_fadeOut( tile_out )
@@ -109,5 +112,36 @@ function tile_fadeIn( tile_in )
 function clear_highlight()
 {
 	if( !map.hasLayer( highlight ) ) return false;
-	map.removeLayer( highlight );
+	map.removeLayer( highlight.top );
+	map.removeLayer( highlight.bottom );
+}
+
+function get_styles( color )
+{
+	var topLayer = L.geoJson( null, {
+	    style : function( feature )
+	    {
+        	return { 
+        		color: color,
+        		fillColor: color,
+        		fillOpacity : 0.2,
+        		weight : 2
+        	};
+		}
+	});
+	
+	var bottomLayer = L.geoJson( null, {
+	    style : function( feature )
+	    {
+        	return { 
+        		color: color,
+        		fillColor: color,
+        		fillOpacity : 0,
+        		opacity : 0.2,
+        		weight : 6 
+        	};
+		}
+	});
+	
+	return { top : topLayer, bottom : bottomLayer };
 }
