@@ -96,7 +96,6 @@ exports.plans = function( req, res )
 	
 	query.on( 'end', function()
 	{
-		console.log( plans );
 		plans = _.sortBy( plans, function( n ){ return parseInt( n.planyear.replace( /[^0-9].*/gi, "" ) ) } ); 
 		res.send( plans );
 		client.end();
