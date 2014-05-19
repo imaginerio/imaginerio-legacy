@@ -58,16 +58,22 @@ function probe( e )
 	clear_highlight();
 	$( "#results .probe" ).empty();
 	
-	highlight = omnivore.geojson( server + "/probe/" + year + "/" + e.latlng.lng + "," + e.latlng.lat )
-		.on( 'ready', function()
-		{
-			_.each( this.getLayers(), function( l )
-			{
-				add_result( l.feature.properties.name, l.feature.properties.id, $( "#results .probe" ) );
-			});
-			cursor_loading( false );
-		})
-		.addTo( map );
+	$.getJSON( server + "/probe/" + year + "/" + e.latlng.lng + "," + e.latlng.lat, function( json )
+	{
+		_.each( json, function( l ){ add_result( l.name, l.id, $( "#results .probe" ) ); });
+		cursor_loading( false );
+	})
+}
+
+function draw( id )
+{
+	clear_highlight();
+	highlight = omnivore.geojson( server + "/draw/" + id )
+				.on( 'ready', function()
+				{
+					map.fitBounds( this.getBounds() );
+				})
+				.addTo( map );
 }
 
 function tile_fadeOut( tile_out )

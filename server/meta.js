@@ -125,20 +125,28 @@ exports.details = function( req, res )
 	
 	query.on( 'end', function()
 	{
-		var q2 = client.query( "SELECT * FROM " + table + w );
-		q2.on( 'row', function( result )
+		if( !table )
 		{
-			result.years = years;
-			_.each( result, function( n, i )
-			{
-				if( n != null && i != "globalidco" ) details[ i ] = n;
-			});
-		});
-		
-		q2.on( 'end', function()
-		{
-			res.send( details );
+			res.send( { years : years } );
 			client.end();
-		});
+		}
+		else
+		{
+			details.years = years;
+			var q2 = client.query( "SELECT * FROM " + table + w );
+			q2.on( 'row', function( result )
+			{
+				_.each( result, function( n, i )
+				{
+					if( n != null && i != "globalidco" ) details[ i ] = n;
+				});
+			});
+			
+			q2.on( 'end', function()
+			{
+				res.send( details );
+				client.end();
+			});
+		}
 	});
 }

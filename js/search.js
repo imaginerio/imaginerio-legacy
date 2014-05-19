@@ -34,6 +34,7 @@ function init_search()
 function add_result( name, id, div, reg )
 { 	
 	var result = $( document.createElement( 'div' ) )
+					.attr( "data-id", _.isArray( id ) ? id.join( "," ) : id )
 					.addClass( "result" )
 					.html( reg ? name.replace( reg, function( m ){ return "<b>" + m + "</b>" } ) : name )
 					.appendTo( div );
@@ -62,6 +63,7 @@ function get_details( id, div )
 						$( ".expand.open" ).click();
 						$( this ).animate( { height : "+=" + $( this ).children( ".details" ).attr( "data-height" ) } )
 						$( this ).addClass( "open" );
+						draw( $( this ).attr( "data-id" ) );
 					}
 				})
 			
