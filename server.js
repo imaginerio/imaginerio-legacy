@@ -31,6 +31,7 @@ app.get( '/bounds/:year', geo.bounds );
 app.get( '/probe/:year/:coords', geo.probe );
 app.get( '/draw/:id', geo.draw );
 app.get( '/visual/:year', geo.visual );
+app.get( '/plans', meta.plans );
 
 app.listen( 3000 );
 console.log( 'Listening on port 3000...' );
