@@ -24,6 +24,12 @@ app.use( function( req, res, next )
     next();
 });
 
+app.use( function( err, req, res, next )
+{
+	console.error( err.stack );
+	res.send( 500, 'Something broke!');
+});
+
 app.get( '/timeline', meta.timeline );
 app.get( '/layers/:year', meta.layers );
 app.get( '/search/:year/:word', meta.search );
