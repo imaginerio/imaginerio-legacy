@@ -101,3 +101,44 @@ exports.plans = function( req, res )
 		client.end();
 	});
 }
+
+exports.details = function( req, res )
+{
+	var client = new pg.Client( conn );
+	client.connect();
+	
+	var id = req.params.id.split( "," ),
+		table = "",
+		years = "",
+		details = {};
+		
+	var w = _.reduce( id, function( memo, i ){ return memo += " globalidco = '" + i + "' OR" }, " WHERE" );
+	w = w.substr( 0, w.length - 3 );
+	
+	var query = client.query( "SELECT tablename, yearfirstd, yearlastdo FROM basepoint" + w + " UNION SELECT tablename, yearfirstd, yearlastdo FROM baseline" + w + " UNION SELECT tablename, yearfirstd, yearlastdo FROM basepoly" + w );
+	
+	query.on( 'row', function( result )
+	{
+		table = result.tablename;
+		years = result.yearfirstd + " - " + result.yearlastdo;
+	});
+	
+	query.on( 'end', function()
+	{
+		var q2 = client.query( "SELECT * FROM " + table + w );
+		q2.on( 'row', function( result )
+		{
+			result.years = years;
+			_.each( result, function( n, i )
+			{
+				if( n != null && i != "globalidco" ) details[ i ] = n;
+			});
+		});
+		
+		q2.on( 'end', function()
+		{
+			res.send( details );
+			client.end();
+		});
+	});
+}

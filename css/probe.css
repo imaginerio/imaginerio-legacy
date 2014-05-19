@@ -17,7 +17,23 @@
 }
 
 .result{
+	height: 20px;
 	padding: 10px 20px;
 	border-bottom: 1px solid #ccc;
 	background-color: #eee;
+	overflow: hidden;
+}
+
+.result.expand{
+	cursor: pointer;
+}
+
+.result.expand:before{
+	content: "▾";
+	display: block;
+	float: right;
+}
+
+.details{
+	margin-top: 20px;
 }

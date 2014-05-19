@@ -24,7 +24,7 @@ function init_search()
 		{
 			search.get( $( this ).val(), function( d )
 			{
-				$( "#probe" ).empty();
+				$( "#results .search" ).empty();
 				_.each( d, function( val ){ add_result( val.name, val.id, $( "#results .search" ), new RegExp( q, "gi" ) ) } );
 			});
 		}
@@ -32,11 +32,51 @@ function init_search()
 }
 
 function add_result( name, id, div, reg )
+{ 	
+	var result = $( document.createElement( 'div' ) )
+					.addClass( "result" )
+					.html( reg ? name.replace( reg, function( m ){ return "<b>" + m + "</b>" } ) : name )
+					.appendTo( div );
+	
+	get_details( id, result );
+}
+
+function get_details( id, div )
 {
-	div.append( 
-		$( document.createElement( 'div' ) )
-			.attr( "data-id", _.isArray( id ) ? id.join( "," ) : id )
-			.addClass( "result" )
-			.html( reg ? name.replace( reg, function( m ){ return "<b>" + m + "</b>" } ) : name )
-	);
+	id = _.isArray( id ) ? id.join( "," ) : id;
+	
+	$.getJSON( server + "/details/" + id, function( json )
+	{
+		if( !_.isEmpty( json ) )
+		{
+			div.addClass( "expand" )
+				.click( function()
+				{
+					if( $( this ).hasClass( "open" ) )
+					{
+						$( this ).animate( { height : 20 } );
+						$( this ).removeClass( "open" );
+					}
+					else
+					{
+						$( ".expand.open" ).click();
+						$( this ).animate( { height : "+=" + $( this ).children( ".details" ).attr( "data-height" ) } )
+						$( this ).addClass( "open" );
+					}
+				})
+			
+			var details = $( document.createElement( 'div' ) )
+							.addClass( "details" )
+							.appendTo( div );
+			
+			if( json.years ) details.append( "<h4>" + json.years + "</h4>" );
+			
+			_.each( json, function( val, key )
+			{
+				if( key != "years" ) details.append( key + ": <b>" + val + "</b><br />" );
+			});
+			
+			details.attr( "data-height", details.outerHeight() + 20 );
+		}
+	});
 }

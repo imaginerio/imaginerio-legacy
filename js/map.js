@@ -56,6 +56,7 @@ function probe( e )
 {
 	cursor_loading( true, e.containerPoint );
 	clear_highlight();
+	$( "#results .probe" ).empty();
 	
 	highlight = omnivore.geojson( server + "/probe/" + year + "/" + e.latlng.lng + "," + e.latlng.lat )
 		.on( 'ready', function()

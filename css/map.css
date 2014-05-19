@@ -21,7 +21,6 @@
 	width: 42px;
 	height: 42px;
 	margin: -21px 0 0 -21px;
-	display: none;
 	z-index: 99999999;
 	background-image: url(../img/click.gif);
 }
