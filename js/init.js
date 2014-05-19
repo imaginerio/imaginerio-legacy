@@ -9,6 +9,7 @@ function init()
 	resize();
 	init_map();
 	init_layers();
+	init_plans();
 	init_timeline();
 	init_search();
 	

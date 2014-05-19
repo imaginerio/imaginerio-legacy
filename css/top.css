@@ -9,7 +9,7 @@ header{
 nav{
 	background-color:rgba(0,0,0,0.7);
 	position: relative;
-	z-index: 5;
+	z-index: 2001;
 }
 
 #year, #timeline{
@@ -26,6 +26,7 @@ nav{
 	text-align: center;
 	margin: 12px 10px 0 10px;
 	color: white;
+	cursor: pointer;
 	-moz-border-radius:9px ;
 	-webkit-border-radius:9px ;
 	border-radius:9px ;
@@ -34,6 +35,10 @@ nav{
 	box-shadow:0px 0px 2px 1px rgba(0,0,0,0.15);
 	-ms-filter:"progid:DXImageTransform.Microsoft.Glow(Color=#ff000000,Strength=3)";
 	filter:progid:DXImageTransform.Microsoft.Glow(Color=#ff000000,Strength=3);
+}
+
+#plans:hover{
+	background-color: #999;
 }
 
 #year{
@@ -117,4 +122,18 @@ nav{
 	font-size: 16px;
 	color:rgb(102,102,102);
 	background: url(../img/search.png) 10px center no-repeat;
+}
+
+#menu{
+	line-height: 40px;
+	font-size: 16px;
+	background-color: #eee;
+	position: absolute;
+	z-index: 1001;
+	display: none;
+}
+
+#menu div{
+	border-bottom: 1px solid #ccc;
+	padding: 0 15px;
 }
