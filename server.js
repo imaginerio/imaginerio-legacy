@@ -24,10 +24,22 @@ app.use( function( req, res, next )
     next();
 });
 
-app.use( function( err, req, res, next )
-{
-	console.error( err.stack );
-	res.send( 500, 'Something broke!');
+app.use( function(err, req, res, next) {
+  console.error(err.stack);
+  next(err);
+});
+
+app.use( function(err, req, res, next) {
+  if (req.xhr) {
+    res.send(500, { error: 'Something blew up!' });
+  } else {
+    next(err);
+  }
+});
+
+app.use( function(err, req, res, next) {
+  res.status(500);
+  res.render('error', { error: err });
 });
 
 app.get( '/timeline', meta.timeline );
