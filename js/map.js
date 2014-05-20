@@ -111,7 +111,7 @@ function tile_fadeIn( tile_in )
 
 function clear_highlight()
 {
-	if( !map.hasLayer( highlight ) ) return false;
+	if( !map.hasLayer( highlight.top ) ) return false;
 	map.removeLayer( highlight.top );
 	map.removeLayer( highlight.bottom );
 }

@@ -2,6 +2,28 @@ var pg = require( 'pg' ),
 	_ = require( 'underscore' ),
 	conn = "postgres://axismaps:U6glEdd0igS2@rio2.c1juezxtnbot.us-west-2.rds.amazonaws.com/rio";
 	
+_.mixin({
+  // ### _.objMap
+  // _.map for objects, keeps key/value associations
+  objMap: function (input, mapper, context) {
+    return _.reduce(input, function (obj, v, k) {
+             obj[k] = mapper.call(context, v, k, input);
+             return obj;
+           }, {}, context);
+  },
+  // ### _.objFilter
+  // _.filter for objects, keeps key/value associations
+  // but only includes the properties that pass test().
+  objFilter: function (input, test, context) {
+    return _.reduce(input, function (obj, v, k) {
+             if (test.call(context, v, k, input)) {
+               obj[k] = v;
+             }
+             return obj;
+           }, {}, context);
+  }
+});
+	
 exports.timeline = function( req, res )
 {
 	var client = new pg.Client( conn );
@@ -106,47 +128,25 @@ exports.details = function( req, res )
 {
 	var client = new pg.Client( conn );
 	client.connect();
-	
-	var id = req.params.id.split( "," ),
-		table = "",
-		years = "",
-		details = {};
 		
-	var w = _.reduce( id, function( memo, i ){ return memo += " globalidco = '" + i + "' OR" }, " WHERE" );
-	w = w.substr( 0, w.length - 3 );
+	var id = _.reduce( req.params.id.split( "," ), function( memo, i ){ return memo += "'" + i + "',"; }, "ANY(ARRAY[" ).replace( /,$/, "])" ),
+		details = [];
 	
-	var query = client.query( "SELECT tablename, yearfirstd, yearlastdo FROM basepoint" + w + " UNION SELECT tablename, yearfirstd, yearlastdo FROM baseline" + w + " UNION SELECT tablename, yearfirstd, yearlastdo FROM basepoly" + w );
+	var query = client.query( "SELECT * FROM ( SELECT yearfirstd, yearlastdo, globalidco FROM basepoint WHERE globalidco = " + id + " UNION SELECT yearfirstd, yearlastdo, globalidco FROM baseline WHERE globalidco = " + id + " UNION SELECT yearfirstd, yearlastdo, globalidco FROM basepoly WHERE globalidco = " + id + ") AS q LEFT OUTER JOIN details AS d ON q.globalidco = d.globalidco" );
 	
 	query.on( 'row', function( result )
 	{
-		table = result.tablename;
-		years = result.yearfirstd + " - " + result.yearlastdo;
+		result.year = result.yearfirstd + " - " + result.yearlastdo;
+		result = _.objFilter( _.omit( result, [ "globalidco", "yearfirstd", "yearlastdo" ] ), function( value )
+		{
+			return value != null;
+		});
+		details.push( result );
 	});
 	
 	query.on( 'end', function()
 	{
-		if( !table )
-		{
-			res.send( { years : years } );
-			client.end();
-		}
-		else
-		{
-			details.years = years;
-			var q2 = client.query( "SELECT * FROM " + table + w );
-			q2.on( 'row', function( result )
-			{
-				_.each( result, function( n, i )
-				{
-					if( n != null && i != "globalidco" ) details[ i ] = n;
-				});
-			});
-			
-			q2.on( 'end', function()
-			{
-				res.send( details );
-				client.end();
-			});
-		}
+		res.send( details );
+		client.end();
 	});
 }

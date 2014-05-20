@@ -48,8 +48,9 @@ function get_details( id, div )
 	
 	$.getJSON( server + "/details/" + id, function( json )
 	{
-		if( !_.isEmpty( json ) )
+		if( json.length > 0 )
 		{
+			json = _.first( json );
 			div.addClass( "expand" )
 				.click( function()
 				{
@@ -71,7 +72,7 @@ function get_details( id, div )
 							.addClass( "details" )
 							.appendTo( div );
 			
-			if( json.years ) details.append( "<h4>" + json.years + "</h4>" );
+			if( json.yearfirstd ) details.append( "<h4>" + json.years + "</h4>" );
 			
 			_.each( json, function( val, key )
 			{

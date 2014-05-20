@@ -44,6 +44,7 @@ function update_year()
 	load_tiles();
 	get_maxBounds();
 	build_layers();
+	clear_highlight();
 }
 
 function build_timeline()
