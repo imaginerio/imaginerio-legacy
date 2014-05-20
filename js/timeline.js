@@ -15,7 +15,7 @@ function init_timeline()
 		year = min;
 		
 		build_timeline();
-		update_year();
+		update_year( min );
 	});
 	
 	$( "#puck" ).mousedown( function()
@@ -31,14 +31,17 @@ function init_timeline()
 			$( "#timeline" ).unbind( "mousemove" );
 			$( window ).unbind( "mouseup" );
 			
-			year = snap_timeline();
-			update_year();
+			update_year( snap_timeline() );
 		})
 	});
 }
 
-function update_year()
+function update_year( y )
 {
+	clear_visual();
+	clear_results();
+	
+	year = y;
 	$( "#year" ).html( year );
 	
 	load_tiles();

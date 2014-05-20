@@ -1,8 +1,8 @@
 function load_visual()
 {
+	clear_visual();
 	if( visual[ year ] )
 	{
-		if( map.hasLayer( visual[ year ] ) ) map.removeLayer( visual[ year ] );
 		map.addLayer( visual[ year ] );
 	}
 	else
@@ -64,4 +64,9 @@ function show_visual_details( ssid )
 			console.log( json );
 		}
 	});
+}
+
+function clear_visual()
+{
+	if( map.hasLayer( visual[ year ] ) ) map.removeLayer( visual[ year ] );
 }

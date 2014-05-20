@@ -83,3 +83,8 @@ function get_details( id, div )
 		}
 	});
 }
+
+function clear_results()
+{
+	$( ".result" ).remove();
+}
