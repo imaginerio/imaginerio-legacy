@@ -1,6 +1,13 @@
+var names = {};
+
 function init_layers()
 {
-	build_layers();
+	$.getJSON( server + "/names", function( json )
+	{
+		names = json;
+		build_layers();
+	})
+	
 	$( "#switch" ).click( function()
 	{
 		if( $( "#layers" ).hasClass( "open" ) )
@@ -35,39 +42,57 @@ function build_layers()
 		{
 			var folder = $( document.createElement( 'div' ) )
 							.addClass( "folder" )
-							.html( "<h4>" + key + "</h4>" )
+							.html( "<h4>" + names[ key ] + "</h4>" )
 							.appendTo( $( "#list" ) );
 			_.each( val, function( val, key )
 			{
 				add_check( "geodb", key, folder );
 				_.each( val, function( val, key )
 				{
-					add_check( "layer", key, folder );
-					_.each( val, function( l )
+					var label = add_check( "layer", key ).appendTo( folder );
+					
+					if( val.shape )
 					{
-						$( document.createElement( 'div' ) )
-							.addClass( "feature" )
-							.html( l )
-							.appendTo( folder )
-					});
+						label.append( add_swatch( val ) );
+					}
+					else
+					{
+						_.each( val, function( style, name )
+						{
+							$( document.createElement( 'div' ) )
+								.addClass( "feature" )
+								.html( names[ name ] )
+								.appendTo( folder )
+								.prepend( add_swatch( style ) );
+						});
+					}
 				});
 			});
 		});
 	});
 	
-	function add_check( cclass, html, parent )
+	function add_check( cclass, html )
 	{
-		$( document.createElement( 'label' ) )
-			.addClass( cclass )
-			.html( html )
-			.prepend(
-				$( document.createElement( 'input' ) )
-					.attr({
-						"type" : "checkbox",
-						"val" : html,
-						"checked" : "checked"
-					})
-			)
-			.appendTo( parent );
+		return $( document.createElement( 'label' ) )
+					.addClass( cclass )
+					.html( names[ html ] )
+					.prepend(
+						$( document.createElement( 'input' ) )
+							.attr({
+								"type" : "checkbox",
+								"val" : html,
+								"checked" : "checked"
+							})
+					);
+	}
+	
+	function add_swatch( style )
+	{
+		var swatch = $( document.createElement( 'div' ) ).addClass( "swatch" );
+		swatch.load( "img/legend/" + style.shape + ".svg" );
+
+		swatch.css( style );
+		
+		return swatch;
 	}
 }

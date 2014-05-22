@@ -20,7 +20,7 @@ function resize()
 {
 	var h = $( window ).height();
 	$( "#map" ).height( h - 100 );
-	$( "#layers" ).height( h - 160 );
+	$( "#layers" ).height( h - 200 );
 	build_timeline();
 }
 

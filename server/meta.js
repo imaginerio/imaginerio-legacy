@@ -52,7 +52,7 @@ exports.layers = function( req, res )
 	client.connect();
 
 	var year = req.params.year;
-	var q = "SELECT * FROM ( SELECT folder, geodatabas, layer, featuretyp FROM baseline WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp UNION SELECT folder, geodatabas, layer, featuretyp FROM basepoint WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp UNION SELECT folder, geodatabas, layer, featuretyp FROM basepoly WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp ) as q ORDER BY folder, geodatabas, layer, featuretyp";
+	var q = "SELECT * FROM ( SELECT q.*, l.fill, l.stroke, l.shape FROM ( SELECT folder, geodatabas, layer, featuretyp FROM baseline WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp UNION SELECT folder, geodatabas, layer, featuretyp FROM basepoint WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp UNION SELECT folder, geodatabas, layer, featuretyp FROM basepoly WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp ) as q LEFT OUTER JOIN legend AS l ON q.layer = l.layer AND ( q.featuretyp = l.featuretyp OR ( l.featuretyp IS NULL AND q.featuretyp IS NULL ) ) ) AS q2 WHERE fill IS NOT NULL OR stroke IS NOT NULL OR shape IS NOT NULL ORDER BY folder, geodatabas, layer, featuretyp";
 	
 	var query = client.query( q ),
 		arr = [],
@@ -65,11 +65,18 @@ exports.layers = function( req, res )
 	query.on( 'end', function()
 	{
 		_.each( arr, function( val )
-		{			
+		{
 			if( !layers[ val.folder ] ) layers[ val.folder ] = {};
 			if( !layers[ val.folder ][ val.geodatabas ] ) layers[ val.folder ][ val.geodatabas ] = {};
-			if( !layers[ val.folder ][ val.geodatabas ][ val.layer ] ) layers[ val.folder ][ val.geodatabas ][ val.layer ] = [];
-			if( val.featuretyp ) layers[ val.folder ][ val.geodatabas ][ val.layer ].push( val.featuretyp );
+			if( !layers[ val.folder ][ val.geodatabas ][ val.layer ] ) layers[ val.folder ][ val.geodatabas ][ val.layer ] = {};
+			if( val.featuretyp )
+			{
+				layers[ val.folder ][ val.geodatabas ][ val.layer ][ val.featuretyp ] = { fill : val.fill, stroke : val.stroke, shape : val.shape };
+			}
+			else
+			{
+				layers[ val.folder ][ val.geodatabas ][ val.layer ] = { fill : val.fill, stroke : val.stroke, shape : val.shape };
+			}
 		});
 		
 		res.send( layers );
@@ -147,6 +154,26 @@ exports.details = function( req, res )
 	query.on( 'end', function()
 	{
 		res.send( details );
+		client.end();
+	});
+}
+exports.names = function( req, res )
+{
+	var client = new pg.Client( conn );
+	client.connect();
+	
+	var names = {};
+	
+	var query = client.query( "SELECT * FROM names" );
+	
+	query.on( 'row', function( result )
+	{
+		names[ result.layer ] = result.name;
+	});
+	
+	query.on( 'end', function()
+	{
+		res.send( names );
 		client.end();
 	});
 }
