@@ -6,10 +6,10 @@
 // expected output at zoom 0: http://goo.gl/cyGwo
 
 var mapnik = require('mapnik')
-  , mercator = require('../../utils/sphericalmercator')
-  , mappool = require('../../utils/pool.js')
+  , mercator = require('utils/sphericalmercator')
+  , mappool = require('utils/pool.js')
   , http = require('http')
-  , parseXYZ = require('../../utils/tile.js').parseXYZ;
+  , parseXYZ = require('utils/tile.js').parseXYZ;
 
 // register shapefile plugin
 if (mapnik.register_default_input_plugins) mapnik.register_default_input_plugins();
