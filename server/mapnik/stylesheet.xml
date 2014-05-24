@@ -1460,16 +1460,16 @@
 <Style name="inlandwater_labels" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <TextSymbolizer size="16" wrap-width="80" line-spacing="6" placement="interior" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="16" wrap-width="80" line-spacing="6" placement="interior" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <TextSymbolizer size="14" wrap-width="40" line-spacing="4" placement="interior" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="14" wrap-width="40" line-spacing="4" placement="interior" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <TextSymbolizer size="12" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" line-spacing="2" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" line-spacing="2" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Layer name="inlandwater_labels"
@@ -1492,22 +1492,22 @@
 <Style name="neighborhoods_labels" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <TextSymbolizer size="21" fill="#7b6e5a" character-spacing="4" placement="point" face-name="Helvetica Bold" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" text-transform="uppercase" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="21" fill="#7b6e5a" character-spacing="4" placement="point" face-name="DejaVu Sans Bold" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" text-transform="uppercase" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <TextSymbolizer size="15" fill="#7b6e5a" character-spacing="4" placement="point" face-name="Helvetica Bold" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" text-transform="uppercase" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="15" fill="#7b6e5a" character-spacing="4" placement="point" face-name="DejaVu Sans Bold" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" text-transform="uppercase" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <TextSymbolizer size="13" character-spacing="3" placement="point" face-name="Helvetica Bold" fill="#977c53" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" text-transform="uppercase" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="13" character-spacing="3" placement="point" face-name="DejaVu Sans Bold" fill="#977c53" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" text-transform="uppercase" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <TextSymbolizer size="10" character-spacing="2" placement="point" face-name="Helvetica Bold" fill="#977c53" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" text-transform="uppercase" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="10" character-spacing="2" placement="point" face-name="DejaVu Sans Bold" fill="#977c53" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" text-transform="uppercase" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Layer name="neighborhoods_labels"
@@ -1531,46 +1531,46 @@
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Garden') and ([nameshort] = 'Quinta da Boa Vista')</Filter>
-    <ShieldSymbolizer file="images/park2-24.png" placement="interior" clip="false" fill="#7a8446" face-name="Helvetica Regular" ><![CDATA[' ']]></ShieldSymbolizer>
+    <ShieldSymbolizer file="images/park2-24.png" placement="interior" clip="false" fill="#7a8446" face-name="DejaVu Sans Book" ><![CDATA[' ']]></ShieldSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Garden') and ([nameshort] = 'Quinta da Boa Vista')</Filter>
-    <ShieldSymbolizer file="images/park2-18.png" placement="interior" clip="false" fill="#7a8446" face-name="Helvetica Regular" ><![CDATA[' ']]></ShieldSymbolizer>
+    <ShieldSymbolizer file="images/park2-18.png" placement="interior" clip="false" fill="#7a8446" face-name="DejaVu Sans Book" ><![CDATA[' ']]></ShieldSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Park') and ([nameshort] = 'Quinta da Boa Vista')</Filter>
-    <ShieldSymbolizer file="images/park2-24.png" placement="interior" clip="false" fill="#7a8446" face-name="Helvetica Regular" ><![CDATA[' ']]></ShieldSymbolizer>
+    <ShieldSymbolizer file="images/park2-24.png" placement="interior" clip="false" fill="#7a8446" face-name="DejaVu Sans Book" ><![CDATA[' ']]></ShieldSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Park') and ([nameshort] = 'Quinta da Boa Vista')</Filter>
-    <ShieldSymbolizer file="images/park2-18.png" placement="interior" clip="false" fill="#7a8446" face-name="Helvetica Regular" ><![CDATA[' ']]></ShieldSymbolizer>
+    <ShieldSymbolizer file="images/park2-18.png" placement="interior" clip="false" fill="#7a8446" face-name="DejaVu Sans Book" ><![CDATA[' ']]></ShieldSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Park')</Filter>
-    <ShieldSymbolizer file="images/park2-24.png" face-name="Helvetica Regular" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
+    <ShieldSymbolizer file="images/park2-24.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Park')</Filter>
-    <ShieldSymbolizer file="images/park2-18.png" face-name="Helvetica Regular" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
+    <ShieldSymbolizer file="images/park2-18.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Garden')</Filter>
-    <ShieldSymbolizer file="images/park2-24.png" face-name="Helvetica Regular" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
+    <ShieldSymbolizer file="images/park2-24.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Garden')</Filter>
-    <ShieldSymbolizer file="images/park2-18.png" face-name="Helvetica Regular" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
+    <ShieldSymbolizer file="images/park2-18.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
   </Rule>
 </Style>
 <Style name="squares_labels-urbanspace" filter-mode="first">
@@ -1578,95 +1578,95 @@
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <MinScaleDenominator>1500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Plaza')</Filter>
-    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Plaza')</Filter>
-    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Plaza')</Filter>
-    <TextSymbolizer size="13" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="13" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>1500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Plaza')</Filter>
-    <TextSymbolizer placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <MinScaleDenominator>1500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Square')</Filter>
-    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Square')</Filter>
-    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Square')</Filter>
-    <TextSymbolizer size="13" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="13" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>1500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Square')</Filter>
-    <TextSymbolizer placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Style name="squares_labels-greenspace" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Garden')</Filter>
-    <TextSymbolizer size="15" character-spacing="2" wrap-width="70" minimum-distance="250" placement="interior" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="15" character-spacing="2" wrap-width="70" minimum-distance="250" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Garden')</Filter>
-    <TextSymbolizer size="14" character-spacing="2" wrap-width="20" minimum-distance="120" placement="interior" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="14" character-spacing="2" wrap-width="20" minimum-distance="120" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Garden')</Filter>
-    <TextSymbolizer size="13" character-spacing="1" wrap-width="50" placement="interior" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="13" character-spacing="1" wrap-width="50" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Garden')</Filter>
-    <TextSymbolizer size="12" character-spacing="1" wrap-width="80" wrap-before="true" placement="interior" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="12" character-spacing="1" wrap-width="80" wrap-before="true" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Park')</Filter>
-    <TextSymbolizer size="15" character-spacing="2" wrap-width="70" minimum-distance="250" placement="interior" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="15" character-spacing="2" wrap-width="70" minimum-distance="250" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Park')</Filter>
-    <TextSymbolizer size="14" character-spacing="2" wrap-width="20" minimum-distance="120" placement="interior" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="14" character-spacing="2" wrap-width="20" minimum-distance="120" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Park')</Filter>
-    <TextSymbolizer size="13" character-spacing="1" wrap-width="50" placement="interior" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="13" character-spacing="1" wrap-width="50" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Park')</Filter>
-    <TextSymbolizer size="12" character-spacing="1" wrap-width="80" wrap-before="true" placement="interior" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="12" character-spacing="1" wrap-width="80" wrap-before="true" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Layer name="squares_labels"
@@ -1692,441 +1692,441 @@
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Travessa')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Travessa')</Filter>
-    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Travessa')</Filter>
-    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Travessa')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Travessa')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Largo')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Largo')</Filter>
-    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Largo')</Filter>
-    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Largo')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Largo')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Ladeira')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Ladeira')</Filter>
-    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Ladeira')</Filter>
-    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Ladeira')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Ladeira')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Estrada')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Estrada')</Filter>
-    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Estrada')</Filter>
-    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Estrada')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Estrada')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Caminho')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Caminho')</Filter>
-    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Caminho')</Filter>
-    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Caminho')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Caminho')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Beco')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Beco')</Filter>
-    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Beco')</Filter>
-    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Beco')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Beco')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Local')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Local')</Filter>
-    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Local')</Filter>
-    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Local')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Local')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Praca')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Praca')</Filter>
-    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Praca')</Filter>
-    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Praca')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Praca')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Praia')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Praia')</Filter>
-    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Praia')</Filter>
-    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Praia')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Praia')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Style name="roads_labels-med" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Avenida')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Avenida')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="300" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Avenida')</Filter>
-    <TextSymbolizer size="14" fill="#574c3b" minimum-distance="250" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="14" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Avenida')</Filter>
-    <TextSymbolizer size="12" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Avenida')</Filter>
-    <TextSymbolizer size="12" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Collector')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Collector')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="300" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Collector')</Filter>
-    <TextSymbolizer size="14" fill="#574c3b" minimum-distance="250" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="14" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Collector')</Filter>
-    <TextSymbolizer size="12" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Collector')</Filter>
-    <TextSymbolizer size="12" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Rua')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Rua')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="300" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Rua')</Filter>
-    <TextSymbolizer size="14" fill="#574c3b" minimum-distance="250" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="14" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Rua')</Filter>
-    <TextSymbolizer size="12" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Rua')</Filter>
-    <TextSymbolizer size="12" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Style name="roads_labels-high" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Minor Arterial')</Filter>
-    <TextSymbolizer size="16" minimum-distance="350" placement="line" face-name="Helvetica Regular" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="16" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Minor Arterial')</Filter>
-    <TextSymbolizer size="16" minimum-distance="300" placement="line" face-name="Helvetica Regular" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="16" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Minor Arterial')</Filter>
-    <TextSymbolizer size="14" minimum-distance="250" placement="line" face-name="Helvetica Regular" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="14" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Minor Arterial')</Filter>
-    <TextSymbolizer size="13" placement="line" face-name="Helvetica Regular" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="13" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Minor Arterial')</Filter>
-    <TextSymbolizer size="12" placement="line" face-name="Helvetica Regular" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Expressway')</Filter>
-    <TextSymbolizer size="16" minimum-distance="350" placement="line" face-name="Helvetica Regular" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="16" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Expressway')</Filter>
-    <TextSymbolizer size="16" minimum-distance="300" placement="line" face-name="Helvetica Regular" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="16" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Expressway')</Filter>
-    <TextSymbolizer size="14" minimum-distance="250" placement="line" face-name="Helvetica Regular" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="14" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Expressway')</Filter>
-    <TextSymbolizer size="13" placement="line" face-name="Helvetica Regular" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="13" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Expressway')</Filter>
-    <TextSymbolizer size="12" placement="line" face-name="Helvetica Regular" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Principle Arterial')</Filter>
-    <TextSymbolizer size="16" minimum-distance="350" placement="line" face-name="Helvetica Regular" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="16" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Principle Arterial')</Filter>
-    <TextSymbolizer size="16" minimum-distance="300" placement="line" face-name="Helvetica Regular" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="16" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Principle Arterial')</Filter>
-    <TextSymbolizer size="14" minimum-distance="250" placement="line" face-name="Helvetica Regular" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="14" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Principle Arterial')</Filter>
-    <TextSymbolizer size="13" placement="line" face-name="Helvetica Regular" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="13" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
     <Filter>([featuretyp] = 'Principle Arterial')</Filter>
-    <TextSymbolizer size="12" placement="line" face-name="Helvetica Regular" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Layer name="roads_labels"
@@ -2151,17 +2151,17 @@
 <Style name="riversstreams_labels" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <TextSymbolizer size="14" minimum-path-length="525" placement="line" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="14" minimum-path-length="525" placement="line" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <TextSymbolizer size="14" minimum-path-length="425" placement="line" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="14" minimum-path-length="425" placement="line" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <TextSymbolizer size="12" minimum-path-length="400" placement="line" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" minimum-path-length="400" placement="line" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Layer name="riversstreams_labels"
@@ -2184,21 +2184,21 @@
 <Style name="waterline_labels" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <TextSymbolizer size="14" minimum-path-length="425" placement="line" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="14" minimum-path-length="425" placement="line" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <TextSymbolizer size="12" minimum-path-length="400" placement="line" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" minimum-path-length="400" placement="line" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <TextSymbolizer size="11" minimum-path-length="300" placement="line" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="11" minimum-path-length="300" placement="line" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <TextSymbolizer placement="line" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer placement="line" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Layer name="waterline_labels"
