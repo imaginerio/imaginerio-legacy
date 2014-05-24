@@ -6,13 +6,15 @@
 // expected output at zoom 0: http://goo.gl/cyGwo
 
 var mapnik = require('mapnik')
-  , mercator = require('utils/sphericalmercator')
-  , mappool = require('utils/pool.js')
+  , mercator = require('./utils/sphericalmercator')
+  , mappool = require('./utils/pool.js')
   , http = require('http')
-  , parseXYZ = require('utils/tile.js').parseXYZ;
+  , parseXYZ = require('./utils/tile.js').parseXYZ;
 
-// register shapefile plugin
+// register plugin
 if (mapnik.register_default_input_plugins) mapnik.register_default_input_plugins();
+if (mapnik.register_default_fonts) mapnik.register_default_fonts();
+if (mapnik.register_system_fonts) mapnik.register_system_fonts();
 
 var TMS_SCHEME = false;
 
