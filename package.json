@@ -8,6 +8,7 @@
 		"pg" : "3.0.3",
 		"underscore" : "1.6",
 		"mapnik" : "*",
-		"postgeo" : "*"
+		"postgeo" : "*",
+		"generic-pool" : "*"
 	}
 }
