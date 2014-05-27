@@ -9,6 +9,7 @@
 		"underscore" : "1.6",
 		"mapnik" : "*",
 		"postgeo" : "*",
-		"generic-pool" : "*"
+		"generic-pool" : "*",
+		"libxmljs" : "*"
 	}
 }

@@ -1,8 +1,8 @@
 var server = "http://rio-server.axismaps.com:3000",
-	tileserver = "http://rio.axismaps.com/"
+	tileserver = "http://rio.axismaps.com:8000/";
 	
-	server = "http://localhost:3000",
-	tileserver = ""
+//	server = "http://localhost:3000",
+//	tileserver = "http://localhost:8000/"
 
 function init()
 {
