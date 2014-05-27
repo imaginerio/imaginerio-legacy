@@ -100,6 +100,18 @@ var aquire = function( id, options, callback )
     });
 };
 
+function mkdir(path, root) {
+
+    var dirs = path.split('/'), dir = dirs.shift(), root = (root||'')+dir+'/';
+
+    try { fs.mkdirSync(root); }
+    catch (e) {
+        //dir wasn't made, something went wrong
+        if(!fs.statSync(root).isDirectory()) throw new Error(e);
+    }
+
+    return !dirs.length||mkdir(dirs.join('/'), root);
+}
 
 http.createServer( function( req, res )
 {
@@ -112,44 +124,68 @@ http.createServer( function( req, res )
         }
         else
         {
-			parseXML( req, params.year, {}, function( stylesheet, options )
+			var png = "cache/png/" + params.year + "/" + params.z + "/" + params.x + "/" + params.y + ".png";
+			fs.exists( png, function( exists )
 			{
-				aquire( stylesheet, options, function( err, map )
+				if( exists )
 				{
-					if( err )
+					fs.readFile( png, function( err, data )
 					{
-						process.nextTick( function()
-						{
-							maps.release( stylesheet, map );
-						});
-						res.writeHead( 500, { 'Content-Type': 'text/plain' } );
-	                    res.end( err.message );
-					}
-	                else
+						if( err ) return console.log( err );
+						res.writeHead( 200, { 'Content-Type' : 'image/png' } );
+						res.end( data );
+					});
+				}
+				else
+				{			
+					parseXML( req, params.year, {}, function( stylesheet, options )
 					{
-	                    // bbox for x,y,z
-						var bbox = mercator.xyz_to_envelope( params.x, params.y, params.z, TMS_SCHEME );
-						map.extent = bbox;
-						var im = new mapnik.Image( map.width, map.height );
-						map.render( im, function( err, im )
+						aquire( stylesheet, options, function( err, map )
 						{
-							process.nextTick( function()
-							{
-								maps.release( stylesheet, map );
-							});
 							if( err )
 							{
-								res.writeHead( 500, { 'Content-Type' : 'text/plain' } );
-								res.end( err.message );
+								process.nextTick( function()
+								{
+									maps.release( stylesheet, map );
+								});
+								res.writeHead( 500, { 'Content-Type': 'text/plain' } );
+			                    res.end( err.message );
 							}
-							else
+			                else
 							{
-								res.writeHead( 200, { 'Content-Type' : 'image/png' } );
-								res.end( im.encodeSync( 'png' ) );
+			                    // bbox for x,y,z
+								var bbox = mercator.xyz_to_envelope( params.x, params.y, params.z, TMS_SCHEME );
+								map.extent = bbox;
+								var im = new mapnik.Image( map.width, map.height );
+								map.render( im, function( err, im )
+								{
+									process.nextTick( function()
+									{
+										maps.release( stylesheet, map );
+									});
+									if( err )
+									{
+										res.writeHead( 500, { 'Content-Type' : 'text/plain' } );
+										res.end( err.message );
+									}
+									else
+									{
+										var imagedata = im.encodeSync( 'png' );
+										
+										mkdir( "cache/png/" + params.year + "/" + params.z + "/" + params.x );
+										fs.writeFile( png, imagedata, 'binary', function( err )
+										{
+											if( err ) return console.log( err );
+											console.log('File saved.')
+										});
+										res.writeHead( 200, { 'Content-Type' : 'image/png' } );
+										res.end( im.encodeSync( 'png' ) );
+									}
+								});
 							}
 						});
-					}
-				});
+					});
+				}
 			});
 		}
 	});
