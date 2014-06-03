@@ -2,7 +2,9 @@ var url = require( 'url' );
 
 module.exports.parseXYZ = function( req, TMS_SCHEME, callback )
 {
-	var matches = req.url.match( /(\d+)/g );
+	var matches = req.url.match( /(\d+)/g ),
+		query = url.parse( req.url, true ).query;
+		
     if( matches && matches.length == 4 )
     {
 		try
@@ -11,9 +13,16 @@ module.exports.parseXYZ = function( req, TMS_SCHEME, callback )
 			var y = parseInt( matches[ 3 ], 10 );
 			var z = parseInt( matches[ 1 ], 10 );
 			var year = parseInt( matches[ 0 ], 10 );
-            
-            if( TMS_SCHEME ) y = ( Math.pow( 2, z ) - 1 ) - y;
-            callback( null, { year : year, z : z, x : x, y : y } );
+
+			if( TMS_SCHEME ) y = ( Math.pow( 2, z ) - 1 ) - y;
+
+			callback( null, {
+				year : year,
+				z : z,
+				x : x,
+				y : y,
+				layer : query.layer != '' ? query.layer : "all"
+			});
 		}
 		catch( err )
 		{
@@ -24,7 +33,6 @@ module.exports.parseXYZ = function( req, TMS_SCHEME, callback )
 	{
 		try
 		{
-			var query = url.parse( req.url, true ).query;
 			if( query && query.year !== undefined && query.x !== undefined && query.y !== undefined && query.z !== undefined )
 			{
 				try

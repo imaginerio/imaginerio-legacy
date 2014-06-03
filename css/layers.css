@@ -132,6 +132,10 @@ label{
 	font-size: 12px;
 }
 
+.feature.off{
+	opacity: 0.25;
+}
+
 .swatch{
 	float: right;
 	margin: 2px -10px 0 0;

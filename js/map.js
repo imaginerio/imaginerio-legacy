@@ -20,20 +20,22 @@ function load_tiles()
 {
 	clear_highlight();
 	map_loading( true );
-	if( tiles[ year ] )
+	if( tiles[ year ] && off.length == 0 )
 	{
 		show_tiles( tiles[ year ] );
 	}
 	else
 	{
-		tiles[ year ] = L.tileLayer( tileserver + 'tiles/' + year + '/{z}/{x}/{y}.png' )
-							.addTo( map )
-							.setOpacity( 0  )
-							.on( "load", function()
-							{
-								show_tiles( this );
-								this.off( "load" );
-							});
+		var t = L.tileLayer( tileserver + 'tiles/' + year + '/{z}/{x}/{y}.png?layer=' + off.join( "," )  )
+					.addTo( map )
+					.setOpacity( 0 )
+					.on( "load", function()
+					{
+						show_tiles( this );
+						this.off( "load" );
+					});
+		
+		if( off.length == 0 ) tiles[ year ] = t;
 	}
 	load_visual();
 }

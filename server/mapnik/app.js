@@ -35,9 +35,9 @@ if( !port )
 	process.exit( 1 );
 }
 
-var parseXML = function( req, year, options, callback )
+var parseXML = function( req, year, layer, options, callback )
 {
-	var file = "cache/xml/" + year + ".xml";
+	var file = "cache/xml/" + year + "/" + layer + ".xml";
 	fs.exists( file, function( exists )
 	{
 		if( exists )
@@ -59,6 +59,18 @@ var parseXML = function( req, year, options, callback )
 					var t = item.text();
 					item.text( t.replace( /99999999/g, year ) );
 				});
+				
+				var off = layer.split( "," );
+				_.each( off, function( l )
+				{
+					sources = xmlDoc.find( "//Layer[@name='" + l + "']" );
+					_.each( sources, function( item )
+					{
+						item.attr( { "status" : "off" } );
+					})
+				})
+				
+				mkdir( "cache/xml/" + year );
 				
 				fs.writeFile( file, xmlDoc.toString(), function( err )
 				{
@@ -124,7 +136,7 @@ http.createServer( function( req, res )
         }
         else
         {
-			var png = "cache/png/" + params.year + "/" + params.z + "/" + params.x + "/" + params.y + ".png";
+			var png = "cache/png/" + params.year + "/" + params.layer + "/" + params.z + "/" + params.x + "/" + params.y + ".png";
 			fs.exists( png, function( exists )
 			{
 				if( exists )
@@ -138,7 +150,7 @@ http.createServer( function( req, res )
 				}
 				else
 				{			
-					parseXML( req, params.year, {}, function( stylesheet, options )
+					parseXML( req, params.year, params.layer, {}, function( stylesheet, options )
 					{
 						aquire( stylesheet, options, function( err, map )
 						{
@@ -172,7 +184,7 @@ http.createServer( function( req, res )
 									{
 										var imagedata = im.encodeSync( 'png' );
 										
-										mkdir( "cache/png/" + params.year + "/" + params.z + "/" + params.x );
+										mkdir( "cache/png/" + params.year + "/" + params.layer + "/" + params.z + "/" + params.x );
 										fs.writeFile( png, imagedata, 'binary', function( err )
 										{
 											if( err ) return console.log( err );

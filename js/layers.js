@@ -1,4 +1,5 @@
-var names = {};
+var names = {},
+	off = [];
 
 function init_layers()
 {
@@ -85,13 +86,29 @@ function build_layers()
 				$( document.createElement( 'input' ) )
 					.attr({
 						"type" : "checkbox",
-						"val" : id,
+						"value" : id,
 						"checked" : "checked"
 					})
+					.click( switch_layers )
 			);
 		}
 		
 		return label;
+	}
+	
+	function switch_layers( e )
+	{
+		off = [];
+		$( ".feature.off" ).removeClass( "off" );
+		
+		$( "#layers input:not( :checked )" ).each( function()
+		{
+			off = off.concat( $( this ).val().split( "," ) );
+			$( this ).parent().nextUntil( "label.layer" ).addClass( "off" );
+		});
+		
+		e.stopPropagation();
+		load_tiles();
 	}
 	
 	function add_swatch( style )

@@ -224,7 +224,7 @@
   <Rule>
     <Filter>([featuretyp] = 'Marsh')</Filter>
     <PolygonSymbolizer fill="#accdc8" fill-opacity="0.6" />
-    <PolygonPatternSymbolizer file="images/ripple2.png" />
+    <PolygonPatternSymbolizer file="../../../images/ripple2.png" />
   </Rule>
 </Style>
 <Layer name="inlandwater"
@@ -1390,21 +1390,21 @@
 <Style name="fountainspoint" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <MarkersSymbolizer file="images/monument-24.svg" fill="#876e4a" multi-policy="whole" placement="point" clip="false" />
+    <MarkersSymbolizer file="../../../images/monument-24.svg" fill="#876e4a" multi-policy="whole" placement="point" clip="false" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <MarkersSymbolizer fill="#876e4a" file="images/monument-18.svg" multi-policy="whole" placement="point" clip="false" />
+    <MarkersSymbolizer fill="#876e4a" file="../../../images/monument-18.svg" multi-policy="whole" placement="point" clip="false" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <MarkersSymbolizer fill="#977c53" file="images/monument-18.svg" multi-policy="whole" placement="point" clip="false" />
+    <MarkersSymbolizer fill="#977c53" file="../../../images/monument-18.svg" multi-policy="whole" placement="point" clip="false" />
   </Rule>
   <Rule>
     <MinScaleDenominator>50000</MinScaleDenominator>
-    <MarkersSymbolizer file="images/monument-18.svg" multi-policy="whole" placement="point" clip="false" />
+    <MarkersSymbolizer file="../../../images/monument-18.svg" multi-policy="whole" placement="point" clip="false" />
   </Rule>
 </Style>
 <Layer name="fountainspoint"
@@ -1427,17 +1427,17 @@
 <Style name="railpoint" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <MarkersSymbolizer file="images/rail-24.svg" fill="#876e4a" multi-policy="whole" placement="point" clip="false" />
+    <MarkersSymbolizer file="../../../images/rail-24.svg" fill="#876e4a" multi-policy="whole" placement="point" clip="false" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <MarkersSymbolizer fill="#876e4a" file="images/rail-18.svg" multi-policy="whole" placement="point" clip="false" />
+    <MarkersSymbolizer fill="#876e4a" file="../../../images/rail-18.svg" multi-policy="whole" placement="point" clip="false" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <MarkersSymbolizer fill="#977c53" file="images/rail-18.svg" multi-policy="whole" placement="point" clip="false" />
+    <MarkersSymbolizer fill="#977c53" file="../../../images/rail-18.svg" multi-policy="whole" placement="point" clip="false" />
   </Rule>
 </Style>
 <Layer name="railpoint"
@@ -1531,46 +1531,46 @@
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Garden') and ([nameshort] = 'Quinta da Boa Vista')</Filter>
-    <ShieldSymbolizer file="images/park2-24.png" placement="interior" clip="false" fill="#7a8446" face-name="DejaVu Sans Book" ><![CDATA[' ']]></ShieldSymbolizer>
+    <ShieldSymbolizer file="../../../images/park2-24.png" placement="interior" clip="false" fill="#7a8446" face-name="DejaVu Sans Book" ><![CDATA[' ']]></ShieldSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Garden') and ([nameshort] = 'Quinta da Boa Vista')</Filter>
-    <ShieldSymbolizer file="images/park2-18.png" placement="interior" clip="false" fill="#7a8446" face-name="DejaVu Sans Book" ><![CDATA[' ']]></ShieldSymbolizer>
+    <ShieldSymbolizer file="../../../images/park2-18.png" placement="interior" clip="false" fill="#7a8446" face-name="DejaVu Sans Book" ><![CDATA[' ']]></ShieldSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Park') and ([nameshort] = 'Quinta da Boa Vista')</Filter>
-    <ShieldSymbolizer file="images/park2-24.png" placement="interior" clip="false" fill="#7a8446" face-name="DejaVu Sans Book" ><![CDATA[' ']]></ShieldSymbolizer>
+    <ShieldSymbolizer file="../../../images/park2-24.png" placement="interior" clip="false" fill="#7a8446" face-name="DejaVu Sans Book" ><![CDATA[' ']]></ShieldSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Park') and ([nameshort] = 'Quinta da Boa Vista')</Filter>
-    <ShieldSymbolizer file="images/park2-18.png" placement="interior" clip="false" fill="#7a8446" face-name="DejaVu Sans Book" ><![CDATA[' ']]></ShieldSymbolizer>
+    <ShieldSymbolizer file="../../../images/park2-18.png" placement="interior" clip="false" fill="#7a8446" face-name="DejaVu Sans Book" ><![CDATA[' ']]></ShieldSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Park')</Filter>
-    <ShieldSymbolizer file="images/park2-24.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
+    <ShieldSymbolizer file="../../../images/park2-24.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Park')</Filter>
-    <ShieldSymbolizer file="images/park2-18.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
+    <ShieldSymbolizer file="../../../images/park2-18.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <Filter>([featuretyp] = 'Garden')</Filter>
-    <ShieldSymbolizer file="images/park2-24.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
+    <ShieldSymbolizer file="../../../images/park2-24.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <Filter>([featuretyp] = 'Garden')</Filter>
-    <ShieldSymbolizer file="images/park2-18.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
+    <ShieldSymbolizer file="../../../images/park2-18.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
   </Rule>
 </Style>
 <Style name="squares_labels-urbanspace" filter-mode="first">
@@ -2221,12 +2221,12 @@
 <Style name="cemeteries_marker" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <MarkersSymbolizer file="images/cemetery-24.svg" multi-policy="whole" placement="interior" clip="false" fill="#7a8446" />
+    <MarkersSymbolizer file="../../../images/cemetery-24.svg" multi-policy="whole" placement="interior" clip="false" fill="#7a8446" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <MarkersSymbolizer file="images/cemetery-18.svg" multi-policy="whole" placement="interior" clip="false" fill="#7a8446" />
+    <MarkersSymbolizer file="../../../images/cemetery-18.svg" multi-policy="whole" placement="interior" clip="false" fill="#7a8446" />
   </Rule>
 </Style>
 <Layer name="cemeteries_marker"
