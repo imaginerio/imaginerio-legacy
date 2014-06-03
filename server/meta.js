@@ -52,7 +52,7 @@ exports.layers = function( req, res )
 	client.connect();
 
 	var year = req.params.year;
-	var q = "SELECT * FROM ( SELECT q.*, l.fill, l.stroke, l.shape FROM ( SELECT folder, geodatabas, layer, featuretyp FROM baseline WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp UNION SELECT folder, geodatabas, layer, featuretyp FROM basepoint WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp UNION SELECT folder, geodatabas, layer, featuretyp FROM basepoly WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp ) as q LEFT OUTER JOIN legend AS l ON q.layer = l.layer AND ( q.featuretyp = l.featuretyp OR ( l.featuretyp IS NULL AND q.featuretyp IS NULL ) ) ) AS q2 WHERE fill IS NOT NULL OR stroke IS NOT NULL OR shape IS NOT NULL ORDER BY folder, geodatabas, layer, featuretyp";
+	var q = "SELECT * FROM ( SELECT q.*, l.fill, l.stroke, l.shape, l.id FROM ( SELECT folder, geodatabas, layer, featuretyp FROM baseline WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp UNION SELECT folder, geodatabas, layer, featuretyp FROM basepoint WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp UNION SELECT folder, geodatabas, layer, featuretyp FROM basepoly WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp ) as q LEFT OUTER JOIN legend AS l ON q.layer = l.layer AND ( q.featuretyp = l.featuretyp OR ( l.featuretyp IS NULL AND q.featuretyp IS NULL ) ) ) AS q2 WHERE fill IS NOT NULL OR stroke IS NOT NULL OR shape IS NOT NULL ORDER BY folder, geodatabas, layer, featuretyp";
 	
 	var query = client.query( q ),
 		arr = [],
@@ -68,14 +68,19 @@ exports.layers = function( req, res )
 		{
 			if( !layers[ val.folder ] ) layers[ val.folder ] = {};
 			if( !layers[ val.folder ][ val.geodatabas ] ) layers[ val.folder ][ val.geodatabas ] = {};
-			if( !layers[ val.folder ][ val.geodatabas ][ val.layer ] ) layers[ val.folder ][ val.geodatabas ][ val.layer ] = {};
+			if( !layers[ val.folder ][ val.geodatabas ][ val.layer ] )
+			{
+				layers[ val.folder ][ val.geodatabas ][ val.layer ] = {};
+				layers[ val.folder ][ val.geodatabas ][ val.layer ].id = val.id;
+			}
+				
 			if( val.featuretyp )
 			{
 				layers[ val.folder ][ val.geodatabas ][ val.layer ][ val.featuretyp ] = { fill : val.fill, stroke : val.stroke, shape : val.shape };
 			}
 			else
 			{
-				layers[ val.folder ][ val.geodatabas ][ val.layer ] = { fill : val.fill, stroke : val.stroke, shape : val.shape };
+				layers[ val.folder ][ val.geodatabas ][ val.layer ].style = { fill : val.fill, stroke : val.stroke, shape : val.shape };
 			}
 		});
 		

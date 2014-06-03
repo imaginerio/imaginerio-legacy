@@ -44,16 +44,18 @@ function build_layers()
 							.addClass( "folder" )
 							.html( "<h4>" + names[ key ] + "</h4>" )
 							.appendTo( $( "#list" ) );
+							
 			_.each( val, function( val, key )
 			{
 				add_check( "geodb", key, folder );
 				_.each( val, function( val, key )
 				{
-					var label = add_check( "layer", key ).appendTo( folder );
+					var label = add_check( "layer", key, val.id ).appendTo( folder );
+					delete val.id;
 					
-					if( val.shape )
+					if( val.style )
 					{
-						label.append( add_swatch( val ) );
+						label.append( add_swatch( val.style ) );
 					}
 					else
 					{
@@ -71,19 +73,25 @@ function build_layers()
 		});
 	});
 	
-	function add_check( cclass, html )
+	function add_check( cclass, html, id )
 	{
-		return $( document.createElement( 'label' ) )
-					.addClass( cclass )
-					.html( names[ html ] )
-					.prepend(
-						$( document.createElement( 'input' ) )
-							.attr({
-								"type" : "checkbox",
-								"val" : html,
-								"checked" : "checked"
-							})
-					);
+		var label = $( document.createElement( 'label' ) )
+						.addClass( cclass )
+						.html( names[ html ] );
+		
+		if( id )
+		{
+			label.prepend(
+				$( document.createElement( 'input' ) )
+					.attr({
+						"type" : "checkbox",
+						"val" : id,
+						"checked" : "checked"
+					})
+			);
+		}
+		
+		return label;
 	}
 	
 	function add_swatch( style )
