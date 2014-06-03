@@ -45,7 +45,6 @@ function update_year( y )
 	$( "#year" ).html( year );
 	
 	load_tiles();
-	get_maxBounds();
 	build_layers();
 	clear_highlight();
 }

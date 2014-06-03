@@ -45,7 +45,6 @@ app.use( function(err, req, res, next) {
 app.get( '/timeline', meta.timeline );
 app.get( '/layers/:year', meta.layers );
 app.get( '/search/:year/:word', meta.search );
-app.get( '/bounds/:year', geo.bounds );
 app.get( '/probe/:year/:coords', geo.probe );
 app.get( '/draw/:id', geo.draw );
 app.get( '/visual/:year', geo.visual );

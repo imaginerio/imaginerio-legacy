@@ -11,7 +11,8 @@ function init_map()
 		center: [ -22.9046, -43.1919 ],
 		zoom: 15,
 		minZoom : 14,
-		maxZoom : 17
+		maxZoom : 17,
+		maxBounds : [ [ -23.10243406, -44.04944719  ], [ -22.63003187, -42.65988214 ] ]
 	})
 	.on( "click", probe );
 }
@@ -44,14 +45,6 @@ function show_tiles( tile )
 {
 	if( shown.tiles ) tile_fadeOut( shown.tiles );
 	shown.tiles = tile_fadeIn( tile );
-}
-
-function get_maxBounds()
-{
-	$.getJSON( server + "/bounds/" + year, function( json )
-	{
-		map.setMaxBounds( json )
-	});
 }
 
 function probe( e )
