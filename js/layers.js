@@ -42,7 +42,7 @@ function build_layers()
 		_.each( json, function( val, key )
 		{
 			var folder = $( document.createElement( 'div' ) )
-							.addClass( "folder" )
+							.addClass( "folder open" )
 							.html( "<h4>" + names[ key ] + "</h4>" )
 							.appendTo( $( "#list" ) );
 							
