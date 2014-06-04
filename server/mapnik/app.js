@@ -42,7 +42,6 @@ var parseXML = function( req, year, layer, options, callback )
 	{
 		if( exists )
 		{
-			console.log( "File exists!" );
 			callback( file, options );
 		}
 		else
@@ -165,6 +164,11 @@ http.createServer( function( req, res )
 							}
 			                else
 							{
+			                    if( map === undefined )
+			                    {
+				                    res.writeHead( 500, { 'Content-Type' : 'text/plain' } );
+									res.end( "Undefined extent" );
+			                    }
 			                    // bbox for x,y,z
 								var bbox = mercator.xyz_to_envelope( params.x, params.y, params.z, TMS_SCHEME );
 								map.extent = bbox;
@@ -188,7 +192,7 @@ http.createServer( function( req, res )
 										fs.writeFile( png, imagedata, 'binary', function( err )
 										{
 											if( err ) return console.log( err );
-											console.log('File saved.')
+											console.log( png + ' saved.')
 										});
 										res.writeHead( 200, { 'Content-Type' : 'image/png' } );
 										res.end( im.encodeSync( 'png' ) );
