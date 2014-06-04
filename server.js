@@ -52,6 +52,7 @@ app.get( '/plans', meta.plans );
 app.get( '/plan/:name', geo.plan );
 app.get( '/details/:id', meta.details );
 app.get( '/names', meta.names );
+app.get( '/feature/:year/:id', geo.feature );
 
 app.listen( 3000 );
 console.log( 'Listening on port 3000...' );

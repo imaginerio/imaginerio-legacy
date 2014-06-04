@@ -31,6 +31,11 @@ function init_layers()
 			$( this ).addClass( "open" );
 		}
 	});
+	$( "#layers" ).on( "click", ".feature", function( e )
+	{
+		draw( $( this ).attr( "id" ), "feature/" + year );
+		e.stopPropagation();
+	});
 }
 
 function build_layers()
@@ -64,6 +69,7 @@ function build_layers()
 						{
 							$( document.createElement( 'div' ) )
 								.addClass( "feature" )
+								.attr( "id", name )
 								.html( names[ name ] )
 								.appendTo( folder )
 								.prepend( add_swatch( style ) );

@@ -60,18 +60,20 @@ function probe( e )
 	})
 }
 
-function draw( id )
+function draw( id, route )
 {
 	clear_highlight();
+	
+	route = route ? route : "draw";
 	var styles = get_styles( "#1a1a1a" );
 	
-	highlight.bottom = omnivore.geojson( server + "/draw/" + id, null, styles.bottom )
+	highlight.bottom = omnivore.geojson( server + "/" + route + "/" + id, null, styles.bottom )
 				.on( 'ready', function()
 				{
 					map.fitBounds( this.getBounds() );
 				})
 				.addTo( map );
-	highlight.top = omnivore.geojson( server + "/draw/" + id, null, styles.top ).addTo( map );
+	highlight.top = omnivore.geojson( server + "/" + route + "/" + id, null, styles.top ).addTo( map );
 }
 
 function tile_fadeOut( tile_out )

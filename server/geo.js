@@ -61,3 +61,16 @@ exports.plan = function( req, res )
 		res.send( data );
 	});
 }
+
+exports.feature = function( req, res )
+{
+	postgeo.connect( conn );
+	
+	var year = req.params.year,
+		id = req.params.id;
+	
+	postgeo.query( "SELECT ST_AsGeoJSON( geom ) AS geometry FROM ( SELECT geom FROM baseline WHERE featuretyp = '" + id + "' AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT geom FROM basepoly WHERE featuretyp = '" + id + "' AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT geom FROM basepoint WHERE featuretyp = '" + id + "' AND firstdispl <= " + year + " AND lastdispla >= " + year + " ) AS q", "geojson", function( data )
+	{
+		res.send( data );
+	});
+}
