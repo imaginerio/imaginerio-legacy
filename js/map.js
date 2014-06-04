@@ -43,7 +43,7 @@ function load_tiles()
 
 function show_tiles( tile )
 {
-	if( shown.tiles ) tile_fadeOut( shown.tiles );
+	if( shown.tiles ) map.removeLayer( tile_fadeOut( shown.tiles ) );
 	shown.tiles = tile_fadeIn( tile );
 }
 
