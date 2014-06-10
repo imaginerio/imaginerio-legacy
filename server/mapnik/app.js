@@ -164,14 +164,18 @@ http.createServer( function( req, res )
 							}
 			                else
 							{
-			                    if( map === undefined )
-			                    {
-				                    res.writeHead( 500, { 'Content-Type' : 'text/plain' } );
-									res.end( "Undefined extent" );
-			                    }
 			                    // bbox for x,y,z
 								var bbox = mercator.xyz_to_envelope( params.x, params.y, params.z, TMS_SCHEME );
-								map.extent = bbox;
+								try
+								{
+									map.extent = bbox;
+								}
+								catch( err )
+								{
+									res.writeHead( 500, { 'Content-Type' : 'text/plain' } );
+									res.end( "Undefined extent" );
+								}
+								
 								var im = new mapnik.Image( map.width, map.height );
 								map.render( im, function( err, im )
 								{
