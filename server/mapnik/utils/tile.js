@@ -33,11 +33,18 @@ module.exports.parseXYZ = function( req, TMS_SCHEME, callback )
 	{
 		try
 		{
-			if( query && query.year !== undefined && query.x !== undefined && query.y !== undefined && query.z !== undefined )
+			if( query && query.x !== undefined && query.y !== undefined && query.z !== undefined )
 			{
 				try
 				{
-					callback( null, { year : parseInt( query.year, 10 ), z : parseInt( query.z, 10 ), x : parseInt( query.x, 10 ), y : parseInt( query.y, 10 ) } );
+					callback( null, {
+						year : parseInt( query.year, 10 ),
+						z : parseInt( query.z, 10 ),
+						x : parseInt( query.x, 10 ),
+						y : parseInt( query.y, 10 ),
+						layer : query.layer != '' ? query.layer : "all",
+						raster : query.raster
+					});
 				}
 				catch( err )
 				{
