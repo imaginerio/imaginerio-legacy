@@ -11,7 +11,7 @@ function init_map()
 		center: [ -22.9046, -43.1919 ],
 		zoom: 15,
 		minZoom : 14,
-		maxZoom : 17,
+		maxZoom : 18,
 		maxBounds : [ [ -23.10243406, -44.04944719  ], [ -22.63003187, -42.65988214 ] ]
 	})
 	.on( "click", probe );
