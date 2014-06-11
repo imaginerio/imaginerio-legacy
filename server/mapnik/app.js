@@ -169,6 +169,7 @@ http.createServer( function( req, res )
 								try
 								{
 									map.extent = bbox;
+									var im = new mapnik.Image( map.width, map.height );
 								}
 								catch( err )
 								{
@@ -176,7 +177,6 @@ http.createServer( function( req, res )
 									res.end( "Undefined extent" );
 								}
 								
-								var im = new mapnik.Image( map.width, map.height );
 								map.render( im, function( err, im )
 								{
 									process.nextTick( function()
