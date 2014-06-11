@@ -18,23 +18,26 @@ function load_visual()
 
 function draw_visual( layer )
 {
-	layer.on( "click", function( e )
-	{
-		if( visual.active ) visual.active.setStyle( { fillOpacity : 0 } );
-		
-		this.bringToFront();
-		_.each( this.getLayers(), function( l )
-		{
-			if( l instanceof L.Marker === false )
+	layer
+		.on( "mouseover", function( e )
+		{	
+			this.bringToFront();
+			_.each( this.getLayers(), function( l )
 			{
-				l.setStyle( { fillOpacity : 0.65 } );
-				visual.active = l;
-			}
+				if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0.65 } );
+			});
+			show_visual_details( this.feature.properties.id, e.containerPoint );
+		})
+		.on( "mouseout", function( e )
+		{
+			_.each( this.getLayers(), function( l )
+			{
+				if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0 } );
+			});
+			$( ".visual_probe" ).remove();
 		});
-		show_visual_details( this.feature.properties.id );
-	});
 
-	_.each( layer.getLayers(), function( l )
+	layer.eachLayer( function( l )
 	{
 		if( l instanceof L.Marker )
 		{
@@ -55,13 +58,39 @@ function draw_visual( layer )
 	});
 }
 
-function show_visual_details( ssid )
+function show_visual_details( ssid, e )
 {
-	$.ajax( "http://www.sscommons.org/openlibrary/secure/collections/7729935",{
+	
+	var probe = $( document.createElement( 'div' ) )
+					.addClass( "visual_probe" )
+					.appendTo( $( ".wrapper" ) );
+					
+	$.ajax( "http://www.sscommons.org/openlibrary/secure/metadata/" + ssid,{
 		dataType : "json",
 		success : function( json )
-		{
-			console.log( json );
+		{					
+			var data = {};
+			_.each( 
+				_.filter( 
+					json.metaData,
+					function( i )
+					{
+						return _.contains( [ "Title", "Date", "Description" ], i.fieldName );
+					}
+				),
+				function( j )
+				{
+					data[ j.fieldName ] = j.fieldValue; 
+				}
+			);
+			
+			probe.html( "<b>" + data.Date + "</b><p>" + data.Title + "<p><i>Click for details</i>" );
+			
+			probe.css({
+				"background-image" : "url( http://www.sscommons.org/" + json.imageUrl + " )",
+				"top" : e.y > $( window ).height() / 2 ? e.y - 20 : e.y + probe.outerHeight() + 20,
+				"left" : e.x > $( window ).width() / 2 ? e.x - probe.outerWidth() : e.x
+			});
 		}
 	});
 }
