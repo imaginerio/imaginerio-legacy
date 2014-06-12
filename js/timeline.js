@@ -12,10 +12,11 @@ function init_timeline()
 		years = json;
 		min = _.first( years ),
 		max = _.last( years ),
-		year = min;
+		year = Math.max( year, min );
 		
 		build_timeline();
-		update_year( min );
+		update_year( year );
+		snap_timeline( year );
 	});
 	
 	$( "#puck" ).mousedown( function()
@@ -100,9 +101,9 @@ function get_timeline_year()
 	return Math.round( l / px ) + min;
 }
 
-function snap_timeline()
+function snap_timeline( set )
 {
-	var y = get_timeline_year();
+	var y = set ? set : get_timeline_year();
 	if( y > year )
 	{
 		y = _.find( years, function( d ){ return d >= y } );

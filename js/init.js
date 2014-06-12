@@ -6,6 +6,8 @@ var server = "http://rio-server.axismaps.com:3000",
 
 function init()
 {
+	if( gup( 'year' ) ) year = gup( 'year' );
+	
 	resize();
 	init_map();
 	init_layers();
@@ -55,6 +57,18 @@ function map_loading( show )
 	{
 		$( "#loading" ).remove();
 	}
+}
+
+function gup( name )
+{
+	name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+	var regexS = "[\\?&]"+name+"=([^&#]*)";
+	var regex = new RegExp( regexS );
+	var results = regex.exec( window.location.href );
+	if( results == null )
+		return "";
+	else
+		return results[1];
 }
 
 init();
