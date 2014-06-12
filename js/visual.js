@@ -36,7 +36,8 @@ function draw_visual( layer )
 				if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0 } );
 			});
 			$( ".visual_probe" ).remove();
-		});
+		})
+		.on( "click", show_image );
 
 	layer.eachLayer( function( l )
 	{
@@ -95,6 +96,31 @@ function show_visual_details( properties, e )
 				"left" : e.x > $( window ).width() / 2 ? e.x - probe.outerWidth() : e.x
 			});
 		}
+	});
+}
+
+function show_image()
+{
+	$.fancybox.showLoading();
+	var data = this.feature.properties;
+	
+	$.getJSON( "http://www.sscommons.org/openlibrary/secure/imagefpx/" + data.id + "/7729935/5", function( json )
+	{
+		console.log( json );
+		$.fancybox.open({
+			href : json[ 0 ].imageServer + json[ 0 ].imageUrl + "&&wid=" + json[ 0 ].width + "&hei=" + json[ 0 ].height + "&rgnn=0,0,1,1&cvt=JPEG",
+			type : 'image',
+			title : "<b>" + data.creator + "</b> - " + data.date + "<br />" + data.description,
+			helpers:  {
+		        title : {
+		            type : 'inside'
+		        },
+		        overlay : {
+		            showEarly : false
+		        }
+		    }
+		});
+		console.log( json[ 0 ].imageServer + json[ 0 ].imageUrl + "&&wid=" + json[ 0 ].width + "&hei=" + json[ 0 ].height + "&rgnn=0,0,1,1&cvt=JPEG" );
 	});
 }
 
