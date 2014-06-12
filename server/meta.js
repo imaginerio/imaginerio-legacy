@@ -31,7 +31,7 @@ exports.timeline = function( req, res )
 	
 	var years = [];
 	
-	var query = client.query( "SELECT * FROM ( SELECT firstdispl  AS year FROM basepoint UNION SELECT lastdispla + 1 AS year FROM basepoint UNION SELECT firstdispl  AS year FROM baseline UNION SELECT lastdispla + 1 AS year FROM baseline UNION SELECT firstdispl  AS year FROM basepoly UNION SELECT lastdispla + 1 AS year FROM basepoly ) as q ORDER BY year" );
+	var query = client.query( "SELECT * FROM ( SELECT firstdispl  AS year FROM basepoint UNION SELECT lastdispla AS year FROM basepoint UNION SELECT firstdispl AS year FROM baseline UNION SELECT lastdispla AS year FROM baseline UNION SELECT firstdispl AS year FROM basepoly UNION SELECT lastdispla AS year FROM basepoly UNION SELECT earliestda AS year FROM visualpoly UNION SELECT latestdate AS year FROM visualpoly ) as q ORDER BY year" );
 	
 	query.on( 'row', function( result )
 	{
