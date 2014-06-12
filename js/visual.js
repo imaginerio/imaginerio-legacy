@@ -26,7 +26,7 @@ function draw_visual( layer )
 			{
 				if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0.65 } );
 			});
-			console.log( this );
+
 			show_visual_details( this.feature.properties, e.containerPoint );
 		})
 		.on( "mouseout", function( e )
@@ -61,7 +61,7 @@ function draw_visual( layer )
 
 function show_visual_details( properties, e )
 {
-	console.log( properties );
+
 	var probe = $( document.createElement( 'div' ) )
 					.addClass( "visual_probe" )
 					.html( "<b>" + properties.creator + "</b><p>" + properties.description + "<p><i>Click for details</i>" )
