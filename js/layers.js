@@ -53,32 +53,74 @@ function build_layers()
 							
 			_.each( val, function( val, key )
 			{
-				add_check( "geodb", key, folder );
-				_.each( val, function( val, key )
+				if( key == "VisualDocuments" )
 				{
-					var label = add_check( "layer", key, val.id ).appendTo( folder );
-					delete val.id;
-					
-					if( val.style )
+					build_visual( val, folder )
+				}
+				else
+				{
+					add_check( "geodb", key, folder );
+					_.each( val, function( val, key )
 					{
-						label.append( add_swatch( val.style ) );
-					}
-					else
-					{
-						_.each( val, function( style, name )
+						var label = add_check( "layer", key, val.id ).appendTo( folder );
+						delete val.id;
+						
+						if( val.style )
 						{
-							$( document.createElement( 'div' ) )
-								.addClass( "feature" )
-								.attr( "id", name )
-								.html( names[ name ] )
-								.appendTo( folder )
-								.prepend( add_swatch( style ) );
-						});
-					}
-				});
+							label.append( add_swatch( val.style ) );
+						}
+						else
+						{
+							_.each( val, function( style, name )
+							{
+								$( document.createElement( 'div' ) )
+									.addClass( "feature" )
+									.attr( "id", name )
+									.html( names[ name ] )
+									.appendTo( folder )
+									.prepend( add_swatch( style ) );
+							});
+						}
+					});
+				}
 			});
 		});
 	});
+	
+	function build_visual( r, div )
+	{
+		var docs = {};
+		_.each( r, function( val, key )
+		{
+			docs[ key ] = _.filter( _.keys( val ), function( i ){ return i != "id" } )[ 0 ];
+		})
+		console.log( docs );
+		_.each( docs, function( val, key )
+		{
+			var label = $( document.createElement( 'label' ) )
+							.html( val )
+							.appendTo( div )
+							.prepend(
+								$( document.createElement( 'input' ) )
+									.attr({
+										type : "radio",
+										name : "visual",
+										value : val
+									})
+							);
+							
+			$.getJSON( "http://www.sscommons.org/openlibrary/secure/imagefpx/" + key + "/7729935/5", function( json )
+			{
+				var w = json[ 0 ].width,
+					h = json[ 0 ].height,
+					s = Math.max( 120 / h, 185 / w );
+					
+				label.after(
+					$( document.createElement( 'img' ) ).attr( "src", json[ 0 ].imageServer + json[ 0 ].imageUrl + "&&wid=" + Math.round( w * s )  + "&hei=" + Math.round( h * s ) + "&rgnn=0,0,1,1&cvt=JPEG" )
+				);
+			});			
+		})
+	}
 	
 	function add_check( cclass, html, id )
 	{

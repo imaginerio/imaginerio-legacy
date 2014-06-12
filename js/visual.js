@@ -106,7 +106,6 @@ function show_image()
 	
 	$.getJSON( "http://www.sscommons.org/openlibrary/secure/imagefpx/" + data.id + "/7729935/5", function( json )
 	{
-		console.log( json );
 		$.fancybox.open({
 			href : json[ 0 ].imageServer + json[ 0 ].imageUrl + "&&wid=" + json[ 0 ].width + "&hei=" + json[ 0 ].height + "&rgnn=0,0,1,1&cvt=JPEG",
 			type : 'image',
@@ -120,7 +119,6 @@ function show_image()
 		        }
 		    }
 		});
-		console.log( json[ 0 ].imageServer + json[ 0 ].imageUrl + "&&wid=" + json[ 0 ].width + "&hei=" + json[ 0 ].height + "&rgnn=0,0,1,1&cvt=JPEG" );
 	});
 }
 
