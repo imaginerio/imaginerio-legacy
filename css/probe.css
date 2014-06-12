@@ -39,8 +39,8 @@
 }
 
 .visual_probe{
-	height: 70px;
-	max-width: 200px;
+	max-width: 300px;
+	min-height: 70px;
 	padding: 15px 15px 15px 125px;
 	position: fixed;
 	font-size: 14px;
@@ -57,4 +57,9 @@
 
 .visual_probe p{
 	margin: 5px 0;
+}
+
+.visual_probe i{
+	font-size: 13px;
+	color: #666;
 }
