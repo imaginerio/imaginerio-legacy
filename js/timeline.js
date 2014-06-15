@@ -11,7 +11,7 @@ function init_timeline()
 	{
 		years = json;
 		min = _.first( years ),
-		max = _.last( years ),
+		max = _.last( years ) + 1,
 		year = Math.max( year, min );
 		
 		build_timeline();

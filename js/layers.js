@@ -176,7 +176,16 @@ function build_layers()
 	function add_swatch( style )
 	{
 		var swatch = $( document.createElement( 'div' ) ).addClass( "swatch" );
-		swatch.load( "img/legend/" + style.shape + ".svg" );
+		if( style.shape.match( /svg$/ ) )
+		{
+			swatch.load( "img/legend/" + style.shape );
+		}
+		else
+		{
+			swatch.append(
+				$( document.createElement( 'img' ) ).attr( "src", "img/legend/" + style.shape )
+			);
+		}
 
 		swatch.css( style );
 		

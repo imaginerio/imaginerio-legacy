@@ -149,4 +149,13 @@
 .swatch{
 	float: right;
 	margin: 2px -10px 0 0;
+	overflow: hidden;
+}
+
+.layer > .swatch{
+	margin-right: 10px;
+}
+
+.layer > .swatch img{
+	margin-right: 25px;
 }
