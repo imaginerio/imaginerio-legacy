@@ -1,8 +1,10 @@
 var server = "http://rio-server.axismaps.com:3000",
-	tileserver = "http://rio-server.axismaps.com:8000/";
+	tileserver = "http://rio-server.axismaps.com:8000/",
+	rasterserver = "http://rio-server.axismaps.com:9000/";
 	
 //	server = "http://localhost:3000";
 //	tileserver = "http://localhost:8000/";
+//	rasterserver = "http://localhost:9000/";
 
 function init()
 {

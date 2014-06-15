@@ -1,6 +1,7 @@
 var map,
 	tiles = {},
 	visual = {},
+	rasters = {},
 	shown = {},
 	highlight = {};
 
@@ -74,6 +75,23 @@ function draw( id, route )
 				})
 				.addTo( map );
 	highlight.top = omnivore.geojson( server + "/" + route + "/" + id, null, styles.top ).addTo( map );
+}
+
+function load_raster( id )
+{
+	if( map.hasLayer( shown.raster ) ) map.removeLayer( shown.raster );
+	if( id !== false )
+	{
+		if( rasters[ id ] )
+		{
+			map.addLayer( rasters[ id ] );
+		}
+		else
+		{
+			rasters[ id ] = L.tileLayer( rasterserver + 'tiles/?z={z}&x={x}&y={y}&raster=' + id ).addTo( map ).setOpacity( 0.35 );
+		}
+		shown.raster = rasters[ id ];
+	}
 }
 
 function tile_fadeOut( tile_out )

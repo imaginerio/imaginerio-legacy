@@ -94,7 +94,7 @@ function build_layers()
 		{
 			docs[ key ] = _.filter( _.keys( val ), function( i ){ return i != "id" } )[ 0 ];
 		})
-		console.log( docs );
+
 		_.each( docs, function( val, key )
 		{
 			var label = $( document.createElement( 'label' ) )
@@ -103,9 +103,23 @@ function build_layers()
 							.prepend(
 								$( document.createElement( 'input' ) )
 									.attr({
-										type : "radio",
-										name : "visual",
-										value : val
+										"type" : "checkbox",
+										"class" : "raster",
+										"value" : key
+									})
+									.click( function( e )
+									{
+										if( $( this ).is( ":checked" ) )
+										{
+											$( "input.raster:checked" ).not( this ).removeAttr( "checked" );
+											load_raster( $( this ).val() );
+										}
+										else
+										{
+											load_raster( false );
+										}
+												
+										e.stopPropagation();
 									})
 							);
 							
