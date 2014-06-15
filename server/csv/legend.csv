@@ -1,0 +1,65 @@
+folder,geodatabas,layer,featuretyp,fill,stroke,shape,id
+Boundaries,PoliticalBoundaries,NeighborhoodsPoly,,,#93836,dashed line,"neighborhoods_labels,neighborhoods"
+BuiltEnvironment,Architecture,BuildingsPoly,,,,,buildings
+BuiltEnvironment,CivilEngineering,TransportationRoadLine,,,,,"roads_labels,roads"
+BuiltEnvironment,Urbanism,SquaresPoly,,,,,"squares_labels,squares"
+NaturalEnvironment,Topography,ContoursLine,100 m,,,,
+NaturalEnvironment,Topography,ContoursLine,10 m,,,,
+NaturalEnvironment,Topography,ContoursLine,50 m,#ded2ca,,line.svg,
+NaturalEnvironment,Topography,ContoursLine,5 m,#ded2ca,,line.svg,
+NaturalEnvironment,Topography,LandPoly,,#e7ded6,,poly.svg,
+NaturalEnvironment,Topography,ContoursLine,60 m,,,,
+NaturalEnvironment,Water,InlandWatersPoly,Lagoon,#b9cee0,#93b2cd,poly.svg,
+BuiltEnvironment,CivilEngineering,TransportationRailPoint,Metro Station,,,rail.png,railpoint
+BuiltEnvironment,CivilEngineering,TransportationRailPoint,Railroad Station,,,rail.png,railpoint
+BuiltEnvironment,CivilEngineering,TransportationRailPoint,Tram Station,,,rail.png,railpoint
+BuiltEnvironment,Urbanism,FountainsPoint,,,,monument.png,fountainspoint
+Boundaries,PoliticalBoundaries,LotsAndLandUsesPoly,,#e9d4be,,poly.svg,lotslanduse
+BuiltEnvironment,Architecture,BuildingsPoly,Adminitrative Building,#e3b587,,poly.svg,buildings
+BuiltEnvironment,Architecture,BuildingsPoly,Church,#e3b587,,poly.svg,buildings
+BuiltEnvironment,Architecture,BuildingsPoly,Civic,#e3b587,,poly.svg,buildings
+BuiltEnvironment,Architecture,BuildingsPoly,Commercial,#e3b587,,poly.svg,buildings
+BuiltEnvironment,Architecture,BuildingsPoly,Convent,#e3b587,,poly.svg,buildings
+BuiltEnvironment,Architecture,BuildingsPoly,Cultural,#e3b587,,poly.svg,buildings
+BuiltEnvironment,Architecture,BuildingsPoly,Cultural Center,#e3b587,,poly.svg,buildings
+BuiltEnvironment,Architecture,BuildingsPoly,Culture,#e3b587,,poly.svg,buildings
+BuiltEnvironment,Architecture,BuildingsPoly,Customs,#e3b587,,poly.svg,buildings
+BuiltEnvironment,Architecture,BuildingsPoly,Fort,#e3b587,,poly.svg,buildings
+BuiltEnvironment,Architecture,BuildingsPoly,Governmental,#e3b587,,poly.svg,buildings
+BuiltEnvironment,Architecture,BuildingsPoly,Health and Human Safety,#e3b587,,poly.svg,buildings
+BuiltEnvironment,Architecture,BuildingsPoly,Hospital,#e3b587,,poly.svg,buildings
+BuiltEnvironment,Architecture,BuildingsPoly,Industrial,#e3b587,,poly.svg,buildings
+BuiltEnvironment,Architecture,BuildingsPoly,Misc,#e3b587,,poly.svg,buildings
+BuiltEnvironment,Architecture,BuildingsPoly,Monuments,#e3b587,,poly.svg,buildings
+BuiltEnvironment,Architecture,BuildingsPoly,Palace,#e3b587,,poly.svg,buildings
+BuiltEnvironment,Architecture,BuildingsPoly,Religious,#e3b587,,poly.svg,buildings
+BuiltEnvironment,Architecture,BuildingsPoly,Residence,#e3b587,,poly.svg,buildings
+BuiltEnvironment,Architecture,BuildingsPoly,School,#e3b587,,poly.svg,buildings
+BuiltEnvironment,Architecture,BuildingsPoly,Sports,#e3b587,,poly.svg,buildings
+BuiltEnvironment,Architecture,BuildingsPoly,Stock Exchange,#e3b587,,poly.svg,buildings
+BuiltEnvironment,CivilEngineering,TransportationRoadLine,Avenida,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
+BuiltEnvironment,CivilEngineering,TransportationRoadLine,Beco,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
+BuiltEnvironment,CivilEngineering,TransportationRoadLine,Caminho,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
+BuiltEnvironment,CivilEngineering,TransportationRoadLine,Collector,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
+BuiltEnvironment,CivilEngineering,TransportationRoadLine,Ladeira,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
+BuiltEnvironment,CivilEngineering,TransportationRoadLine,Estrada,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
+BuiltEnvironment,CivilEngineering,TransportationRoadLine,Expressway,#ffffff,#d2c1b3,line.svg,"roads_labels,roads"
+BuiltEnvironment,CivilEngineering,TransportationRoadLine,Largo,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
+BuiltEnvironment,CivilEngineering,TransportationRoadLine,Local,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
+BuiltEnvironment,CivilEngineering,TransportationRoadLine,Minor Arterial,#ffffff,#d2c1b3,line.svg,"roads_labels,roads"
+BuiltEnvironment,CivilEngineering,TransportationRoadLine,Praça,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
+BuiltEnvironment,CivilEngineering,TransportationRoadLine,Praia,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
+BuiltEnvironment,CivilEngineering,TransportationRoadLine,Principle Arterial,#ffffff,#d2c1b3,line.svg,"roads_labels,roads"
+BuiltEnvironment,CivilEngineering,TransportationRoadLine,Rua,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
+BuiltEnvironment,CivilEngineering,TransportationRoadLine,Travessa,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
+BuiltEnvironment,CivilEngineering,WaterLine,Aqueduct,,#90b0cc,line.svg,"waterline_labels,waterline"
+BuiltEnvironment,LandscapeArchitecture,CemeteriesPoly,,#ccd1ac,,poly.svg,"cemeteries_marker,cemeteries"
+BuiltEnvironment,Urbanism,CityBlocksPoly,,#ebe3dd,,poly.svg,cityblocks
+BuiltEnvironment,Urbanism,SquaresPoly,Garden,#ccd1ac,,poly.svg,"squares_labels,squares"
+BuiltEnvironment,Urbanism,SquaresPoly,Park,#ccd1ac,,poly.svg,"squares_labels,squares"
+BuiltEnvironment,Urbanism,SquaresPoly,Plaza,#fcf8d7,,poly.svg,"squares_labels,squares"
+BuiltEnvironment,Urbanism,SquaresPoly,Square,#fcf8d7,,poly.svg,"squares_labels,squares"
+NaturalEnvironment,Topography,ContoursLine,25 m,#ded2ca,,line.svg,
+NaturalEnvironment,Water,InlandWatersPoly,Marsh,#c3d3cd,,ripple.png,
+NaturalEnvironment,Water,InlandWatersPoly,Pond Or Reservoir,#b9cee0,#93b2cd,poly.svg,
+NaturalEnvironment,Water,RiversAndStreamsLine,,,#90b0cc,line.svg,
