@@ -24,7 +24,7 @@ function load_tiles()
 	map_loading( true );
 	if( tiles[ year ] && off.length == 0 )
 	{
-		show_tiles( tiles[ year ] );
+		map.addLayer( tiles[ year ].setOpacity( 0 ) );
 	}
 	else
 	{
@@ -34,7 +34,6 @@ function load_tiles()
 					.on( "load", function()
 					{
 						show_tiles( this );
-						this.off( "load" );
 					});
 		
 		if( off.length == 0 ) tiles[ year ] = t;
@@ -102,7 +101,7 @@ function tile_fadeOut( tile_out )
 		i -= 0.1;
 		if( i <= 0 ) clearInterval( timer );
 		tile_out.setOpacity( Math.max( 0, i ) );
-	}, 5 );
+	}, 50 );
 	
 	return tile_out;
 }
@@ -119,7 +118,7 @@ function tile_fadeIn( tile_in )
 			map_loading( false );
 		}
 		tile_in.setOpacity( Math.min( 1, i ) );
-	}, 5 );
+	}, 50 );
 	
 	return tile_in;
 }

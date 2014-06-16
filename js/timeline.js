@@ -99,7 +99,6 @@ function build_timeline()
 function get_timeline_year()
 {
 	var l = $( "#puck" ).css( "left" ).replace( "px", "" );
-	console.log( l );
 	return Math.round( l / px ) + min;
 }
 
