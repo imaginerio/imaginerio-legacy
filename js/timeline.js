@@ -13,6 +13,7 @@ function init_timeline()
 		min = _.first( years ),
 		max = _.last( years ) + 1,
 		year = Math.max( year, min );
+		years.push( max );
 		
 		build_timeline();
 		update_year( year );
@@ -98,6 +99,7 @@ function build_timeline()
 function get_timeline_year()
 {
 	var l = $( "#puck" ).css( "left" ).replace( "px", "" );
+	console.log( l );
 	return Math.round( l / px ) + min;
 }
 
