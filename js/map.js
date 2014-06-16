@@ -43,8 +43,11 @@ function load_tiles()
 
 function show_tiles( tile )
 {
-	if( shown.tiles ) map.removeLayer( tile_fadeOut( shown.tiles ) );
-	shown.tiles = tile_fadeIn( tile );
+	if( !_.isEqual( shown.tiles, tile ) )
+	{
+		if( shown.tiles ) map.removeLayer( tile_fadeOut( shown.tiles ) );
+		shown.tiles = tile_fadeIn( tile );
+	}
 }
 
 function probe( e )
