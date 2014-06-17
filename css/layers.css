@@ -14,6 +14,11 @@
 	-o-transition: left 500ms ease-in;
 	transition: left 500ms ease-in;
 	overflow: scroll;
+	-moz-box-shadow:0px 0px 3px 1px rgba(0,0,0,0.25);
+	-webkit-box-shadow:0px 0px 3px 1px rgba(0,0,0,0.25);
+	box-shadow:0px 0px 3px 1px rgba(0,0,0,0.25);
+	-ms-filter:"progid:DXImageTransform.Microsoft.Glow(Color=#ff000000,Strength=4)";
+	filter:progid:DXImageTransform.Microsoft.Glow(Color=#ff000000,Strength=4);
 }
 
 #layers.open{
@@ -41,6 +46,11 @@
 	-ms-transition: width 500ms ease-in;
 	-o-transition: width 500ms ease-in;
 	transition: width 500ms ease-in;
+	-moz-box-shadow:0px 0px 3px 1px rgba(0,0,0,0.25);
+	-webkit-box-shadow:0px 0px 3px 1px rgba(0,0,0,0.25);
+	box-shadow:0px 0px 3px 1px rgba(0,0,0,0.25);
+	-ms-filter:"progid:DXImageTransform.Microsoft.Glow(Color=#ff000000,Strength=4)";
+	filter:progid:DXImageTransform.Microsoft.Glow(Color=#ff000000,Strength=4);
 }
 
 #switch.open{
@@ -154,6 +164,10 @@
 
 .layer > .swatch{
 	margin-right: 10px;
+}
+
+.swatch img{
+	margin-right: 5px;
 }
 
 .layer > .swatch img{
