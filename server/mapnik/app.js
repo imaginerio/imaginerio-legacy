@@ -170,38 +170,37 @@ http.createServer( function( req, res )
 								{
 									map.extent = bbox;
 									var im = new mapnik.Image( map.width, map.height );
+									map.render( im, function( err, im )
+									{
+										process.nextTick( function()
+										{
+											maps.release( stylesheet, map );
+										});
+										if( err )
+										{
+											res.writeHead( 500, { 'Content-Type' : 'text/plain' } );
+											res.end( err.message );
+										}
+										else
+										{
+											var imagedata = im.encodeSync( 'png' );
+											
+											mkdir( "cache/png/" + params.year + "/" + params.layer + "/" + params.z + "/" + params.x );
+											fs.writeFile( png, imagedata, 'binary', function( err )
+											{
+												if( err ) return console.log( err );
+												console.log( png + ' saved.')
+											});
+											res.writeHead( 200, { 'Content-Type' : 'image/png' } );
+											res.end( im.encodeSync( 'png' ) );
+										}
+									});
 								}
 								catch( err )
 								{
 									res.writeHead( 500, { 'Content-Type' : 'text/plain' } );
 									res.end( "Undefined extent" );
 								}
-								
-								map.render( im, function( err, im )
-								{
-									process.nextTick( function()
-									{
-										maps.release( stylesheet, map );
-									});
-									if( err )
-									{
-										res.writeHead( 500, { 'Content-Type' : 'text/plain' } );
-										res.end( err.message );
-									}
-									else
-									{
-										var imagedata = im.encodeSync( 'png' );
-										
-										mkdir( "cache/png/" + params.year + "/" + params.layer + "/" + params.z + "/" + params.x );
-										fs.writeFile( png, imagedata, 'binary', function( err )
-										{
-											if( err ) return console.log( err );
-											console.log( png + ' saved.')
-										});
-										res.writeHead( 200, { 'Content-Type' : 'image/png' } );
-										res.end( im.encodeSync( 'png' ) );
-									}
-								});
 							}
 						});
 					});
