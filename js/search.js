@@ -10,7 +10,7 @@ function init_search()
 			replace : function( url, uriEncodedQuery ){ return url.replace( '/year/', '/' + year + '/' ).replace( '%QUERY', uriEncodedQuery ) },
 			filter : function( json )
 			{
-				return _.map( json, function( value, key ){ return { 'name' : key, 'id' : value } } );
+				return _.map( json, function( value, key ){ return { 'name' : key, 'data' : value } } );
 			}
 		}
 	});
@@ -25,14 +25,15 @@ function init_search()
 			search.get( $( this ).val(), function( d )
 			{
 				$( "#results .search" ).empty();
-				_.each( d, function( val ){ add_result( val.name, val.id, $( "#results .search" ), new RegExp( q, "gi" ) ) } );
+				_.each( d, function( val ){ add_result( val.name, val.data.id, val.data.layer, $( "#results .search" ), new RegExp( q, "gi" ) ) } );
 			});
 		}
 	});
 }
 
-function add_result( name, id, div, reg )
+function add_result( name, id, layer, div, reg )
 { 	
+	if( $( ".header[name=" + layer + "]" ).length == 0 ) add_header( layer, div );
 	var result = $( document.createElement( 'div' ) )
 					.attr( "data-id", _.isArray( id ) ? id.join( "," ) : id )
 					.addClass( "result" )
@@ -40,6 +41,17 @@ function add_result( name, id, div, reg )
 					.appendTo( div );
 	
 	get_details( id, result );
+	
+	function add_header( layer, div )
+	{
+		$( document.createElement( 'div' ) )
+			.attr({
+				"class" : "header",
+				"name" : layer
+			})
+			.html( names[ layer ] )
+			.appendTo( div );
+	}
 }
 
 function get_details( id, div )

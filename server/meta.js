@@ -51,9 +51,7 @@ exports.layers = function( req, res )
 	var client = new pg.Client( conn );
 	client.connect();
 
-	var year = req.params.year;
-	//var q = "SELECT * FROM ( SELECT q.*, l.fill, l.stroke, l.shape, l. ID FROM ( SELECT folder, geodatabas, layer, featuretyp FROM baseline WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp UNION SELECT folder, geodatabas, layer, featuretyp FROM basepoint WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp UNION SELECT folder, geodatabas, layer, featuretyp FROM basepoly WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp UNION SELECT folder, geodatabas, layer, ssid AS featuretyp FROM visualpoly WHERE earliestda <= " + year + " AND latestdate >= " + year + " AND layer = 'MapsAndPlansPoly' GROUP BY folder, geodatabas, layer, ssid ) AS q LEFT OUTER JOIN legend AS l ON q.layer = l.layer AND ( q.featuretyp = l.featuretyp OR ( l.featuretyp IS NULL AND q.featuretyp IS NULL ) ) ) AS q2 WHERE fill IS NOT NULL OR folder = 'VisualDocuments' OR stroke IS NOT NULL OR shape IS NOT NULL ORDER BY folder, geodatabas, layer, featuretyp";
-	
+	var year = req.params.year;	
 	var q = "SELECT * FROM ( SELECT q.*, l.fill, l.stroke, l.shape, l. ID FROM ( SELECT folder, geodatabas, layer, featuretyp FROM baseline WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp UNION SELECT folder, geodatabas, layer, featuretyp FROM basepoint WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp UNION SELECT folder, geodatabas, layer, featuretyp FROM basepoly WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp UNION SELECT folder, geodatabas, ssid AS layer, imageviewd AS featuretyp FROM visualpoly WHERE earliestda <= " + year + " AND latestdate >= " + year + " AND layer = 'MapsAndPlansPoly' GROUP BY folder, geodatabas, ssid, imageviewd ) AS q LEFT OUTER JOIN legend AS l ON q.layer = l.layer AND ( q.featuretyp = l.featuretyp OR ( l.featuretyp IS NULL AND q.featuretyp IS NULL ) ) ) AS q2 WHERE fill IS NOT NULL OR folder = 'VisualDocuments' OR stroke IS NOT NULL OR shape IS NOT NULL ORDER BY folder, geodatabas, layer, featuretyp";
 	
 	var query = client.query( q ),
@@ -99,14 +97,14 @@ exports.search = function( req, res )
 	var year = req.params.year,
 		word = req.params.word;
 		
-	var q = "SELECT array_agg( id ) as gid, namecomple FROM ( SELECT globalidco AS id, namecomple FROM basepoint WHERE namecomple ILIKE '%" + word + "%' AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT globalidco AS id, namecomple FROM baseline WHERE namecomple ILIKE '%" + word + "%' AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT globalidco AS id, namecomple FROM basepoly WHERE namecomple ILIKE '%" + word + "%' AND firstdispl <= " + year + " AND lastdispla >= " + year + " ) as q GROUP BY namecomple LIMIT 5";
+	var q = "SELECT array_agg( id ) as gid, namecomple, layer FROM ( SELECT globalidco AS id, namecomple, layer FROM basepoint WHERE namecomple ILIKE '%" + word + "%' AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT globalidco AS id, namecomple, layer FROM baseline WHERE namecomple ILIKE '%" + word + "%' AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT globalidco AS id, namecomple, layer FROM basepoly WHERE namecomple ILIKE '%" + word + "%' AND firstdispl <= " + year + " AND lastdispla >= " + year + " ) as q GROUP BY namecomple, layer LIMIT 5";
 	
 	var query = client.query( q ),
 		names = {};
 	
 	query.on( 'row', function( result )
 	{
-		names[ result.namecomple ] = result.gid;
+		names[ result.namecomple ] = { id : result.gid, layer : result.layer };
 	});
 	
 	query.on( 'end', function()

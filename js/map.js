@@ -58,7 +58,7 @@ function probe( e )
 	
 	$.getJSON( server + "/probe/" + year + "/" + e.latlng.lng + "," + e.latlng.lat, function( json )
 	{
-		_.each( json, function( l ){ add_result( l.name, l.id, $( "#results .probe" ) ); });
+		_.each( json, function( l ){ add_result( l.name, l.id, l.layer, $( "#results .probe" ) ); });
 		cursor_loading( false );
 	})
 }
