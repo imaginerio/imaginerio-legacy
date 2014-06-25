@@ -54,7 +54,7 @@ function probe( e )
 {
 	cursor_loading( true, e.containerPoint );
 	clear_highlight();
-	$( "#results .probe" ).empty();
+	clear_results( "probe" );
 	
 	$.getJSON( server + "/probe/" + year + "/" + e.latlng.lng + "," + e.latlng.lat, function( json )
 	{

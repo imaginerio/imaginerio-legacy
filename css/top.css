@@ -139,6 +139,18 @@ nav{
 	background: url(../img/search.png) 10px center no-repeat;
 }
 
+#search #clear{
+	content: "";
+	display: block;
+	position: absolute;
+	right: 0;
+	height: 100%;
+	width: 35px;
+	background: url(../img/close.png) no-repeat center center;
+	display: none;
+	cursor: pointer;
+}
+
 #menu{
 	line-height: 40px;
 	font-size: 16px;

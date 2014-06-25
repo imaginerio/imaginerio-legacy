@@ -41,7 +41,7 @@ function init_timeline()
 function update_year( y )
 {
 	clear_visual();
-	clear_results();
+	clear_results( "shadow");
 	
 	year = y;
 	$( "#year" ).html( year );

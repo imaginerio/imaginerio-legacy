@@ -19,16 +19,28 @@ function init_search()
 	
 	$( "#search input").keyup( function()
 	{
+		$( "#search #clear" ).show();
 		var q = $( this ).val();
 		if( q.length > 2 )
 		{
 			search.get( $( this ).val(), function( d )
 			{
-				$( "#results .search" ).empty();
+				clear_results( "search" );
+				$( "#search #clear" ).show();
 				_.each( d, function( val ){ add_result( val.name, val.data.id, val.data.layer, $( "#results .search" ), new RegExp( q, "gi" ) ) } );
 			});
 		}
+		else
+		{
+			clear_results( "search" );
+		}
 	});
+	
+	$( "#search #clear" ).click( function()
+	{
+		$( "#search input").val( '' );
+		clear_results( "search" );
+	})
 }
 
 function add_result( name, id, layer, div, reg )
@@ -96,7 +108,12 @@ function get_details( id, div )
 	});
 }
 
-function clear_results()
+function clear_results( type )
 {
-	$( ".result" ).remove();
+	$( "." + type + " .result, ." + type + " .header" ).remove();
+	$(  ).remove();
+	if( type == "search" )
+	{
+		$( "#search #clear" ).hide();
+	}
 }
