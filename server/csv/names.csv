@@ -78,3 +78,8 @@ TransportationRailPoint,Railway Station
 TransportationRoadLine,Road
 WaterLine,Water
 VisualDocuments,Visual Documents
+creator,Creator
+firstowner,First Owner
+owner,Owner
+occupant,Occupant
+year,Mapped

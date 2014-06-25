@@ -88,7 +88,7 @@ function get_details( id, div )
 			
 			_.each( json, function( val, key )
 			{
-				if( key != "years" ) details.append( key + ": <b>" + val + "</b><br />" );
+				if( key != "years" ) details.append( "<b>" + names[ key ] + ":</b> " + val + "<br />" );
 			});
 			
 			details.attr( "data-height", details.outerHeight() + 20 );
