@@ -20,15 +20,16 @@ function init_layers()
 			$( "#layers, #switch, .leaflet-control-zoom" ).addClass( "open" );
 		}
 	});
-	$( "#layers" ).on( "click", ".folder", function()
+	$( "#layers" ).on( "click", ".folder h4", function()
 	{
-		if( $( this ).hasClass( "open" ) )
+		var folder = $( this ).parent();
+		if( folder.hasClass( "open" ) )
 		{
-			$( this ).removeClass( "open" );
+			folder.removeClass( "open" );
 		}
 		else
 		{
-			$( this ).addClass( "open" );
+			folder.addClass( "open" );
 		}
 	});
 	$( "#layers" ).on( "click", ".feature", function( e )
