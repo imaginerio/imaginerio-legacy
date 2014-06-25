@@ -50,6 +50,16 @@ nav{
 	line-height: 60px;
 }
 
+#plan_info{
+	border-left: 1px solid #999;
+	margin: 10px 0;
+	line-height: 40px;
+	padding-left: 10px;
+	font-weight: 400;
+	font-size: 18px;
+	font-style: italic;
+}
+
 #year{
 	width: 100px;
 	font-size: 32px;

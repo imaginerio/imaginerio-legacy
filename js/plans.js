@@ -49,15 +49,15 @@ function init_plans()
 function load_plan( plan )
 {
 	draw_plan( plan );
-	$( "#year, #track, #puck" ).fadeOut( function()
+	$( "#track, #puck" ).fadeOut( function()
 	{
 		$( "#plans" )
 			.addClass( "back" )
-			.html( "&#9664; Back to Rio" );
+			.html( "&#9664; Clear plan" );
 			
 		$( "#plan_info" )
 			.show()
-			.html( plan.planname + " | " + plan.planyear );
+			.html( plan.planname + ", " + plan.planyear );
 	})
 }
 
