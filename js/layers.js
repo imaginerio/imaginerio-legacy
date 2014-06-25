@@ -65,20 +65,16 @@ function build_layers()
 						var label = add_check( "layer", key, val.id ).appendTo( folder );
 						delete val.id;
 						
-						if( val.style )
+						if( val.style ) label.append( add_swatch( val.style ) );
+						if( val.features )
 						{
-							label.append( add_swatch( val.style ) );
-						}
-						else
-						{
-							_.each( val, function( style, name )
+							_.each( val.features, function( name )
 							{
 								$( document.createElement( 'div' ) )
 									.addClass( "feature" )
 									.attr( "id", name )
 									.html( names[ name ] )
-									.appendTo( folder )
-									.prepend( add_swatch( style ) );
+									.appendTo( folder );
 							});
 						}
 					});

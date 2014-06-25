@@ -72,16 +72,11 @@ exports.layers = function( req, res )
 			{
 				layers[ val.folder ][ val.geodatabas ][ val.layer ] = {};
 				layers[ val.folder ][ val.geodatabas ][ val.layer ].id = val.id;
+				layers[ val.folder ][ val.geodatabas ][ val.layer ].features = [];
 			}
-				
-			if( val.featuretyp )
-			{
-				layers[ val.folder ][ val.geodatabas ][ val.layer ][ val.featuretyp ] = { fill : val.fill, stroke : val.stroke, shape : val.shape };
-			}
-			else
-			{
-				layers[ val.folder ][ val.geodatabas ][ val.layer ].style = { fill : val.fill, stroke : val.stroke, shape : val.shape };
-			}
+			
+			if( val.shape ) layers[ val.folder ][ val.geodatabas ][ val.layer ].style = { fill : val.fill, stroke : val.stroke, shape : val.shape };
+			if( val.featuretyp ) layers[ val.folder ][ val.geodatabas ][ val.layer ].features.push( val.featuretyp );
 		});
 		
 		res.send( layers );
