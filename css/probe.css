@@ -20,7 +20,7 @@
 	height: 20px;
 	padding: 10px 20px;
 	border-bottom: 1px solid #ccc;
-	background-color: #eee;
+	background: #eee url(../img/loader_small.gif) no-repeat 320px center;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -28,6 +28,7 @@
 
 .result.expand{
 	cursor: pointer;
+	background-image: none;
 }
 
 .result.expand:before{
