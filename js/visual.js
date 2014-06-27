@@ -18,27 +18,6 @@ function load_visual()
 
 function draw_visual( layer )
 {
-	layer
-		.on( "mouseover", function( e )
-		{	
-			this.bringToFront();
-			_.each( this.getLayers(), function( l )
-			{
-				if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0.65 } );
-			});
-
-			show_visual_details( this.feature.properties, e.containerPoint );
-		})
-		.on( "mouseout", function( e )
-		{
-			_.each( this.getLayers(), function( l )
-			{
-				if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0 } );
-			});
-			$( ".visual_probe" ).remove();
-		})
-		.on( "click", show_image );
-
 	layer.eachLayer( function( l )
 	{
 		if( l instanceof L.Marker )
@@ -48,6 +27,28 @@ function draw_visual( layer )
 				iconSize : [ 25, 22 ],
 				iconAnchor : [ 12, 11 ]
 			}));
+			
+			l.layer = layer;
+			
+			l.on( "mouseover", function( e )
+			{	
+				this.layer.bringToFront();
+				_.each( this.layer.getLayers(), function( l )
+				{
+					if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0.65 } );
+				});
+	
+				show_visual_details( this.layer.feature.properties, e.containerPoint );
+			});
+			l.on( "mouseout", function( e )
+			{
+				_.each( this.layer.getLayers(), function( l )
+				{
+					if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0 } );
+				});
+				$( ".visual_probe" ).remove();
+			});
+			l.on( "click", show_image );
 		}
 		else
 		{
@@ -87,8 +88,6 @@ function show_visual_details( properties, e )
 					data[ j.fieldName ] = j.fieldValue; 
 				}
 			);
-			
-			
 			
 			probe.css({
 				"background-image" : "url( http://www.sscommons.org/" + json.imageUrl + " )",
