@@ -1,15 +1,24 @@
 header{
 	font-size: 60px;
 	font-weight: 100;
-	background-color:rgb(238,238,238);
 	padding: 0 20px;
 	border-bottom: 1px solid rgb(153,153,153);
+	background: -moz-linear-gradient(top,  rgba(238,238,238,1) 0%, rgba(255,255,255,0.8) 70%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(238,238,238,1)), color-stop(70%,rgba(255,255,255,0.8))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(238,238,238,1) 0%,rgba(255,255,255,0.8) 70%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(238,238,238,1) 0%,rgba(255,255,255,0.8) 70%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(238,238,238,1) 0%,rgba(255,255,255,0.8) 70%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(238,238,238,1) 0%,rgba(255,255,255,0.8) 70%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#b3ffffff',GradientType=0 ); /* IE6-9 */
+}
+
+header, nav{
+	position: relative;
+	z-index: 2001;
 }
 
 nav{
 	background-color:rgba(0,0,0,0.7);
-	position: relative;
-	z-index: 2001;
 }
 
 #year, #timeline{

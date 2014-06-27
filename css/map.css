@@ -27,6 +27,7 @@
 
 .leaflet-container{
 	cursor: default;
+	overflow: visible;
 }
 
 .leaflet-dragging .leaflet-container{
