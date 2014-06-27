@@ -146,7 +146,7 @@ function build_layers()
 					.attr({
 						"type" : "checkbox",
 						"value" : id,
-						"checked" : "checked"
+						"checked" : !_.contains( off, id )
 					})
 					.click( switch_layers )
 			);
