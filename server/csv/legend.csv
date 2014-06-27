@@ -10,6 +10,7 @@ NaturalEnvironment,Topography,ContoursLine,5 m,#ded2ca,,line.svg,
 NaturalEnvironment,Topography,LandPoly,,#e7ded6,,poly.svg,
 NaturalEnvironment,Topography,ContoursLine,60 m,,,,
 NaturalEnvironment,Water,InlandWatersPoly,Lagoon,#b9cee0,#93b2cd,poly.svg,
+BuiltEnvironment,CivilEngineering,WaterLine,Aqueduct,#90b0cc,#90b0cc,line.svg,"waterline_labels,waterline"
 BuiltEnvironment,CivilEngineering,TransportationRailPoint,Metro Station,,,rail.png,railpoint
 BuiltEnvironment,CivilEngineering,TransportationRailPoint,Railroad Station,,,rail.png,railpoint
 BuiltEnvironment,CivilEngineering,TransportationRailPoint,Tram Station,,,rail.png,railpoint
@@ -52,7 +53,6 @@ BuiltEnvironment,CivilEngineering,TransportationRoadLine,Praia,#f2eee9,#d2c1b3,l
 BuiltEnvironment,CivilEngineering,TransportationRoadLine,Principle Arterial,#ffffff,#d2c1b3,line.svg,"roads_labels,roads"
 BuiltEnvironment,CivilEngineering,TransportationRoadLine,Rua,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
 BuiltEnvironment,CivilEngineering,TransportationRoadLine,Travessa,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
-BuiltEnvironment,CivilEngineering,WaterLine,Aqueduct,,#90b0cc,line.svg,"waterline_labels,waterline"
 BuiltEnvironment,LandscapeArchitecture,CemeteriesPoly,,#ccd1ac,,poly.svg,"cemeteries_marker,cemeteries"
 BuiltEnvironment,Urbanism,CityBlocksPoly,,#ebe3dd,,poly.svg,cityblocks
 BuiltEnvironment,Urbanism,SquaresPoly,Garden,#ccd1ac,,poly.svg,"squares_labels,squares"
@@ -62,4 +62,4 @@ BuiltEnvironment,Urbanism,SquaresPoly,Square,#fcf8d7,,poly.svg,"squares_labels,s
 NaturalEnvironment,Topography,ContoursLine,25 m,#ded2ca,,line.svg,
 NaturalEnvironment,Water,InlandWatersPoly,Marsh,#c3d3cd,,ripple.png,
 NaturalEnvironment,Water,InlandWatersPoly,Pond Or Reservoir,#b9cee0,#93b2cd,poly.svg,
-NaturalEnvironment,Water,RiversAndStreamsLine,,,#90b0cc,line.svg,
+NaturalEnvironment,Water,RiversAndStreamsLine,,#90b0cc,#90b0cc,line.svg,
