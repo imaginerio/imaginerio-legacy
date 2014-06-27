@@ -24,7 +24,7 @@ function init_timeline()
 	{
 		$( "#timeline" ).mousemove( function( e )
 		{
-			var pos = Math.max( 0, Math.min( e.clientX - 260, $( this ).width() ) );
+			var pos = Math.max( 0, Math.min( e.clientX - 300, $( this ).width() ) );
 			$( "#puck" ).css( "left", pos );
 		});
 		
@@ -36,6 +36,25 @@ function init_timeline()
 			update_year( snap_timeline() );
 		})
 	});
+	
+	$( "#year div" ).click( function()
+	{
+		if( $( this ).attr( "id" ) == "next" )
+		{
+			var y = _.find( years, function( y ){ return y >= year + 10; } );
+		}
+		else
+		{
+			years.reverse();
+			var y = _.find( years, function( y ){ return y <= year - 10; } );
+			years.reverse();
+		}
+		if( y !== undefined )
+		{
+			update_year( y );
+			snap_timeline( y );
+		}
+	})
 }
 
 function update_year( y )
@@ -44,7 +63,7 @@ function update_year( y )
 	clear_results( "shadow");
 	
 	year = y;
-	$( "#year" ).html( year );
+	$( "#year span" ).html( year );
 	
 	load_tiles();
 	build_layers();

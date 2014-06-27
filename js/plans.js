@@ -90,5 +90,5 @@ function clear_plan()
 		.html( "Plans for Rio &nbsp;&#9662;" );
 		
 	$( "#plan_info" ).hide();
-	$( "#year, #track, #puck" ).fadeIn();
+	$( "#track, #puck" ).fadeIn();
 }

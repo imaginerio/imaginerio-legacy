@@ -61,12 +61,37 @@ nav{
 }
 
 #year{
-	width: 100px;
+	width: 120px;
+	padding: 0 10px;
 	font-size: 32px;
 }
 
+#year div{
+	font-size: 24px;
+	display: inline-block;
+	margin: 0 0 0 10px;
+	position: relative;
+	bottom: 3px;
+	cursor: pointer;
+	color: #aaa;
+}
+
+#year #prev{
+	margin: 0 10px 0 0;
+	bottom: 0;
+	-moz-transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+
+#year div:hover{
+	color: white;
+}
+
 #timeline{
-	margin: 0 370px 0 260px;
+	margin: 0 370px 0 300px;
 }
 
 .tick, .minor{
