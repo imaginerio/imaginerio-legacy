@@ -83,7 +83,7 @@ function build_timeline()
 		y = min;
 	
 	px = w / ( max - min );
-	var gap = _.find( interval, function( i ){ return px * i > 60; } );
+	var gap = _.find( interval, function( i ){ return px * i > 65; } );
 		
 	while( Math.round( y / gap ) != y / gap )
 	{
