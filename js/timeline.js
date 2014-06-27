@@ -22,16 +22,19 @@ function init_timeline()
 	
 	$( "#puck" ).mousedown( function()
 	{
+		$( "#puck span" ).fadeIn( "fast" );
 		$( "#timeline" ).mousemove( function( e )
 		{
 			var pos = Math.max( 0, Math.min( e.clientX - 300, $( this ).width() ) );
 			$( "#puck" ).css( "left", pos );
+			$( "#puck span" ).html( get_timeline_year() );
 		});
 		
 		$( window ).mouseup( function()
 		{
 			$( "#timeline" ).unbind( "mousemove" );
 			$( window ).unbind( "mouseup" );
+			$( "#puck span" ).fadeOut( "fast" );
 			
 			update_year( snap_timeline() );
 		})
@@ -63,7 +66,7 @@ function update_year( y )
 	clear_results( "shadow");
 	
 	year = y;
-	$( "#year span" ).html( year );
+	$( "#year span, #puck span" ).html( year );
 	
 	load_tiles();
 	build_layers();

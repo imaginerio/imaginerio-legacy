@@ -148,6 +148,17 @@ nav{
 	text-align: center;
 }
 
+#puck span{
+	position: relative;
+	bottom: 110px;
+	right: 15px; 
+	background-color:rgba(0,0,0,0.7);
+	color: white;
+	font-size: 14px;
+	padding: 2px 5px;
+	display: none;
+}
+
 #search{
 	background-color: white;
 }
