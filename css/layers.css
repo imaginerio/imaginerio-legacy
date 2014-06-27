@@ -54,7 +54,7 @@
 }
 
 #switch.open{
-	width: 300px;
+	width: 260px;
 }
 
 #switch.open:before{
@@ -117,7 +117,7 @@
 	padding: 0 30px 0 20px;
 	font-size: 14px;
 	clear: both;
-	width: 275px;
+	width: 235px;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
