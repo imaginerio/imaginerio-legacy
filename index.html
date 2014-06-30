@@ -12,9 +12,11 @@
 		<link href="css/map.css" rel="stylesheet" type="text/css">
 		<link href="css/probe.css" rel="stylesheet" type="text/css">
 		<link href="css/top.css" rel="stylesheet" type="text/css">
+		
+		<script type="text/javascript">L_PREFER_CANVAS = true;</script>
 	</head>
 	<body>
-		<header>imagineRio</header>
+		<header><div id="export">Export map image <span>⬇︎</span></div>imagineRio</header>
 		<nav>
 			<form id="search" class="shadow">
 				<div id="clear"></div>
@@ -42,6 +44,7 @@
 			<div id="instruction" class="shadow">Click the map to explore...</div>
 			<div class="probe shadow"></div>
 		</div>
+		<div id="images"></div>
 		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 		<script src="lib/leaflet.js"></script>
@@ -49,6 +52,7 @@
 		<script src="lib/underscore-min.js"></script>
 		<script src="lib/bloodhound.js"></script>
 		<script src="lib/fancybox/jquery.fancybox.pack.js"></script>
+		<script src="lib/leaflet-image.js"></script>
 		
 		<script src="js/layers.js"></script>
 		<script src="js/map.js"></script>

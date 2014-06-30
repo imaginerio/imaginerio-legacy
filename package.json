@@ -1,15 +1,16 @@
 {
-	"name": "imagineRio",
-	"description": "imagineRio Interactive Map",
-	"version": "0.0.1",
-	"private": true,
-	"dependencies": {
-		"express": "4.1.1",
-		"pg" : "3.0.3",
-		"underscore" : "1.6",
-		"mapnik" : "*",
-		"postgeo" : "*",
-		"generic-pool" : "*",
-		"libxmljs" : "*"
-	}
+  "name": "imagineRio",
+  "description": "imagineRio Interactive Map",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.4.3",
+    "express": "4.1.1",
+    "generic-pool": "*",
+    "libxmljs": "*",
+    "mapnik": "*",
+    "pg": "3.0.3",
+    "postgeo": "*",
+    "underscore": "1.6"
+  }
 }

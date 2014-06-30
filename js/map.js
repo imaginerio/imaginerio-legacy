@@ -16,6 +16,8 @@ function init_map()
 		maxBounds : [ [ -23.10243406, -44.04944719  ], [ -22.63003187, -42.65988214 ] ]
 	})
 	.on( "click", probe );
+	
+	$( "#export" ).click( export_map );
 }
 
 function load_tiles()
@@ -161,4 +163,42 @@ function get_styles( color )
 	});
 	
 	return { top : topLayer, bottom : bottomLayer };
+}
+
+function export_map()
+{
+	leafletImage( map, function( err, canvas )
+	{
+	    var img = document.createElement( 'img' );
+	    var dimensions = map.getSize();
+	    img.width = dimensions.x;
+	    img.height = dimensions.y;
+	    savePNG( canvas.toDataURL(), "rio" );
+	});
+	
+	function savePNG( data, fname )
+	{
+        fname = fname || 'picture';
+         
+        data = data.substr( data.indexOf( ',' ) + 1 ).toString();
+         
+        var dataInput = document.createElement( "input" );
+        dataInput.setAttribute( "name", 'imgdata' );
+        dataInput.setAttribute( "value", data );
+        dataInput.setAttribute( "type", "hidden" );
+         
+        var nameInput = document.createElement( "input" );
+        nameInput.setAttribute( "name", 'name' );
+        nameInput.setAttribute( "value", fname + '.png' );
+         
+        var myForm = document.createElement( "form" );
+        myForm.method = 'post';
+        myForm.action = server + "/save";
+        myForm.appendChild( dataInput );
+        myForm.appendChild( nameInput );
+         
+        document.body.appendChild( myForm );
+        myForm.submit();
+        document.body.removeChild(myForm);
+    };
 }

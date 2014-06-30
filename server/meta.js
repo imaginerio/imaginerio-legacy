@@ -177,3 +177,13 @@ exports.names = function( req, res )
 		client.end();
 	});
 }
+
+exports.save = function( req, res )
+{
+	var b64string = req.body.imgdata.replace( " ", "+" );
+	var buf = new Buffer( b64string, 'base64' );
+	
+	res.setHeader( 'Content-type', 'image/png' );
+	res.setHeader( 'Content-Disposition', 'attachment; filename="' + req.body.name + '"' );
+	res.send( buf );
+}

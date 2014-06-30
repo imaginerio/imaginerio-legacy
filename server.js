@@ -1,4 +1,5 @@
 var express = require( 'express' ),
+	bodyParser = require( 'body-parser' ),
     meta = require( './server/meta' ),
     geo = require( './server/geo' );
 
@@ -42,6 +43,9 @@ app.use( function(err, req, res, next) {
   res.render('error', { error: err });
 });
 
+//app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({limit: 10000000}));
+
 app.get( '/timeline', meta.timeline );
 app.get( '/layers/:year', meta.layers );
 app.get( '/search/:year/:word', meta.search );
@@ -53,6 +57,7 @@ app.get( '/plan/:name', geo.plan );
 app.get( '/details/:id', meta.details );
 app.get( '/names', meta.names );
 app.get( '/feature/:year/:id', geo.feature );
+app.post( '/save', meta.save );
 
 app.listen( 3000 );
 console.log( 'Listening on port 3000...' );

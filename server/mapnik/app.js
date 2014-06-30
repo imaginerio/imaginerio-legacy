@@ -143,7 +143,10 @@ http.createServer( function( req, res )
 					fs.readFile( png, function( err, data )
 					{
 						if( err ) return console.log( err );
-						res.writeHead( 200, { 'Content-Type' : 'image/png' } );
+						res.writeHead( 200, {
+							'Content-Type' : 'image/png',
+							"Access-Control-Allow-Origin" : "*"
+						});
 						res.end( data );
 					});
 				}
@@ -191,7 +194,10 @@ http.createServer( function( req, res )
 												if( err ) return console.log( err );
 												console.log( png + ' saved.')
 											});
-											res.writeHead( 200, { 'Content-Type' : 'image/png' } );
+											res.writeHead( 200, {
+												'Content-Type' : 'image/png',
+												"Access-Control-Allow-Origin" : "*"
+											});
 											res.end( im.encodeSync( 'png' ) );
 										}
 									});
