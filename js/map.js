@@ -167,13 +167,24 @@ function get_styles( color )
 
 function export_map()
 {
-	leafletImage( map, function( err, canvas )
+	var dimensions = map.getSize();
+	dimensions.y += 100;
+	
+	map.panBy( [ 0, -100 ], { animate : false } );
+	
+	leafletImage( map, dimensions, function( err, canvas )
 	{
-	    var img = document.createElement( 'img' );
-	    var dimensions = map.getSize();
-	    img.width = dimensions.x;
-	    img.height = dimensions.y;
+	    var context = canvas.getContext( "2d" );
+		context.fillStyle = '#eee';
+		context.fillRect( 0, 0, dimensions.x, 100 );
+		context.fillStyle = '#666';
+		context.fillRect( 0, 99, dimensions.x, 1 );
+		context.font = '100 60px Helvetica Neue, HelveticaNeue, TeXGyreHeros, FreeSans, Nimbus Sans L, Liberation Sans, Arimo, Helvetica, Arial, sans-serif';
+		context.fillText( "imagineRio", 20, 70 );
+	    
 	    savePNG( canvas.toDataURL(), "rio" );
+	    
+	    map.panBy( [ 0, 100 ], { animate : false } );
 	});
 	
 	function savePNG( data, fname )
