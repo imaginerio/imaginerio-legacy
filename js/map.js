@@ -181,6 +181,9 @@ function export_map()
 		context.fillRect( 0, 99, dimensions.x, 1 );
 		context.font = '100 60px Helvetica Neue, HelveticaNeue, TeXGyreHeros, FreeSans, Nimbus Sans L, Liberation Sans, Arimo, Helvetica, Arial, sans-serif';
 		context.fillText( "imagineRio", 20, 70 );
+		
+		context.font = 'bold 30px Helvetica Neue, HelveticaNeue, TeXGyreHeros, FreeSans, Nimbus Sans L, Liberation Sans, Arimo, Helvetica, Arial, sans-serif';
+		context.fillText( year, dimensions.x - 100, 70 ); 
 	    
 	    savePNG( canvas.toDataURL(), "rio" );
 	    
