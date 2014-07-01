@@ -38,7 +38,7 @@ function draw_visual( layer )
 					if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0.65 } );
 				});
 	
-				show_visual_details( this.layer.feature.properties, e.containerPoint );
+				show_visual_details( this.layer.feature.properties, map.latLngToContainerPoint( e.latlng ) );
 			});
 			l.on( "mouseout", function( e )
 			{
@@ -68,8 +68,7 @@ function show_visual_details( properties, e )
 					.addClass( "visual_probe" )
 					.html( "<b>" + properties.creator + "</b><p>" + properties.description + "<p><i>Click for details</i>" )
 					.appendTo( $( ".wrapper" ) );
-					
-					
+	
 	$.ajax( "http://www.sscommons.org/openlibrary/secure/metadata/" + properties.id,{
 		dataType : "json",
 		success : function( json )
@@ -101,7 +100,7 @@ function show_visual_details( properties, e )
 function show_image()
 {
 	$.fancybox.showLoading();
-	var data = this.feature.properties;
+	var data = this.layer.feature.properties;
 	
 	$.getJSON( "http://www.sscommons.org/openlibrary/secure/imagefpx/" + data.id + "/7729935/5", function( json )
 	{
