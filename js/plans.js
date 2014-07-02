@@ -87,7 +87,7 @@ function clear_plan()
 	
 	$( "#plans" )
 		.removeClass( "back" )
-		.html( "Plans for Rio &nbsp;&#9662;" );
+		.html( "Urban Projects &nbsp;&#9662;" );
 		
 	$( "#plan_info" ).hide();
 	$( "#track, #puck" ).fadeIn();
