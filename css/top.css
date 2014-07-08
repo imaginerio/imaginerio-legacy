@@ -1,6 +1,5 @@
 header{
 	font-size: 60px;
-	font-weight: 100;
 	padding: 0 20px;
 	border-bottom: 1px solid rgb(153,153,153);
 	background: -moz-linear-gradient(top,  rgba(238,238,238,1) 0%, rgba(255,255,255,0.8) 70%); /* FF3.6+ */
@@ -26,7 +25,7 @@ header, nav{
 	line-height: normal;
 }
 
-#export span{
+#export span, #enter span{
 	background-color: #ddd;
 	-webkit-border-radius: 10px;
 	border-radius: 100%;

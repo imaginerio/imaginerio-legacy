@@ -18,6 +18,11 @@ function init()
 	init_search();
 	
 	$( window ).resize( resize );
+	
+	$( "#enter" ).click( function()
+	{
+		$( "#intro" ).fadeOut( "slow" );
+	})
 }
 
 function resize()
