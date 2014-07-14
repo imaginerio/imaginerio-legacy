@@ -12,11 +12,10 @@ function init_timeline()
 		years = json;
 		min = _.first( years ),
 		max = _.last( years ) + 1,
-		year = Math.max( year, min );
 		years.push( max );
 		
 		build_timeline();
-		update_year( year );
+		update_year( Math.max( year, min ) );
 		snap_timeline( year );
 	});
 	
@@ -64,6 +63,8 @@ function init_timeline()
 
 function update_year( y )
 {
+	if( year == y ) return false;
+	
 	clear_visual();
 	clear_results( "shadow");
 	
