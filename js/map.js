@@ -170,7 +170,7 @@ function export_map()
 	var dimensions = map.getSize();
 	dimensions.y += 100;
 	
-	map.panBy( [ 0, -100 ], { animate : false } );
+	$( "#export" ).addClass( "loading" );
 	
 	leafletImage( map, dimensions, function( err, canvas )
 	{
@@ -185,34 +185,16 @@ function export_map()
 		context.font = 'bold 30px Helvetica Neue, HelveticaNeue, TeXGyreHeros, FreeSans, Nimbus Sans L, Liberation Sans, Arimo, Helvetica, Arial, sans-serif';
 		context.fillText( year, dimensions.x - 100, 70 ); 
 	    
-	    savePNG( canvas.toDataURL(), "rio" );
-	    
-	    map.panBy( [ 0, 100 ], { animate : false } );
+	    savePNG( canvas.toDataURL(), "rio-" + year + ".png");
 	});
 	
 	function savePNG( data, fname )
 	{
-        fname = fname || 'picture';
-         
-        data = data.substr( data.indexOf( ',' ) + 1 ).toString();
-         
-        var dataInput = document.createElement( "input" );
-        dataInput.setAttribute( "name", 'imgdata' );
-        dataInput.setAttribute( "value", data );
-        dataInput.setAttribute( "type", "hidden" );
-         
-        var nameInput = document.createElement( "input" );
-        nameInput.setAttribute( "name", 'name' );
-        nameInput.setAttribute( "value", fname + '.png' );
-         
-        var myForm = document.createElement( "form" );
-        myForm.method = 'post';
-        myForm.action = server + "/save";
-        myForm.appendChild( dataInput );
-        myForm.appendChild( nameInput );
-         
-        document.body.appendChild( myForm );
-        myForm.submit();
-        document.body.removeChild(myForm);
+        var pom = document.createElement('a');
+		pom.setAttribute( 'href', data );
+    	pom.setAttribute( 'download', fname );
+	    pom.click();
+        
+        $( "#export" ).removeClass( "loading" );
     };
 }

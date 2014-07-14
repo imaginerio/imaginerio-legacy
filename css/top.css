@@ -34,10 +34,23 @@ header, nav{
 	border-radius: 100%;
 	color: #999;
 	width: 30px;
+	height: 30px;
 	margin-left: 5px;
 	line-height: 30px;
 	display: inline-block;
 	text-align: center;
+}
+
+#export span:before, #enter span:before{
+	content: '⬇';
+}
+
+#export.loading span{
+	background: #ddd url(../img/loader_small.gif) no-repeat center center;
+}
+
+#export.loading span:before{
+	content: '.';
 }
 
 #export:hover, #enter:hover{
