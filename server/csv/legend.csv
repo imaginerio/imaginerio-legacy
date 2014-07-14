@@ -3,12 +3,7 @@ Boundaries,PoliticalBoundaries,NeighborhoodsPoly,,,#93836,dashed line,"neighborh
 BuiltEnvironment,Architecture,BuildingsPoly,,,,,buildings
 BuiltEnvironment,CivilEngineering,TransportationRoadLine,,,,,"roads_labels,roads"
 BuiltEnvironment,Urbanism,SquaresPoly,,,,,"squares_labels,squares"
-NaturalEnvironment,Topography,ContoursLine,100 m,,,,
-NaturalEnvironment,Topography,ContoursLine,10 m,,,,
-NaturalEnvironment,Topography,ContoursLine,50 m,#ded2ca,,line.svg,
-NaturalEnvironment,Topography,ContoursLine,5 m,#ded2ca,,line.svg,
 NaturalEnvironment,Topography,LandPoly,,#e7ded6,,poly.svg,
-NaturalEnvironment,Topography,ContoursLine,60 m,,,,
 NaturalEnvironment,Water,InlandWatersPoly,Lagoon,#b9cee0,#93b2cd,poly.svg,
 BuiltEnvironment,CivilEngineering,WaterLine,Aqueduct,#90b0cc,#90b0cc,line.svg,"waterline_labels,waterline"
 BuiltEnvironment,CivilEngineering,TransportationRailPoint,Metro Station,,,rail.png,railpoint
@@ -59,7 +54,6 @@ BuiltEnvironment,Urbanism,SquaresPoly,Garden,#ccd1ac,,poly.svg,"squares_labels,s
 BuiltEnvironment,Urbanism,SquaresPoly,Park,#ccd1ac,,poly.svg,"squares_labels,squares"
 BuiltEnvironment,Urbanism,SquaresPoly,Plaza,#fcf8d7,,poly.svg,"squares_labels,squares"
 BuiltEnvironment,Urbanism,SquaresPoly,Square,#fcf8d7,,poly.svg,"squares_labels,squares"
-NaturalEnvironment,Topography,ContoursLine,25 m,#ded2ca,,line.svg,
 NaturalEnvironment,Water,InlandWatersPoly,Marsh,#c3d3cd,,ripple.png,
 NaturalEnvironment,Water,InlandWatersPoly,Pond Or Reservoir,#b9cee0,#93b2cd,poly.svg,
 NaturalEnvironment,Water,RiversAndStreamsLine,,#90b0cc,#90b0cc,line.svg,
