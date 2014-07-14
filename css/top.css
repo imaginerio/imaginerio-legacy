@@ -32,18 +32,19 @@ header, nav{
 	background-color: #ddd;
 	-webkit-border-radius: 10px;
 	border-radius: 100%;
-	padding: 4px 5px;
 	color: #999;
-	margin-left: 5px;
 	width: 30px;
-	height: 30px;
+	margin-left: 5px;
+	line-height: 30px;
+	display: inline-block;
+	text-align: center;
 }
 
-#export:hover{
+#export:hover, #enter:hover{
 	color: #666;
 }
 
-#export:hover span{
+#export:hover span, #enter:hover span{
 	background-color: #999;
 	color: white;
 }

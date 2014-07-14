@@ -13,6 +13,10 @@ body{
 	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=3,Color=#40000000,Positive=true);
 }
 
+h1{
+	letter-spacing: 5px;
+}
+
 header{
 	line-height: 99px;
 }
@@ -57,12 +61,11 @@ h1, header{
 
 #language{
 	float: right;
-	margin: 60px 40px;
+	margin: 40px;
 	color: #999;
 	font-size: 16px;
 	cursor: pointer;
 	height: 60px;
-	text-align: right;
 }
 
 #language:hover{
@@ -71,7 +74,7 @@ h1, header{
 
 #language div{
 	opacity: 0;
-	margin: 10px 20px;
+	margin: 10px 0;
 	 -webkit-transition: opacity 0.5s ease-in;
     -moz-transition: opacity 0.5s ease-in;
     -o-transition: opacity 0.5s ease-in;
@@ -111,6 +114,7 @@ h1, header{
 	text-align: center;
 	margin: auto;
 	text-transform: uppercase;
+	color: #999;
 	border-color:rgb(204,204,204);
 	border-width:1px;
 	-moz-border-radius:11px ;
@@ -125,4 +129,12 @@ h1, header{
 		progid:DXImageTransform.Microsoft.Glow(Color=#ff000000,Strength=3)";
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffffff,endColorstr=#ffeeeeee,GradientType=0)
 		progid:DXImageTransform.Microsoft.Glow(Color=#ff000000,Strength=3);
+}
+
+#enter span{
+	-moz-transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	transform: rotate(-90deg);
 }
