@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE Map[]>
-<Map srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over" background-color="#b9cee0" buffer-size="500" maximum-extent="-20037508.34,-20037508.34,20037508.34,20037508.34">
+<Map srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over" background-color="#b9cee0" buffer-size="1000" maximum-extent="-20037508.34,-20037508.34,20037508.34,20037508.34">
 
 <Parameters>
   <Parameter name="bounds">-44.04944719,-23.10243406,-42.65988214,-22.63003187</Parameter>
@@ -13,7 +13,7 @@
   <Parameter name="scale">1</Parameter>
   <Parameter name="metatile">15</Parameter>
   <Parameter name="id"><![CDATA[Rio]]></Parameter>
-  <Parameter name="_updated">1400865335000</Parameter>
+  <Parameter name="_updated">1405089520000</Parameter>
   <Parameter name="name"><![CDATA[Rio]]></Parameter>
   <Parameter name="tilejson"><![CDATA[2.0.0]]></Parameter>
   <Parameter name="scheme"><![CDATA[xyz]]></Parameter>
@@ -245,6 +245,20 @@
     </Datasource>
   </Layer>
 
+<Style name="hillshade_2013" filter-mode="first" comp-op="overlay">
+  <Rule>
+    <RasterSymbolizer opacity="0.5" />
+  </Rule>
+</Style>
+<Layer name="hillshade_2013"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>hillshade_2013</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[hillshade_2013.tif]]></Parameter>
+       <Parameter name="type"><![CDATA[gdal]]></Parameter>
+    </Datasource>
+  </Layer>
+
 <Style name="riversstreams" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
@@ -322,6 +336,88 @@
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
        <Parameter name="extent"><![CDATA[-43.7954299139144,-23.0822316762007,-43.0917420245885,-22.7290825466831]]></Parameter>
+       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
+       <Parameter name="host"><![CDATA[rio2.c1juezxtnbot.us-west-2.rds.amazonaws.com]]></Parameter>
+       <Parameter name="user"><![CDATA[axismaps]]></Parameter>
+       <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="neighborhoods-inline" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>5000</MaxScaleDenominator>
+    <LineSymbolizer stroke-dasharray="6, 4" stroke="#766141" stroke-width="1.5" stroke-opacity="0.5" stroke-linejoin="round" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500</MaxScaleDenominator>
+    <MinScaleDenominator>5000</MinScaleDenominator>
+    <LineSymbolizer stroke-dasharray="5, 3" stroke="#766141" stroke-width="1" stroke-opacity="0.5" stroke-linejoin="round" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000</MaxScaleDenominator>
+    <MinScaleDenominator>12500</MinScaleDenominator>
+    <LineSymbolizer stroke-dasharray="4, 2" stroke="#977c53" stroke-width="1" stroke-opacity="0.5" stroke-linejoin="round" />
+  </Rule>
+</Style>
+<Style name="neighborhoods-outline" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>5000</MaxScaleDenominator>
+    <LineSymbolizer stroke="#ffffff" stroke-width="4" stroke-opacity="0.3" stroke-linejoin="round" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500</MaxScaleDenominator>
+    <MinScaleDenominator>5000</MinScaleDenominator>
+    <LineSymbolizer stroke="#ffffff" stroke-width="4" stroke-opacity="0.3" stroke-linejoin="round" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000</MaxScaleDenominator>
+    <MinScaleDenominator>12500</MinScaleDenominator>
+    <LineSymbolizer stroke="#ffffff" stroke-width="3" stroke-opacity="0.3" stroke-linejoin="round" />
+  </Rule>
+</Style>
+<Layer name="neighborhoods"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>neighborhoods-outline</StyleName>
+    <StyleName>neighborhoods-inline</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'NeighborhoodsPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
+       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
+       <Parameter name="host"><![CDATA[rio2.c1juezxtnbot.us-west-2.rds.amazonaws.com]]></Parameter>
+       <Parameter name="user"><![CDATA[axismaps]]></Parameter>
+       <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="ocean" filter-mode="first">
+  <Rule>
+    <PolygonSymbolizer fill="#b9cee0" fill-opacity="0.25" />
+  </Rule>
+</Style>
+<Layer name="ocean"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>ocean</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT 1 AS gid, ST_DIFFERENCE(
+(
+	ST_MakeEnvelope( -44.04944719, -23.10243406, -42.65988214, -22.63003187, 4326 )
+),
+(
+	SELECT ST_UNION (basepoly.geom) AS geom
+		FROM basepoly
+		WHERE layer = 'LandPoly'
+			AND firstdispl <= 99999999 AND lastdispla >= 99999999
+		GROUP BY layer
+)) AS geom ) AS q]]></Parameter>
+       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-44.04944719,-23.10243406,-42.65988214,-22.63003187]]></Parameter>
        <Parameter name="dbname"><![CDATA[rio]]></Parameter>
        <Parameter name="host"><![CDATA[rio2.c1juezxtnbot.us-west-2.rds.amazonaws.com]]></Parameter>
        <Parameter name="user"><![CDATA[axismaps]]></Parameter>
@@ -1267,119 +1363,6 @@
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
        <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
-       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
-       <Parameter name="host"><![CDATA[rio2.c1juezxtnbot.us-west-2.rds.amazonaws.com]]></Parameter>
-       <Parameter name="user"><![CDATA[axismaps]]></Parameter>
-       <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
-    </Datasource>
-  </Layer>
-
-<Style name="neighborhoods-inline" filter-mode="first">
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <LineSymbolizer stroke-dasharray="6, 4" stroke="#766141" stroke-width="1.5" stroke-opacity="0.5" stroke-linejoin="round" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <LineSymbolizer stroke-dasharray="5, 3" stroke="#766141" stroke-width="1" stroke-opacity="0.5" stroke-linejoin="round" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <LineSymbolizer stroke-dasharray="4, 2" stroke="#977c53" stroke-width="1" stroke-opacity="0.5" stroke-linejoin="round" />
-  </Rule>
-</Style>
-<Style name="neighborhoods-outline" filter-mode="first">
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <LineSymbolizer stroke="#ffffff" stroke-width="4" stroke-opacity="0.3" stroke-linejoin="round" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <LineSymbolizer stroke="#ffffff" stroke-width="4" stroke-opacity="0.3" stroke-linejoin="round" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <LineSymbolizer stroke="#ffffff" stroke-width="3" stroke-opacity="0.3" stroke-linejoin="round" />
-  </Rule>
-</Style>
-<Layer name="neighborhoods"
-  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>neighborhoods-outline</StyleName>
-    <StyleName>neighborhoods-inline</StyleName>
-    <Datasource>
-       <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'NeighborhoodsPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
-       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
-       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
-       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
-       <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
-       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
-       <Parameter name="host"><![CDATA[rio2.c1juezxtnbot.us-west-2.rds.amazonaws.com]]></Parameter>
-       <Parameter name="user"><![CDATA[axismaps]]></Parameter>
-       <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
-    </Datasource>
-  </Layer>
-
-<Style name="contours" filter-mode="first">
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <Filter>([featuretyp] = '25 m')</Filter>
-    <LineSymbolizer stroke-width="0.5" stroke-opacity="0.4" stroke="#b89d86" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = '25 m')</Filter>
-    <LineSymbolizer stroke-width="1" stroke-opacity="0.2" stroke="#a58365" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = '25 m')</Filter>
-    <LineSymbolizer stroke-width="1" stroke-opacity="0.1" stroke="#785e46" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = '25 m')</Filter>
-    <LineSymbolizer stroke-width="0.5" stroke-opacity="0.08" stroke="#382b20" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <Filter>([featuretyp] = '5 m')</Filter>
-    <LineSymbolizer stroke-width="0.5" stroke-opacity="0.4" stroke="#b89d86" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = '5 m')</Filter>
-    <LineSymbolizer stroke-width="0.5" stroke-opacity="0.2" stroke="#a58365" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = '5 m')</Filter>
-    <LineSymbolizer stroke-width="0.5" stroke-opacity="0.1" stroke="#785e46" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = '50 m')</Filter>
-    <LineSymbolizer stroke-width="1" stroke-opacity="0.08" stroke="#382b20" />
-  </Rule>
-</Style>
-<Layer name="contours"
-  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>contours</StyleName>
-    <Datasource>
-       <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM baseline WHERE layer = 'ContoursLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
-       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
-       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
-       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
-       <Parameter name="extent"><![CDATA[-43.7954299139144,-23.0822316762007,-43.0917420245885,-22.7290825466831]]></Parameter>
        <Parameter name="dbname"><![CDATA[rio]]></Parameter>
        <Parameter name="host"><![CDATA[rio2.c1juezxtnbot.us-west-2.rds.amazonaws.com]]></Parameter>
        <Parameter name="user"><![CDATA[axismaps]]></Parameter>

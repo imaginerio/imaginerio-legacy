@@ -5,7 +5,8 @@ var mapnik = require( 'mapnik' ),
 	fs = require( 'fs' ),
 	xml = require( 'libxmljs' ),
 	_ = require( 'underscore' ),
-	parseXYZ = require( './utils/tile.js' ).parseXYZ;
+	parseXYZ = require( './utils/tile.js' ).parseXYZ,
+	hillshade = [ { year : 1960, file : '../../../../../raster/Hillshade_WGS84_1960_2013.tif' }, { year : 1921, file : '../../../../../raster/Hillshade_WGS84_1921_1959.tif' }, { year : 1906, file : '../../../../../raster/Hillshade_WGS84_1906_1920.tif' }, { year : 1500, file : '../../../../../raster/Hillshade_WGS84_1500_1905.tif' } ];
 
 // register plugins
 if( mapnik.register_default_input_plugins ) mapnik.register_default_input_plugins();
@@ -67,7 +68,13 @@ var parseXML = function( req, year, layer, options, callback )
 					{
 						item.attr( { "status" : "off" } );
 					})
-				})
+				});
+				
+				var hs = xmlDoc.find( "//Parameter[@name='file']" );
+				_.each( hs, function( item )
+				{
+					item.text( _.find( hillshade, function( h ){ return h.year <= year } ).file );
+				});
 				
 				mkdir( "cache/xml/" + year );
 				
