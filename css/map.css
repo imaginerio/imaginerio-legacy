@@ -9,11 +9,12 @@
 #loading:before{
 	content: "Loading...";
 	font-size: 36px;
-	font-weight: bold;
+	font-weight: 200;
 	text-align: center;
 	display: block;
 	position: relative;
 	top: 55%;
+	color: #333;
 }
 
 #click{
