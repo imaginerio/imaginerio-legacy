@@ -53,7 +53,7 @@ function load_plan( plan )
 	{
 		$( "#plans" )
 			.addClass( "back" )
-			.html( "&#9664; Clear plan" );
+			.html( "Clear project" );
 			
 		$( "#plan_info" )
 			.show()
