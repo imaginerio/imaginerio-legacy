@@ -34,7 +34,8 @@ function init_layers()
 	});
 	$( "#layers" ).on( "click", ".feature", function( e )
 	{
-		draw( $( this ).attr( "id" ), "feature/" + year );
+		draw( $( this ).attr( "id" ), "feature/" + year, $( this ) );
+		$( this ).addClass( "loading" );
 		e.stopPropagation();
 	});
 }

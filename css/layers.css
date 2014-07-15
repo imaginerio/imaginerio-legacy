@@ -152,8 +152,18 @@
 	font-size: 12px;
 }
 
+.feature:hover{
+	background-color: #ddd;
+}
+
 .feature.off{
 	opacity: 0.25;
+}
+
+.feature.loading{
+	background-image: url(../img/loader_small.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
 }
 
 .swatch{

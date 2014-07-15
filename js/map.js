@@ -65,7 +65,7 @@ function probe( e )
 	})
 }
 
-function draw( id, route )
+function draw( id, route, el )
 {
 	clear_highlight();
 	
@@ -75,7 +75,8 @@ function draw( id, route )
 	highlight.bottom = omnivore.geojson( server + "/" + route + "/" + id, null, styles.bottom )
 				.on( 'ready', function()
 				{
-					map.fitBounds( this.getBounds() );
+					map.fitBounds( this.getBounds(), { paddingTopLeft : [ 265, 165 ] } );
+					if( el ) el.removeClass( "loading" );
 				})
 				.addTo( map );
 	highlight.top = omnivore.geojson( server + "/" + route + "/" + id, null, styles.top ).addTo( map );
