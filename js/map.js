@@ -174,7 +174,14 @@ function export_map()
 	
 	leafletImage( map, dimensions, function( err, canvas )
 	{
-	    var context = canvas.getContext( "2d" );
+	    dimensions.x += 235;
+	    var exp = document.createElement( "canvas" );
+		exp.width = dimensions.x;
+		exp.height = dimensions.y;
+		
+		var context = exp.getContext( "2d" );
+	    
+	    context.drawImage( canvas, 235, 100 );
 		context.fillStyle = '#eee';
 		context.fillRect( 0, 0, dimensions.x, 100 );
 		context.fillStyle = '#666';
@@ -183,9 +190,15 @@ function export_map()
 		context.fillText( "imagineRio", 20, 70 );
 		
 		context.font = 'bold 30px Helvetica Neue, HelveticaNeue, TeXGyreHeros, FreeSans, Nimbus Sans L, Liberation Sans, Arimo, Helvetica, Arial, sans-serif';
-		context.fillText( year, dimensions.x - 100, 70 ); 
-	    
-	    savePNG( canvas.toDataURL(), "rio-" + year + ".png");
+		context.fillText( year, dimensions.x - 100, 70 );
+		
+		var legend = new Image();
+		legend.src = 'img/legend.png';
+		legend.onload = function()
+		{
+			context.drawImage( legend, 0, 100);
+			savePNG( exp.toDataURL(), "rio-" + year + ".png" );
+		}
 	});
 	
 	function savePNG( data, fname )
