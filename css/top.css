@@ -243,6 +243,10 @@ nav{
 	cursor: pointer;
 }
 
+#search #clear:hover{
+	background-image: url(../img/close_over.png);
+}
+
 #menu{
 	line-height: 40px;
 	font-size: 16px;
