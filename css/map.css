@@ -69,6 +69,6 @@
 }
 
 .leaflet-control-zoom a:last-child{
-	border-right: 1px solid black;
+	border-right: 1px solid #b3b3b3;
 	width: 49px;
 }
