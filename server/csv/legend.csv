@@ -1,9 +1,9 @@
 folder,geodatabas,layer,featuretyp,fill,stroke,shape,id
-Boundaries,PoliticalBoundaries,NeighborhoodsPoly,,,#93836,dashed line,"neighborhoods_labels,neighborhoods"
 BuiltEnvironment,Architecture,BuildingsPoly,,,,,buildings
 BuiltEnvironment,CivilEngineering,TransportationRoadLine,,,,,"roads_labels,roads"
 BuiltEnvironment,Urbanism,SquaresPoly,,,,,"squares_labels,squares"
 NaturalEnvironment,Topography,LandPoly,,#e7ded6,,poly.svg,
+Boundaries,PoliticalBoundaries,NeighborhoodsPoly,,,#93836,dashed_line.svg,"neighborhoods_labels,neighborhoods"
 NaturalEnvironment,Water,InlandWatersPoly,Lagoon,#b9cee0,#93b2cd,poly.svg,
 BuiltEnvironment,CivilEngineering,WaterLine,Aqueduct,#90b0cc,#90b0cc,line.svg,"waterline_labels,waterline"
 BuiltEnvironment,CivilEngineering,TransportationRailPoint,Metro Station,,,rail.png,railpoint
