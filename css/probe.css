@@ -37,6 +37,10 @@
 	float: right;
 }
 
+.result.expand:hover{
+	background-color: #fafafa;
+}
+
 .details{
 	margin-top: 20px;
 }
