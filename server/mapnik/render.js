@@ -4,6 +4,8 @@ var mapnik = require( 'mapnik' ),
 	fs = require( 'fs' ),
 	xml = require( 'libxmljs' ),
 	_ = require( 'underscore' ),
+	pg = require( 'pg' ),
+	conn = "postgres://axismaps:U6glEdd0igS2@rio2.c1juezxtnbot.us-west-2.rds.amazonaws.com/rio",
 	hillshade = [ { year : 1960, file : '../../../../../raster/Hillshade_WGS84_1960_2013.tif' }, { year : 1921, file : '../../../../../raster/Hillshade_WGS84_1921_1959.tif' }, { year : 1906, file : '../../../../../raster/Hillshade_WGS84_1906_1920.tif' }, { year : 1500, file : '../../../../../raster/Hillshade_WGS84_1500_1905.tif' } ];
 
 // register plugins
@@ -126,7 +128,11 @@ function render_tile( year, layer, z, x, y )
 	var png = "cache/png/" + year + "/" + layer + "/" + z + "/" + x + "/" + y + ".png";
 	fs.exists( png, function( exists )
 	{
-		if( !exists )
+		if( exists )
+		{
+			console.log( png + ' exists.' );
+		}
+		else
 		{
 			parseXML( year, layer, {}, function( stylesheet, options )
 			{
@@ -166,7 +172,7 @@ function render_tile( year, layer, z, x, y )
 									fs.writeFile( png, imagedata, 'binary', function( err )
 									{
 										if( err ) return console.log( err );
-										console.log( png + ' saved.')
+										console.log( png + ' saved.' );
 									});
 								}
 							});
@@ -205,27 +211,52 @@ function tile_coords( lat, lon, zoom )
 	return { x : tx, y : ty }
 }
 
-var minx = -44.04944719,
-	maxx = -42.65988214,
-	maxy = -23.10243406,
-	miny = -22.63003187;
-
-for( var z = 14; z <= 18; z++ )
+function render_year( years, y, callback )
 {
-	var min = tile_coords( miny, minx, z ),
-		max = tile_coords( maxy, maxx, z );
-	
-	console.log( min );
-	console.log( max );
+	var minx = -43.9,
+		maxx = -43,
+		maxy = -23.2,
+		miny = -22.6,
+		year = years[ y ];
+	console.log( year );
 		
-	for( var x = min.x; x <= max.x; x++ )
+	for( var z = 14; z <= 18; z++ )
 	{
-		for( var y = min.y; y <= max.y; y++ )
-		{
+		var min = tile_coords( miny, minx, z ),
+			max = tile_coords( maxy, maxx, z );
+		
+		console.log( min );
+		console.log( max );
 			
-			render_tile( 1565, "all", z, x, y );
+		for( var x = min.x; x <= max.x; x++ )
+		{
+			for( var y = min.y; y <= max.y; y++ )
+			{
+				render_tile( year, "all", z, x, y );
+			}
 		}
 	}
+	y++;
+	if( y < years.length ) callback( years, y, callback );
 }
 
-console.log( "YO" );
+var client = new pg.Client( conn );
+client.connect();
+	
+var years = [],
+	y = 0;
+	
+var query = client.query( "SELECT * FROM ( SELECT firstdispl  AS year FROM basepoint UNION SELECT lastdispla AS year FROM basepoint UNION SELECT firstdispl AS year FROM baseline UNION SELECT lastdispla AS year FROM baseline UNION SELECT firstdispl AS year FROM basepoly UNION SELECT lastdispla AS year FROM basepoly UNION SELECT earliestda AS year FROM visualpoly UNION SELECT latestdate AS year FROM visualpoly ) as q ORDER BY year" );
+	
+query.on( 'row', function( result )
+{
+	years.push( result.year );
+});
+	
+query.on( 'end', function()
+{
+	console.log( years );
+
+	render_year( years, y, render_year );
+	
+});
