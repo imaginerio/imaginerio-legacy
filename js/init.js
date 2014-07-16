@@ -39,7 +39,7 @@ function cursor_loading( show, p )
 	{
 		$( "#map" ).append( 
 			$( document.createElement( 'div' ) )
-				.attr( "id", "click" )
+				.attr( "class", "animated zoomIn" )
 				.css({
 					"top" : p.y + 100,
 					"left" : p.x
@@ -48,7 +48,7 @@ function cursor_loading( show, p )
 	}
 	else
 	{
-		$( "#click" ).remove();
+		$( ".zoomIn" ).remove();
 	}
 }
 

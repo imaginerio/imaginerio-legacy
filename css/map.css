@@ -17,15 +17,6 @@
 	color: #333;
 }
 
-#click{
-	position: fixed;
-	width: 42px;
-	height: 42px;
-	margin: -21px 0 0 -21px;
-	z-index: 99999999;
-	background-image: url(../img/click.gif);
-}
-
 .leaflet-container{
 	cursor: default;
 	overflow: visible;
