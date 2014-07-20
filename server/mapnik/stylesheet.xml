@@ -403,17 +403,7 @@
     <StyleName>ocean</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT 1 AS gid, ST_DIFFERENCE(
-(
-	ST_MakeEnvelope( -44.04944719, -23.10243406, -42.65988214, -22.63003187, 4326 )
-),
-(
-	SELECT ST_UNION (basepoly.geom) AS geom
-		FROM basepoly
-		WHERE layer = 'LandPoly'
-			AND firstdispl <= 99999999 AND lastdispla >= 99999999
-		GROUP BY layer
-)) AS geom ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'OceanPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
