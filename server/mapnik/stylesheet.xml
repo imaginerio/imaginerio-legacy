@@ -254,8 +254,12 @@
   srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
     <StyleName>hillshade_2013</StyleName>
     <Datasource>
+       <Parameter name="type">raster</Parameter>
        <Parameter name="file"><![CDATA[hillshade_2013.tif]]></Parameter>
-       <Parameter name="type"><![CDATA[gdal]]></Parameter>
+       <Parameter name="lox">-43.7890751496502517</Parameter>
+       <Parameter name="loy">-23.0841334663174891</Parameter>
+       <Parameter name="hix">-43.0868921496502537</Parameter>
+       <Parameter name="hiy">-22.7290994663174892</Parameter>
     </Datasource>
   </Layer>
 
