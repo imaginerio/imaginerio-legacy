@@ -104,8 +104,9 @@ function show_image()
 	
 	$.getJSON( "http://www.sscommons.org/openlibrary/secure/imagefpx/" + data.id + "/7729935/5", function( json )
 	{
+		var dim = scale_image( json[ 0 ].width, json[ 0 ].height );
 		$.fancybox.open({
-			href : json[ 0 ].imageServer + json[ 0 ].imageUrl + "&&wid=" + json[ 0 ].width + "&hei=" + json[ 0 ].height + "&rgnn=0,0,1,1&cvt=JPEG",
+			href : json[ 0 ].imageServer + json[ 0 ].imageUrl + "&&wid=" + dim.w + "&hei=" + dim.h + "&rgnn=0,0,1,1&cvt=JPEG",
 			type : 'image',
 			title : "<b>" + data.creator + "</b> - " + data.date + "<br />" + data.description,
 			helpers:  {
@@ -123,4 +124,27 @@ function show_image()
 function clear_visual()
 {
 	if( map.hasLayer( visual[ year ] ) ) map.removeLayer( visual[ year ] );
+}
+
+function scale_image( width, height )
+{
+	var maxWidth = $( window ).width(),
+		maxHeight = $( window ).height(),
+		ratio = 0;
+	
+	if( width > maxWidth )
+	{
+		ratio = maxWidth / width;
+		height = height * ratio;
+		width = width * ratio;
+	}
+	
+	if( height > maxHeight )
+	{
+		ratio = maxHeight / height;
+		width = width * ratio;
+		height = height * ratio;
+	}
+	
+	return { w : Math.round( width ), h : Math.round( height ) };
 }
