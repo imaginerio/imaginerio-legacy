@@ -256,6 +256,7 @@
     <Datasource>
        <Parameter name="file"><![CDATA[hillshade_2013.tif]]></Parameter>
        <Parameter name="type"><![CDATA[gdal]]></Parameter>
+       <Parameter name="shared">true</Parameter>
     </Datasource>
   </Layer>
 
