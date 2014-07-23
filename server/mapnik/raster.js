@@ -2,7 +2,7 @@ var mapnik = require( 'mapnik' ),
 	mercator = require( './utils/sphericalmercator' ),
 	mappool = require( './utils/pool.js' ),
 	http = require( 'http' ),
-	fs = require( 'fs' ),
+	fs = require( 'graceful-fs' ),
 	xml = require( 'libxmljs' ),
 	parseXYZ = require( './utils/tile.js' ).parseXYZ;
 

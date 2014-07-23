@@ -1,7 +1,7 @@
 var mapnik = require( 'mapnik' ),
 	mercator = require( './utils/sphericalmercator' ),
 	mappool = require( './utils/pool.js' ),
-	fs = require( 'fs' ),
+	fs = require( 'graceful-fs' ),
 	xml = require( 'libxmljs' ),
 	_ = require( 'underscore' ),
 	pg = require( 'pg' ),
