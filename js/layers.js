@@ -48,90 +48,86 @@ function build_layers()
 		
 		_.each( json, function( val, key )
 		{
-			var folder = $( document.createElement( 'div' ) )
-							.addClass( "folder open" )
-							.html( "<h4>" + names[ key ] + "</h4>" )
-							.appendTo( $( "#list" ) );
+			var folder = build_folder( names[ key ] );
 							
 			_.each( val, function( val, key )
 			{
-				if( key == "VisualDocuments" )
+				add_check( "geodb", key, folder );
+				_.each( val, function( val, key )
 				{
-					build_visual( val, folder )
-				}
-				else
-				{
-					add_check( "geodb", key, folder );
-					_.each( val, function( val, key )
+					var label = add_check( "layer", key, val.id ).appendTo( folder );
+					delete val.id;
+					
+					if( val.style ) label.append( add_swatch( val.style ) );
+					if( val.features )
 					{
-						var label = add_check( "layer", key, val.id ).appendTo( folder );
-						delete val.id;
-						
-						if( val.style ) label.append( add_swatch( val.style ) );
-						if( val.features )
+						_.each( val.features, function( name )
 						{
-							_.each( val.features, function( name )
-							{
-								$( document.createElement( 'div' ) )
-									.addClass( "feature" )
-									.attr( "id", name )
-									.html( names[ name ] )
-									.appendTo( folder );
-							});
-						}
-					});
-				}
+							$( document.createElement( 'div' ) )
+								.addClass( "feature" )
+								.attr( "id", name )
+								.html( names[ name ] )
+								.appendTo( folder );
+						});
+					}
+				});
+			});
+		});
+		$.getJSON( server + "/raster/" + year, function( json )
+		{
+			var folder = build_folder( names.VisualDocuments );
+			_.each( json, function( val )
+			{
+				build_visual( val, folder );
 			});
 		});
 	});
 	
+	function build_folder( name )
+	{
+		return $( document.createElement( 'div' ) )
+					.addClass( "folder open" )
+					.html( "<h4>" + name + "</h4>" )
+					.appendTo( $( "#list" ) );
+	}
+	
 	function build_visual( r, div )
 	{
-		var docs = {};
-		_.each( r, function( val, key )
-		{
-			docs[ key ] = _.filter( _.keys( val ), function( i ){ return i != "id" } )[ 0 ];
-		})
-
-		_.each( docs, function( val, key )
-		{
-			var label = $( document.createElement( 'label' ) )
-							.html( val )
-							.appendTo( div )
-							.prepend(
-								$( document.createElement( 'input' ) )
-									.attr({
-										"type" : "checkbox",
-										"class" : "raster",
-										"value" : key
-									})
-									.click( function( e )
+		var label = $( document.createElement( 'label' ) )
+						.html( r.description )
+						.appendTo( div )
+						.prepend(
+							$( document.createElement( 'input' ) )
+								.attr({
+									"type" : "checkbox",
+									"class" : "raster",
+									"value" : r.file
+								})
+								.click( function( e )
+								{
+									if( $( this ).is( ":checked" ) )
 									{
-										if( $( this ).is( ":checked" ) )
-										{
-											$( "input.raster:checked" ).not( this ).removeAttr( "checked" );
-											load_raster( $( this ).val() );
-										}
-										else
-										{
-											load_raster( false );
-										}
-												
-										e.stopPropagation();
-									})
-							);
-							
-			$.getJSON( "http://www.sscommons.org/openlibrary/secure/imagefpx/" + key + "/7729935/5", function( json )
-			{
-				var w = json[ 0 ].width,
-					h = json[ 0 ].height,
-					s = Math.max( 120 / h, 185 / w );
-					
-				label.after(
-					$( document.createElement( 'img' ) ).attr( "src", json[ 0 ].imageServer + json[ 0 ].imageUrl + "&&wid=" + Math.round( w * s )  + "&hei=" + Math.round( h * s ) + "&rgnn=0,0,1,1&cvt=JPEG" )
-				);
-			});			
-		})
+										$( "input.raster:checked" ).not( this ).removeAttr( "checked" );
+										load_raster( $( this ).val() );
+									}
+									else
+									{
+										load_raster( false );
+									}
+											
+									e.stopPropagation();
+								})
+						);							
+		$.getJSON( "http://www.sscommons.org/openlibrary/secure/imagefpx/" + r.id + "/7729935/5", function( json )
+		{
+			var w = json[ 0 ].width,
+				h = json[ 0 ].height,
+				s = Math.max( 120 / h, 185 / w );
+				
+			label.after(
+				$( document.createElement( 'img' ) ).attr( "src", json[ 0 ].imageServer + json[ 0 ].imageUrl + "&&wid=" + Math.round( w * s )  + "&hei=" + Math.round( h * s ) + "&rgnn=0,0,1,1&cvt=JPEG" )
+			);
+		});
 	}
 	
 	function add_check( cclass, html, id )

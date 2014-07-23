@@ -52,7 +52,7 @@ exports.layers = function( req, res )
 	client.connect();
 
 	var year = req.params.year;	
-	var q = "SELECT * FROM ( SELECT q.*, l.fill, l.stroke, l.shape, l. ID FROM ( SELECT folder, geodatabas, layer, featuretyp FROM baseline WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp UNION SELECT folder, geodatabas, layer, featuretyp FROM basepoint WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp UNION SELECT folder, geodatabas, layer, featuretyp FROM basepoly WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp UNION SELECT folder, geodatabas, ssid AS layer, imageviewd AS featuretyp FROM visualpoly WHERE earliestda <= " + year + " AND latestdate >= " + year + " AND layer = 'MapsAndPlansPoly' GROUP BY folder, geodatabas, ssid, imageviewd ) AS q LEFT OUTER JOIN legend AS l ON q.layer = l.layer AND ( q.featuretyp = l.featuretyp OR ( l.featuretyp IS NULL AND q.featuretyp IS NULL ) ) ) AS q2 WHERE fill IS NOT NULL OR folder = 'VisualDocuments' OR stroke IS NOT NULL OR shape IS NOT NULL ORDER BY folder, geodatabas, layer, featuretyp";
+	var q = "SELECT * FROM ( SELECT q.*, l.fill, l.stroke, l.shape, l. ID FROM ( SELECT folder, geodatabas, layer, featuretyp FROM baseline WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp UNION SELECT folder, geodatabas, layer, featuretyp FROM basepoint WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp UNION SELECT folder, geodatabas, layer, featuretyp FROM basepoly WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY folder, geodatabas, layer, featuretyp ) AS q LEFT OUTER JOIN legend AS l ON q.layer = l.layer AND ( q.featuretyp = l.featuretyp OR ( l.featuretyp IS NULL AND q.featuretyp IS NULL ) ) ) AS q2 WHERE fill IS NOT NULL OR folder = 'VisualDocuments' OR stroke IS NOT NULL OR shape IS NOT NULL ORDER BY folder, geodatabas, layer, featuretyp";
 	
 	var query = client.query( q ),
 		arr = [],
@@ -80,6 +80,29 @@ exports.layers = function( req, res )
 		});
 		
 		res.send( layers );
+		client.end();
+	});
+}
+
+exports.raster = function( req, res )
+{
+	var client = new pg.Client( conn );
+	client.connect();
+
+	var year = req.params.year,
+		q = "SELECT imageid AS id, 'SSID' || ssid AS file, imageviewd AS description FROM visualpoly WHERE earliestda <= " + year + " AND latestdate >= " + year + " AND layer = 'MapsAndPlansPoly'";
+	
+	var query = client.query( q ),
+		arr = [];
+	
+	query.on( 'row', function( result )
+	{
+		arr.push( result );
+	});
+	
+	query.on( 'end', function()
+	{
+		res.send( arr );
 		client.end();
 	});
 }

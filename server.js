@@ -52,6 +52,7 @@ app.get( '/search/:year/:word', meta.search );
 app.get( '/probe/:year/:coords', geo.probe );
 app.get( '/draw/:id', geo.draw );
 app.get( '/visual/:year', geo.visual );
+app.get( '/raster/:year', meta.raster );
 app.get( '/plans', meta.plans );
 app.get( '/plan/:name', geo.plan );
 app.get( '/details/:id', meta.details );
