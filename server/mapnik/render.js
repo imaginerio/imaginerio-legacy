@@ -131,7 +131,7 @@ function render_tile( year, layer, z, x, y, callback )
 		if( exists )
 		{
 			console.log( png + ' exists.' );
-			callback( year, layer, z, x, y + 1, callback );
+			callback( years[ 0 ], layer, zs[ 0 ], xs[ 0 ], ys.shift(), callback );
 		}
 		else
 		{
@@ -174,7 +174,7 @@ function render_tile( year, layer, z, x, y, callback )
 									{
 										if( err ) return console.log( err );
 										console.log( png + ' saved.' );
-										callback( year, layer, z, x, y + 1, callback );
+										callback( years[ 0 ], layer, zs[ 0 ], xs[ 0 ], ys.shift(), callback );
 									});
 								}
 							});
@@ -215,24 +215,31 @@ function tile_coords( lat, lon, zoom )
 
 function next_tile( year, layer, z, x, y, callback )
 {
-	if( y > max.y )
+	if( y === undefined )
 	{
-		y = min.y;
-		x++;
+		xs.shift();
+		x = xs[ 0 ];
+		ys = _.range( min.y, max.y + 1 );
+		y = ys.shift();
 	}
 	
-	if( x > max.x )
+	if( x === undefined )
 	{
-		z++;
-		if( z > maxz )
+		z = zs.shift();
+		z = zs[ 0 ];
+		if( z === undefined )
 		{
-			year = years[ _.indexOf( years, year, true ) + 1 ];
-			z = minz;
+			years.shift();
+			year = years[ 0 ];
+			zs = _.range( minz, maxz + 1 );
+			z = zs[ 0 ];
 		}
 		min = tile_coords( miny, minx, z );
 		max = tile_coords( maxy, maxx, z );
-		x = min.x;
-		y = min.y;
+		xs = _.range( min.x, max.x + 1 ),
+		ys = _.range( min.y, max.y + 1 );
+		x = xs[ 0 ];
+		y = ys.shift();
 	}
 	render_tile( year, layer, z, x, y, callback );
 }
@@ -248,7 +255,11 @@ var years = [],
 	minz = 14,
 	maxz = 18,
 	min = tile_coords( miny, minx, minz ),
-	max = tile_coords( maxy, maxx, minz );
+	max = tile_coords( maxy, maxx, minz ),
+	xs = _.range( min.x, max.x + 1 ),
+	ys = _.range( min.y, max.y + 1 ),
+	zs = _.range( minz, maxz + 1 );
+	
 	
 var query = client.query( "SELECT * FROM ( SELECT firstdispl  AS year FROM basepoint UNION SELECT lastdispla AS year FROM basepoint UNION SELECT firstdispl AS year FROM baseline UNION SELECT lastdispla AS year FROM baseline UNION SELECT firstdispl AS year FROM basepoly UNION SELECT lastdispla AS year FROM basepoly UNION SELECT earliestda AS year FROM visualpoly UNION SELECT latestdate AS year FROM visualpoly ) as q ORDER BY year" );
 	
@@ -261,6 +272,10 @@ query.on( 'end', function()
 {
 	console.log( years );
 	
-	next_tile( years[ 0 ], "all", minz, min.x, min.y, next_tile )
+	next_tile( years[ 0 ], "all", zs[ 0 ], xs[ 0 ], ys.shift(), next_tile );
+	next_tile( years[ 0 ], "all", zs[ 0 ], xs[ 0 ], ys.shift(), next_tile );
+	next_tile( years[ 0 ], "all", zs[ 0 ], xs[ 0 ], ys.shift(), next_tile );
+	next_tile( years[ 0 ], "all", zs[ 0 ], xs[ 0 ], ys.shift(), next_tile );
+	next_tile( years[ 0 ], "all", zs[ 0 ], xs[ 0 ], ys.shift(), next_tile );
 	
 });
