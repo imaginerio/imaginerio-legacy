@@ -137,6 +137,7 @@ http.createServer( function( req, res )
 				}
 				else
 				{			
+					var t = process.hrtime();
 					parseXML( req, params.raster, {}, function( stylesheet, options )
 					{
 						aquire( stylesheet, options, function( err, map )
@@ -184,7 +185,9 @@ http.createServer( function( req, res )
 										fs.writeFile( png, imagedata, 'binary', function( err )
 										{
 											if( err ) return console.log( err );
-											console.log( png + ' saved.')
+											t = process.hrtime( t );
+											var sec = Math.round( ( t[ 0 ] + ( t[ 1 ] / 1000000000 ) ) * 100 ) / 100;
+											console.log( png + ' saved in ' + sec + ' seconds.' );
 										});
 										res.writeHead( 200, {
 											'Content-Type' : 'image/png',

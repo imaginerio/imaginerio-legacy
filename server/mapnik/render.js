@@ -135,6 +135,7 @@ function render_tile( year, layer, z, x, y, callback )
 		}
 		else
 		{
+			var t = process.hrtime();
 			parseXML( year, layer, {}, function( stylesheet, options )
 			{
 				aquire( stylesheet, options, function( err, map )
@@ -173,7 +174,9 @@ function render_tile( year, layer, z, x, y, callback )
 									fs.writeFile( png, imagedata, 'binary', function( err )
 									{
 										if( err ) return console.log( err );
-										console.log( png + ' saved.' );
+										t = process.hrtime( t );
+										var sec = Math.round( ( t[ 0 ] + ( t[ 1 ] / 1000000000 ) ) * 100 ) / 100;
+										console.log( png + ' saved in ' + sec + ' seconds.' );
 										callback( years[ 0 ], layer, zs[ 0 ], xs[ 0 ], ys.shift(), callback );
 									});
 								}
