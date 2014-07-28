@@ -48,7 +48,7 @@
     <StyleName>land</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'LandPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'LandPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -71,7 +71,7 @@
     <StyleName>cityblocks</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'CityBlocksPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'CityBlocksPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -108,7 +108,7 @@
     <StyleName>lotslanduse</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'LotsAndLandUsesPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'LotsAndLandUsesPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -136,7 +136,7 @@
     <StyleName>cemeteries-outline</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'CemeteriesPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'CemeteriesPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -190,7 +190,7 @@
     <StyleName>squares-outline</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'SquaresPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom, featuretyp FROM basepoly WHERE layer = 'SquaresPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -233,7 +233,7 @@
     <StyleName>inlandwater-outline</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'InlandWatersPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom, featuretyp FROM basepoly WHERE layer = 'InlandWatersPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -290,7 +290,7 @@
     <StyleName>riversstreams</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM baseline WHERE layer = 'RiversAndStreamsLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM baseline WHERE layer = 'RiversAndStreamsLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -332,7 +332,7 @@
     <StyleName>waterline</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM baseline WHERE layer = 'WaterLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM baseline WHERE layer = 'WaterLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -382,7 +382,7 @@
     <StyleName>neighborhoods-inline</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'NeighborhoodsPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'NeighborhoodsPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -404,7 +404,7 @@
     <StyleName>ocean</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'OceanPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'OceanPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -1272,7 +1272,7 @@
     <StyleName>roads-high/inline</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM baseline WHERE layer = 'TransportationRoadLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom, featuretyp FROM baseline WHERE layer = 'TransportationRoadLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -1349,7 +1349,7 @@
     <StyleName>buildings-set/outline</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'BuildingsPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'BuildingsPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -1386,7 +1386,7 @@
     <StyleName>fountainspoint</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM basepoint WHERE layer = 'FountainsPoint' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoint WHERE layer = 'FountainsPoint' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -1419,7 +1419,7 @@
     <StyleName>railpoint</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM basepoint WHERE layer = 'TransportationRailPoint' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoint WHERE layer = 'TransportationRailPoint' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -1451,7 +1451,7 @@
     <StyleName>inlandwater_labels</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'InlandWatersPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom, featuretyp, namecomple FROM basepoly WHERE layer = 'InlandWatersPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -1489,7 +1489,7 @@
     <StyleName>neighborhoods_labels</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'NeighborhoodsPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom, nameshort FROM basepoly WHERE layer = 'NeighborhoodsPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -1650,7 +1650,7 @@
     <StyleName>squares_labels-icon</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'SquaresPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom, featuretyp, nameshort FROM basepoly WHERE layer = 'SquaresPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -2110,7 +2110,7 @@
     <StyleName>roads_labels-low</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM baseline WHERE layer = 'TransportationRoadLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom, featuretyp, namecomple FROM baseline WHERE layer = 'TransportationRoadLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -2143,7 +2143,7 @@
     <StyleName>riversstreams_labels</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM baseline WHERE layer = 'RiversAndStreamsLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom, namecomple FROM baseline WHERE layer = 'RiversAndStreamsLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -2180,7 +2180,7 @@
     <StyleName>waterline_labels</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM baseline WHERE layer = 'WaterLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom, namecomple FROM baseline WHERE layer = 'WaterLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -2208,7 +2208,7 @@
     <StyleName>cemeteries_marker</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'CemeteriesPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'CemeteriesPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
