@@ -5,7 +5,7 @@ var mapnik = require( 'mapnik' ),
 	xml = require( 'libxmljs' ),
 	_ = require( 'underscore' ),
 	pg = require( 'pg' ),
-	conn = "postgres://axismaps:U6glEdd0igS2@rio2.c1juezxtnbot.us-west-2.rds.amazonaws.com/rio",
+	conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/rio";
 	hillshade = [ { year : 1960, file : '../../../../../raster/Hillshade_WGS84_1960_2013.tif' }, { year : 1921, file : '../../../../../raster/Hillshade_WGS84_1921_1959.tif' }, { year : 1906, file : '../../../../../raster/Hillshade_WGS84_1906_1920.tif' }, { year : 1500, file : '../../../../../raster/Hillshade_WGS84_1500_1905.tif' } ];
 
 // register plugins

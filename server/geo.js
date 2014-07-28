@@ -1,7 +1,7 @@
 var pg = require( 'pg' ),
 	postgeo = require( 'postgeo' ),
 	_ = require( 'underscore' ),
-	conn = "postgres://axismaps:U6glEdd0igS2@rio2.c1juezxtnbot.us-west-2.rds.amazonaws.com/rio";
+	conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/rio";
 
 exports.probe = function( req, res )
 {
