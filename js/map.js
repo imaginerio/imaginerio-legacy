@@ -17,7 +17,15 @@ function init_map()
 	})
 	.on( "click", probe );
 	
-	$( "#export" ).click( export_map );
+	if( $( "html" ).hasClass( "canvas" ) )
+	{
+		$( "#export" ).click( export_map );
+	}
+	else
+	{
+		$( "#export" ).hide();
+	}
+	
 }
 
 function load_tiles()
@@ -204,10 +212,25 @@ function export_map()
 	
 	function savePNG( data, fname )
 	{
-        var pom = document.createElement('a');
-		pom.setAttribute( 'href', data );
-    	pom.setAttribute( 'download', fname );
-	    pom.click();
+        if( $( "html" ).hasClass( "adownload" ) )
+        {
+	        var pom = document.createElement('a');
+			pom.setAttribute( 'href', data.replace( 'image/png', 'image/octet-stream' ) );
+	    	pom.setAttribute( 'download', fname );
+		    pom.click();
+		}
+		else
+		{
+			$.fancybox.open({
+				content : $( "<img/>" ).attr( "src", data ),
+				title : "<b>Drag image to your desktop to save</b>",
+				helpers:  {
+			        title : {
+			            type : 'inside'
+			        }
+			    }
+			});
+		}
         
         $( "#export" ).removeClass( "loading" );
     };

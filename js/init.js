@@ -22,7 +22,7 @@ function init()
 	$( "#enter" ).click( function()
 	{
 		$( "#intro" ).fadeOut( "slow" );
-	})
+	});
 }
 
 function resize()
