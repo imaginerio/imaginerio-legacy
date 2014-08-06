@@ -251,10 +251,10 @@ var client = new pg.Client( conn );
 client.connect();
 	
 var years = [],
-	minx = -43.233,
-	maxx = -43.109,
-	maxy = -22.933,
-	miny = -22.876,
+	minx = -43.3,
+	maxx = -43.1,
+	maxy = -23.0,
+	miny = -22.8,
 	minz = 14,
 	maxz = 18,
 	min = tile_coords( miny, minx, minz ),
