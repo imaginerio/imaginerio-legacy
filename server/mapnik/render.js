@@ -131,7 +131,11 @@ function render_tile( year, layer, z, x, y, callback )
 		if( exists )
 		{
 			console.log( png + ' exists.' );
-			callback( years[ 0 ], layer, zs[ 0 ], xs[ 0 ], ys.shift(), callback );
+			callback( years[ 0 ], combo[ 0 ], zs[ 0 ], xs[ 0 ], ys.shift(), callback );
+		}
+		else if( layer === undefined )
+		{
+			return false;
 		}
 		else
 		{
@@ -177,7 +181,7 @@ function render_tile( year, layer, z, x, y, callback )
 										t = process.hrtime( t );
 										var sec = Math.round( ( t[ 0 ] + ( t[ 1 ] / 1000000000 ) ) * 100 ) / 100;
 										console.log( png + ' saved in ' + sec + ' seconds.' );
-										callback( years[ 0 ], layer, zs[ 0 ], xs[ 0 ], ys.shift(), callback );
+										callback( years[ 0 ], combo[ 0 ], zs[ 0 ], xs[ 0 ], ys.shift(), callback );
 									});
 								}
 							});
@@ -232,10 +236,17 @@ function next_tile( year, layer, z, x, y, callback )
 		z = zs[ 0 ];
 		if( z === undefined )
 		{
-			years.shift();
-			year = years[ 0 ];
+			combo.shift();
+			layer = combo[ 0 ];
 			zs = _.range( minz, maxz + 1 );
 			z = zs[ 0 ];
+			if( layer === undefined )
+			{
+				years.shift();
+				year = years[ 0 ];
+				get_layers( year );
+				return false;
+			}
 		}
 		min = tile_coords( miny, minx, z );
 		max = tile_coords( maxy, maxx, z );
@@ -247,21 +258,69 @@ function next_tile( year, layer, z, x, y, callback )
 	render_tile( year, layer, z, x, y, callback );
 }
 
+function get_layers( year )
+{
+	var layers = [],
+		big = [ 'buildings', 'lotslanduse', 'roads_labels,roads', 'neighborhoods_labels,neighborhoods' ],
+		query = client.query( "SELECT id FROM basepoly INNER JOIN legend ON basepoly.layer = legend.layer WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " AND ID IS NOT NULL GROUP BY id UNION SELECT id FROM baseline INNER JOIN legend ON baseline.layer = legend.layer WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " AND ID IS NOT NULL GROUP BY id" );
+	
+	query.on( 'row', function( result )
+	{
+		layers.push( result.id );
+	});
+	query.on( 'end', function()
+	{
+		combo = combinations( _.intersection( layers, big ) );
+		combo = _.map( combo, function( val ){ return val.replace( /^,/gi, ""); } );
+		combo.push( "all" );
+		console.log( combo );
+		
+		next_tile( years[ 0 ], combo[ 0 ], zs[ 0 ], xs[ 0 ], ys.shift(), next_tile );
+		next_tile( years[ 0 ], combo[ 0 ], zs[ 0 ], xs[ 0 ], ys.shift(), next_tile );
+		next_tile( years[ 0 ], combo[ 0 ], zs[ 0 ], xs[ 0 ], ys.shift(), next_tile );
+		next_tile( years[ 0 ], combo[ 0 ], zs[ 0 ], xs[ 0 ], ys.shift(), next_tile );
+		next_tile( years[ 0 ], combo[ 0 ], zs[ 0 ], xs[ 0 ], ys.shift(), next_tile );
+	});
+	
+	function combinations( str )
+	{
+    	if( str.length == 1 ) return str;
+    	
+    	var fn = function( active, rest, a )
+    	{
+        	if( active.length == 0 && rest.length == 0 )
+            	return;
+			if( rest.length == 0 )
+			{
+            	a.push( active );
+        	}
+        	else
+        	{
+            	fn( active + "," + rest[ 0 ], rest.slice( 1 ), a );
+				fn( active, rest.slice( 1 ), a );
+        	}
+			return a;
+    	}
+		return fn( "", str, [] );
+	}
+}
+
 var client = new pg.Client( conn );
 client.connect();
 	
 var years = [],
-	minx = -43.3,
-	maxx = -43.1,
-	maxy = -23.0,
-	miny = -22.8,
+	minx = -43.2537,
+	maxx = -43.1300,
+	maxy = -22.9325,
+	miny = -22.8766,
 	minz = 14,
 	maxz = 18,
 	min = tile_coords( miny, minx, minz ),
 	max = tile_coords( maxy, maxx, minz ),
 	xs = _.range( min.x, max.x + 1 ),
 	ys = _.range( min.y, max.y + 1 ),
-	zs = _.range( minz, maxz + 1 );
+	zs = _.range( minz, maxz + 1 ),
+	combo = [];
 	
 	
 var query = client.query( "SELECT * FROM ( SELECT firstdispl  AS year FROM basepoint UNION SELECT lastdispla AS year FROM basepoint UNION SELECT firstdispl AS year FROM baseline UNION SELECT lastdispla AS year FROM baseline UNION SELECT firstdispl AS year FROM basepoly UNION SELECT lastdispla AS year FROM basepoly UNION SELECT earliestda AS year FROM visualpoly UNION SELECT latestdate AS year FROM visualpoly ) as q ORDER BY year" );
@@ -273,12 +332,8 @@ query.on( 'row', function( result )
 	
 query.on( 'end', function()
 {
+	//years.reverse();
 	console.log( years );
 	
-	next_tile( years[ 0 ], "all", zs[ 0 ], xs[ 0 ], ys.shift(), next_tile );
-	next_tile( years[ 0 ], "all", zs[ 0 ], xs[ 0 ], ys.shift(), next_tile );
-	next_tile( years[ 0 ], "all", zs[ 0 ], xs[ 0 ], ys.shift(), next_tile );
-	next_tile( years[ 0 ], "all", zs[ 0 ], xs[ 0 ], ys.shift(), next_tile );
-	next_tile( years[ 0 ], "all", zs[ 0 ], xs[ 0 ], ys.shift(), next_tile );
-	
+	get_layers( years[ 0 ] );
 });
