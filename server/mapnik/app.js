@@ -197,20 +197,21 @@ http.createServer( function( req, res )
 										else
 										{
 											var imagedata = im.encodeSync( 'png' );
-											
-											mkdir( "cache/png/" + params.year + "/" + params.layer + "/" + params.z + "/" + params.x );
-											fs.writeFile( png, imagedata, 'binary', function( err )
-											{
-												if( err ) return console.log( err );
-												t = process.hrtime( t );
-												var sec = Math.round( ( t[ 0 ] + ( t[ 1 ] / 1000000000 ) ) * 100 ) / 100;
-												console.log( png + ' saved in ' + sec + ' seconds.' );
-											});
 											res.writeHead( 200, {
 												'Content-Type' : 'image/png',
 												"Access-Control-Allow-Origin" : "*"
 											});
 											res.end( im.encodeSync( 'png' ) );
+											
+											t = process.hrtime( t );
+											var sec = Math.round( ( t[ 0 ] + ( t[ 1 ] / 1000000000 ) ) * 100 ) / 100;
+											console.log( png + ' saved in ' + sec + ' seconds.' );
+											
+											mkdir( "cache/png/" + params.year + "/" + params.layer + "/" + params.z + "/" + params.x );
+											fs.writeFile( png, imagedata, 'binary', function( err )
+											{
+												if( err ) return console.log( err );
+											});
 										}
 									});
 								}
