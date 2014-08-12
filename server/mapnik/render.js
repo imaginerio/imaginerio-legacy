@@ -125,6 +125,8 @@ function mkdir(path, root) {
 
 function render_tile( year, layer, z, x, y, callback )
 {
+	layer = layer.split( "," ).sort().join( "," );
+	
 	var png = "cache/png/" + year + "/" + layer + "/" + z + "/" + x + "/" + y + ".png";
 	fs.exists( png, function( exists )
 	{

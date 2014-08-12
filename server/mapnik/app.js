@@ -142,6 +142,8 @@ http.createServer( function( req, res )
         }
         else
         {
+			params.layer = params.layer.split( "," ).sort().join( "," );
+			
 			var png = "cache/png/" + params.year + "/" + params.layer + "/" + params.z + "/" + params.x + "/" + params.y + ".png";
 			fs.exists( png, function( exists )
 			{
