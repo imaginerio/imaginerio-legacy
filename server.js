@@ -1,9 +1,25 @@
 var express = require( 'express' ),
 	bodyParser = require( 'body-parser' ),
     meta = require( './server/meta' ),
-    geo = require( './server/geo' );
+    geo = require( './server/geo' ),
+    finalhandler = require( 'finalhandler' ),
+	http = require( 'http' ),
+	serveStatic = require( 'serve-static' );
 
 var app = express();
+
+// Serve up public/ftp folder
+var serve = serveStatic( 'server/mapnik/cache/' );
+
+// Create server
+var server = http.createServer( function( req, res )
+{
+  var done = finalhandler( req, res );
+  serve( req, res, done );
+});
+
+// Listen
+server.listen( 8080 );
 
 app.use( function( req, res, next )
 {

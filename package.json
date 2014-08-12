@@ -12,6 +12,8 @@
     "pg": "3.0.3",
     "postgeo": "*",
     "underscore": "1.6",
-    "graceful-fs": "3.0.2"
+    "graceful-fs": "3.0.2",
+    "serve-static" : "1.5.1",
+    "finalhandler" : "0.1.0"
   }
 }
