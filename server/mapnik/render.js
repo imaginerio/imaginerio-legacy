@@ -125,6 +125,7 @@ function mkdir(path, root) {
 
 function render_tile( year, layer, z, x, y, callback )
 {
+	if( layer === undefined ) return false;
 	layer = layer.split( "," ).sort().join( "," );
 	
 	var png = "cache/png/" + year + "/" + layer + "/" + z + "/" + x + "/" + y + ".png";
@@ -134,10 +135,6 @@ function render_tile( year, layer, z, x, y, callback )
 		{
 			console.log( png + ' exists.' );
 			callback( years[ 0 ], combo[ 0 ], zs[ 0 ], xs[ 0 ], ys.shift(), callback );
-		}
-		else if( layer === undefined )
-		{
-			return false;
 		}
 		else
 		{
