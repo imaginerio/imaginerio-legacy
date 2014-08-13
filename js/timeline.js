@@ -15,7 +15,7 @@ function init_timeline()
 		years.push( max );
 		
 		build_timeline();
-		update_year( Math.max( year, min ) );
+		update_year( gup( 'year' ) ? gup( 'year' ) : Math.max( year, min ) );
 		snap_timeline( year );
 	});
 	
