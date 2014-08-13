@@ -18,6 +18,9 @@ var lang,
 
 function init()
 {
+	L_PREFER_CANVAS = true;
+	L.Icon.Default.imagePath = 'img';
+	
 	if( gup( 'year' ) ) year = gup( 'year' );
 	
 	lang = gup( 'lang' ) == "pr" ? "pr" : "en";

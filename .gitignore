@@ -2,3 +2,4 @@ node_modules/*
 tiles*
 server/mapnik/cache/*
 raster/*
+Build/*
