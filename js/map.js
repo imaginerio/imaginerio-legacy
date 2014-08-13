@@ -196,13 +196,13 @@ function export_map()
 		context.fillStyle = '#666';
 		context.fillRect( 0, 99, dimensions.x, 1 );
 		context.font = '100 60px Helvetica Neue, HelveticaNeue, TeXGyreHeros, FreeSans, Nimbus Sans L, Liberation Sans, Arimo, Helvetica, Arial, sans-serif';
-		context.fillText( "imagineRio", 20, 70 );
+		context.fillText( $( "header h1" ).text(), 20, 70 );
 		
 		context.font = 'bold 30px Helvetica Neue, HelveticaNeue, TeXGyreHeros, FreeSans, Nimbus Sans L, Liberation Sans, Arimo, Helvetica, Arial, sans-serif';
 		context.fillText( year, dimensions.x - 100, 70 );
 		
 		var legend = new Image();
-		legend.src = 'img/legend.png';
+		legend.src = 'img/legend_' + lang + '.png';
 		legend.onload = function()
 		{
 			context.drawImage( legend, 0, 100);

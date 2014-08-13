@@ -1,84 +1,84 @@
-layer,name
-100 m,100 m
-10 m,10 m
-25 m,25 m
-50 m,50 m
-5 m,5 m
-60 m,60 m
-Adminitrative Building,Adminitrative Building
-Aqueduct,Aqueduct
-Architecture,Architecture
-Avenida,Avenida
-Beco,Beco
-Boundaries,Boundaries
-Caminho,Caminho
-Church,Church
-Civic,Civic
-Collector,Collector
-Commercial,Commercial
-Convent,Convent
-Cultural,Cultural
-Cultural Center,Cultural Center
-Culture,Culture
-Customs,Customs
-Estrada,Estrada
-Expressway,Expressway
-Fort,Fort
-Garden,Garden
-Governmental,Governmental
-Health and Human Safety,Health and Human Safety
-Hospital,Hospital
-Industrial,Industrial
-Ladeira,Ladeira
-Lagoon,Lagoon
-Largo,Largo
-Local,Local
-Marsh,Marsh
-Metro Station,Metro Station
-Minor Arterial,Minor Arterial
-Misc,Misc
-Monuments,Monuments
-Palace,Palace
-Park,Park
-Plaza,Plaza
-Praça,Praça
-Praia,Praia
-Principle Arterial,Principle Arterial
-Railroad Station,Railroad Station
-Religious,Religious
-Residence,Residence
-Rua,Rua
-School,School
-Sports,Sports
-Square,Square
-Stock Exchange,Stock Exchange
-Topography,Topography
-Tram Station,Tram Station
-Travessa,Travessa
-Urbanism,Urbanism
-Water,Water
-BuildingsPoly,Buildings
-BuiltEnvironment,Built Environment
-CemeteriesPoly,Cemeteries
-CityBlocksPoly,City Blocks
-CivilEngineering,Civil Engineering
-FountainsPoint,Fountains
-InlandWatersPoly,Inland Waters
-LandPoly,Land
-LandscapeArchitecture,Landscape Architecture
-LotsAndLandUsesPoly,Lots and Land Uses
-NaturalEnvironment,Natural Environment
-NeighborhoodsPoly,Neighborhoods
-PoliticalBoundaries,Political Boundaries
-Pond Or Reservoir,Pond or Reservoir
-RiversAndStreamsLine,Rivers and Streams
-SquaresPoly,Squares
-TransportationRailPoint,Railway Station
-TransportationRoadLine,Road
-WaterLine,Water
-VisualDocuments,Visual Documents
-creator,Creator
-firstowner,First Owner
-owner,Owner
-occupant,Occupant
-year,Mapped
+layer,name_en,name_pr
+Collector,Collector,Via Coletora
+Convent,Monastery/Convent,Mosteiro/Convento
+Cultural,Cultural,Cultural
+Cultural Center,Cultural Center,Centro Cultural
+Culture,Culture,Cultura
+Estrada,Road,Estrada
+Expressway,Expressway,Via Expressa
+Fort,Fort,Forte
+Garden,Garden,Jardim
+Governmental,Governmental,Governamental
+Hospital,Hospital,Hospital
+Industrial,Industrial,Industrial
+Ladeira,Slope,Ladeira
+VisualDocuments,Visual Documents,Documentos Visuais
+creator,Creator,Criador
+occupant,Occupant,Residente
+year,Mapped,Mapeado
+Adminitrative Building,Administrative Building,Prédio Administrativo
+BuildingsPoly,Buildings,Prédios
+BuiltEnvironment,Built Environment,Meio Ambiente Construído
+CemeteriesPoly,Cemeteries,Cemitérios
+Civic,Civic,Cívico
+Commercial,Commercial,Comércio
+Customs,Customs,Alfândega
+firstowner,First Owner,Primeiro Proprietário
+Health and Human Safety,Health and Human Safety,Saúde e Segurança Pública
+InlandWatersPoly,Inland Waters,Águas Cercadas de Terras
+Marsh,Marsh,Alagadiço
+Metro Station,Metro Station,Estação de Metrô
+Minor Arterial,Minor Arterial,Via Arterial Secundária
+Misc,Misc,Vários
+owner,Owner,Proprietário
+Palace,Palace,Palácio
+PoliticalBoundaries,Political Boundaries,Limites Políticos
+Pond Or Reservoir,Pond or Reservoir,Reservatório ou Represa
+Praça,Praça,Praça
+Railroad Station,Railroad Station,Estação de Trem
+Residence,Residence,Residência
+Square,Square,Praça
+SquaresPoly,Squares,Praças
+100 m,100 m,100 m
+10 m,10 m,10 m
+25 m,25 m,25 m
+50 m,50 m,50 m
+5 m,5 m,5 m
+60 m,60 m,60 m
+Aqueduct,Aqueduct,Aqueduto
+Architecture,Architecture,Arquitetura
+Avenida,Avenue,Avenida
+Beco,Alley,Beco
+Boundaries,Boundaries,Limites
+Caminho,Trail,Caminho
+Church,Church,Igreja
+Lagoon,Lagoon,Lagoa
+Largo,Largo,Plaza
+Local,Local,Via Local
+Monuments,Monuments,Monumentos
+Park,Park,Parque
+Plaza,Plaza,Largo
+Praia,Beach,Praia
+Principle Arterial,Principal Arterial,Via Arterial Principal
+Religious,Religious,Religioso
+Rua,Street,Rua
+School,School,Escola
+Sports,Sports,Esportes
+Stock Exchange,Stock Exchange,Bolsa de Valores
+Topography,Topography,Topografia
+Travessa,Passage,Travessa
+Urbanism,Urbanism,Urbanismo
+CityBlocksPoly,City Blocks,Quadras
+CivilEngineering,Civil Engineering,Engenharia Civil
+FountainsPoint,Fountains,Chafarizes
+LandPoly,Land,Solo
+LandscapeArchitecture,Landscape Architecture,Paisagismo
+LotsAndLandUsesPoly,Lots and Land Uses,Lotes e Usos do Solo
+NaturalEnvironment,Natural Environment,Meio Ambiente Natural
+NeighborhoodsPoly,Neighborhoods,Bairros
+RiversAndStreamsLine,Rivers and Streams,Rios e Riachos
+TransportationRoadLine,Road,Via
+Tram Station,Tram Station,Estação de Bonde
+TransportationRailPoint,Railway Station,Estação de Trem
+Water,Water,Água
+WaterLine,Water,Infrastrutura de Água

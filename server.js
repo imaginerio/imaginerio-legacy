@@ -73,7 +73,7 @@ app.get( '/raster/:year', meta.raster );
 app.get( '/plans', meta.plans );
 app.get( '/plan/:name', geo.plan );
 app.get( '/details/:id', meta.details );
-app.get( '/names', meta.names );
+app.get( '/names/:lang', meta.names );
 app.get( '/feature/:year/:id', geo.feature );
 app.post( '/save', meta.save );
 

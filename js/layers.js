@@ -3,7 +3,7 @@ var names = {},
 
 function init_layers()
 {
-	$.getJSON( server + "/names", function( json )
+	$.getJSON( server + "/names/" + lang, function( json )
 	{
 		names = json;
 		build_layers();
@@ -134,7 +134,7 @@ function build_layers()
 	{
 		var label = $( document.createElement( 'label' ) )
 						.addClass( cclass )
-						.html( names[ html ] );
+						.html( "<span>" + names[ html ] + "</span>" );
 		
 		if( id )
 		{

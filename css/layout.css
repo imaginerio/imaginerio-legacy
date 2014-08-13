@@ -72,9 +72,12 @@ h1, header{
 	color: black;
 }
 
-#language div{
+#language a{
+	display: block;
+	color: #999;
 	opacity: 0;
 	margin: 10px 0;
+	text-decoration: none;
 	 -webkit-transition: opacity 0.5s ease-in;
     -moz-transition: opacity 0.5s ease-in;
     -o-transition: opacity 0.5s ease-in;
@@ -82,13 +85,12 @@ h1, header{
     transition: opacity 0.5s ease-in;
 }
 
-#language:hover div{
-	display: block;
+#language:hover a{
 	opacity: 1;
 	color: #999;
 }
 
-#language div:hover{
+#language a:hover{
 	color: black;
 }
 

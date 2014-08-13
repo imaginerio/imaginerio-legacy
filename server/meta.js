@@ -185,13 +185,14 @@ exports.names = function( req, res )
 	var client = new pg.Client( conn );
 	client.connect();
 	
-	var names = {};
+	var names = {},
+		lang = req.params.lang;
 	
 	var query = client.query( "SELECT * FROM names" );
 	
 	query.on( 'row', function( result )
 	{
-		names[ result.layer ] = result.name;
+		names[ result.layer ] = result[ "name_" + lang ];
 	});
 	
 	query.on( 'end', function()

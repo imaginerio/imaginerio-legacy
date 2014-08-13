@@ -6,10 +6,23 @@ var server = "http://rio-server.axismaps.com:3000",
 //	tileserver = "http://localhost:8000/";
 //	rasterserver = "http://localhost:9000/";
 
+var lang,
+	pr = {
+		"h1" : "imaginarRio",
+		"#enter" : "Ver o mapa <span></span>",
+		"#plans" : "Projetos Urbanos",
+		"#switch" : "Legenda do Mapa",
+		"#instruction" : "Clique no mapa para explorar...",
+		"#export" : "Exporte a imagem do mapa <span></span>"
+	};
+
 function init()
 {
 	if( gup( 'year' ) ) year = gup( 'year' );
 	
+	lang = gup( 'lang' ) == "pr" ? "pr" : "en";
+	
+	set_language();
 	resize();
 	init_map();
 	init_layers();
@@ -63,6 +76,23 @@ function map_loading( show )
 	else if( show === false )
 	{
 		$( "#loading" ).remove();
+	}
+}
+
+function set_language()
+{
+	if( lang == "pr" )
+	{
+		$( "#language span" ).html( "Versão em Português ▼" );
+		$( "#language a" )
+			.html( "English Version" )
+			.attr( "href", "index.html?lang=en" );
+		_.each( pr, function( text, sel )
+		{
+			$( sel ).html( text );
+		});
+		
+		$( "#search input" ).attr( "placeholder", "Pesquisa..." );
 	}
 }
 

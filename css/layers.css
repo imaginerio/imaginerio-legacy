@@ -118,9 +118,7 @@
 	font-size: 14px;
 	clear: both;
 	width: 235px;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+	height: 40px;
 }
 
 #layers label + img{
@@ -129,8 +127,22 @@
 	border: 1px solid #999;
 }
 
+#layers label span{
+	display: inline-block;
+	width: 165px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+#layers label input + span{
+	width: 140px;
+}
+
 #layers input{
 	margin-right: 10px;
+	height: 35px;
+	float: left;
 }
 
 .geodb{
@@ -147,7 +159,7 @@
 	background-color: #eee;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	margin: 8px 20px 8px 65px;
+	margin: 8px 20px 8px 50px;
 	padding: 0 10px;
 	font-size: 12px;
 }
