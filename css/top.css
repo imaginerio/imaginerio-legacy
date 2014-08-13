@@ -50,7 +50,7 @@ header, nav{
 	content: '⬇';
 }
 
-#export.loading span{
+#export.loading span, #export.loading:hover span{
 	background: #ddd url(../img/loader_small.gif) no-repeat center center;
 }
 
@@ -65,6 +65,27 @@ header, nav{
 #export:hover span, #enter:hover span{
 	background-color: #999;
 	color: white;
+}
+
+.drag > img{
+	cursor: move;
+}
+
+.drag > div{
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	line-height: 40px;
+	height: 40px;
+	background-color: rgba( 0,0,0,0.2);
+}
+
+.drag > div img{
+	position: absolute;
+	top: 10px;
+	margin-left: -30px;
 }
 
 nav{

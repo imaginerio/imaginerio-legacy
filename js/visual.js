@@ -117,7 +117,7 @@ function clear_visual()
 
 function scale_image( width, height )
 {
-	var maxWidth = $( window ).width() - 100,
+	var maxWidth = Math.floor( $( window ).width() * 0.9 ) - 100,
 		maxHeight = $( window ).height() - 150,
 		ratio = 0;
 	

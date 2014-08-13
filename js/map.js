@@ -206,11 +206,11 @@ function export_map()
 		legend.onload = function()
 		{
 			context.drawImage( legend, 0, 100);
-			savePNG( exp.toDataURL(), "rio-" + year + ".png" );
+			savePNG( exp.toDataURL(), "rio-" + year + ".png", dimensions );
 		}
 	});
 	
-	function savePNG( data, fname )
+	function savePNG( data, fname, dimensions )
 	{
         if( $( "html" ).hasClass( "adownload" ) )
         {
@@ -221,15 +221,19 @@ function export_map()
 		}
 		else
 		{
-			$.fancybox.open({
-				content : $( "<img/>" ).attr( "src", data ),
-				title : "<b>Drag image to your desktop to save</b>",
-				helpers:  {
-			        title : {
-			            type : 'inside'
-			        }
-			    }
-			});
+			var dim = scale_image( dimensions.x, dimensions.y );
+			var light = $( document.createElement( 'div' ) )
+							.addClass( 'drag' )
+							.append( 
+								$( "<img/>" ).attr( "src", data ).width( dim.w ).height( dim.h )
+							)
+							.append(
+								$( document.createElement( 'div' ) )
+									.html( " Drag the image to your desktop to save" )
+									.prepend( $( "<img/>" ).attr( "src", "img/drag.png" ) )
+							)
+			
+			$.featherlight( light );
 		}
         
         $( "#export" ).removeClass( "loading" );
