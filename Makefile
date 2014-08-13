@@ -12,7 +12,7 @@ css-path =			css/
 css-build-path = 	$(build-dir)css/
 css-page-target =	$(css-build-path)rio.min.css
 css-page-prereq =	lib/leaflet.css \
-					lib/featherweight.css \
+					lib/featherlight.css \
 					$(css-path)layout.css \
 					$(css-path)layers.css \
 					$(css-path)map.css \
@@ -28,7 +28,7 @@ js-page-prereq =	lib/modernizr.custom.96959.js \
 					lib/leaflet-omnivore.min.js \
 					lib/underscore-min.js \
 					lib/bloodhound.js \
-					lib/featherweight.js \
+					lib/featherlight.js \
 					lib/leaflet-image.js \
 					$(js-path)layers.js \
 					$(js-path)map.js \
