@@ -15,6 +15,7 @@ var serve = serveStatic( 'server/mapnik/cache/' );
 var server = http.createServer( function( req, res )
 {
   var done = finalhandler( req, res );
+  res.setHeader( 'Access-Control-Allow-Origin', '*' );
   serve( req, res, done );
 });
 
