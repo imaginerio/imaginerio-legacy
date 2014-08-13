@@ -99,25 +99,14 @@ function show_visual_details( properties, e )
 
 function show_image()
 {
-	$.fancybox.showLoading();
 	var data = this.layer.feature.properties;
+	
+	console.log( data.description );
 	
 	$.getJSON( "http://www.sscommons.org/openlibrary/secure/imagefpx/" + data.id + "/7729935/5", function( json )
 	{
 		var dim = scale_image( json[ 0 ].width, json[ 0 ].height );
-		$.fancybox.open({
-			href : json[ 0 ].imageServer + json[ 0 ].imageUrl + "&&wid=" + dim.w + "&hei=" + dim.h + "&rgnn=0,0,1,1&cvt=JPEG",
-			type : 'image',
-			title : "<b>" + data.creator + "</b> - " + data.date + "<br />" + data.description,
-			helpers:  {
-		        title : {
-		            type : 'inside'
-		        },
-		        overlay : {
-		            showEarly : false
-		        }
-		    }
-		});
+		$.featherlight( '<img src="' + json[ 0 ].imageServer + json[ 0 ].imageUrl + "&&wid=" + dim.w + "&hei=" + dim.h + "&rgnn=0,0,1,1&cvt=JPEG" + '"><p><b>' + data.creator + '</b> - ' + data.date + '<br />' + data.description + '</p>' );
 	});
 }
 
@@ -128,8 +117,8 @@ function clear_visual()
 
 function scale_image( width, height )
 {
-	var maxWidth = $( window ).width(),
-		maxHeight = $( window ).height(),
+	var maxWidth = $( window ).width() - 100,
+		maxHeight = $( window ).height() - 150,
 		ratio = 0;
 	
 	if( width > maxWidth )

@@ -136,3 +136,11 @@ h1, header{
 	-ms-transform: rotate(-90deg);
 	transform: rotate(-90deg);
 }
+
+.featherlight{
+	z-index: 9999;
+}
+
+p.featherlight-inner{
+	margin-bottom: 0;
+}
