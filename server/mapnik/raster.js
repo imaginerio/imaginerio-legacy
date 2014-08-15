@@ -125,15 +125,11 @@ http.createServer( function( req, res )
 			{
 				if( exists )
 				{
-					fs.readFile( png, function( err, data )
-					{
-						if( err ) return console.log( err );
-						res.writeHead( 200, {
-							'Content-Type' : 'image/png',
-							"Access-Control-Allow-Origin" : "*"
-						});
-						res.end( data );
+					res.writeHead( 302, {
+						"Location": "http://rio-server.axismaps.com:8080" + png.replace( /^cache/, "" ),
+						"Access-Control-Allow-Origin" : "*"
 					});
+					res.end();
 				}
 				else
 				{			
@@ -180,20 +176,21 @@ http.createServer( function( req, res )
 									else
 									{
 										var imagedata = im.encodeSync( 'png' );
-										
-										mkdir( "cache/raster/" + params.raster + "/" + params.z + "/" + params.x );
-										fs.writeFile( png, imagedata, 'binary', function( err )
-										{
-											if( err ) return console.log( err );
-											t = process.hrtime( t );
-											var sec = Math.round( ( t[ 0 ] + ( t[ 1 ] / 1000000000 ) ) * 100 ) / 100;
-											console.log( png + ' saved in ' + sec + ' seconds.' );
-										});
 										res.writeHead( 200, {
 											'Content-Type' : 'image/png',
 											"Access-Control-Allow-Origin" : "*"
 										});
 										res.end( im.encodeSync( 'png' ) );
+										
+										t = process.hrtime( t );
+											var sec = Math.round( ( t[ 0 ] + ( t[ 1 ] / 1000000000 ) ) * 100 ) / 100;
+											console.log( png + ' saved in ' + sec + ' seconds.' );
+										
+										mkdir( "cache/raster/" + params.raster + "/" + params.z + "/" + params.x );
+										fs.writeFile( png, imagedata, 'binary', function( err )
+										{
+											if( err ) return console.log( err );
+										});
 									}
 								});
 							}
