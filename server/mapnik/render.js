@@ -6,7 +6,7 @@ var mapnik = require( 'mapnik' ),
 	_ = require( 'underscore' ),
 	pg = require( 'pg' ),
 	AWS = require( 'aws-sdk' ),
-	conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/rio";
+	conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/rio",
 	hillshade = [ { year : 1960, file : '../../../../../raster/Hillshade_WGS84_1960_2013.tif' }, { year : 1921, file : '../../../../../raster/Hillshade_WGS84_1921_1959.tif' }, { year : 1906, file : '../../../../../raster/Hillshade_WGS84_1906_1920.tif' }, { year : 1500, file : '../../../../../raster/Hillshade_WGS84_1500_1905.tif' } ];
 
 // register plugins
@@ -206,11 +206,15 @@ function render_tile( year, layer, z, x, y, callback )
 												query.on( 'end', function()
 												{
 													console.log( png + " uploaded to S3" );
-													callback( years[ 0 ], combo[ 0 ], zs[ 0 ], xs[ 0 ], ys.shift(), callback );
+													fs.unlink( png, function( err )
+													{
+														if( err ) console.log( err );
+														callback( years[ 0 ], combo[ 0 ], zs[ 0 ], xs[ 0 ], ys.shift(), callback );
+													});
+													
 												});
 											}
-									
-									   });
+										});
 									});
 								}
 							});

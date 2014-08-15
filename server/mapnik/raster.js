@@ -4,7 +4,10 @@ var mapnik = require( 'mapnik' ),
 	http = require( 'http' ),
 	fs = require( 'graceful-fs' ),
 	xml = require( 'libxmljs' ),
-	parseXYZ = require( './utils/tile.js' ).parseXYZ;
+	parseXYZ = require( './utils/tile.js' ).parseXYZ,
+	pg = require( 'pg' ),
+	AWS = require( 'aws-sdk' ),
+	conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/rio";
 
 // register plugins
 if( mapnik.register_default_input_plugins ) mapnik.register_default_input_plugins();
@@ -33,6 +36,14 @@ if( !port )
 	console.log( usage );
 	process.exit( 1 );
 }
+
+//loading AWS config
+AWS.config.loadFromPath( './aws-config.json' );
+var s3 = new AWS.S3();
+
+//postgres connect
+var client = new pg.Client( conn );
+client.connect();
 
 var parseXML = function( req, id, options, callback )
 {
@@ -120,14 +131,21 @@ http.createServer( function( req, res )
         }
         else
         {
-			var png = "cache/raster/" + params.raster + "/" + params.z + "/" + params.x + "/" + params.y + ".png";
-			fs.exists( png, function( exists )
+			var png = "cache/raster/" + params.raster + "/" + params.z + "/" + params.x + "/" + params.y + ".png",
+				exists = false,
+				query = client.query( "SELECT id FROM cache WHERE layer = '" + params.raster + "' AND z = " + params.z + " AND x = " + params.x + " AND y = " + params.y );
+			
+			query.on( 'row', function( result )
+			{
+				exists = result.id;
+			});
+			query.on( 'end', function()
 			{
 				if( exists )
 				{
+					console.log( png + ' exists.' );
 					res.writeHead( 302, {
-						"Location": "http://rio-server.axismaps.com:8080" + png.replace( /^cache/, "" ),
-						"Access-Control-Allow-Origin" : "*"
+						"Location": "http://imagine-rio2.s3-website-us-west-2.amazonaws.com/" + png
 					});
 					res.end();
 				}
@@ -183,13 +201,40 @@ http.createServer( function( req, res )
 										res.end( im.encodeSync( 'png' ) );
 										
 										t = process.hrtime( t );
-											var sec = Math.round( ( t[ 0 ] + ( t[ 1 ] / 1000000000 ) ) * 100 ) / 100;
-											console.log( png + ' saved in ' + sec + ' seconds.' );
+										var sec = Math.round( ( t[ 0 ] + ( t[ 1 ] / 1000000000 ) ) * 100 ) / 100;
+										console.log( png + ' saved in ' + sec + ' seconds.' );
 										
 										mkdir( "cache/raster/" + params.raster + "/" + params.z + "/" + params.x );
 										fs.writeFile( png, imagedata, 'binary', function( err )
 										{
-											if( err ) return console.log( err );
+											if( err )
+											{
+												return console.log( err );
+											}
+											else
+											{
+												var p = { Bucket : 'imagine-rio2', Key : png, Body : imagedata, ACL : 'public-read' };
+												s3.putObject( p, function( err, data )
+												{
+											    	if( err )       
+													{
+														console.log( err );
+													}
+													else
+													{
+														var query = client.query( "INSERT INTO cache ( layer, z, x, y ) VALUES ( '" + params.raster + "', " + params.z + ", " + params.x + ", " + params.y + " )" );
+														query.on( 'end', function()
+														{
+															console.log( png + " uploaded to S3" );
+															fs.unlink( png, function( err )
+															{
+																if( err ) console.log( err );
+															});
+															
+														});
+													}
+												});
+											}
 										});
 									}
 								});
