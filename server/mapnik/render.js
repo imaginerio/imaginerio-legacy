@@ -193,7 +193,7 @@ function render_tile( year, layer, z, x, y, callback )
 										var sec = Math.round( ( t[ 0 ] + ( t[ 1 ] / 1000000000 ) ) * 100 ) / 100;
 										console.log( png + ' saved in ' + sec + ' seconds' );
 										
-										var params = { Bucket : 'imagine-rio2', Key : png, Body : imagedata };
+										var params = { Bucket : 'imagine-rio2', Key : png, Body : imagedata, ACL : 'public-read' };
 										s3.putObject( params, function( err, data )
 										{
 									    	if( err )       
