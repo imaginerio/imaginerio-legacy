@@ -5,6 +5,7 @@ var mapnik = require( 'mapnik' ),
 	xml = require( 'libxmljs' ),
 	_ = require( 'underscore' ),
 	pg = require( 'pg' ),
+	AWS = require( 'aws-sdk' ),
 	conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/rio";
 	hillshade = [ { year : 1960, file : '../../../../../raster/Hillshade_WGS84_1960_2013.tif' }, { year : 1921, file : '../../../../../raster/Hillshade_WGS84_1921_1959.tif' }, { year : 1906, file : '../../../../../raster/Hillshade_WGS84_1906_1920.tif' }, { year : 1500, file : '../../../../../raster/Hillshade_WGS84_1500_1905.tif' } ];
 
@@ -27,6 +28,10 @@ if( !base )
    console.log( usage );
    process.exit( 1 );
 }
+
+//loading AWS config
+AWS.config.loadFromPath( './aws-config.json' );
+var s3 = new AWS.S3();
 
 var parseXML = function( year, layer, options, callback )
 {
@@ -128,8 +133,15 @@ function render_tile( year, layer, z, x, y, callback )
 	if( layer === undefined ) return false;
 	layer = layer.split( "," ).sort().join( "," );
 	
-	var png = "cache/png/" + year + "/" + layer + "/" + z + "/" + x + "/" + y + ".png";
-	fs.exists( png, function( exists )
+	var png = "cache/png/" + year + "/" + layer + "/" + z + "/" + x + "/" + y + ".png",
+		exists = false,
+		query = client.query( "SELECT id FROM cache WHERE year = " + year + " AND layer = '" + layer + "' AND z = " + z + " AND x = " + x + " AND y = " + y );
+		
+	query.on( 'row', function( result )
+	{
+		exists = result.id;
+	});
+	query.on( 'end', function()
 	{
 		if( exists )
 		{
@@ -179,8 +191,26 @@ function render_tile( year, layer, z, x, y, callback )
 										if( err ) return console.log( err );
 										t = process.hrtime( t );
 										var sec = Math.round( ( t[ 0 ] + ( t[ 1 ] / 1000000000 ) ) * 100 ) / 100;
-										console.log( png + ' saved in ' + sec + ' seconds.' );
+										console.log( png + ' saved in ' + sec + ' seconds' );
 										callback( years[ 0 ], combo[ 0 ], zs[ 0 ], xs[ 0 ], ys.shift(), callback );
+										
+										var params = { Bucket : 'imagine-rio2', Key : png, Body : imagedata };
+										s3.putObject( params, function( err, data )
+										{
+									    	if( err )       
+											{
+												console.log( err );
+											}
+											else
+											{
+												var query = client.query( "INSERT INTO cache ( year, layer, z, x, y ) VALUES ( " + year + ", '" + layer + "', " + z + ", " + x + ", " + y + " )" );
+												query.on( 'end', function()
+												{
+													console.log( png + " uploaded to S3" );
+												});
+											}
+									
+									   });
 									});
 								}
 							});
