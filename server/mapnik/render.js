@@ -192,7 +192,6 @@ function render_tile( year, layer, z, x, y, callback )
 										t = process.hrtime( t );
 										var sec = Math.round( ( t[ 0 ] + ( t[ 1 ] / 1000000000 ) ) * 100 ) / 100;
 										console.log( png + ' saved in ' + sec + ' seconds' );
-										callback( years[ 0 ], combo[ 0 ], zs[ 0 ], xs[ 0 ], ys.shift(), callback );
 										
 										var params = { Bucket : 'imagine-rio2', Key : png, Body : imagedata };
 										s3.putObject( params, function( err, data )
@@ -207,6 +206,7 @@ function render_tile( year, layer, z, x, y, callback )
 												query.on( 'end', function()
 												{
 													console.log( png + " uploaded to S3" );
+													callback( years[ 0 ], combo[ 0 ], zs[ 0 ], xs[ 0 ], ys.shift(), callback );
 												});
 											}
 									
