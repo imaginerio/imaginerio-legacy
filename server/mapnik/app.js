@@ -149,11 +149,15 @@ http.createServer( function( req, res )
 			{
 				if( exists )
 				{
-					res.writeHead( 302, {
-						"Location": "http://rio-server.axismaps.com:8080" + png.replace( /^cache/, "" ),
-						"Access-Control-Allow-Origin" : "*"
+					fs.readFile( png, function( err, data )
+					{
+						if( err ) return console.log( err );
+						res.writeHead( 200, {
+							'Content-Type' : 'image/png',
+							"Access-Control-Allow-Origin" : "*"
+						});
+						res.end( data );
 					});
-					res.end();
 				}
 				else
 				{			
