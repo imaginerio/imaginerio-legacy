@@ -146,7 +146,7 @@ function render_tile( year, layer, z, x, y, callback )
 		if( exists )
 		{
 			console.log( png + ' exists.' );
-			callback( years[ 0 ], combo[ 0 ], zs[ 0 ], xs[ 0 ], ys.shift(), callback );
+			return callback( years[ 0 ], combo[ 0 ], zs[ 0 ], xs[ 0 ], ys.shift(), callback );
 		}
 		else
 		{
@@ -209,7 +209,7 @@ function render_tile( year, layer, z, x, y, callback )
 													fs.unlink( png, function( err )
 													{
 														if( err ) console.log( err );
-														callback( years[ 0 ], combo[ 0 ], zs[ 0 ], xs[ 0 ], ys.shift(), callback );
+														return callback( years[ 0 ], combo[ 0 ], zs[ 0 ], xs[ 0 ], ys.shift(), callback );
 													});
 													
 												});
