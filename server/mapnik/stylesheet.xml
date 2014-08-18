@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE Map[]>
-<Map srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over" background-color="#b9cee0" buffer-size="1000" maximum-extent="-20037508.34,-20037508.34,20037508.34,20037508.34">
+<Map srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over" buffer-size="1000" maximum-extent="-20037508.34,-20037508.34,20037508.34,20037508.34">
 
 <Parameters>
   <Parameter name="bounds">-44.04944719,-23.10243406,-42.65988214,-22.63003187</Parameter>
@@ -18,47 +18,6 @@
   <Parameter name="tilejson"><![CDATA[2.0.0]]></Parameter>
   <Parameter name="scheme"><![CDATA[xyz]]></Parameter>
 </Parameters>
-
-
-<Style name="land" filter-mode="first">
-  <Rule>
-    <PolygonSymbolizer fill="#e7ded6" />
-  </Rule>
-</Style>
-<Style name="land-outline" filter-mode="first">
-  <Rule>
-    <LineSymbolizer stroke="#a2aabc" stroke-width="2" stroke-linejoin="round" />
-  </Rule>
-</Style>
-<Style name="land-nearshore" filter-mode="first" image-filters="agg-stack-blur(50,50)">
-  <Rule>
-    <LineSymbolizer stroke="#8fb0cd" stroke-opacity="0.75" stroke-width="50" stroke-linejoin="round" stroke-linecap="round" />
-  </Rule>
-</Style>
-<Style name="land-offshore" filter-mode="first" image-filters="agg-stack-blur(50,50)">
-  <Rule>
-    <LineSymbolizer stroke="#a4bfd7" stroke-opacity="0.75" stroke-width="150" stroke-linejoin="round" stroke-linecap="round" />
-  </Rule>
-</Style>
-<Layer name="land"
-  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>land-offshore</StyleName>
-    <StyleName>land-nearshore</StyleName>
-    <StyleName>land-outline</StyleName>
-    <StyleName>land</StyleName>
-    <Datasource>
-       <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'LandPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
-       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
-       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
-       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
-       <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
-       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
-       <Parameter name="host"><![CDATA[localhost]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
-       <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
-    </Datasource>
-  </Layer>
 
 <Style name="cityblocks" filter-mode="first">
   <Rule>
@@ -202,64 +161,6 @@
     </Datasource>
   </Layer>
 
-<Style name="inlandwater-outline" filter-mode="first">
-  <Rule>
-    <Filter>([featuretyp] = 'Pond Or Reservoir')</Filter>
-    <LineSymbolizer stroke="#8fb0cd" stroke-width="1" stroke-linejoin="round" />
-  </Rule>
-  <Rule>
-    <Filter>([featuretyp] = 'Lagoon')</Filter>
-    <LineSymbolizer stroke="#8fb0cd" stroke-width="1" stroke-linejoin="round" />
-  </Rule>
-</Style>
-<Style name="inlandwater" filter-mode="first">
-  <Rule>
-    <Filter>([featuretyp] = 'Pond Or Reservoir')</Filter>
-    <PolygonSymbolizer fill="#b9cee0" />
-  </Rule>
-  <Rule>
-    <Filter>([featuretyp] = 'Lagoon')</Filter>
-    <PolygonSymbolizer fill="#b9cee0" />
-  </Rule>
-  <Rule>
-    <Filter>([featuretyp] = 'Marsh')</Filter>
-    <PolygonSymbolizer fill="#accdc8" fill-opacity="0.6" />
-    <PolygonPatternSymbolizer file="../../../images/ripple2.png" />
-  </Rule>
-</Style>
-<Layer name="inlandwater"
-  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>inlandwater</StyleName>
-    <StyleName>inlandwater-outline</StyleName>
-    <Datasource>
-       <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom, featuretyp FROM basepoly WHERE layer = 'InlandWatersPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
-       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
-       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
-       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
-       <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
-       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
-       <Parameter name="host"><![CDATA[localhost]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
-       <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
-    </Datasource>
-  </Layer>
-
-<Style name="hillshade_2013" filter-mode="first" comp-op="overlay">
-  <Rule>
-    <RasterSymbolizer opacity="0.5" />
-  </Rule>
-</Style>
-<Layer name="hillshade_2013"
-  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>hillshade_2013</StyleName>
-    <Datasource>
-       <Parameter name="file"><![CDATA[hillshade_2013.tif]]></Parameter>
-       <Parameter name="type"><![CDATA[gdal]]></Parameter>
-       <Parameter name="shared">true</Parameter>
-    </Datasource>
-  </Layer>
-
 <Style name="riversstreams" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
@@ -393,29 +294,6 @@
        <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
     </Datasource>
   </Layer>
-
-<Style name="ocean" filter-mode="first">
-  <Rule>
-    <PolygonSymbolizer fill="#b9cee0" fill-opacity="0.25" />
-  </Rule>
-</Style>
-<Layer name="ocean"
-  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>ocean</StyleName>
-    <Datasource>
-       <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'OceanPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
-       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
-       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
-       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
-       <Parameter name="extent"><![CDATA[-44.04944719,-23.10243406,-42.65988214,-22.63003187]]></Parameter>
-       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
-       <Parameter name="host"><![CDATA[localhost]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
-       <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
-    </Datasource>
-  </Layer>
-
 <Style name="roads-high/inline" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
