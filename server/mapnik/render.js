@@ -21,14 +21,6 @@ var maps = mappool.create_pool( 5 );
 
 var usage = 'usage: app.js <stylesheet> <port>\ndemo:  app.js ../../stylesheet.xml 8000';
 
-var base = process.argv[ 2 ];
-
-if( !base )
-{
-   console.log( usage );
-   process.exit( 1 );
-}
-
 //loading AWS config
 AWS.config.loadFromPath( './aws-config.json' );
 var s3 = new AWS.S3();
@@ -44,7 +36,7 @@ var parseXML = function( year, layer, options, callback )
 		}
 		else
 		{
-			fs.readFile( base, 'utf8', function( err, data )
+			fs.readFile( layer == "base" ? "base.xml" : "stylesheet.xml", 'utf8', function( err, data )
 			{
 				if( err ) return console.log( err );
 				
@@ -305,7 +297,7 @@ function get_layers( year )
 	{
 		combo = combinations( _.intersection( layers, big ) );
 		combo = _.map( combo, function( val ){ return val.replace( /^,/gi, ""); } );
-		combo.push( "all" );
+		combo.unshift( "base", "all" );
 		console.log( combo );
 		
 		next_tile( years[ 0 ], combo[ 0 ], zs[ 0 ], xs[ 0 ], ys.shift(), next_tile );
@@ -365,7 +357,7 @@ query.on( 'row', function( result )
 	
 query.on( 'end', function()
 {
-	//years.reverse();
+	years.reverse();
 	console.log( years );
 	
 	get_layers( years[ 0 ] );
