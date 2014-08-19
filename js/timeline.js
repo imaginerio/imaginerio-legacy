@@ -71,6 +71,7 @@ function update_year( y )
 	year = y;
 	$( "#year span, #puck span" ).html( year );
 	
+	load_base();
 	load_tiles();
 	build_layers();
 	clear_highlight();

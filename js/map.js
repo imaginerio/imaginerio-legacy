@@ -1,5 +1,6 @@
 var map,
 	tiles = {},
+	base;
 	visual = {},
 	rasters = {},
 	shown = {},
@@ -26,6 +27,13 @@ function init_map()
 		$( "#export" ).hide();
 	}
 	
+}
+
+function load_base()
+{
+	if( map.hasLayer( base ) ) map.removeLayer( base );
+	
+	base = L.tileLayer( tileserver + 'tiles/' + year + '/{z}/{x}/{y}.png?layer=base'  ).addTo( map );
 }
 
 function load_tiles()

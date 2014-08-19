@@ -22,7 +22,7 @@
 <Style name="cityblocks" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <PolygonSymbolizer fill="#ffffff" fill-opacity="0.2" />
+    <PolygonSymbolizer fill="#ffffff" fill-opacity="0.4" />
   </Rule>
 </Style>
 <Layer name="cityblocks"
@@ -45,7 +45,7 @@
 <Style name="lotslanduse" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <PolygonSymbolizer fill="rgba(237, 207, 174, 0.6)" />
+    <PolygonSymbolizer fill="rgba(237, 207, 174, 0.5)" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
@@ -86,7 +86,7 @@
 </Style>
 <Style name="cemeteries" filter-mode="first">
   <Rule>
-    <PolygonSymbolizer fill="#ccd2aa" />
+    <PolygonSymbolizer fill="#ccd2aa" fill-opacity="0.6" />
   </Rule>
 </Style>
 <Layer name="cemeteries"
@@ -109,38 +109,38 @@
 
 <Style name="squares-outline" filter-mode="first">
   <Rule>
-    <Filter>([featuretyp] = 'Park')</Filter>
-    <LineSymbolizer stroke="#cbb7a6" stroke-width="1" stroke-opacity="0.5" stroke-linejoin="round" />
+    <Filter>([featuretyp] = 'Garden')</Filter>
+    <LineSymbolizer stroke="#b8c089" stroke-width="1" stroke-opacity="0.5" stroke-linejoin="round" />
   </Rule>
   <Rule>
-    <Filter>([featuretyp] = 'Garden')</Filter>
-    <LineSymbolizer stroke="#cbb7a6" stroke-width="1" stroke-opacity="0.5" stroke-linejoin="round" />
+    <Filter>([featuretyp] = 'Park')</Filter>
+    <LineSymbolizer stroke="#b8c089" stroke-width="1" stroke-opacity="0.5" stroke-linejoin="round" />
   </Rule>
   <Rule>
     <Filter>([featuretyp] = 'Square')</Filter>
-    <LineSymbolizer stroke="#f9f2a5" stroke-width="1" stroke-opacity="0.5" stroke-linejoin="round" />
+    <LineSymbolizer stroke="#d4c4b6" stroke-width="1" stroke-opacity="0.6" stroke-linejoin="round" />
   </Rule>
   <Rule>
     <Filter>([featuretyp] = 'Plaza')</Filter>
-    <LineSymbolizer stroke="#f9f2a5" stroke-width="1" stroke-opacity="0.5" stroke-linejoin="round" />
+    <LineSymbolizer stroke="#d4c4b6" stroke-width="1" stroke-opacity="0.6" stroke-linejoin="round" />
   </Rule>
 </Style>
 <Style name="squares" filter-mode="first">
   <Rule>
-    <Filter>([featuretyp] = 'Park')</Filter>
-    <PolygonSymbolizer fill="#ccd2aa" />
-  </Rule>
-  <Rule>
     <Filter>([featuretyp] = 'Garden')</Filter>
-    <PolygonSymbolizer fill="#ccd2aa" />
+    <PolygonSymbolizer fill="#ccd2aa" fill-opacity="0.6" />
   </Rule>
   <Rule>
-    <Filter>([featuretyp] = 'Plaza')</Filter>
-    <PolygonSymbolizer fill="#fcf9d5" />
+    <Filter>([featuretyp] = 'Park')</Filter>
+    <PolygonSymbolizer fill="#ccd2aa" fill-opacity="0.6" />
   </Rule>
   <Rule>
     <Filter>([featuretyp] = 'Square')</Filter>
-    <PolygonSymbolizer fill="#fcf9d5" />
+    <PolygonSymbolizer fill="#fcf9d5" fill-opacity="0.8" />
+  </Rule>
+  <Rule>
+    <Filter>([featuretyp] = 'Plaza')</Filter>
+    <PolygonSymbolizer fill="#fcf9d5" fill-opacity="0.8" />
   </Rule>
 </Style>
 <Layer name="squares"
@@ -161,6 +161,48 @@
     </Datasource>
   </Layer>
 
+<Style name="inlandwater-outline" filter-mode="first">
+  <Rule>
+    <Filter>([featuretyp] = 'Lagoon')</Filter>
+    <LineSymbolizer stroke="#8fb0cd" stroke-width="1" stroke-linejoin="round" />
+  </Rule>
+  <Rule>
+    <Filter>([featuretyp] = 'Pond Or Reservoir')</Filter>
+    <LineSymbolizer stroke="#8fb0cd" stroke-width="1" stroke-linejoin="round" />
+  </Rule>
+</Style>
+<Style name="inlandwater" filter-mode="first">
+  <Rule>
+    <Filter>([featuretyp] = 'Lagoon')</Filter>
+    <PolygonSymbolizer fill="#b9cee0" />
+  </Rule>
+  <Rule>
+    <Filter>([featuretyp] = 'Pond Or Reservoir')</Filter>
+    <PolygonSymbolizer fill="#b9cee0" />
+  </Rule>
+  <Rule>
+    <Filter>([featuretyp] = 'Marsh')</Filter>
+    <PolygonSymbolizer fill="#accdc8" fill-opacity="0.6" />
+    <PolygonPatternSymbolizer file="../../../images/ripple2.png" />
+  </Rule>
+</Style>
+<Layer name="inlandwater"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>inlandwater</StyleName>
+    <StyleName>inlandwater-outline</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom, featuretyp FROM basepoly WHERE layer = 'InlandWatersPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
+       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
+       <Parameter name="host"><![CDATA[localhost]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
+    </Datasource>
+  </Layer>
 <Style name="riversstreams" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>

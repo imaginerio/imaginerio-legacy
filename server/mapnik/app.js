@@ -21,17 +21,9 @@ var TMS_SCHEME = false;
 // create a pool of 5 maps to manage concurrency under load
 var maps = mappool.create_pool( 5 );
 
-var usage = 'usage: app.js <stylesheet> <port>\ndemo:  app.js ../../stylesheet.xml 8000';
+var usage = 'usage: app.js <port>\ndemo:  app.js ../../stylesheet.xml 8000';
 
-var base = process.argv[ 2 ];
-
-if( !base )
-{
-   console.log( usage );
-   process.exit( 1 );
-}
-
-var port = process.argv[ 3 ];
+var port = process.argv[ 2 ];
 
 if( !port )
 {
@@ -58,7 +50,7 @@ var parseXML = function( req, year, layer, options, callback )
 		}
 		else
 		{
-			fs.readFile( base, 'utf8', function( err, data )
+			fs.readFile( layer == "base" ? "base.xml" : "stylesheet.xml", 'utf8', function( err, data )
 			{
 				if( err ) return console.log( err );
 				

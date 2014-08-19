@@ -59,50 +59,7 @@
        <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
     </Datasource>
   </Layer>
-<Style name="inlandwater-outline" filter-mode="first">
-  <Rule>
-    <Filter>([featuretyp] = 'Pond Or Reservoir')</Filter>
-    <LineSymbolizer stroke="#8fb0cd" stroke-width="1" stroke-linejoin="round" />
-  </Rule>
-  <Rule>
-    <Filter>([featuretyp] = 'Lagoon')</Filter>
-    <LineSymbolizer stroke="#8fb0cd" stroke-width="1" stroke-linejoin="round" />
-  </Rule>
-</Style>
-<Style name="inlandwater" filter-mode="first">
-  <Rule>
-    <Filter>([featuretyp] = 'Pond Or Reservoir')</Filter>
-    <PolygonSymbolizer fill="#b9cee0" />
-  </Rule>
-  <Rule>
-    <Filter>([featuretyp] = 'Lagoon')</Filter>
-    <PolygonSymbolizer fill="#b9cee0" />
-  </Rule>
-  <Rule>
-    <Filter>([featuretyp] = 'Marsh')</Filter>
-    <PolygonSymbolizer fill="#accdc8" fill-opacity="0.6" />
-    <PolygonPatternSymbolizer file="../../../images/ripple2.png" />
-  </Rule>
-</Style>
-<Layer name="inlandwater"
-  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>inlandwater</StyleName>
-    <StyleName>inlandwater-outline</StyleName>
-    <Datasource>
-       <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom, featuretyp FROM basepoly WHERE layer = 'InlandWatersPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
-       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
-       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
-       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
-       <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
-       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
-       <Parameter name="host"><![CDATA[localhost]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
-       <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
-    </Datasource>
-  </Layer>
-
-<Style name="hillshade_2013" filter-mode="first" comp-op="overlay">
+ <Style name="hillshade_2013" filter-mode="first" comp-op="overlay">
   <Rule>
     <RasterSymbolizer opacity="0.5" />
   </Rule>
