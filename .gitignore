@@ -4,3 +4,4 @@ server/mapnik/cache/*
 raster/*
 Build/*
 server/mapnik/aws-config.json
+*.pem
