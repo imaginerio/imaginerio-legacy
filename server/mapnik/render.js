@@ -286,7 +286,7 @@ function next_tile( year, layer, z, x, y, callback )
 function get_layers( year )
 {
 	var layers = [],
-		big = [ 'buildings', 'lotslanduse', 'roads_labels,roads', 'neighborhoods_labels,neighborhoods' ],
+		//big = [ 'buildings', 'lotslanduse', 'roads_labels,roads', 'neighborhoods_labels,neighborhoods' ],
 		query = client.query( "SELECT id FROM basepoly INNER JOIN legend ON basepoly.layer = legend.layer WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " AND ID IS NOT NULL GROUP BY id UNION SELECT id FROM baseline INNER JOIN legend ON baseline.layer = legend.layer WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " AND ID IS NOT NULL GROUP BY id" );
 	
 	query.on( 'row', function( result )
@@ -295,7 +295,7 @@ function get_layers( year )
 	});
 	query.on( 'end', function()
 	{
-		combo = combinations( _.intersection( layers, big ) );
+		combo = combinations( layers );
 		combo = _.map( combo, function( val ){ return val.replace( /^,/gi, ""); } );
 		combo.unshift( "base", "all" );
 		console.log( combo );
