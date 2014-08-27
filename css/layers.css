@@ -139,6 +139,10 @@
 	width: 140px;
 }
 
+#layers label input.raster + span{
+	width: 200px;
+}
+
 #layers input{
 	margin-right: 10px;
 	height: 35px;

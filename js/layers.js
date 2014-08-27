@@ -94,7 +94,7 @@ function build_layers()
 	function build_visual( r, div )
 	{
 		var label = $( document.createElement( 'label' ) )
-						.html( r.description )
+						.html( '<span>' + r.description + '</span>' )
 						.appendTo( div )
 						.prepend(
 							$( document.createElement( 'input' ) )
