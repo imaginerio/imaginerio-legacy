@@ -100,7 +100,11 @@ function draw( id, route, el )
 
 function load_raster( id )
 {
-	if( map.hasLayer( shown.raster ) ) map.removeLayer( shown.raster );
+	if( map.hasLayer( shown.raster ) )
+	{
+		map.removeLayer( shown.raster );
+		shown.tiles.setOpacity( 1 );
+	}
 	if( id !== false )
 	{
 		if( rasters[ id ] )
@@ -109,8 +113,11 @@ function load_raster( id )
 		}
 		else
 		{
-			rasters[ id ] = L.tileLayer( rasterserver + 'tiles/?year=' + year + '&z={z}&x={x}&y={y}&raster=' + id ).addTo( map ).setOpacity( 0.35 );
+			rasters[ id ] = L.tileLayer( rasterserver + 'tiles/?year=' + year + '&z={z}&x={x}&y={y}&raster=' + id ).addTo( map ).setOpacity( 0.75 );
+			rasters[ id ].bringToBack();
+			base.bringToBack();
 		}
+		shown.tiles.setOpacity( 0.75 );
 		shown.raster = rasters[ id ];
 	}
 }
