@@ -17,6 +17,12 @@ function init_search()
 	
 	search.initialize();
 	
+	$( "#search" ).submit( function( e )
+	{
+		e.preventDefault();
+		return false;
+	});
+	
 	$( "#search input").keyup( function()
 	{
 		$( "#search #clear" ).show();
