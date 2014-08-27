@@ -133,7 +133,7 @@ http.createServer( function( req, res )
         {
 			var png = "cache/raster/" + params.raster + "/" + params.z + "/" + params.x + "/" + params.y + ".png",
 				exists = false,
-				query = client.query( "SELECT id FROM cache WHERE layer = '" + params.raster + "' AND z = " + params.z + " AND x = " + params.x + " AND y = " + params.y );
+				query = client.query( "SELECT id FROM cache WHERE year IS NULL AND layer = '" + params.raster + "' AND z = " + params.z + " AND x = " + params.x + " AND y = " + params.y );
 			
 			query.on( 'row', function( result )
 			{
