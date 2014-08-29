@@ -75,11 +75,14 @@ function build_layers()
 		});
 		$.getJSON( server + "/raster/" + year, function( json )
 		{
-			var folder = build_folder( names.VisualDocuments );
-			_.each( json, function( val )
+			if( json.length > 0 )
 			{
-				build_visual( val, folder );
-			});
+				var folder = build_folder( names.VisualDocuments );
+				_.each( json, function( val )
+				{
+					build_visual( val, folder );
+				});
+			}
 		});
 	});
 	
