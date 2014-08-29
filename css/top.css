@@ -154,7 +154,7 @@ nav{
 #year div{
 	font-size: 24px;
 	display: inline-block;
-	margin: 0 0 0 10px;
+	margin: 0;
 	position: relative;
 	bottom: 3px;
 	cursor: pointer;
@@ -162,7 +162,6 @@ nav{
 }
 
 #year #prev{
-	margin: 0 10px 0 0;
 	bottom: 0;
 	-moz-transform: rotate(180deg);
 	-webkit-transform: rotate(180deg);
