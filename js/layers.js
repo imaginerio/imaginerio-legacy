@@ -129,7 +129,13 @@ function build_layers()
 				s = Math.max( 120 / h, 185 / w );
 				
 			label.after(
-				$( document.createElement( 'img' ) ).attr( "src", json[ 0 ].imageServer + json[ 0 ].imageUrl + "&&wid=" + Math.round( w * s )  + "&hei=" + Math.round( h * s ) + "&rgnn=0,0,1,1&cvt=JPEG" )
+				$( document.createElement( 'img' ) )
+					.attr( "src", json[ 0 ].imageServer + json[ 0 ].imageUrl + "&&wid=" + Math.round( w * s )  + "&hei=" + Math.round( h * s ) + "&rgnn=0,0,1,1&cvt=JPEG" )
+					.data( r )
+					.click( function()
+					{
+						show_image( $( this ).data() );
+					})
 			);
 		});
 	}

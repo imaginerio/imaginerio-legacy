@@ -90,7 +90,7 @@ exports.raster = function( req, res )
 	client.connect();
 
 	var year = req.params.year,
-		q = "SELECT imageid AS id, 'SSID' || ssid AS file, imageviewd AS description FROM visualpoly WHERE earliestda <= " + year + " AND latestdate >= " + year + " AND layer = 'MapsAndPlansPoly'";
+		q = "SELECT imageid AS id, 'SSID' || ssid AS file, earliestda || ' - ' || latestdate AS date, creator, imageviewd AS description FROM visualpoly WHERE earliestda <= " + year + " AND latestdate >= " + year + " AND layer = 'MapsAndPlansPoly'";
 	
 	var query = client.query( q ),
 		arr = [];

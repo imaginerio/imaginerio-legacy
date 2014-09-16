@@ -48,7 +48,10 @@ function draw_visual( layer )
 				});
 				$( ".visual_probe" ).remove();
 			});
-			l.on( "click", show_image );
+			l.on( "click", function()
+			{
+				show_image( this.layer.feature.properties );
+			});
 		}
 		else
 		{
@@ -97,10 +100,8 @@ function show_visual_details( properties, e )
 	});
 }
 
-function show_image()
-{
-	var data = this.layer.feature.properties;
-	
+function show_image( data )
+{	
 	console.log( data.description );
 	
 	$.getJSON( "http://www.sscommons.org/openlibrary/secure/imagefpx/" + data.id + "/7729935/5", function( json )
