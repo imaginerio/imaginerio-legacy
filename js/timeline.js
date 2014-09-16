@@ -43,15 +43,15 @@ function init_timeline()
 	{
 		if( $( this ).attr( "id" ) == "next" )
 		{
-			var y = _.find( years, function( y ){ return y >= year + 10; } );
+			var y = _.find( visual_years, function( y ){ return y > year; } );
 			y = y ? y : max;
 		}
 		else
 		{
-			years.reverse();
-			var y = _.find( years, function( y ){ return y <= year - 10; } );
+			visual_years.reverse();
+			var y = _.find( visual_years, function( y ){ return y < year; } );
 			y = y ? y : min;
-			years.reverse();
+			visual_years.reverse();
 		}
 		if( y !== undefined )
 		{
