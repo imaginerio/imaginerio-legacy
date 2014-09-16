@@ -152,17 +152,20 @@ nav{
 }
 
 #year div{
-	font-size: 24px;
+	height: 16px;
+	width: 12px;
+	background: url(../img/arrow_right.png) no-repeat center bottom;
 	display: inline-block;
 	margin: 0;
 	position: relative;
 	bottom: 3px;
+	left: 5px;
 	cursor: pointer;
 	color: #aaa;
 }
 
 #year #prev{
-	bottom: 0;
+	left: -5px;
 	-moz-transform: rotate(180deg);
 	-webkit-transform: rotate(180deg);
 	-o-transform: rotate(180deg);
@@ -171,7 +174,7 @@ nav{
 }
 
 #year div:hover{
-	color: white;
+	background-position-y: top;
 }
 
 #timeline{
