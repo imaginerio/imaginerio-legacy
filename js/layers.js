@@ -48,8 +48,25 @@ function build_layers()
 	{
 		if( json.length > 0 )
 		{
-			var folder = build_folder( names.VisualDocuments );
-			_.each( json, function( val )
+			var folder = build_folder( names.VisualDocuments ),
+				raster = _.filter( json, function( val ){ return val.layer == "MapsAndPlansPoly" } );
+				
+			if( raster.length < json.length )
+			{
+				var label = add_check( "layer visual", "ImageViewshedsPoly", "viewsheds", function()
+				{
+					if( $( ".visual" ).children( "input" ).is( ":checked" ) )
+					{
+						map.addLayer( visual[ year ] );
+					}
+					else
+					{
+						if( map.hasLayer( visual[ year ] ) ) map.removeLayer( visual[ year ] );
+					}
+				}).appendTo( folder );
+				label.append( add_swatch( { shape : "../viewpoint.png" } ) );
+			}
+			_.each( raster, function( val )
 			{
 				build_visual( val, folder );
 			});
@@ -63,10 +80,10 @@ function build_layers()
 								
 				_.each( val, function( val, key )
 				{
-					add_check( "geodb", key, folder );
+					add_check( "geodb", key, folder, switch_layers );
 					_.each( val, function( val, key )
 					{
-						var label = add_check( "layer", key, val.id ).appendTo( folder );
+						var label = add_check( "layer", key, val.id, switch_layers ).appendTo( folder );
 						delete val.id;
 						
 						if( val.style ) label.append( add_swatch( val.style ) );
@@ -99,6 +116,7 @@ function build_layers()
 	{
 		var label = $( document.createElement( 'label' ) )
 						.html( '<span>' + r.description + '</span>' )
+						.addClass( "visual" )
 						.appendTo( div )
 						.prepend(
 							$( document.createElement( 'input' ) )
@@ -140,7 +158,7 @@ function build_layers()
 		});
 	}
 	
-	function add_check( cclass, html, id )
+	function add_check( cclass, html, id, on_click )
 	{
 		var label = $( document.createElement( 'label' ) )
 						.addClass( cclass )
@@ -155,7 +173,7 @@ function build_layers()
 						"value" : id,
 						"checked" : !_.contains( off, id )
 					})
-					.click( switch_layers )
+					.click( on_click )
 			);
 		}
 		
@@ -167,7 +185,7 @@ function build_layers()
 		off = [];
 		$( ".feature.off" ).removeClass( "off" );
 		
-		$( "#layers input:not( :checked )" ).each( function()
+		$( "#layers label:not( .visual ) input:not( :checked )" ).each( function()
 		{
 			off = off.concat( $( this ).val().split( "," ) );
 			$( this ).parent().nextUntil( "label.layer" ).addClass( "off" );
