@@ -145,7 +145,7 @@ http.createServer( function( req, res )
 				{
 					console.log( png + ' exists.' );
 					res.writeHead( 302, {
-						"Location": "http://imagine-rio.s3-website-us-west-2.amazonaws.com/" + png
+						"Location": "http://d3unofsdy0zxgc.cloudfront.net/" + png
 					});
 					res.end();
 				}
