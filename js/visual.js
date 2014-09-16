@@ -35,7 +35,7 @@ function draw_visual( layer )
 				this.layer.bringToFront();
 				_.each( this.layer.getLayers(), function( l )
 				{
-					if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0.65 } );
+					if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0.2 } );
 				});
 	
 				show_visual_details( this.layer.feature.properties, map.latLngToContainerPoint( e.latlng ) );
@@ -53,7 +53,7 @@ function draw_visual( layer )
 		else
 		{
 			l.setStyle({
-				fillColor : "#FFFFFF",
+				fillColor : "#000000",
 				fillOpacity : 0,
 				opacity : 0
 			});
