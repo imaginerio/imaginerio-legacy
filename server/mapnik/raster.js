@@ -145,7 +145,7 @@ http.createServer( function( req, res )
 				{
 					console.log( png + ' exists.' );
 					res.writeHead( 302, {
-						"Location": "http://imagine-rio2.s3-website-us-west-2.amazonaws.com/" + png
+						"Location": "http://imagine-rio.s3-website-us-west-2.amazonaws.com/" + png
 					});
 					res.end();
 				}
@@ -213,7 +213,7 @@ http.createServer( function( req, res )
 											}
 											else
 											{
-												var p = { Bucket : 'imagine-rio2', Key : png, Body : imagedata, ACL : 'public-read' };
+												var p = { Bucket : 'imagine-rio', Key : png, Body : imagedata, ACL : 'public-read' };
 												s3.putObject( p, function( err, data )
 												{
 											    	if( err )       

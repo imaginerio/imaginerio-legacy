@@ -185,7 +185,7 @@ function render_tile( year, layer, z, x, y, callback )
 										var sec = Math.round( ( t[ 0 ] + ( t[ 1 ] / 1000000000 ) ) * 100 ) / 100;
 										console.log( png + ' saved in ' + sec + ' seconds' );
 										
-										var params = { Bucket : 'imagine-rio2', Key : png, Body : imagedata, ACL : 'public-read' };
+										var params = { Bucket : 'imagine-rio', Key : png, Body : imagedata, ACL : 'public-read' };
 										s3.putObject( params, function( err, data )
 										{
 									    	if( err )       
@@ -339,7 +339,7 @@ var years = [],
 	maxy = -23.0,
 	miny = -22.8,
 	minz = 14,
-	maxz = 18,
+	maxz = 17,
 	min = tile_coords( miny, minx, minz ),
 	max = tile_coords( maxy, maxx, minz ),
 	xs = _.range( min.x, max.x + 1 ),
