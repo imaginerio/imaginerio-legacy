@@ -42,47 +42,48 @@ function init_layers()
 
 function build_layers()
 {
-	$.getJSON( server + "/layers/" + year, function( json )
+	$( "#list" ).empty();
+	
+	$.getJSON( server + "/raster/" + year, function( json )
 	{
-		$( "#list" ).empty();
-		
-		_.each( json, function( val, key )
+		if( json.length > 0 )
 		{
-			var folder = build_folder( names[ key ] );
-							
-			_.each( val, function( val, key )
+			var folder = build_folder( names.VisualDocuments );
+			_.each( json, function( val )
 			{
-				add_check( "geodb", key, folder );
+				build_visual( val, folder );
+			});
+		}
+		
+		$.getJSON( server + "/layers/" + year, function( json )
+		{	
+			_.each( json, function( val, key )
+			{
+				var folder = build_folder( names[ key ] );
+								
 				_.each( val, function( val, key )
 				{
-					var label = add_check( "layer", key, val.id ).appendTo( folder );
-					delete val.id;
-					
-					if( val.style ) label.append( add_swatch( val.style ) );
-					if( val.features )
+					add_check( "geodb", key, folder );
+					_.each( val, function( val, key )
 					{
-						_.each( val.features, function( name )
+						var label = add_check( "layer", key, val.id ).appendTo( folder );
+						delete val.id;
+						
+						if( val.style ) label.append( add_swatch( val.style ) );
+						if( val.features )
 						{
-							$( document.createElement( 'div' ) )
-								.addClass( "feature" )
-								.attr( "id", name )
-								.html( names[ name ] )
-								.appendTo( folder );
-						});
-					}
+							_.each( val.features, function( name )
+							{
+								$( document.createElement( 'div' ) )
+									.addClass( "feature" )
+									.attr( "id", name )
+									.html( names[ name ] )
+									.appendTo( folder );
+							});
+						}
+					});
 				});
 			});
-		});
-		$.getJSON( server + "/raster/" + year, function( json )
-		{
-			if( json.length > 0 )
-			{
-				var folder = build_folder( names.VisualDocuments );
-				_.each( json, function( val )
-				{
-					build_visual( val, folder );
-				});
-			}
 		});
 	});
 	
