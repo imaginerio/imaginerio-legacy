@@ -75,22 +75,7 @@ function show_visual_details( properties, e )
 	$.ajax( "http://www.sscommons.org/openlibrary/secure/metadata/" + properties.id,{
 		dataType : "json",
 		success : function( json )
-		{					
-			var data = {};
-			_.each( 
-				_.filter( 
-					json.metaData,
-					function( i )
-					{
-						return _.contains( [ "Title", "Date", "Description" ], i.fieldName );
-					}
-				),
-				function( j )
-				{
-					data[ j.fieldName ] = j.fieldValue; 
-				}
-			);
-			
+		{
 			probe.css({
 				"background-image" : "url( http://www.sscommons.org/" + json.imageUrl + " )",
 				"top" : e.y > $( window ).height() / 2 ? e.y - 20 : e.y + probe.outerHeight() + 20,
@@ -102,12 +87,17 @@ function show_visual_details( properties, e )
 
 function show_image( data )
 {	
-	console.log( data.description );
-	
 	$.getJSON( "http://www.sscommons.org/openlibrary/secure/imagefpx/" + data.id + "/7729935/5", function( json )
 	{
-		var dim = scale_image( json[ 0 ].width, json[ 0 ].height );
-		$.featherlight( '<img src="' + json[ 0 ].imageServer + json[ 0 ].imageUrl + "&&wid=" + dim.w + "&hei=" + dim.h + "&rgnn=0,0,1,1&cvt=JPEG" + '"><p><b>' + data.creator + '</b> - ' + data.date + '<br />' + data.description + '</p>' );
+		$.ajax( "http://www.sscommons.org/openlibrary/secure/metadata/" + data.id + "?_method=FpHtml",{
+			dataType : "html",
+			success : function( html )
+			{
+				var href = $( html ).find( "td" ).last().text().replace( /\s/gm, "" );
+				var dim = scale_image( json[ 0 ].width, json[ 0 ].height );
+				$.featherlight( '<img src="' + json[ 0 ].imageServer + json[ 0 ].imageUrl + "&&wid=" + dim.w + "&hei=" + dim.h + "&rgnn=0,0,1,1&cvt=JPEG" + '"><p><b>' + data.creator + '</b> - ' + data.date + '<br />' + data.description + '</p><p><a href="http://www.sscommons.org/openlibrary/' + href + '" target="_blank">View image on SharedShelf Commons</a></p>', { afterOpen : function(){ $( ".featherlight-content" ).width( dim.w ); } } );
+			}
+		});
 	});
 }
 
@@ -119,7 +109,7 @@ function clear_visual()
 function scale_image( width, height )
 {
 	var maxWidth = Math.floor( $( window ).width() * 0.9 ) - 100,
-		maxHeight = $( window ).height() - 150,
+		maxHeight = $( window ).height() - 250,
 		ratio = 0;
 	
 	if( width > maxWidth )
