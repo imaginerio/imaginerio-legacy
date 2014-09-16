@@ -19,6 +19,9 @@ header h1{
 header, nav{
 	position: relative;
 	z-index: 2001;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 }
 
 #export{
@@ -96,9 +99,6 @@ nav{
 #year, #timeline{
 	height: 60px;
 	line-height: 60px;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
 }
 
 #plans{
@@ -119,9 +119,6 @@ nav{
 	box-shadow:0px 0px 2px 1px rgba(0,0,0,0.15);
 	-ms-filter:"progid:DXImageTransform.Microsoft.Glow(Color=#ff000000,Strength=3)";
 	filter:progid:DXImageTransform.Microsoft.Glow(Color=#ff000000,Strength=3);
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
 }
 
 #plans:hover{
