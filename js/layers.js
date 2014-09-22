@@ -64,7 +64,7 @@ function build_layers()
 						if( map.hasLayer( visual[ year ] ) ) map.removeLayer( visual[ year ] );
 					}
 				}).appendTo( folder );
-				label.append( add_swatch( { shape : "../viewpoint.png" } ) );
+				label.prepend( add_swatch( { shape : "../viewpoint.png" } ) );
 			}
 			_.each( raster, function( val )
 			{
@@ -86,7 +86,7 @@ function build_layers()
 						var label = add_check( "layer", key, val.id, switch_layers ).appendTo( folder );
 						delete val.id;
 						
-						if( val.style ) label.append( add_swatch( val.style ) );
+						if( val.style ) label.prepend( add_swatch( val.style ) );
 						if( val.features )
 						{
 							_.each( val.features, function( name )
