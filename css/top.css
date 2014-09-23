@@ -183,10 +183,15 @@ nav{
 	border-right: 1px solid #999;
 	font-size: 12px;
 	font-weight: bold;
-	height: 35px;
+	height: 30px;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
+}
+
+.tick:first-child{
+	border-left: 1px solid #999;
+	margin-left: -5px;
 }
 
 .tick span{
@@ -200,9 +205,17 @@ nav{
 	color: #999;
 }
 
+.tick:first-child span.first{
+	left: 0;
+}
+
+.tick:last-child span{
+	left: 5px;
+}
+
 .minor{
 	width: 50%;
-	height: 20px;
+	height: 15px;
 }
 
 #puck{

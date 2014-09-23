@@ -84,7 +84,8 @@ function build_timeline()
 	if( years.length == 0 ) return false;
 	
 	var w = $( "#timeline" ).width(),
-		y = min;
+		y = min,
+		width = 0;
 	
 	px = w / ( max - min );
 	var gap = _.find( interval, function( i ){ return px * i > 70; } );
@@ -98,6 +99,16 @@ function build_timeline()
 	{
 		$( "#track" ).append( add_tick( i ) );
 	}
+	
+	$( ".tick" ).last().find( "span" ).last().remove();
+	$( ".tick" ).first().find( "span" ).first().addClass( "first" ).html( min );
+	
+	$( "#track" ).append(
+		$( document.createElement( 'div' ) )
+			.addClass( "tick minor" )
+			.width( $( "#track" ).width() - width )
+			.html( "<span>" + max + "</span>" )
+	);
 	
 	function add_tick( i )
 	{
@@ -118,6 +129,9 @@ function build_timeline()
 					.width( i - min < gap ? Math.floor( ( gap * px ) - ( ( i - min ) * px ) ) : "50%" )
 			);
 		}
+		
+		width += div.width();
+		
 		return div;
 	}
 }
