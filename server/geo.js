@@ -31,10 +31,22 @@ exports.draw = function( req, res )
 	postgeo.connect( conn );
 	
 	var id = _.reduce( req.params.id.split( "," ), function( memo, i ){ return memo += "'" + i + "',"; }, "ANY(ARRAY[" ).replace( /,$/, "])" ); 
-
+	
 	postgeo.query( "SELECT id, ST_AsGeoJSON( geom ) AS geometry FROM ( SELECT globalidco AS ID, geom FROM baseline WHERE globalidco = " + id + " UNION SELECT globalidco AS ID, geom FROM basepoly WHERE globalidco = " + id + " UNION SELECT globalidco AS ID, geom FROM basepoint WHERE globalidco = " + id + " ) AS q", "geojson", function( data )
 	{
-		res.send( data );
+		if( data.features[ 0 ].geometry.type )
+		{
+			var coords = data.features[ 0 ].geometry.coordinates.join( " " ),
+				id = data.features[ 0 ].properties.id;
+			postgeo.query( "SELECT '" + id + "' AS id, ST_AsGeoJSON( ST_Buffer( ST_GeomFromText( 'POINT(" + coords + ")' ), 0.0005 ) ) AS geometry", "geojson", function( data )
+			{
+				res.send( data );
+			});
+		}
+		else
+		{
+			res.send( data );
+		}
 	});
 }
 
