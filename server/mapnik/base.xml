@@ -73,4 +73,17 @@
        <Parameter name="shared">true</Parameter>
     </Datasource>
   </Layer>
+<Style name="mask" filter-mode="first" comp-op="overlay" opacity="0.5">
+  <Rule>
+    <PolygonSymbolizer fill="#b4b4b4" />
+  </Rule>
+</Style>
+<Layer name="mask"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>mask</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[/Users/bcsheesley/Documents/MapBox/project/Rio/layers/mask/mask.shp]]></Parameter>
+       <Parameter name="type"><![CDATA[shape]]></Parameter>
+    </Datasource>
+  </Layer>
 </Map>
