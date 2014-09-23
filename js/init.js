@@ -47,6 +47,7 @@ function resize()
 	$( "#map" ).height( h - 100 );
 	$( "#layers" ).height( h - 210 );
 	build_timeline();
+	snap_timeline( year, 0 );
 }
 
 function cursor_loading( show, p )

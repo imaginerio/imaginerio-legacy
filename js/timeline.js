@@ -142,9 +142,11 @@ function get_timeline_year()
 	return Math.round( l / px ) + min;
 }
 
-function snap_timeline( set )
+function snap_timeline( set, dur )
 {
-	var y = set ? set : get_timeline_year();
+	var y = set ? set : get_timeline_year(),
+		speed = dur ? dur : "fast";
+	
 	if( y > year )
 	{
 		y = _.find( years, function( d ){ return d >= y } );
@@ -154,7 +156,7 @@ function snap_timeline( set )
 		y = _.find( _.clone( years ).reverse(), function( d ){ return d <= y } );
 	}
 	
-	$( "#puck" ).stop().animate( { "left" : ( y - min ) * px }, "fast" );
+	$( "#puck" ).stop().animate( { "left" : ( y - min ) * px }, dur );
 	
 	return y;
 }
