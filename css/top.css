@@ -30,7 +30,7 @@ header, nav{
 	font-weight: 200;
 	letter-spacing: 1.5;
 	float: right;
-	margin-top: 60px;
+	margin-top: 40px;
 	cursor: pointer;
 	line-height: normal;
 	text-shadow: none;
@@ -47,10 +47,27 @@ header, nav{
 	line-height: 30px;
 	display: inline-block;
 	text-align: center;
+	position: relative;
+	top: 8px;
+}
+
+#export span{
+	-moz-transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	transform: rotate(90deg);
 }
 
 #export span:before, #enter span:before{
-	content: '⬇';
+	content: '';
+	width: 16px;
+	height: 15px;
+	display: block;
+	background: url(../img/arrow.png) no-repeat center bottom;
+	position: relative;
+	top: 8px;
+	left: 7px;
 }
 
 #export.loading span, #export.loading:hover span{
@@ -68,6 +85,10 @@ header, nav{
 #export:hover span, #enter:hover span{
 	background-color: #999;
 	color: white;
+}
+
+#export:hover span:before, #enter:hover span:before{
+	background-position-y: top;
 }
 
 .drag > img{
