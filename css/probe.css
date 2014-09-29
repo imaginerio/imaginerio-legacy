@@ -41,6 +41,13 @@
 	background-color: #fafafa;
 }
 
+.result.expand.loaded:before{
+	content: "Clear";
+	text-decoration: underline;
+	color: #666;
+	font-size: 12px;
+}
+
 .details{
 	margin-top: 20px;
 }

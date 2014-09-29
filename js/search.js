@@ -86,15 +86,16 @@ function get_details( id, div )
 				{
 					if( $( this ).hasClass( "open" ) )
 					{
+						clear_highlight();
 						$( this ).animate( { height : 20 } );
-						$( this ).removeClass( "open" );
+						$( this ).removeClass( "open loaded" );
 					}
 					else
 					{
 						$( ".expand.open" ).click();
 						$( this ).animate( { height : "+=" + $( this ).children( ".details" ).attr( "data-height" ) } )
 						$( this ).addClass( "open" );
-						draw( $( this ).attr( "data-id" ) );
+						draw( $( this ).attr( "data-id" ), "draw", $( this ), search_loaded );
 					}
 				})
 			
@@ -122,4 +123,9 @@ function clear_results( type )
 	{
 		$( "#search #clear" ).hide();
 	}
+}
+
+function search_loaded( el )
+{
+	el.addClass( "loaded" );
 }
