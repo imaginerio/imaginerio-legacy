@@ -34,7 +34,7 @@ exports.draw = function( req, res )
 	
 	postgeo.query( "SELECT id, ST_AsGeoJSON( geom ) AS geometry FROM ( SELECT globalidco AS ID, geom FROM baseline WHERE globalidco = " + id + " UNION SELECT globalidco AS ID, geom FROM basepoly WHERE globalidco = " + id + " UNION SELECT globalidco AS ID, geom FROM basepoint WHERE globalidco = " + id + " ) AS q", "geojson", function( data )
 	{
-		if( data.features[ 0 ].geometry.type )
+		if( data.features[ 0 ].geometry.type == "Point" )
 		{
 			var coords = data.features[ 0 ].geometry.coordinates.join( " " ),
 				id = data.features[ 0 ].properties.id;
