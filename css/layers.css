@@ -183,6 +183,22 @@
 	background-position: right center;
 }
 
+.feature.drawn{
+	color: white;
+	background-color: #666;
+}
+
+.feature span{
+	display: none;
+}
+
+.feature.drawn span{
+	display: block;
+	float: right;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
 .swatch{
 	margin-top: 5px;
 	overflow: hidden;

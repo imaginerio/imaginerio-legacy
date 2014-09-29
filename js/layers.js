@@ -34,8 +34,17 @@ function init_layers()
 	});
 	$( "#layers" ).on( "click", ".feature", function( e )
 	{
-		draw( $( this ).attr( "id" ), "feature/" + year, $( this ) );
-		$( this ).addClass( "loading" );
+		if( $( this ).hasClass( "drawn" ) )
+		{
+			clear_highlight();
+		}
+		else
+		{
+			draw( $( this ).attr( "id" ), "feature/" + year, $( this ), feature_drawn );
+			$( this ).addClass( "loading" );
+		}
+		
+		$( ".drawn" ).removeClass( "drawn" );
 		e.stopPropagation();
 	});
 }
@@ -95,6 +104,7 @@ function build_layers()
 									.addClass( "feature" )
 									.attr( "id", name )
 									.html( names[ name ] )
+									.prepend( "<span>Clear</span>" )
 									.appendTo( folder );
 							});
 						}
@@ -213,4 +223,10 @@ function build_layers()
 		
 		return swatch;
 	}
+}
+
+function feature_drawn( el )
+{
+	el.removeClass( "loading" );
+	el.addClass( "drawn" );
 }
