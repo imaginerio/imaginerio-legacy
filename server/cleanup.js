@@ -103,9 +103,22 @@ function empty_cache( row )
 		}
 		else
 		{
-			console.log( " " );
-			console.log( "**PROCESS COMPLETE**" );
-			client.end();
+			update_upload();
 		}
+	});
+}
+
+function update_upload()
+{
+	var date = new Date(),
+		num = parseInt( date.getFullYear().toString() + ( "0" + ( date.getMonth() + 1 ) ).slice( -2 )  + ( "0" + date.getDate() ).slice( -2 ) );
+		
+	var query = client.query( "INSERT INTO uploads VALUES ( " + num + " )" );
+	
+	query.on( 'end', function( result )
+	{
+		console.log( " " );
+		console.log( "**PROCESS COMPLETE**" );
+		client.end();
 	});
 }
