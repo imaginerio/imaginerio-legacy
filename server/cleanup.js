@@ -11,7 +11,7 @@ clean_cache( tables.pop() )
 
 function clean_cache( table )
 {
-	console.log( table );
+	console.log( "- Cleaning " + table + ":" );
 	var query = client.query(
 		"SELECT \
 			MIN( firstdispl ) AS first, \
@@ -43,7 +43,7 @@ function clean_cache( table )
 	query.on( 'row', function( result )
 	{
 		cache.push( result );
-		console.log( result );
+		console.log( "    Found changes in " + result.id + ": " + result.first + " - " + result.last );
 	});
 	query.on( 'end', function( result )
 	{
@@ -54,7 +54,7 @@ function clean_cache( table )
 function delete_records( table )
 {
 	var query = client.query(
-		"DELETE FROM basepoly_copy \
+		"DELETE FROM " + table + " \
 		WHERE gid NOT IN ( \
 			SELECT gid \
 			FROM " + table + " AS t \
@@ -71,19 +71,16 @@ function delete_records( table )
 			OR uploaddate = 99999999"
 	);
 	
-	query.on( 'row', function( result )
-	{
-		console.log( result );
-	});
 	query.on( 'end', function( result )
 	{
-		console.log( result );
+		console.log( "    Deleted " + result.rowCount + " rows from " + table );
 		if( tables.length > 0 )
 		{
 			clean_cache( tables.pop() );
 		}
 		else
 		{
+			console.log( "- Cleaning tile cache:" );
 			empty_cache( cache.pop() );
 		}
 	});
@@ -97,20 +94,17 @@ function empty_cache( row )
 	
 	var query = client.query( q );
 	
-	query.on( 'row', function( result )
-	{
-		console.log( result );
-	});
 	query.on( 'end', function( result )
 	{
-		console.log( result );
+		console.log( "    Removed " + result.rowCount + " tiles from cache" );
 		if( cache.length > 0 )
 		{
 			empty_cache( cache.pop() );
 		}
 		else
 		{
-			console.log( "DONE" );
+			console.log( " " );
+			console.log( "**PROCESS COMPLETE**" );
 			client.end();
 		}
 	});
