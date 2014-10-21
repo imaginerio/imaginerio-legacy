@@ -224,7 +224,7 @@ exports.clean = function( req, res )
 	
 	function clean_cache( table )
 	{
-		res.send( "- Cleaning " + table + ":" );
+		res.write( "\n- Cleaning " + table + ":" );
 		var query = client.query(
 			"SELECT \
 				MIN( firstdispl ) AS first, \
@@ -256,7 +256,7 @@ exports.clean = function( req, res )
 		query.on( 'row', function( result )
 		{
 			cache.push( result );
-			res.send( "    Found changes in " + result.id + ": " + result.first + " - " + result.last );
+			res.write( "\n    Found changes in " + result.id + ": " + result.first + " - " + result.last );
 		});
 		query.on( 'end', function( result )
 		{
@@ -286,15 +286,22 @@ exports.clean = function( req, res )
 		
 		query.on( 'end', function( result )
 		{
-			res.send( "    Deleted " + result.rowCount + " rows from " + table );
+			res.write( "\n    Deleted " + result.rowCount + " rows from " + table );
 			if( tables.length > 0 )
 			{
 				clean_cache( tables.pop() );
 			}
 			else
 			{
-				res.send( "- Cleaning tile cache:" );
-				empty_cache( cache.pop() );
+				res.write( "\n- Cleaning tile cache:" );
+				if( cache.length > 0 )
+				{
+					empty_cache( cache.pop() );
+				}
+				else
+				{
+					update_upload();
+				}
 			}
 		});
 	}
@@ -309,7 +316,7 @@ exports.clean = function( req, res )
 		
 		query.on( 'end', function( result )
 		{
-			res.send( "    Removed " + result.rowCount + " tiles from cache" );
+			res.write( "\n    Removed " + result.rowCount + " tiles from cache" );
 			if( cache.length > 0 )
 			{
 				empty_cache( cache.pop() );
@@ -330,9 +337,15 @@ exports.clean = function( req, res )
 		
 		query.on( 'end', function( result )
 		{
-			res.send( " " );
-			res.send( "**PROCESS COMPLETE**" );
-			client.end();
+			res.write( "\n\n- Vacuuming database..." );
+			query2 = client.query( "VACUUM ANALYZE" );
+			
+			query2.on( 'end', function()
+			{
+				res.write( "\n\n**PROCESS COMPLETE**" );
+				client.end();
+				res.end();
+			});
 		});
 	}
 }
