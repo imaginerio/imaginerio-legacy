@@ -12,7 +12,7 @@
  Target Server Version : 90209
  File Encoding         : utf-8
 
- Date: 10/28/2014 10:40:21 AM
+ Date: 10/28/2014 10:45:19 AM
 */
 
 -- ----------------------------
@@ -33,11 +33,18 @@ CREATE TABLE "public"."baseline" (
 	"geodatabas" varchar(50) COLLATE "default",
 	"layer" varchar(50) COLLATE "default",
 	"tablename" varchar(50) COLLATE "default",
-	"globalidco" varchar(50) COLLATE "default",
-	"geom" "public"."geometry"
+	"globalidco" varchar(50) NOT NULL COLLATE "default",
+	"geom" "public"."geometry",
+	"uploaddate" int4,
+	"notes" varchar(255) COLLATE "default"
 )
 WITH (OIDS=FALSE);
 ALTER TABLE "public"."baseline" OWNER TO "pg_power_user";
+
+-- ----------------------------
+--  Primary key structure for table baseline
+-- ----------------------------
+ALTER TABLE "public"."baseline" ADD PRIMARY KEY ("gid", "globalidco") NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 -- ----------------------------
 --  Indexes structure for table baseline
