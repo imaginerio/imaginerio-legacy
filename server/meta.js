@@ -215,7 +215,7 @@ exports.save = function( req, res )
 exports.clean = function( req, res )
 {
 	var client = new pg.Client( conn ),
-		tables = [ "basepoly", "baseline", "basepoint" ],
+		tables = [ "basepoly", "baseline", "basepoint", "visualpoly" ],
 		cache = [];
 	
 	client.connect();
