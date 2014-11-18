@@ -12,7 +12,7 @@
  Target Server Version : 90209
  File Encoding         : utf-8
 
- Date: 11/18/2014 14:36:02 PM
+ Date: 11/18/2014 16:21:56 PM
 */
 
 -- ----------------------------
@@ -33,6 +33,8 @@ CREATE TABLE "public"."visualpoly" (
 	"imageviewd" varchar(200) COLLATE "default",
 	"imageid" varchar(50) COLLATE "default",
 	"geom" "public"."geometry",
+	"latitude" numeric,
+	"longitude" numeric,
 	"uploaddate" int4
 )
 WITH (OIDS=FALSE);
