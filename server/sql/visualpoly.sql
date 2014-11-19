@@ -12,7 +12,7 @@
  Target Server Version : 90209
  File Encoding         : utf-8
 
- Date: 11/18/2014 16:21:56 PM
+ Date: 11/19/2014 13:15:46 PM
 */
 
 -- ----------------------------
@@ -28,14 +28,14 @@ CREATE TABLE "public"."visualpoly" (
 	"featuretyp" varchar(50) COLLATE "default",
 	"creator" varchar(100) COLLATE "default",
 	"repository" varchar(100) COLLATE "default",
-	"earliestda" int2,
-	"latestdate" int2,
+	"firstdispl" int2,
+	"lastdispla" int2,
 	"imageviewd" varchar(200) COLLATE "default",
 	"imageid" varchar(50) COLLATE "default",
 	"geom" "public"."geometry",
+	"uploaddate" int4,
 	"latitude" numeric,
-	"longitude" numeric,
-	"uploaddate" int4
+	"longitude" numeric
 )
 WITH (OIDS=FALSE);
 ALTER TABLE "public"."visualpoly" OWNER TO "pg_power_user";
