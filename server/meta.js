@@ -90,7 +90,7 @@ exports.raster = function( req, res )
 	client.connect();
 
 	var year = req.params.year,
-		q = "SELECT imageid AS id, 'SSID' || globalidco AS file, firstdispl || ' - ' || lastdispla AS date, creator, imageviewd AS description, layer FROM visualpoly WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " ORDER BY layer";
+		q = "SELECT imageid AS id, 'SSID' || globalid AS file, firstdispl || ' - ' || lastdispla AS date, creator, imageviewd AS description, layer FROM visualpoly WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " ORDER BY layer";
 	
 	var query = client.query( q ),
 		arr = [];
@@ -115,7 +115,7 @@ exports.search = function( req, res )
 	var year = req.params.year,
 		word = req.params.word;
 		
-	var q = "SELECT array_agg( id ) as gid, namecomple, layer FROM ( SELECT globalidco AS id, namecomple, layer FROM basepoint WHERE namecomple ILIKE '%" + word + "%' AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT globalidco AS id, namecomple, layer FROM baseline WHERE namecomple ILIKE '%" + word + "%' AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT globalidco AS id, namecomple, layer FROM basepoly WHERE namecomple ILIKE '%" + word + "%' AND firstdispl <= " + year + " AND lastdispla >= " + year + " ) as q GROUP BY namecomple, layer ORDER BY layer LIMIT 5";
+	var q = "SELECT array_agg( id ) as gid, namecomple, layer FROM ( SELECT globalid AS id, namecomple, layer FROM basepoint WHERE namecomple ILIKE '%" + word + "%' AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT globalid AS id, namecomple, layer FROM baseline WHERE namecomple ILIKE '%" + word + "%' AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT globalid AS id, namecomple, layer FROM basepoly WHERE namecomple ILIKE '%" + word + "%' AND firstdispl <= " + year + " AND lastdispla >= " + year + " ) as q GROUP BY namecomple, layer ORDER BY layer LIMIT 5";
 	
 	var query = client.query( q ),
 		names = {};
@@ -162,12 +162,12 @@ exports.details = function( req, res )
 	var id = _.reduce( req.params.id.split( "," ), function( memo, i ){ return memo += "'" + i + "',"; }, "ANY(ARRAY[" ).replace( /,$/, "])" ),
 		details = [];
 	
-	var query = client.query( "SELECT * FROM ( SELECT yearfirstd, yearlastdo, globalidco FROM basepoint WHERE globalidco = " + id + " UNION SELECT yearfirstd, yearlastdo, globalidco FROM baseline WHERE globalidco = " + id + " UNION SELECT yearfirstd, yearlastdo, globalidco FROM basepoly WHERE globalidco = " + id + ") AS q LEFT OUTER JOIN details AS d ON q.globalidco = d.globalidco" );
+	var query = client.query( "SELECT * FROM ( SELECT yearfirstd, yearlastdo, globalid FROM basepoint WHERE globalid = " + id + " UNION SELECT yearfirstd, yearlastdo, globalid FROM baseline WHERE globalid = " + id + " UNION SELECT yearfirstd, yearlastdo, globalid FROM basepoly WHERE globalid = " + id + ") AS q LEFT OUTER JOIN details AS d ON q.globalid = d.globalid" );
 	
 	query.on( 'row', function( result )
 	{
 		result.year = result.yearfirstd + " - " + result.yearlastdo;
-		result = _.objFilter( _.omit( result, [ "globalidco", "yearfirstd", "yearlastdo" ] ), function( value )
+		result = _.objFilter( _.omit( result, [ "globalid", "yearfirstd", "yearlastdo" ] ), function( value )
 		{
 			return value != null;
 		});
@@ -238,12 +238,12 @@ exports.clean = function( req, res )
 				FROM " + table + " AS t1 \
 				INNER JOIN ( \
 					SELECT \
-						globalidco, \
+						globalid, \
 						MAX (uploaddate) AS maxdate \
 					FROM " + table + " \
-					GROUP BY globalidco \
+					GROUP BY globalid \
 				) AS q \
-					ON t1.globalidco = q.globalidco \
+					ON t1.globalid = q.globalid \
 						AND t1.uploaddate = q.maxdate \
 			) \
 			OR uploaddate > ( \
@@ -273,12 +273,12 @@ exports.clean = function( req, res )
 				FROM " + table + " AS t \
 				INNER JOIN ( \
 					SELECT \
-						globalidco, \
+						globalid, \
 						MAX (uploaddate) AS maxdate \
 					FROM " + table + " \
-					GROUP BY globalidco \
+					GROUP BY globalid \
 				) AS q \
-					ON t.globalidco = q.globalidco \
+					ON t.globalid = q.globalid \
 						AND t.uploaddate = q.maxdate \
 			) \
 				OR uploaddate = 99999999"

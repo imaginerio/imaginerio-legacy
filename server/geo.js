@@ -12,7 +12,7 @@ exports.probe = function( req, res )
 		coords = req.params.coords,
 		results = [];
 	
-	var query = client.query( "SELECT array_agg( id ) AS id, name, layer FROM ( SELECT globalidco AS id, namecomple AS name, layer, geom FROM baseline WHERE namecomple IS NOT NULL AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT globalidco AS id, namecomple AS name, layer, geom FROM basepoly WHERE namecomple IS NOT NULL AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT globalidco AS id, namecomple AS name, layer, geom FROM basepoint WHERE namecomple IS NOT NULL AND firstdispl <= " + year + " AND lastdispla >= " + year + " ORDER BY layer ) as q WHERE ST_DWithin( geom, ST_SetSRID( ST_MakePoint( " + coords + " ), 4326 ), 0.0005 ) GROUP BY name, layer ORDER BY layer" );
+	var query = client.query( "SELECT array_agg( id ) AS id, name, layer FROM ( SELECT globalid AS id, namecomple AS name, layer, geom FROM baseline WHERE namecomple IS NOT NULL AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT globalid AS id, namecomple AS name, layer, geom FROM basepoly WHERE namecomple IS NOT NULL AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT globalid AS id, namecomple AS name, layer, geom FROM basepoint WHERE namecomple IS NOT NULL AND firstdispl <= " + year + " AND lastdispla >= " + year + " ORDER BY layer ) as q WHERE ST_DWithin( geom, ST_SetSRID( ST_MakePoint( " + coords + " ), 4326 ), 0.0005 ) GROUP BY name, layer ORDER BY layer" );
 	
 	query.on( 'row', function( result )
 	{
@@ -32,7 +32,7 @@ exports.draw = function( req, res )
 	
 	var id = _.reduce( req.params.id.split( "," ), function( memo, i ){ return memo += "'" + i + "',"; }, "ANY(ARRAY[" ).replace( /,$/, "])" ); 
 	
-	postgeo.query( "SELECT id, ST_AsGeoJSON( geom ) AS geometry FROM ( SELECT globalidco AS ID, geom FROM baseline WHERE globalidco = " + id + " UNION SELECT globalidco AS ID, geom FROM basepoly WHERE globalidco = " + id + " UNION SELECT globalidco AS ID, geom FROM basepoint WHERE globalidco = " + id + " ) AS q", "geojson", function( data )
+	postgeo.query( "SELECT id, ST_AsGeoJSON( geom ) AS geometry FROM ( SELECT globalid AS ID, geom FROM baseline WHERE globalid = " + id + " UNION SELECT globalid AS ID, geom FROM basepoly WHERE globalid = " + id + " UNION SELECT globalid AS ID, geom FROM basepoint WHERE globalid = " + id + " ) AS q", "geojson", function( data )
 	{
 		if( data.features[ 0 ].geometry.type == "Point" )
 		{
@@ -68,7 +68,7 @@ exports.plan = function( req, res )
 	
 	var plan = decodeURI( req.params.name );
 	
-	postgeo.query( "SELECT globalidco AS id, namecomple AS name, ST_AsGeoJSON( geom ) AS geometry FROM plannedline WHERE planname = '" + plan + "' UNION SELECT globalidco AS id, namecomple AS name, ST_AsGeoJSON( geom ) AS geometry FROM plannedpoly WHERE planname = '" + plan + "'", "geojson", function( data )
+	postgeo.query( "SELECT globalid AS id, namecomple AS name, ST_AsGeoJSON( geom ) AS geometry FROM plannedline WHERE planname = '" + plan + "' UNION SELECT globalid AS id, namecomple AS name, ST_AsGeoJSON( geom ) AS geometry FROM plannedpoly WHERE planname = '" + plan + "'", "geojson", function( data )
 	{
 		res.send( data );
 	});

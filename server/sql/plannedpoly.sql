@@ -29,7 +29,7 @@ CREATE TABLE "public"."plannedpoly" (
 	"layer" varchar(50) COLLATE "default",
 	"namecomple" varchar(50) COLLATE "default",
 	"nameshort" varchar(50) COLLATE "default",
-	"globalidco" varchar(50) COLLATE "default",
+	"globalid" varchar(50) COLLATE "default",
 	"geom" "public"."geometry"
 )
 WITH (OIDS=FALSE);

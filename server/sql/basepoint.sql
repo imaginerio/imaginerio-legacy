@@ -32,7 +32,7 @@ CREATE TABLE "public"."basepoint" (
 	"geodatabas" varchar(50) COLLATE "default",
 	"layer" varchar(50) COLLATE "default",
 	"featuretyp" varchar(50) COLLATE "default",
-	"globalidco" varchar(50) NOT NULL COLLATE "default",
+	"globalid" varchar(50) NOT NULL COLLATE "default",
 	"tablename" varchar(50) COLLATE "default",
 	"geom" "public"."geometry",
 	"uploaddate" int4,
@@ -44,7 +44,7 @@ ALTER TABLE "public"."basepoint" OWNER TO "pg_power_user";
 -- ----------------------------
 --  Primary key structure for table basepoint
 -- ----------------------------
-ALTER TABLE "public"."basepoint" ADD PRIMARY KEY ("gid", "globalidco") NOT DEFERRABLE INITIALLY IMMEDIATE;
+ALTER TABLE "public"."basepoint" ADD PRIMARY KEY ("gid", "globalid") NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 -- ----------------------------
 --  Indexes structure for table basepoint

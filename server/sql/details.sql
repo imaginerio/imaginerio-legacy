@@ -26,7 +26,7 @@ CREATE TABLE "public"."details" (
 	"occupant" varchar(150) COLLATE "default",
 	"routename" varchar(50) COLLATE "default",
 	"nameabbrev" varchar(50) COLLATE "default",
-	"globalidco" varchar(50) COLLATE "default"
+	"globalid" varchar(50) COLLATE "default"
 )
 WITH (OIDS=FALSE);
 ALTER TABLE "public"."details" OWNER TO "pg_power_user";

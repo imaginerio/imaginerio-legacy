@@ -33,7 +33,7 @@ CREATE TABLE "public"."basepoly" (
 	"geodatabas" varchar(50) COLLATE "default",
 	"layer" varchar(50) COLLATE "default",
 	"tablename" varchar(50) COLLATE "default",
-	"globalidco" varchar(50) NOT NULL COLLATE "default",
+	"globalid" varchar(50) NOT NULL COLLATE "default",
 	"geom" "public"."geometry",
 	"uploaddate" int4,
 	"notes" varchar(255) COLLATE "default"
@@ -44,7 +44,7 @@ ALTER TABLE "public"."basepoly" OWNER TO "pg_power_user";
 -- ----------------------------
 --  Primary key structure for table basepoly
 -- ----------------------------
-ALTER TABLE "public"."basepoly" ADD PRIMARY KEY ("gid", "globalidco") NOT DEFERRABLE INITIALLY IMMEDIATE;
+ALTER TABLE "public"."basepoly" ADD PRIMARY KEY ("gid", "globalid") NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 -- ----------------------------
 --  Indexes structure for table basepoly

@@ -23,7 +23,7 @@ CREATE TABLE "public"."visualpoly" (
 	"gid" int4 NOT NULL DEFAULT nextval('visualpoly_gid_seq1'::regclass),
 	"folder" varchar(50) COLLATE "default",
 	"layer" varchar(50) COLLATE "default",
-	"globalidco" varchar(50) NOT NULL COLLATE "default",
+	"globalid" varchar(50) NOT NULL COLLATE "default",
 	"geodatabas" varchar(50) COLLATE "default",
 	"featuretyp" varchar(50) COLLATE "default",
 	"creator" varchar(100) COLLATE "default",
@@ -43,7 +43,7 @@ ALTER TABLE "public"."visualpoly" OWNER TO "pg_power_user";
 -- ----------------------------
 --  Primary key structure for table visualpoly
 -- ----------------------------
-ALTER TABLE "public"."visualpoly" ADD PRIMARY KEY ("gid", "globalidco") NOT DEFERRABLE INITIALLY IMMEDIATE;
+ALTER TABLE "public"."visualpoly" ADD PRIMARY KEY ("gid", "globalid") NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 -- ----------------------------
 --  Indexes structure for table visualpoly
