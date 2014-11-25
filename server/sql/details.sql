@@ -12,7 +12,7 @@
  Target Server Version : 90209
  File Encoding         : utf-8
 
- Date: 10/28/2014 10:41:14 AM
+ Date: 11/25/2014 14:21:19 PM
 */
 
 -- ----------------------------
@@ -26,8 +26,13 @@ CREATE TABLE "public"."details" (
 	"occupant" varchar(150) COLLATE "default",
 	"routename" varchar(50) COLLATE "default",
 	"nameabbrev" varchar(50) COLLATE "default",
-	"globalid" varchar(50) COLLATE "default"
+	"globalid" varchar(50) NOT NULL COLLATE "default"
 )
 WITH (OIDS=FALSE);
 ALTER TABLE "public"."details" OWNER TO "pg_power_user";
+
+-- ----------------------------
+--  Primary key structure for table details
+-- ----------------------------
+ALTER TABLE "public"."details" ADD PRIMARY KEY ("globalid") NOT DEFERRABLE INITIALLY IMMEDIATE;
 
