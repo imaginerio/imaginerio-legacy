@@ -12,7 +12,7 @@
  Target Server Version : 90209
  File Encoding         : utf-8
 
- Date: 10/28/2014 11:08:11 AM
+ Date: 11/25/2014 14:02:33 PM
 */
 
 -- ----------------------------
@@ -36,7 +36,8 @@ CREATE TABLE "public"."basepoly" (
 	"globalid" varchar(50) NOT NULL COLLATE "default",
 	"geom" "public"."geometry",
 	"uploaddate" int4,
-	"notes" varchar(255) COLLATE "default"
+	"notes" varchar(255) COLLATE "default",
+	"nameabbrev" varchar(50) COLLATE "default"
 )
 WITH (OIDS=FALSE);
 ALTER TABLE "public"."basepoly" OWNER TO "pg_power_user";
