@@ -1,6 +1,7 @@
 var pg = require( 'pg' ),
 	_ = require( 'underscore' ),
-	conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/rio";
+	conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/rio",
+	admin = "postgres://pg_power_user:XfAfooM4zUD8HG@localhost/rio";
 	
 _.mixin({
   // ### _.objMap
@@ -35,7 +36,7 @@ exports.timeline = function( req, res )
 	
 	query.on( 'row', function( result )
 	{
-		years.push( result.year );
+		if( result.year > 0 ) years.push( result.year );
 	});
 	
 	query.on( 'end', function()
@@ -214,8 +215,8 @@ exports.save = function( req, res )
 
 exports.clean = function( req, res )
 {
-	var client = new pg.Client( conn ),
-		tables = [ "basepoly", "baseline", "basepoint", "visualpoly" ],
+	var client = new pg.Client( admin ),
+		tables = [ "basepoly", "baseline", "basepoint", "visualpoly", "plannedline", "plannedpoly" ],
 		cache = [];
 	
 	client.connect();
@@ -296,7 +297,7 @@ exports.clean = function( req, res )
 				res.write( "\n- Cleaning tile cache:" );
 				if( cache.length > 0 )
 				{
-					empty_cache( cache.pop() );
+					if( !table.match( /^plan/ ) ) empty_cache( cache.pop() );
 				}
 				else
 				{
