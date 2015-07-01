@@ -74,7 +74,7 @@
 }
 
 #layers h4{
-	margin: 0 0 0 45px;
+	margin: 0;
 	font-size: 16px;
 }
 
@@ -91,7 +91,7 @@
 	padding-bottom: 20px;
 }
 
-.folder:before{
+.folder h4:before{
 	content: "◢";
 	display: block;
 	float: left;
@@ -103,9 +103,10 @@
 	transform: rotate(-45deg);
 	position: relative;
 	left: 15px;
+	margin-right: 35px;
 }
 
-.folder.open:before{
+.folder.open h4:before{
 	-moz-transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);
 	-o-transform: rotate(45deg);
