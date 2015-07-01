@@ -106,7 +106,7 @@ function build_timeline()
 	$( "#track" ).append(
 		$( document.createElement( 'div' ) )
 			.addClass( "tick minor" )
-			.width( $( "#track" ).width() - width )
+			.width( $( "#track" ).width() - width - 10 )
 			.html( "<span>" + max + "</span>" )
 	);
 	
