@@ -161,7 +161,8 @@ http.createServer( function( req, res )
 				{
 					console.log( png + ' exists.' );
 					res.writeHead( 302, {
-						"Location": "http://d3unofsdy0zxgc.cloudfront.net/" + png
+						"Location": "http://d3unofsdy0zxgc.cloudfront.net/" + png,
+						"Access-Control-Request-Method": "GET"
 					});
 					res.end();
 				}
