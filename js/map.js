@@ -228,12 +228,14 @@ function export_map()
 	
 	function savePNG( data, fname, dimensions )
 	{
-        if( $( "html" ).hasClass( "adownload" ) )
-        {
-	        var pom = document.createElement('a');
+    if( $( "html" ).hasClass( "adownload" ) )
+    {
+	    var pom = document.createElement('a');
+	    document.body.appendChild(pom);
 			pom.setAttribute( 'href', data.replace( 'image/png', 'image/octet-stream' ) );
-	    	pom.setAttribute( 'download', fname );
-		    pom.click();
+	    pom.setAttribute( 'download', fname );
+		  pom.click();
+		  document.body.removeChild(pom);
 		}
 		else
 		{
