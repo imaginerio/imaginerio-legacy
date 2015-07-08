@@ -8,7 +8,7 @@ var server = "http://imaginerio-dev.rice.edu:3000",
 
 var lang,
 	pr = {
-		"h1" : "imaginarRio",
+		"h1" : "imagináRio",
 		"#enter" : "Ver o mapa <span></span>",
 		"#plans" : "Projetos Urbanos",
 		"#switch" : "Legenda do Mapa",
