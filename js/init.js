@@ -76,10 +76,21 @@ function map_loading( show )
 		$( "#map" ).append(
 			$( document.createElement( 'div' ) ).attr( "id", "loading" )
 		);
+    
+    $( "#loading" ).mouseover( function( e ){
+      map.dragging.disable();
+      map.touchZoom.disable();
+      map.doubleClickZoom.disable();
+      map.scrollWheelZoom.disable();
+    });    
 	}
 	else if( show === false )
 	{
 		$( "#loading" ).remove();
+    map.dragging.enable();
+    map.touchZoom.enable();
+    map.doubleClickZoom.enable();
+    map.scrollWheelZoom.enable();
 	}
 }
 
