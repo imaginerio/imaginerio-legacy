@@ -75,7 +75,7 @@ function probe( e )
 	clear_highlight();
 	clear_results( "probe" );
 	
-	$.getJSON( server + "/probe/" + year + "/" + e.latlng.lng + "," + e.latlng.lat, function( json )
+	$.getJSON( server + "/probe/" + year + "/5/" + e.latlng.lng + "," + e.latlng.lat, function( json )
 	{
 		_.each( json, function( l ){ add_result( l.name, l.id, l.layer, $( "#results .probe" ) ); });
 		cursor_loading( false );

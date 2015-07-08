@@ -10,9 +10,10 @@ exports.probe = function( req, res )
 	
 	var year = req.params.year,
 		coords = req.params.coords,
+		radius = req.params.radius / 1000,
 		results = [];
 	
-	var query = client.query( "SELECT array_agg( id ) AS id, name, layer FROM ( SELECT globalid AS id, namecomple AS name, layer, geom FROM baseline WHERE namecomple IS NOT NULL AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT globalid AS id, namecomple AS name, layer, geom FROM basepoly WHERE namecomple IS NOT NULL AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT globalid AS id, namecomple AS name, layer, geom FROM basepoint WHERE namecomple IS NOT NULL AND firstdispl <= " + year + " AND lastdispla >= " + year + " ORDER BY layer ) as q WHERE ST_DWithin( geom, ST_SetSRID( ST_MakePoint( " + coords + " ), 4326 ), 0.0005 ) GROUP BY name, layer ORDER BY layer" );
+	var query = client.query( "SELECT array_agg( id ) AS id, name, layer FROM ( SELECT globalid AS id, namecomple AS name, layer, geom FROM baseline WHERE namecomple IS NOT NULL AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT globalid AS id, namecomple AS name, layer, geom FROM basepoly WHERE namecomple IS NOT NULL AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT globalid AS id, namecomple AS name, layer, geom FROM basepoint WHERE namecomple IS NOT NULL AND firstdispl <= " + year + " AND lastdispla >= " + year + " ORDER BY layer ) as q WHERE ST_DWithin( geom, ST_SetSRID( ST_MakePoint( " + coords + " ), 4326 ), " + radius + " ) GROUP BY name, layer ORDER BY layer" );
 	
 	query.on( 'row', function( result )
 	{
