@@ -16,22 +16,33 @@ exports.q = [
     ]
   },
   {
-    type : 'input',
-    name : 'layer',
-    message : 'Enter layer name:',
+    type : 'list',
+    name : 'geom',
+    message : 'Select feature type:',
+    choices : [
+      { name : 'point', value : 'basepoint' },
+      { name : 'line', value : 'baseline' },
+      { name : 'polygon', value : 'basepoly' },
+      new inquirer.Separator(),
+      { name : 'viewshed', value : 'viewsheds' },
+      { name : 'maps / plans', value : 'mapsplans' }
+    ],
     when : function( ans ){ 
       return ans.task != 'push' && ans.task != 'pull';
     }
   },
   {
-    type : 'list',
-    name : 'geom',
-    message : 'Select geometry type:',
-    choices : [
-      { name : 'point', value : 'basepoint' },
-      { name : 'line', value : 'baseline' },
-      { name : 'polygon', value : 'basepoly' }
-    ],
+    type : 'input',
+    name : 'layer',
+    message : 'Enter layer name:',
+    default : function( ans ){
+      if( ans.geom == 'viewsheds' ){
+        return 'viewsheds';
+      }
+      else if( ans.geom == 'mapsplans' ){
+        return 'maps';
+      }
+    },
     when : function( ans ){ 
       return ans.task != 'push' && ans.task != 'pull';
     }
