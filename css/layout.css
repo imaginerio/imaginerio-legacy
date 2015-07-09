@@ -140,13 +140,13 @@ h1, header{
 }
 
 #logos .logo{
-  width: 33%;
+  width: 24%;
   display: inline-block;
-  border-left: 2px solid #999;
+  border-left: 1px solid #999;
 }
 
 #logos img{
-  height: 80px;
+  height: 56px;
   padding: 10px 20px;
 }
 
