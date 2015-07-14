@@ -4,7 +4,8 @@ var map,
 	visual = {},
 	rasters = {},
 	shown = {},
-	highlight = {};
+	highlight = {},
+  probeZoom = .5;
 
 function init_map()
 {
@@ -17,7 +18,24 @@ function init_map()
 		doubleClickZoom : false,
 		maxBounds : [ [ -23.10243406, -44.04944719  ], [ -22.63003187, -42.65988214 ] ]
 	})
-	.on( "click", probe );
+	.on( "click", probe )
+  .on( "zoomend", function(){
+    var zoom = map.getZoom();
+    switch ( zoom ){
+      case 14:
+        probeZoom = .6;
+        break;
+      case 15:
+        probeZoom = .5;
+        break;
+      case 16:
+        probeZoom = .35;
+        break;
+      case 17:
+        probeZoom = .2;
+        break;
+    }
+  });
 	
 	if( $( "html" ).hasClass( "canvas" ) )
 	{
@@ -75,7 +93,7 @@ function probe( e )
 	clear_highlight();
 	clear_results( "probe" );
 	
-	$.getJSON( server + "/probe/" + year + "/5/" + e.latlng.lng + "," + e.latlng.lat, function( json )
+	$.getJSON( server + "/probe/" + year + "/" + probeZoom + "/" + e.latlng.lng + "," + e.latlng.lat, function( json )
 	{
 		_.each( json, function( l ){ add_result( l.name, l.id, l.layer, $( "#results .probe" ) ); });
 		cursor_loading( false );
