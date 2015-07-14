@@ -19,20 +19,26 @@ function init_timeline()
 		snap_timeline( year );
 	});
 	
-	$( "#puck" ).mousedown( function()
+  $( "#puck" ).on( 'touchstart mousedown', function( e )
 	{
+    e.preventDefault();
 		$( "#puck span" ).fadeIn( "fast" );
-		$( "#timeline" ).mousemove( function( e )
+    $( "#timeline" ).on( 'touchmove mousemove', function( e )
 		{
-			var pos = Math.max( 0, Math.min( e.clientX - 300, $( this ).width() ) );
+      if( e.type == 'touchmove' ){
+        var x = e.originalEvent.targetTouches[0].clientX;
+      } else {
+        var x = e.clientX;
+      }
+			var pos = Math.max( 0, Math.min( x - 300, $( this ).width() ) );
 			$( "#puck" ).css( "left", pos );
 			$( "#puck span" ).html( get_timeline_year() );
 		});
 		
-		$( window ).mouseup( function()
+		$( window ).on( 'touchend mouseup', function()
 		{
-			$( "#timeline" ).unbind( "mousemove" );
-			$( window ).unbind( "mouseup" );
+			$( "#timeline" ).off( "touchmove mousemove" );
+			$( window ).off( "touchend mouseup" );
 			$( "#puck span" ).fadeOut( "fast" );
 			
 			update_year( snap_timeline() );
