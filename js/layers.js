@@ -201,6 +201,7 @@ function build_layers()
 			$( this ).parent().nextUntil( "label.layer" ).addClass( "off" );
 		});
 		
+    clear_results( "probe" );
 		e.stopPropagation();
 		load_tiles();
 	}
