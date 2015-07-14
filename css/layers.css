@@ -76,6 +76,7 @@
 #layers h4{
 	margin: 0;
 	font-size: 16px;
+  cursor: pointer;
 }
 
 .folder{
@@ -83,7 +84,6 @@
 	background-color: white;
 	height: 40px;
 	overflow: hidden;
-	cursor: pointer;
 }
 
 .folder.open{
@@ -160,6 +160,7 @@
 
 .layer{
 	padding-left: 40px;
+  cursor: pointer;
 }
 
 .feature{
@@ -170,6 +171,7 @@
 	margin: 8px 20px 8px 50px;
 	padding: 0 10px;
 	font-size: 12px;
+  cursor: pointer;
 }
 
 .feature:hover{
@@ -178,6 +180,8 @@
 
 .feature.off{
 	opacity: 0.25;
+  pointer-events: none;
+  cursor: default;
 }
 
 .feature.loading{
