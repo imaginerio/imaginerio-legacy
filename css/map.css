@@ -48,18 +48,18 @@
 
 .leaflet-control-zoom a, .leaflet-control-zoom a:hover{
 	background-color:rgba(255,255,255,0.9);
-	width:50px;
-	line-height:40px;
-	height: 40px;
+	width: 50px !important;
+	line-height: 40px !important;
+	height: 40px !important;
 	float: right;
 	-webkit-border-radius: 0 !important;
 	border-radius: 0 !important;
-	border: none;
+	border: none !important;
 	font-size: 24px;
 	font-weight: bold;
 }
 
 .leaflet-control-zoom a:last-child{
-	border-right: 1px solid #b3b3b3;
-	width: 49px;
+	border-right: 1px solid #b3b3b3 !important;
+	width: 49px !important;
 }
