@@ -85,5 +85,8 @@
 	font-weight: bold;
 	line-height: 20px;
 	text-indent: 10px;
-	
+}
+
+.featherlight .featherlight-close-icon:hover{
+  text-shadow: #999 0 0 3px;
 }
