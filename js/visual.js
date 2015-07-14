@@ -95,7 +95,7 @@ function show_image( data )
 			{
 				var href = $( html ).find( "td" ).last().text().replace( /\s/gm, "" );
 				var dim = scale_image( json[ 0 ].width, json[ 0 ].height );
-				$.featherlight( '<img src="' + json[ 0 ].imageServer + json[ 0 ].imageUrl + "&&wid=" + dim.w + "&hei=" + dim.h + "&rgnn=0,0,1,1&cvt=JPEG" + '"><p><b>' + data.creator + '</b> - ' + data.date + '<br />' + data.description + '</p><p><a href="http://www.sscommons.org/openlibrary/' + href + '" target="_blank">View image on SharedShelf Commons</a></p>', { afterOpen : function(){ $( ".featherlight-content" ).width( dim.w ); } } );
+				$.featherlight( '<img src="' + json[ 0 ].imageServer + json[ 0 ].imageUrl + "&&wid=" + dim.w + "&hei=" + dim.h + "&rgnn=0,0,1,1&cvt=JPEG" + '"><p><b>' + data.creator + '</b> - ' + data.date + '<br />' + data.description + '</p><p><a href="http://www.sscommons.org/openlibrary/' + href + '&fs=true" target="_blank">View image on SharedShelf Commons</a></p>', { afterOpen : function(){ $( ".featherlight-content" ).width( dim.w ); } } );
 			}
 		});
 	});
