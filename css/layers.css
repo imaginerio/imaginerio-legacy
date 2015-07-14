@@ -128,6 +128,7 @@
 	margin-left: 45px;
 	padding: 5px;
 	border: 1px solid #999;
+  width: 175px;
 }
 
 #layers label span{
@@ -143,7 +144,7 @@
 }
 
 #layers label input.raster + span{
-	width: 200px;
+	width: 190px;
 }
 
 #layers input{
