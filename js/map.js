@@ -93,7 +93,7 @@ function probe( e )
 	clear_highlight();
 	clear_results( "probe" );
 	
-	$.getJSON( server + "/probe/" + year + "/" + probeZoom + "/" + e.latlng.lng + "," + e.latlng.lat, function( json )
+	$.getJSON( server + "/probe/" + year + "/" + probeZoom + "/" + e.latlng.lng + "," + e.latlng.lat + "/" + off.join( "," ), function( json )
 	{
 		_.each( json, function( l ){ add_result( l.name, l.id, l.layer, $( "#results .probe" ) ); });
 		cursor_loading( false );
@@ -224,7 +224,7 @@ function export_map()
 		
 		var context = exp.getContext( "2d" );
 	    
-	    context.drawImage( canvas, 235, 100 );
+    context.drawImage( canvas, 235, 100 );
 		context.fillStyle = '#eee';
 		context.fillRect( 0, 0, dimensions.x, 100 );
 		context.fillStyle = '#666';

@@ -49,7 +49,7 @@ app.use(bodyParser.urlencoded({limit: 10000000}));
 app.get( '/timeline', meta.timeline );
 app.get( '/layers/:year', meta.layers );
 app.get( '/search/:year/:word', meta.search );
-app.get( '/probe/:year/:radius/:coords', geo.probe );
+app.get( '/probe/:year/:radius/:coords/:layers?', geo.probe );
 app.get( '/draw/:id', geo.draw );
 app.get( '/visual/:year', geo.visual );
 app.get( '/raster/:year', meta.raster );
