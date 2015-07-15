@@ -202,7 +202,7 @@ function build_layers()
 		
 		$( "#layers label:not( .visual ) input:not( :checked )" ).each( function()
 		{
-			off = off.concat( $( this ).val().split( "," ) );
+			off = off.concat( $( this ).val() );
 			$( this ).parent().nextUntil( "label.layer" ).addClass( "off" );
 		});
 		
