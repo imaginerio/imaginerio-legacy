@@ -160,16 +160,41 @@ function build_layers()
 			var w = json[ 0 ].width,
 				h = json[ 0 ].height,
 				s = Math.max( 120 / h, 185 / w );
-				
-			label.after(
-				$( document.createElement( 'img' ) )
-					.attr( "src", json[ 0 ].imageServer + json[ 0 ].imageUrl + "&&wid=" + Math.round( w * s )  + "&hei=" + Math.round( h * s ) + "&rgnn=0,0,1,1&cvt=JPEG" )
-					.data( r )
-					.click( function()
-					{
-						show_image( $( this ).data() );
-					})
-			);
+			
+      $.ajax( "http://www.sscommons.org/openlibrary/secure/metadata/" + r.id + "?_method=FpHtml",
+      {
+        dataType : "html",
+        success : function( html )
+        {
+          var href = $( html ).find( "td" ).last().text().replace( /\s/gm, "" );
+          label.after(
+            $( document.createElement( 'a' ) )
+              .attr({
+                  "href" : "http://www.sscommons.org/openlibrary/" + href + "&fs=true",
+                  "class" : "visual-link",
+                  "target" : "_blank"
+              })
+              .text( "View full" )
+              .append(
+                $( document.createElement( 'img' ) )
+                  .attr({
+                    "src" : "img/external-link.jpg"
+                  })
+              )
+              
+          );
+          
+          label.after(
+            $( document.createElement( 'img' ) )
+              .attr( "src", json[ 0 ].imageServer + json[ 0 ].imageUrl + "&&wid=" + Math.round( w * s )  + "&hei=" + Math.round( h * s ) + "&rgnn=0,0,1,1&cvt=JPEG" )
+              .data( r )
+              .click( function()
+              {
+                show_image( $( this ).data() );
+              })
+          );
+        }
+      });
 		});
 	}
 	

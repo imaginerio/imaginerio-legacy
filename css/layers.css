@@ -224,3 +224,9 @@
 .layer > .swatch img{
 	margin: 5px;
 }
+
+.folder a{
+  text-align: center;
+  margin-left: 45px;
+  padding: 5px;
+}
