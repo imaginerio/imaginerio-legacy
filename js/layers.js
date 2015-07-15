@@ -111,6 +111,11 @@ function build_layers()
 					});
 				});
 			});
+      
+      $( "#layers label:not( .visual ) input:not( :checked )" ).each( function()
+      {
+        $( this ).parent().nextUntil( "label.layer" ).addClass( "off" );
+      });
 		});
 	});
 	
