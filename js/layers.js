@@ -174,11 +174,11 @@ function build_layers()
                   "class" : "visual-link",
                   "target" : "_blank"
               })
-              .text( "View full" )
+              .text( "View full image" )
               .append(
                 $( document.createElement( 'img' ) )
                   .attr({
-                    "src" : "img/external-link.jpg"
+                    "src" : "img/External_link.png"
                   })
               )
               

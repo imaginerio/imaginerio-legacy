@@ -225,8 +225,22 @@
 	margin: 5px;
 }
 
-.folder a{
+.folder a, .folder a:visited, .folder a:hover{
   text-align: center;
   margin-left: 45px;
   padding: 5px;
+  font-size: 14px;
+  color: black;
+  text-decoration: none;
+  vertical-align: bottom;
+}
+
+.folder a:hover{
+  text-decoration: underline;
+}
+
+.folder a img{
+  height: 15px;
+  margin-left: 5px;
+  vertical-align: baseline;
 }
