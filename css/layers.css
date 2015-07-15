@@ -180,8 +180,7 @@
 
 .feature.off{
 	opacity: 0.25;
-  pointer-events: none;
-  cursor: default;
+  display: none;
 }
 
 .feature.loading{
