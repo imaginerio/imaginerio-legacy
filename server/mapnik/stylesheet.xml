@@ -8,7 +8,7 @@
   <Parameter name="format">png8</Parameter>
   <Parameter name="interactivity_layer"></Parameter>
   <Parameter name="interactivity_fields"></Parameter>
-  <Parameter name="minzoom">14</Parameter>
+  <Parameter name="minzoom">13</Parameter>
   <Parameter name="maxzoom">18</Parameter>
   <Parameter name="scale">1</Parameter>
   <Parameter name="metatile">15</Parameter>
