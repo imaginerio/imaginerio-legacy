@@ -53,7 +53,7 @@ function add_result( name, id, layer, div, reg )
 { 	
 	if( $( ".header[name=" + layer + "]" ).length == 0 ) add_header( layer, div );
 	var result = $( document.createElement( 'div' ) )
-					.attr( "data-id", _.isArray( id ) ? id.join( "," ) : id )
+					.attr( "data-id", name )
 					.addClass( "result" )
 					.html( reg ? name.replace( reg, function( m ){ return "<b>" + m + "</b>" } ) : name )
 					.appendTo( div );
