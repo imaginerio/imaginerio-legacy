@@ -22,9 +22,6 @@ function init_map()
   .on( "zoomend", function(){
     var zoom = map.getZoom();
     switch ( zoom ){
-      case 14:
-        probeZoom = .6;
-        break;
       case 15:
         probeZoom = .5;
         break;
@@ -33,6 +30,9 @@ function init_map()
         break;
       case 17:
         probeZoom = .2;
+        break;
+      default:
+        probeZoom = .6;
         break;
     }
   });
