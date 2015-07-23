@@ -163,23 +163,25 @@ http.createServer( function( req, res )
 									maps.release( stylesheet, map );
 								});
 								res.writeHead( 500, { 'Content-Type': 'text/plain' } );
-			                    res.end( err.message );
-							}
-			                else
-							{
-			                    // bbox for x,y,z
+			         res.end( err.message );
+							  }
+                else
+                {
+                // bbox for x,y,z
 								var bbox = mercator.xyz_to_envelope( params.x, params.y, params.z, TMS_SCHEME );
 								try
 								{
 									map.extent = bbox;
+									var im = new mapnik.Image( map.width, map.height );
 								}
 								catch( err )
 								{
 									res.writeHead( 500, { 'Content-Type' : 'text/plain' } );
 									res.end( "Undefined extent" );
+									console.log( "Bad request for " + params.raster );
+                  return false;
 								}
 								
-								var im = new mapnik.Image( map.width, map.height );
 								map.render( im, function( err, im )
 								{
 									process.nextTick( function()
