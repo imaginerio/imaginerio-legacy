@@ -8,7 +8,18 @@ var pg = require( 'pg' ),
     inquirer = require( 'inquirer' ),
     chalk = require( 'chalk' ),
     shapefile  = require( 'shapefile' ),
-    questions = require( './questions' );
+    questions = require( './questions' ),
+    defaultNull = {
+      "NameComple" : null,
+      "NameShort" : null,
+      "YearLastDo" : null,
+      "Notes" : null,
+      "Creator" : null,
+      "FirstOwner" : null,
+      "Owner" : null,
+      "Occupant" : null,
+      "Address" : null
+    }
     
 _.mixin({
   // ### _.objMap
@@ -115,7 +126,7 @@ var newLayer = function( client, ans, callback ) {
   var addRecord = function( record, reader, ans, client, callback ){
     var date = new Date(),
     			num = parseInt( date.getFullYear().toString() + ( "0" + ( date.getMonth() + 1 ) ).slice( -2 )  + ( "0" + date.getDate() ).slice( -2 ) ),
-    			props = _.objMap( record.properties, processRecord );
+    			props = _.defaults( _.objMap( record.properties, processRecord ), defaultNull );
     
     var q = "INSERT INTO " + ans.geom + " (featuretyp, namecomple, nameshort, yearlastdo, firstdispl, lastdispla, notes, creator, firstowner, owner, occupant, address, geom, uploaddate, globalid, layer) VALUES ( " + props.FeatureTyp + ", " + props.NameComple + ", " + props.NameShort + ", " + props.YearLastDo + ", " + props.FirstDispl + ", " + props.LastDispla + ", " + props.Notes + ", " + props.Creator + ", " + props.FirstOwner + ", " + props.Owner + ", " + props.Occupant + ", " + props.Address + ", ST_GeomFromGeoJSON('" + JSON.stringify( record.geometry ) + "'), " + num + ", 'missing-id', '" + ans.layer + "')";
 
