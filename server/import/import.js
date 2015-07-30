@@ -97,7 +97,7 @@ var newLayer = function( client, ans, callback ) {
       if( count.error > 0 ) {
         console.log( chalk.red( count.error ) + " records were not imported due to errors" );
       }
-      callback( null, client );
+      callback( null, client, ans );
     }
     else if( recordTest( record.properties ) ) {
       addRecord( record, reader, ans, client, callback );
@@ -140,7 +140,7 @@ var newLayer = function( client, ans, callback ) {
     var query = client.query( q );
     
     query.on( 'error', function( error ) {
-      console.log( q ); //Remove this when finished debugging
+      console.log( q );
       callback( error, client );
     });
     
@@ -149,6 +149,79 @@ var newLayer = function( client, ans, callback ) {
       reader.readRecord( recordReader );
     });
   }
+}
+
+var getNames = function( client, ans, callback ){
+  var features = [ ans.layer ],
+      langs = { 'en' : 'English', 'pr' : 'Portuguese' },
+      q = [],
+      query = client.query( "SELECT featuretyp FROM " + ans.geom + " WHERE layer = '" + ans.layer + "' GROUP BY featuretyp ORDER BY featuretyp" );
+  
+  query.on( 'row', function( result ){
+    features.push( result.featuretyp );
+  });
+  
+  query.on( 'error', function( error ) {
+    callback( error, client );
+  });
+    
+  query.on( 'end', function() {
+    _.each( features, function( value ){
+      _.each( langs, function( name, code ){
+        q.push({
+          type : 'input',
+          name : value + "-" + code,
+          message : 'Enter the ' + chalk.yellow( name ) + ' translation for: ' + chalk.blue( value ),
+          default : value
+        });
+      });
+    });
+    
+    inquirer.prompt( q, function( names ) {
+      callback( null, client, ans, names );
+    });
+  });
+}
+
+var updateNames = function( client, ans, names, callback ){
+  var translate = {},
+      i = 0;
+  _.each( names, function( value, key ){
+    var layer = key.replace( /-(en|pr)$/g, "" ),
+        code = key.replace( /.*?(en|pr)$/g, "$1" );
+    if( !translate[ layer ] ) translate[ layer ] = {};
+    translate[ layer ][ code ] = value;
+    i++;
+  });
+  
+  var q = _.reduce( translate, function( memo, trans, text ){
+    return memo + " INSERT INTO names ( text, name_en, name_pr, layer ) VALUES ( '" + text + "', '" + trans.en + "', '" + trans.pr + "', '" + ans.layer + "' );";
+  }, '' );
+  
+  var query = client.query( q );
+  
+  query.on( 'error', function( error ) {
+    console.log( q );
+    callback( error, client );
+  });
+  
+  query.on( 'end', function() {
+    console.log( chalk.green( i ) + " translations successfully added" );
+    callback( null, client );
+  });
+}
+
+var deleteNames = function( client, ans, callback ){
+  var query = client.query( "DELETE FROM names WHERE layer = '" + ans.layer + "'" );
+  
+  query.on( 'error', function( error ) {
+    console.log( q );
+    callback( error, client );
+  });
+  
+  query.on( 'end', function() {
+    callback( null, client, ans );
+  });
 }
 
 var waterfallExit = function( err, client ) {
@@ -165,7 +238,10 @@ var replaceSeq = function( ans, client ) {
           testFile,
           testLayer,
           deleteLayer,
-          newLayer
+          deleteNames,
+          newLayer,
+          getNames,
+          updateNames
         ],
         waterfallExit
       );
@@ -176,7 +252,9 @@ var replaceSeq = function( ans, client ) {
             callback( null, client, ans );
           },
           testFile,
-          newLayer
+          newLayer,
+          getNames,
+          updateNames
         ],
         waterfallExit
       );
@@ -187,7 +265,8 @@ var replaceSeq = function( ans, client ) {
             callback( null, client, ans );
           },
           testLayer,
-          deleteLayer
+          deleteLayer,
+          deleteNames
         ],
         waterfallExit
       );
