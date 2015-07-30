@@ -163,7 +163,7 @@ exports.details = function( req, res )
 	var id = _.reduce( req.params.id.split( "," ), function( memo, i ){ return memo += "'" + i + "',"; }, "ANY(ARRAY[" ).replace( /,$/, "])" ),
 		details = [];
 	
-	var query = client.query( "SELECT * FROM ( SELECT yearfirstd, yearlastdo, globalid FROM basepoint WHERE globalid = " + id + " UNION SELECT yearfirstd, yearlastdo, globalid FROM baseline WHERE globalid = " + id + " UNION SELECT yearfirstd, yearlastdo, globalid FROM basepoly WHERE globalid = " + id + ") AS q LEFT OUTER JOIN details AS d ON q.globalid = d.globalid" );
+	var query = client.query( "SELECT creator, firstowner, owner, occupant, address, yearfirstd, yearlastdo, globalid FROM basepoint WHERE globalid = " + id + " UNION SELECT creator, firstowner, owner, occupant, address, yearfirstd, yearlastdo, globalid FROM baseline WHERE globalid = " + id + " UNION SELECT creator, firstowner, owner, occupant, address, yearfirstd, yearlastdo, globalid FROM basepoly WHERE globalid = " + id );
 	
 	query.on( 'row', function( result )
 	{
