@@ -95,7 +95,7 @@
     <StyleName>cemeteries-outline</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'CemeteriesPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'PublicSpacesPoly' AND featuretyp = 'Cemeteries' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -109,37 +109,37 @@
 
 <Style name="squares-outline" filter-mode="first">
   <Rule>
-    <Filter>([featuretyp] = 'Garden')</Filter>
+    <Filter>([featuretyp] = 'Gardens')</Filter>
     <LineSymbolizer stroke="#b8c089" stroke-width="1" stroke-opacity="0.5" stroke-linejoin="round" />
   </Rule>
   <Rule>
-    <Filter>([featuretyp] = 'Park')</Filter>
+    <Filter>([featuretyp] = 'Parks')</Filter>
     <LineSymbolizer stroke="#b8c089" stroke-width="1" stroke-opacity="0.5" stroke-linejoin="round" />
   </Rule>
   <Rule>
-    <Filter>([featuretyp] = 'Square')</Filter>
+    <Filter>([featuretyp] = 'Squares')</Filter>
     <LineSymbolizer stroke="#d4c4b6" stroke-width="1" stroke-opacity="0.6" stroke-linejoin="round" />
   </Rule>
   <Rule>
-    <Filter>([featuretyp] = 'Plaza')</Filter>
+    <Filter>([featuretyp] = 'Plazas')</Filter>
     <LineSymbolizer stroke="#d4c4b6" stroke-width="1" stroke-opacity="0.6" stroke-linejoin="round" />
   </Rule>
 </Style>
 <Style name="squares" filter-mode="first">
   <Rule>
-    <Filter>([featuretyp] = 'Garden')</Filter>
+    <Filter>([featuretyp] = 'Gardens')</Filter>
     <PolygonSymbolizer fill="#ccd2aa" fill-opacity="0.6" />
   </Rule>
   <Rule>
-    <Filter>([featuretyp] = 'Park')</Filter>
+    <Filter>([featuretyp] = 'Parks')</Filter>
     <PolygonSymbolizer fill="#ccd2aa" fill-opacity="0.6" />
   </Rule>
   <Rule>
-    <Filter>([featuretyp] = 'Square')</Filter>
+    <Filter>([featuretyp] = 'Squares')</Filter>
     <PolygonSymbolizer fill="#fcf9d5" fill-opacity="0.8" />
   </Rule>
   <Rule>
-    <Filter>([featuretyp] = 'Plaza')</Filter>
+    <Filter>([featuretyp] = 'Plazas')</Filter>
     <PolygonSymbolizer fill="#fcf9d5" fill-opacity="0.8" />
   </Rule>
 </Style>
@@ -149,7 +149,7 @@
     <StyleName>squares-outline</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom, featuretyp FROM basepoly WHERE layer = 'SquaresPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom, featuretyp FROM basepoly WHERE layer = 'PublicSpacesPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -1372,46 +1372,24 @@
 <Style name="squares_labels-icon" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Garden') and ([nameshort] = 'Quinta da Boa Vista')</Filter>
-    <ShieldSymbolizer file="../../../images/park2-24.png" placement="interior" clip="false" fill="#7a8446" face-name="DejaVu Sans Book" ><![CDATA[' ']]></ShieldSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Garden') and ([nameshort] = 'Quinta da Boa Vista')</Filter>
-    <ShieldSymbolizer file="../../../images/park2-18.png" placement="interior" clip="false" fill="#7a8446" face-name="DejaVu Sans Book" ><![CDATA[' ']]></ShieldSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Park') and ([nameshort] = 'Quinta da Boa Vista')</Filter>
-    <ShieldSymbolizer file="../../../images/park2-24.png" placement="interior" clip="false" fill="#7a8446" face-name="DejaVu Sans Book" ><![CDATA[' ']]></ShieldSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Park') and ([nameshort] = 'Quinta da Boa Vista')</Filter>
-    <ShieldSymbolizer file="../../../images/park2-18.png" placement="interior" clip="false" fill="#7a8446" face-name="DejaVu Sans Book" ><![CDATA[' ']]></ShieldSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Park')</Filter>
+    <Filter>([featuretyp] = 'Parks')</Filter>
     <ShieldSymbolizer file="../../../images/park2-24.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Park')</Filter>
+    <Filter>([featuretyp] = 'Parks')</Filter>
     <ShieldSymbolizer file="../../../images/park2-18.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Garden')</Filter>
+    <Filter>([featuretyp] = 'Gardens')</Filter>
     <ShieldSymbolizer file="../../../images/park2-24.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Garden')</Filter>
+    <Filter>([featuretyp] = 'Gardens')</Filter>
     <ShieldSymbolizer file="../../../images/park2-18.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
   </Rule>
 </Style>
@@ -1419,95 +1397,95 @@
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <MinScaleDenominator>1500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Plaza')</Filter>
+    <Filter>([featuretyp] = 'Plazas')</Filter>
     <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Plaza')</Filter>
+    <Filter>([featuretyp] = 'Plazas')</Filter>
     <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Plaza')</Filter>
+    <Filter>([featuretyp] = 'Plazas')</Filter>
     <TextSymbolizer size="13" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>1500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Plaza')</Filter>
+    <Filter>([featuretyp] = 'Plazas')</Filter>
     <TextSymbolizer placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <MinScaleDenominator>1500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Square')</Filter>
+    <Filter>([featuretyp] = 'Squares')</Filter>
     <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Square')</Filter>
+    <Filter>([featuretyp] = 'Squares')</Filter>
     <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Square')</Filter>
+    <Filter>([featuretyp] = 'Squares')</Filter>
     <TextSymbolizer size="13" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>1500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Square')</Filter>
+    <Filter>([featuretyp] = 'Squares')</Filter>
     <TextSymbolizer placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Style name="squares_labels-greenspace" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Garden')</Filter>
+    <Filter>([featuretyp] = 'Gardens')</Filter>
     <TextSymbolizer size="15" character-spacing="2" wrap-width="70" minimum-distance="250" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Garden')</Filter>
+    <Filter>([featuretyp] = 'Gardens')</Filter>
     <TextSymbolizer size="14" character-spacing="2" wrap-width="20" minimum-distance="120" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Garden')</Filter>
+    <Filter>([featuretyp] = 'Gardens')</Filter>
     <TextSymbolizer size="13" character-spacing="1" wrap-width="50" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Garden')</Filter>
+    <Filter>([featuretyp] = 'Gardens')</Filter>
     <TextSymbolizer size="12" character-spacing="1" wrap-width="80" wrap-before="true" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Park')</Filter>
+    <Filter>([featuretyp] = 'Parks')</Filter>
     <TextSymbolizer size="15" character-spacing="2" wrap-width="70" minimum-distance="250" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Park')</Filter>
+    <Filter>([featuretyp] = 'Parks')</Filter>
     <TextSymbolizer size="14" character-spacing="2" wrap-width="20" minimum-distance="120" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Park')</Filter>
+    <Filter>([featuretyp] = 'Parks')</Filter>
     <TextSymbolizer size="13" character-spacing="1" wrap-width="50" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Park')</Filter>
+    <Filter>([featuretyp] = 'Parks')</Filter>
     <TextSymbolizer size="12" character-spacing="1" wrap-width="80" wrap-before="true" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
 </Style>
@@ -1518,7 +1496,7 @@
     <StyleName>squares_labels-icon</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom, featuretyp, nameshort FROM basepoly WHERE layer = 'SquaresPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom, featuretyp, nameshort FROM basepoly WHERE layer = 'PublicSpacesPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -2039,7 +2017,7 @@
     <StyleName>cemeteries_marker</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'CemeteriesPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'PublicSpacesPoly' AND featuretyp = 'Cemeteries' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
