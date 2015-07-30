@@ -107,7 +107,7 @@ function draw( id, route, el, callback )
 	route = route ? route : "draw";
 	var styles = get_styles( "#1a1a1a" );
 	
-	highlight.bottom = omnivore.geojson( server + "/" + route + "/" + id, null, styles.bottom )
+	highlight.bottom = omnivore.geojson( server + "/" + route + "/" + encodeURIComponent( id ), null, styles.bottom )
 				.on( 'ready', function()
 				{
 					map.fitBounds( this.getBounds(), { paddingTopLeft : [ 265, 165 ] } );
