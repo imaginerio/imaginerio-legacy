@@ -233,49 +233,7 @@
     <StyleName>riversstreams</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM baseline WHERE layer = 'RiversAndStreamsLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
-       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
-       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
-       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
-       <Parameter name="extent"><![CDATA[-43.7954299139144,-23.0822316762007,-43.0917420245885,-22.7290825466831]]></Parameter>
-       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
-       <Parameter name="host"><![CDATA[localhost]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
-       <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
-    </Datasource>
-  </Layer>
-
-<Style name="waterline" filter-mode="first">
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <LineSymbolizer stroke-width="3.5" stroke="#8fb0cd" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <LineSymbolizer stroke-width="2.5" stroke="#8fb0cd" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <LineSymbolizer stroke-width="1.7" stroke="#8fb0cd" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <LineSymbolizer stroke-width="1.2" stroke="#8fb0cd" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <LineSymbolizer stroke-width="0.8" stroke="#8fb0cd" />
-  </Rule>
-</Style>
-<Layer name="waterline"
-  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>waterline</StyleName>
-    <Datasource>
-       <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM baseline WHERE layer = 'WaterLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM baseline WHERE layer = 'InlandWatersLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -2053,44 +2011,7 @@
     <StyleName>riversstreams_labels</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom, namecomple FROM baseline WHERE layer = 'RiversAndStreamsLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
-       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
-       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
-       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
-       <Parameter name="extent"><![CDATA[-43.7954299139144,-23.0822316762007,-43.0917420245885,-22.7290825466831]]></Parameter>
-       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
-       <Parameter name="host"><![CDATA[localhost]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
-       <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
-    </Datasource>
-  </Layer>
-
-<Style name="waterline_labels" filter-mode="first">
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <TextSymbolizer size="14" minimum-path-length="425" placement="line" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <TextSymbolizer size="12" minimum-path-length="400" placement="line" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <TextSymbolizer size="11" minimum-path-length="300" placement="line" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <TextSymbolizer placement="line" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-</Style>
-<Layer name="waterline_labels"
-  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>waterline_labels</StyleName>
-    <Datasource>
-       <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom, namecomple FROM baseline WHERE layer = 'WaterLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom, namecomple FROM baseline WHERE layer = 'InlandWatersLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
