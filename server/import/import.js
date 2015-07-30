@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var pg = require( 'pg' ),
     _ = require( 'underscore' ),
     fs = require( 'fs' ),
