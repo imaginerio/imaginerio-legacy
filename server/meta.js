@@ -189,11 +189,11 @@ exports.names = function( req, res )
 	var names = {},
 		lang = req.params.lang;
 	
-	var query = client.query( "SELECT * FROM names" );
+	var query = client.query( "SELECT text, name_en, name_pr FROM names" );
 	
 	query.on( 'row', function( result )
 	{
-		names[ result.layer ] = result[ "name_" + lang ];
+		names[ result.text ] = result[ "name_" + lang ];
 	});
 	
 	query.on( 'end', function()
