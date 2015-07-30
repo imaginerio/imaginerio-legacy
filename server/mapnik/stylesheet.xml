@@ -11,7 +11,7 @@
   <Parameter name="minzoom">13</Parameter>
   <Parameter name="maxzoom">18</Parameter>
   <Parameter name="scale">1</Parameter>
-  <Parameter name="metatile">15</Parameter>
+  <Parameter name="metatile">64</Parameter>
   <Parameter name="id"><![CDATA[Rio]]></Parameter>
   <Parameter name="_updated">1405089520000</Parameter>
   <Parameter name="name"><![CDATA[Rio]]></Parameter>
@@ -1329,7 +1329,7 @@
     <StyleName>railpoint</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoint WHERE layer = 'TransportationRailPoint' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoint WHERE layer = 'BuildingsPoint' AND ( featuretyp = 'Transportation/Metro Station' OR featuretyp = 'Transportation/Railroad Station' OR featuretyp = 'Transportation/Tram Station' ) AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
