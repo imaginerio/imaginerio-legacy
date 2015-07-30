@@ -128,6 +128,13 @@ var newLayer = function( client, ans, callback ) {
     			num = parseInt( date.getFullYear().toString() + ( "0" + ( date.getMonth() + 1 ) ).slice( -2 )  + ( "0" + date.getDate() ).slice( -2 ) ),
     			props = _.defaults( _.objMap( record.properties, processRecord ), defaultNull );
     
+    record.geometry.crs = {
+      "type" : "name",
+      "properties" : {
+        "name" : "EPSG:4326"
+      }
+    }
+    
     var q = "INSERT INTO " + ans.geom + " (featuretyp, namecomple, nameshort, yearlastdo, firstdispl, lastdispla, notes, creator, firstowner, owner, occupant, address, geom, uploaddate, globalid, layer) VALUES ( " + props.FeatureTyp + ", " + props.NameComple + ", " + props.NameShort + ", " + props.YearLastDo + ", " + props.FirstDispl + ", " + props.LastDispla + ", " + props.Notes + ", " + props.Creator + ", " + props.FirstOwner + ", " + props.Owner + ", " + props.Occupant + ", " + props.Address + ", ST_GeomFromGeoJSON('" + JSON.stringify( record.geometry ) + "'), " + num + ", 'missing-id', '" + ans.layer + "')";
 
     var query = client.query( q );
