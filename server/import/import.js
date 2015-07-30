@@ -19,7 +19,7 @@ var pg = require( 'pg' ),
       "Owner" : null,
       "Occupant" : null,
       "Address" : null
-    }
+    };
     
 _.mixin({
   // ### _.objMap
@@ -79,7 +79,7 @@ var deleteLayer = function( client, ans, count, callback ) {
 }
 
 var newLayer = function( client, ans, callback ) {
-  var reader = shapefile.reader( ans.file ),
+  var reader = shapefile.reader( ans.file, { encoding : "UTF-8" } ),
       count = { success : 0, error : 0 };
       
   reader.readHeader( function( error, header ) {
