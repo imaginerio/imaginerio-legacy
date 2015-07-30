@@ -114,7 +114,7 @@ function draw( id, route, el, callback )
 					if( callback ) callback( el );
 				})
 				.addTo( map );
-	highlight.top = omnivore.geojson( server + "/" + route + "/" + id, null, styles.top ).addTo( map );
+	highlight.top = omnivore.geojson( server + "/" + route + "/" + encodeURIComponent( id ), null, styles.top ).addTo( map );
 }
 
 function load_raster( id )
@@ -180,29 +180,42 @@ function clear_highlight()
 
 function get_styles( color )
 {
+	var topStyle = { 
+      		color: color,
+      		fillColor: color,
+      		fillOpacity : 0.2,
+      		weight : 2,
+      		radius : 4
+      },
+      bottomStyle = { 
+      		color: color,
+      		fillColor: color,
+      		fillOpacity : 0,
+      		opacity : 0.2,
+      		weight : 6,
+      		radius : 4
+      	};
+  
 	var topLayer = L.geoJson( null, {
 	    style : function( feature )
 	    {
-        	return { 
-        		color: color,
-        		fillColor: color,
-        		fillOpacity : 0.2,
-        		weight : 2
-        	};
-		}
+        	return topStyle;
+		  },
+		  pointToLayer: function( feature, latlng )
+		  {
+        return L.circleMarker( latlng, topStyle );
+      }
 	});
 	
 	var bottomLayer = L.geoJson( null, {
 	    style : function( feature )
 	    {
-        	return { 
-        		color: color,
-        		fillColor: color,
-        		fillOpacity : 0,
-        		opacity : 0.2,
-        		weight : 6 
-        	};
-		}
+        	return bottomStyle;
+		  },
+		  pointToLayer: function( feature, latlng )
+		  {
+        return L.circleMarker( latlng, bottomStyle );
+      }
 	});
 	
 	return { top : topLayer, bottom : bottomLayer };
