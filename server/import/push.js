@@ -4,7 +4,7 @@ var sys = require( 'sys' ),
     	
 exports.copyDB = function( client, to, from ){
   console.log( "Dumping " + chalk.green( from ) + " database structure and data..." );
-  exec( "pg_dump -T cache " + from + " | gzip > " + from + ".gz", function ( error, stdout, stderr ){
+  exec( "pg_dump " + from + " | gzip > " + from + ".gz", function ( error, stdout, stderr ){
     if( error !== null ){
       	console.log( chalk.red( "ERROR: " ) + error );
     }
