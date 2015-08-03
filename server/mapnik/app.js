@@ -1,15 +1,16 @@
 var mapnik = require( 'mapnik' ),
-	mercator = require( './utils/sphericalmercator' ),
-	mappool = require( './utils/pool.js' ),
-	http = require( 'http' ),
-	fs = require( 'graceful-fs' ),
-	xml = require( 'libxmljs' ),
-	_ = require( 'underscore' ),
-	parseXYZ = require( './utils/tile.js' ).parseXYZ,
-	pg = require( 'pg' ),
-	AWS = require( 'aws-sdk' ),
-	conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/rio",
-	hillshade = [ { year : 1960, file : '../../../../../raster/Hillshade_WGS84_1960_2013.tif' }, { year : 1921, file : '../../../../../raster/Hillshade_WGS84_1921_1959.tif' }, { year : 1906, file : '../../../../../raster/Hillshade_WGS84_1906_1920.tif' }, { year : 1500, file : '../../../../../raster/Hillshade_WGS84_1500_1905.tif' } ];
+    mercator = require( './utils/sphericalmercator' ),
+    mappool = require( './utils/pool.js' ),
+    http = require( 'http' ),
+    fs = require( 'graceful-fs' ),
+    xml = require( 'libxmljs' ),
+    _ = require( 'underscore' ),
+    parseXYZ = require( './utils/tile.js' ).parseXYZ,
+    pg = require( 'pg' ),
+    AWS = require( 'aws-sdk' ),
+    conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/rio",
+    dev,
+    hillshade = [ { year : 1960, file : '../../../../../raster/Hillshade_WGS84_1960_2013.tif' }, { year : 1921, file : '../../../../../raster/Hillshade_WGS84_1921_1959.tif' }, { year : 1906, file : '../../../../../raster/Hillshade_WGS84_1906_1920.tif' }, { year : 1500, file : '../../../../../raster/Hillshade_WGS84_1500_1905.tif' } ];
 
 // register plugins
 if( mapnik.register_default_input_plugins ) mapnik.register_default_input_plugins();
@@ -41,10 +42,10 @@ client.connect();
 
 var parseXML = function( req, year, layer, options, callback )
 {
-	var file = "cache/xml/" + year + "/" + layer + ".xml";
+	var file = dev ? "cache/xml/" + year + "/" + layer + "-dev.xml" : "cache/xml/" + year + "/" + layer + ".xml";
 	fs.exists( file, function( exists )
 	{
-		if( exists )
+		if( exists && dev === false )
 		{
 			callback( file, options );
 		}
@@ -56,12 +57,21 @@ var parseXML = function( req, year, layer, options, callback )
 				
 				var xmlDoc = xml.parseXml( data );
 				var sources = xmlDoc.find( "//Parameter[@name='table']" );
+				var dbname = xmlDoc.find( "//Parameter[@name='dbname']" );
 				
 				_.each( sources, function( item )
 				{
 					var t = item.text();
 					item.text( t.replace( /99999999/g, year ) );
 				});
+				
+				if( dev ){
+  				  _.each( sources, function( item )
+    				{
+    					var t = item.text();
+    					item.text( t + 'dev' );
+    				});
+				}
 				
 				var off = layer.split( "," );
 				_.each( off, function( l )
@@ -142,22 +152,23 @@ http.createServer( function( req, res )
 		{
 			res.writeHead( 500, { 'Content-Type' : 'text/plain' } );
 			res.end( err.message );
-        }
-        else
-        {
+    }
+    else
+    {
+			dev = req.headers.host.match( /-dev/ ) ? true : false;
 			params.layer = params.layer.split( "," ).sort().join( "," );
 			
 			var png = "cache/png/" + params.year + "/" + params.layer + "/" + params.z + "/" + params.x + "/" + params.y + ".png",
-				exists = false,
-				query = client.query( "SELECT id FROM cache WHERE year = " + params.year + " AND layer = '" + params.layer + "' AND z = " + params.z + " AND x = " + params.x + " AND y = " + params.y );
-
+				  exists = false,
+          query = client.query( "SELECT id FROM cache WHERE year = " + params.year + " AND layer = '" + params.layer + "' AND z = " + params.z + " AND x = " + params.x + " AND y = " + params.y );
+      
 			query.on( 'row', function( result )
 			{
 				exists = result.id;
 			});
 			query.on( 'end', function()
 			{
-				if( exists )
+				if( exists && dev === false )
 				{
 					console.log( png + ' exists.' );
 					res.writeHead( 302, {
@@ -180,11 +191,11 @@ http.createServer( function( req, res )
 									maps.release( stylesheet, map );
 								});
 								res.writeHead( 500, { 'Content-Type': 'text/plain' } );
-			                    res.end( err.message );
+                res.end( err.message );
 							}
-			                else
+              else
 							{
-			                    // bbox for x,y,z
+			          // bbox for x,y,z
 								var bbox = mercator.xyz_to_envelope( params.x, params.y, params.z, TMS_SCHEME );
 								try
 								{
@@ -209,6 +220,10 @@ http.createServer( function( req, res )
 												"Access-Control-Allow-Origin" : "*"
 											});
 											res.end( im.encodeSync( 'png' ) );
+											
+											if( dev ){
+  											  return console.log( png + " dev tile created" );
+											}
 											
 											t = process.hrtime( t );
 											var sec = Math.round( ( t[ 0 ] + ( t[ 1 ] / 1000000000 ) ) * 100 ) / 100;

@@ -5,6 +5,7 @@ var pg = require( 'pg' ),
 
 exports.probe = function( req, res )
 {
+	if( req.headers.host.match( /-dev/ ) ) conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/riodev";
 	var client = new pg.Client( conn );
 	client.connect();
 	
@@ -30,6 +31,7 @@ exports.probe = function( req, res )
 
 exports.draw = function( req, res )
 {
+	if( req.headers.host.match( /-dev/ ) ) conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/riodev";
 	postgeo.connect( conn );
 	
 	var id = req.params.id;
@@ -72,6 +74,7 @@ exports.draw = function( req, res )
 
 exports.visual = function( req, res )
 {
+	if( req.headers.host.match( /-dev/ ) ) conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/riodev";
 	postgeo.connect( conn );
 	
 	var year = req.params.year;
@@ -84,6 +87,7 @@ exports.visual = function( req, res )
 
 exports.plan = function( req, res )
 {
+	if( req.headers.host.match( /-dev/ ) ) conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/riodev";
 	postgeo.connect( conn );
 	
 	var plan = decodeURI( req.params.name );
