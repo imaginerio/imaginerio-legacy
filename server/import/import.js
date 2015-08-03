@@ -9,6 +9,7 @@ var pg = require( 'pg' ),
     chalk = require( 'chalk' ),
     shapefile  = require( 'shapefile' ),
     questions = require( './questions' ),
+    push = require( './push' ),
     defaultNull = {
       "NameComple" : null,
       "NameShort" : null,
@@ -271,11 +272,12 @@ var replaceSeq = function( ans, client ) {
         waterfallExit
       );
     },
-    pushDB = function( ans ) {
-      
+    pushDB = function( ans, client ) {
+      push.copyDB( client, "rio", "riodev" );
     },
-    pullDB = function( ans ) {
-      
+    pullDB = function( ans, client ) {
+      client.end();
+      push.copyDB( client, "riodev", "rio" );
     },
     tasks = {
       'replace' : replaceSeq,
