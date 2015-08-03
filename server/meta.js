@@ -1,7 +1,6 @@
 var pg = require( 'pg' ),
 	_ = require( 'underscore' ),
-	conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/rio",
-	admin = "postgres://pg_power_user:XfAfooM4zUD8HG@localhost/rio";
+	conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/rio";
 	
 _.mixin({
   // ### _.objMap
@@ -27,6 +26,7 @@ _.mixin({
 	
 exports.timeline = function( req, res )
 {
+	console.log( req );
 	var client = new pg.Client( conn );
 	client.connect();
 	
