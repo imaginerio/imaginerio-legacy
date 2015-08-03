@@ -1,10 +1,6 @@
-var server = "http://imaginerio-dev.rice.edu:3000",
-	tileserver = "http://imaginerio-dev.rice.edu:8000/",
-	rasterserver = "http://imaginerio-dev.rice.edu:9000/";
-	
-//	server = "http://localhost:3000";
-//	tileserver = "http://localhost:8000/";
-//	rasterserver = "http://localhost:9000/";
+var server = "http://imaginerio.rice.edu:3000",
+	  tileserver = "http://imaginerio.rice.edu:8000/",
+    rasterserver = "http://imaginerio.rice.edu:9000/";
 
 var lang,
 	pr = {
@@ -24,6 +20,11 @@ function init()
 	L.Icon.Default.imagePath = 'img';
 	
 	lang = gup( 'lang' ) == "pr" ? "pr" : "en";
+	if( gup( 'dev' ) == 'true' ){
+    	server = "http://imaginerio-dev.rice.edu:3000";
+	  tileserver = "http://imaginerio-dev.rice.edu:8000/";
+    rasterserver = "http://imaginerio-dev.rice.edu:9000/";
+	}
 	
 	set_language();
 	resize();
