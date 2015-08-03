@@ -26,7 +26,7 @@ exports.copyDB = function( client, to, from ){
         }
         else{
           console.log( "Creating empty " + chalk.green( to ) + " database..." );
-          exec( "createdb " + to, function( error, stdout, stderr ){
+          exec( "createdb -T template0 " + to, function( error, stdout, stderr ){
             	if( error !== null ){
               console.log( chalk.red( "ERROR: " ) + error );
               client.end();
