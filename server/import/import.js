@@ -197,7 +197,7 @@ var updateNames = function( client, ans, names, callback ){
   });
   
   var q = _.reduce( translate, function( memo, trans, text ){
-    return memo + " INSERT INTO names ( text, name_en, name_pr, layer ) VALUES ( '" + text + "', '" + trans.en + "', '" + trans.pr + "', '" + ans.layer + "' );";
+    return memo + " INSERT INTO names ( text, name_en, name_pr, layer ) SELECT '" + text + "', '" + trans.en + "', '" + trans.pr + "', '" + ans.layer + "' WHERE NOT EXISTS ( SELECT text FROM names WHERE text = '" + text + "' );";
   }, '' );
   
   var query = client.query( q );
