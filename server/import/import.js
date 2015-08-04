@@ -157,7 +157,7 @@ var getNames = function( client, ans, callback ){
   var features = [ ans.layer ],
       langs = { 'en' : 'English', 'pr' : 'Portuguese' },
       q = [],
-      query = client.query( "SELECT featuretyp FROM " + ans.geom + " WHERE layer = '" + ans.layer + "' GROUP BY featuretyp ORDER BY featuretyp" );
+      query = client.query( "SELECT featuretyp FROM " + ans.geom + " WHERE layer = '" + ans.layer + "' AND featuretyp IS NOT NULL GROUP BY featuretyp ORDER BY featuretyp" );
   
   query.on( 'row', function( result ){
     features.push( result.featuretyp );
