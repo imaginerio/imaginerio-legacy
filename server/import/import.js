@@ -21,7 +21,15 @@ var pg = require( 'pg' ),
       "Owner" : null,
       "Occupant" : null,
       "Address" : null
-    };
+    },
+    defaultVisual = {
+      "Notes" : null,
+      "Creator" : null,
+      "SS_Title" : null,
+      "SS_Reposit" : null,
+      "Latitude" : null,
+      "Longitude" : null
+    }
     
 _.mixin({
   // ### _.objMap
@@ -127,8 +135,7 @@ var newLayer = function( client, ans, callback ) {
   
   var addRecord = function( record, reader, ans, client, callback ){
     var date = new Date(),
-    			num = parseInt( date.getFullYear().toString() + ( "0" + ( date.getMonth() + 1 ) ).slice( -2 )  + ( "0" + date.getDate() ).slice( -2 ) ),
-    			props = _.defaults( _.objMap( record.properties, processRecord ), defaultNull );
+    			num = parseInt( date.getFullYear().toString() + ( "0" + ( date.getMonth() + 1 ) ).slice( -2 )  + ( "0" + date.getDate() ).slice( -2 ) );
     
     record.geometry.crs = {
       "type" : "name",
@@ -137,7 +144,14 @@ var newLayer = function( client, ans, callback ) {
       }
     }
     
-    var q = "INSERT INTO " + ans.geom + " (featuretyp, namecomple, nameshort, yearlastdo, firstdispl, lastdispla, notes, creator, firstowner, owner, occupant, address, geom, uploaddate, globalid, layer) VALUES ( " + props.FeatureTyp + ", " + props.NameComple + ", " + props.NameShort + ", " + props.YearLastDo + ", " + props.FirstDispl + ", " + props.LastDispla + ", " + props.Notes + ", " + props.Creator + ", " + props.FirstOwner + ", " + props.Owner + ", " + props.Occupant + ", " + props.Address + ", ST_GeomFromGeoJSON('" + JSON.stringify( record.geometry ) + "'), " + num + ", '" + uuid.v1() + "', '" + ans.layer + "')";
+    if( ans.geom == 'viewsheds' || ans.geom == 'mapsplans' ){
+      var props = props = _.defaults( _.objMap( record.properties, processRecord ), defaultVisual ),
+          q = "INSERT INTO " + ans.geom + " (firstdispl, lastdispla, notes, creator, title, repository, imageid, latitude, longitude, geom, uploaddate, globalid, layer) VALUES ( " + props.FirstDispl + ", " + props.LastDispla + ", " + props.Notes + ", " + props.Creator + ", " + props.SS_Title + ", " + props.SS_Reposit + ", " + props.SSC_ImageI + ", " + props.Latitude + ", " + props.Longitude + ", ST_GeomFromGeoJSON('" + JSON.stringify( record.geometry ) + "'), " + num + ", " + props.SS_ID + ", '" + ans.layer + "')";
+    }
+    else{
+      var props = _.defaults( _.objMap( record.properties, processRecord ), defaultNull ),
+          q = "INSERT INTO " + ans.geom + " (featuretyp, namecomple, nameshort, yearlastdo, firstdispl, lastdispla, notes, creator, firstowner, owner, occupant, address, geom, uploaddate, globalid, layer) VALUES ( " + props.FeatureTyp + ", " + props.NameComple + ", " + props.NameShort + ", " + props.YearLastDo + ", " + props.FirstDispl + ", " + props.LastDispla + ", " + props.Notes + ", " + props.Creator + ", " + props.FirstOwner + ", " + props.Owner + ", " + props.Occupant + ", " + props.Address + ", ST_GeomFromGeoJSON('" + JSON.stringify( record.geometry ) + "'), " + num + ", '" + uuid.v1() + "', '" + ans.layer + "')";
+    }
 
     var query = client.query( q );
     
