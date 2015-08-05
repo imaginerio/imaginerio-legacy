@@ -24,7 +24,7 @@ exports.q = [
     choices : function( ans ){
       if( ans.task == 'visual' ) {
         return [
-          { name : 'viewsheds', value : 'viewshed' },
+          { name : 'viewsheds', value : 'viewsheds' },
           { name : 'maps', value : 'maps' },
           { name : 'plans', value : 'plans' }
         ]
