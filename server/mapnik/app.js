@@ -45,7 +45,7 @@ var parseXML = function( req, year, layer, options, callback )
 	var file = dev ? "cache/xml/" + year + "/" + layer + "-dev.xml" : "cache/xml/" + year + "/" + layer + ".xml";
 	fs.exists( file, function( exists )
 	{
-		if( exists && dev === false )
+		if( exists )
 		{
 			callback( file, options );
 		}
