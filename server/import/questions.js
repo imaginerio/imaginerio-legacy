@@ -35,14 +35,6 @@ exports.q = [
     type : 'input',
     name : 'layer',
     message : 'Enter layer name:',
-    default : function( ans ){
-      if( ans.geom == 'viewsheds' ){
-        return 'viewsheds';
-      }
-      else if( ans.geom == 'mapsplans' ){
-        return 'maps';
-      }
-    },
     when : function( ans ){ 
       return ans.task != 'push' && ans.task != 'pull';
     }
