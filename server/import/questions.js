@@ -11,6 +11,8 @@ exports.q = [
       { name : "Import a new layer", value : 'new' },
       { name : "Delete a layer", value : 'delete' },
       new inquirer.Separator(),
+      { name : "Import a visual layer", value : 'visual' },
+      new inquirer.Separator(),
       { name : "Push development database to live", value : 'push' },
       { name : "Reset development database from live", value : 'pull' }
     ]
@@ -19,14 +21,22 @@ exports.q = [
     type : 'list',
     name : 'geom',
     message : 'Select feature type:',
-    choices : [
-      { name : 'point', value : 'basepoint' },
-      { name : 'line', value : 'baseline' },
-      { name : 'polygon', value : 'basepoly' },
-      new inquirer.Separator(),
-      { name : 'viewshed', value : 'viewsheds' },
-      { name : 'maps / plans', value : 'mapsplans' }
-    ],
+    choices : function( ans ){
+      if( ans.task == 'visual' ) {
+        return [
+          { name : 'viewsheds', value : 'viewshed' },
+          { name : 'maps', value : 'maps' },
+          { name : 'plans', value : 'plans' }
+        ]
+      }
+      else{
+        return [
+          { name : 'point', value : 'basepoint' },
+          { name : 'line', value : 'baseline' },
+          { name : 'polygon', value : 'basepoly' }
+        ]
+      }
+    },
     when : function( ans ){ 
       return ans.task != 'push' && ans.task != 'pull';
     }
@@ -36,7 +46,7 @@ exports.q = [
     name : 'layer',
     message : 'Enter layer name:',
     when : function( ans ){ 
-      return ans.task != 'push' && ans.task != 'pull';
+      return ans.task != 'push' && ans.task != 'pull' && ans.task != 'visual';
     }
   },
   {
@@ -47,7 +57,7 @@ exports.q = [
       return ans.layer;
     },
     when : function( ans ){
-      return ans.task == 'replace' || ans.task == 'new';
+      return ans.task == 'replace' || ans.task == 'new' || ans.task == 'visual';
     }
   },
   {
@@ -63,6 +73,9 @@ exports.q = [
           break;
         case 'delete':
           var str = 'Delete the layer ' + chalk.red.underline( ans.layer ) + ' from ' + chalk.underline.red( ans.geom ) + '?';
+          break;
+        case 'visual':
+          var str = 'Replace the visual layer ' + chalk.red.underline( ans.geom ) + ' from the file ' + chalk.red.underline( ans.file ) + '?'
           break;
         case 'push':
           var str = chalk.red.underline( 'Overwrite the live database' ) + ' with data from the development database?';

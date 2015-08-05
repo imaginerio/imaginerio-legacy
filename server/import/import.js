@@ -66,7 +66,7 @@ var testLayer = function( client, ans, callback ) {
 	})
 	
 	query.on( 'end', function(){
-		if( count > 0 ) {
+		if( count > 0 || ans.task == 'visual' ) {
   		  callback( null, client, ans, count );
 		}
 		else {
@@ -168,6 +168,7 @@ var newLayer = function( client, ans, callback ) {
 }
 
 var getNames = function( client, ans, callback ){
+  if( ans.geom == 'viewsheds' || ans.geom == 'mapsplans' ) callback( null, client, ans, null );
   var features = [ ans.layer ],
       langs = { 'en' : 'English', 'pr' : 'Portuguese' },
       q = [],
@@ -200,6 +201,7 @@ var getNames = function( client, ans, callback ){
 }
 
 var updateNames = function( client, ans, names, callback ){
+  if( ans.geom == 'viewsheds' || ans.geom == 'mapsplans' ) callback( null, client );
   var translate = {},
       i = 0;
   _.each( names, function( value, key ){
@@ -228,6 +230,7 @@ var updateNames = function( client, ans, names, callback ){
 }
 
 var deleteNames = function( client, ans, callback ){
+  if( ans.geom == 'viewsheds' || ans.geom == 'mapsplans' ) callback( null, client, ans );
   var query = client.query( "DELETE FROM names WHERE layer = '" + ans.layer + "'" );
   
   query.on( 'error', function( error ) {
@@ -287,6 +290,21 @@ var replaceSeq = function( ans, client ) {
         waterfallExit
       );
     },
+    visualSeq = function( ans, client ) {
+      ans.layer = ans.geom;
+      ans.geom = ans.layer == 'viewshed' ? ans.geom : 'mapsplans';
+      async.waterfall([
+          function( callback ) {
+            callback( null, client, ans );
+          },
+          testFile,
+          testLayer,
+          deleteLayer,
+          newLayer,
+        ],
+        waterfallExit
+      );
+    },
     pushDB = function( ans, client ) {
       push.copyDB( client, "rio", "riodev" );
     },
@@ -298,6 +316,7 @@ var replaceSeq = function( ans, client ) {
       'replace' : replaceSeq,
       'new' : newSeq,
       'delete' : deleteSeq,
+      'visual' : visualSeq,
       'push' : pushDB,
       'pull' : pullDB
     };
