@@ -48,7 +48,7 @@ client.connect();
 
 var parseXML = function( req, id, options, callback )
 {
-	var file = dev ? "cache/raster/" + id + "/raster-dev.xml" : "cache/raster/" + id + "/raster.xml";
+	var file = "cache/raster/" + id + "/raster.xml";
 	fs.exists( file, function( exists )
 	{
 		if( exists )
@@ -143,7 +143,7 @@ http.createServer( function( req, res )
 			});
 			query.on( 'end', function()
 			{
-				if( exists )
+				if( exists && dev === false )
 				{
 					console.log( png + ' exists.' );
 					res.writeHead( 302, {
