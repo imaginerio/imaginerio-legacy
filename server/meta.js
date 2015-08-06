@@ -32,7 +32,7 @@ exports.timeline = function( req, res )
 	
 	var years = [];
 	
-	var query = client.query( "SELECT * FROM ( SELECT firstdispl  AS year FROM basepoint UNION SELECT lastdispla AS year FROM basepoint UNION SELECT firstdispl AS year FROM baseline UNION SELECT lastdispla AS year FROM baseline UNION SELECT firstdispl AS year FROM basepoly UNION SELECT lastdispla AS year FROM basepoly UNION SELECT firstdispl AS year FROM visualpoly UNION SELECT lastdispla AS year FROM visualpoly ) as q ORDER BY year" );
+	var query = client.query( "SELECT * FROM ( SELECT firstdispl  AS year FROM basepoint UNION SELECT lastdispla AS year FROM basepoint UNION SELECT firstdispl AS year FROM baseline UNION SELECT lastdispla AS year FROM baseline UNION SELECT firstdispl AS year FROM basepoly UNION SELECT lastdispla AS year FROM basepoly UNION SELECT firstdispl AS year FROM mapsplans UNION SELECT lastdispla AS year FROM mapsplans UNION SELECT firstdispl AS year FROM viewsheds UNION SELECT lastdispla AS year FROM viewsheds ) as q ORDER BY year" );
 	
 	query.on( 'row', function( result )
 	{
@@ -93,7 +93,7 @@ exports.raster = function( req, res )
 	client.connect();
 
 	var year = req.params.year,
-		q = "SELECT imageid AS id, 'SSID' || globalid AS file, firstdispl || ' - ' || lastdispla AS date, creator, imageviewd AS description, layer FROM visualpoly WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " ORDER BY layer";
+		q = "SELECT imageid AS id, 'SSID' || globalid AS file, firstdispl || ' - ' || lastdispla AS date, creator, title AS description, layer FROM mapsplans WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " ORDER BY layer";
 	
 	var query = client.query( q ),
 		arr = [];
