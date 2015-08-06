@@ -58,7 +58,7 @@ function build_layers()
 		if( json.length > 0 )
 		{
 			var folder = build_folder( names.VisualDocuments ),
-				raster = _.filter( json, function( val ){ return val.layer == "MapsAndPlansPoly" } );
+				  raster = json;
 				
 			if( raster.length < json.length )
 			{
