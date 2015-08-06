@@ -7,7 +7,8 @@ var mapnik = require( 'mapnik' ),
 	parseXYZ = require( './utils/tile.js' ).parseXYZ,
 	pg = require( 'pg' ),
 	AWS = require( 'aws-sdk' ),
-	conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/rio";
+	conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/rio",
+	dev;
 
 // register plugins
 if( mapnik.register_default_input_plugins ) mapnik.register_default_input_plugins();
@@ -47,7 +48,7 @@ client.connect();
 
 var parseXML = function( req, id, options, callback )
 {
-	var file = "cache/raster/" + id + "/raster.xml";
+	var file = dev ? "cache/raster/" + id + "/raster-dev.xml" : "cache/raster/" + id + "/raster.xml";
 	fs.exists( file, function( exists )
 	{
 		if( exists )
@@ -128,9 +129,10 @@ http.createServer( function( req, res )
 		{
 			res.writeHead( 500, { 'Content-Type' : 'text/plain' } );
 			res.end( err.message );
-        }
-        else
-        {
+    }
+    else
+    {
+      dev = req.headers.host.match( /-dev/ ) ? true : false;
 			var png = "cache/raster/" + params.raster + "/" + params.z + "/" + params.x + "/" + params.y + ".png",
 				exists = false,
 				query = client.query( "SELECT id FROM cache WHERE year IS NULL AND layer = '" + params.raster + "' AND z = " + params.z + " AND x = " + params.x + " AND y = " + params.y );
@@ -201,6 +203,10 @@ http.createServer( function( req, res )
 											"Access-Control-Allow-Origin" : "*"
 										});
 										res.end( im.encodeSync( 'png' ) );
+										
+										if( dev ){
+										  return console.log( png + " dev tile created" );
+										}
 										
 										t = process.hrtime( t );
 										var sec = Math.round( ( t[ 0 ] + ( t[ 1 ] / 1000000000 ) ) * 100 ) / 100;
