@@ -168,12 +168,12 @@ exports.details = function( req, res )
 	var id = _.reduce( req.params.id.split( "," ), function( memo, i ){ return memo += "'" + i + "',"; }, "ANY(ARRAY[" ).replace( /,$/, "])" ),
 		details = [];
 	
-	var query = client.query( "SELECT creator, firstowner, owner, occupant, address, yearfirstd, yearlastdo, globalid FROM basepoint WHERE globalid = " + id + " UNION SELECT creator, firstowner, owner, occupant, address, yearfirstd, yearlastdo, globalid FROM baseline WHERE globalid = " + id + " UNION SELECT creator, firstowner, owner, occupant, address, yearfirstd, yearlastdo, globalid FROM basepoly WHERE globalid = " + id );
+	var query = client.query( "SELECT creator, firstowner, owner, occupant, address, firstdispl, lastdispla, globalid FROM basepoint WHERE globalid = " + id + " UNION SELECT creator, firstowner, owner, occupant, address, firstdispl, lastdispla, globalid FROM baseline WHERE globalid = " + id + " UNION SELECT creator, firstowner, owner, occupant, address, firstdispl, lastdispla, globalid FROM basepoly WHERE globalid = " + id );
 	
 	query.on( 'row', function( result )
 	{
-		result.year = result.yearfirstd + " - " + result.yearlastdo;
-		result = _.objFilter( _.omit( result, [ "globalid", "yearfirstd", "yearlastdo" ] ), function( value )
+		result.year = result.firstdispl + " - " + result.lastdispla;
+		result = _.objFilter( _.omit( result, [ "globalid", "firstdispl", "lastdispla", ] ), function( value )
 		{
 			return value != null;
 		});
