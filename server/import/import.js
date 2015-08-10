@@ -66,7 +66,7 @@ var testLayer = function( client, ans, callback ) {
 	})
 	
 	query.on( 'end', function(){
-		if( count > 0 || ans.task == 'visual' ) {
+		if( count > 0 || ans.task == 'visual' || ans.task == 'planned' ) {
   		  callback( null, client, ans, count );
 		}
 		else {
@@ -144,13 +144,17 @@ var newLayer = function( client, ans, callback ) {
       }
     }
     
-    if( ans.geom == 'viewsheds' || ans.geom == 'mapsplans' ){
+    if( ans.task == 'visual' ){
       var props = props = _.defaults( _.objMap( record.properties, processRecord ), defaultVisual ),
           q = "INSERT INTO " + ans.geom + " (firstdispl, lastdispla, notes, creator, title, repository, imageid, latitude, longitude, geom, uploaddate, globalid, layer) VALUES ( " + props.FirstDispl + ", " + props.LastDispla + ", " + props.Notes + ", " + props.Creator + ", " + props.SS_Title + ", " + props.SS_Reposit + ", " + props.SSC_ImageI + ", " + props.Latitude + ", " + props.Longitude + ", ST_GeomFromGeoJSON('" + JSON.stringify( record.geometry ) + "'), " + num + ", " + props.SS_ID + ", '" + ans.layer + "')";
     }
+    else if( ans.task == 'planned' ){
+      var props = props = _.objMap( record.properties, processRecord ),
+          q = "INSERT INTO " + ans.geom + " (firstdispl, lastdispla, planyear, planname, geom, uploaddate, globalid, layer) VALUES ( " + props.FirstDispl + ", " + props.LastDispla + ", " + props.UrbanProje + ", " + props.UrbanPro_1 + ", ST_GeomFromGeoJSON('" + JSON.stringify( record.geometry ) + "'), " + num + ", '" + uuid.v1() + "', '" + ans.layer + "')";
+    }
     else{
       var props = _.defaults( _.objMap( record.properties, processRecord ), defaultNull ),
-          q = "INSERT INTO " + ans.geom + " (featuretyp, namecomple, nameshort, yearlastdo, firstdispl, lastdispla, notes, creator, firstowner, owner, occupant, address, geom, uploaddate, globalid, layer) VALUES ( " + props.FeatureTyp + ", " + props.NameComple + ", " + props.NameShort + ", " + props.YearLastDo + ", " + props.FirstDispl + ", " + props.LastDispla + ", " + props.Notes + ", " + props.Creator + ", " + props.FirstOwner + ", " + props.Owner + ", " + props.Occupant + ", " + props.Address + ", ST_GeomFromGeoJSON('" + JSON.stringify( record.geometry ) + "'), " + num + ", '" + uuid.v1() + "', '" + ans.layer + "')";
+          q = "INSERT INTO " + ans.geom + " (featuretyp, namecomple, nameshort, yearfirstd, yearlastdo, firstdispl, lastdispla, notes, creator, firstowner, owner, occupant, address, geom, uploaddate, globalid, layer) VALUES ( " + props.FeatureTyp + ", " + props.NameComple + ", " + props.NameShort + ", " + props.YearFirstD + ", " + props.YearLastDo + ", " + props.FirstDispl + ", " + props.LastDispla + ", " + props.Notes + ", " + props.Creator + ", " + props.FirstOwner + ", " + props.Owner + ", " + props.Occupant + ", " + props.Address + ", ST_GeomFromGeoJSON('" + JSON.stringify( record.geometry ) + "'), " + num + ", '" + uuid.v1() + "', '" + ans.layer + "')";
     }
 
     var query = client.query( q );
@@ -305,6 +309,19 @@ var replaceSeq = function( ans, client ) {
         waterfallExit
       );
     },
+    plannedSeq = function( ans, client ) {
+      async.waterfall([
+          function( callback ) {
+            callback( null, client, ans );
+          },
+          testFile,
+          testLayer,
+          deleteLayer,
+          newLayer,
+        ],
+        waterfallExit
+      );
+    }
     pushDB = function( ans, client ) {
       push.copyDB( client, "rio", "riodev" );
     },
@@ -317,6 +334,7 @@ var replaceSeq = function( ans, client ) {
       'new' : newSeq,
       'delete' : deleteSeq,
       'visual' : visualSeq,
+      'planned' : plannedSeq,
       'push' : pushDB,
       'pull' : pullDB
     };

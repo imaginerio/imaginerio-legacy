@@ -12,6 +12,7 @@ exports.q = [
       { name : "Delete a layer", value : 'delete' },
       new inquirer.Separator(),
       { name : "Import a visual layer", value : 'visual' },
+      { name : "Import an urban project", value : 'planned' },
       new inquirer.Separator(),
       { name : "Push development database to live", value : 'push' },
       { name : "Reset development database from live", value : 'pull' }
@@ -27,6 +28,12 @@ exports.q = [
           { name : 'viewsheds', value : 'viewsheds' },
           { name : 'maps', value : 'maps' },
           { name : 'plans', value : 'plans' }
+        ]
+      }
+      else if( ans.task == 'planned' ){
+        return [
+          { name : 'line', value : 'plannedline' },
+          { name : 'polygon', value : 'plannedpoly' }
         ]
       }
       else{
@@ -57,7 +64,7 @@ exports.q = [
       return ans.layer;
     },
     when : function( ans ){
-      return ans.task == 'replace' || ans.task == 'new' || ans.task == 'visual';
+      return ans.task == 'replace' || ans.task == 'new' || ans.task == 'visual' || ans.task == 'planned';
     }
   },
   {
@@ -76,6 +83,9 @@ exports.q = [
           break;
         case 'visual':
           var str = 'Replace the visual layer ' + chalk.red.underline( ans.geom ) + ' from the file ' + chalk.red.underline( ans.file ) + '?'
+          break;
+        case 'planned':
+          var str = 'Replace the planned layer ' + chalk.red.underline( ans.layer ) + ' in ' + chalk.underline.red( ans.geom ) + ' from the file ' + chalk.red.underline( ans.file ) + '?'
           break;
         case 'push':
           var str = chalk.red.underline( 'Overwrite the live database' ) + ' with data from the development database?';
