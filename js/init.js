@@ -11,8 +11,6 @@ var lang,
 		"#instruction" : "Clique no mapa para explorar...",
 		"#export" : "Exporte a imagem do mapa <span></span>"
 	};
-	
-var visual_years = [ 1763, 1817, 1840, 1875, 1900, 1903, 1910, 1927, 1934, 1937 ];
 
 function init()
 {
