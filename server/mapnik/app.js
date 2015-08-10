@@ -86,7 +86,7 @@ var parseXML = function( req, year, layer, options, callback )
 				var hs = xmlDoc.find( "//Parameter[@name='file']" );
 				_.each( hs, function( item )
 				{
-					item.text( _.find( hillshade, function( h ){ return h.year <= year } ).file );
+					if( item.text().match( /hillshade/ ) ) item.text( _.find( hillshade, function( h ){ return h.year <= year } ).file );
 				});
 				
 				mkdir( "cache/xml/" + year );

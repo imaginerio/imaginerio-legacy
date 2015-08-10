@@ -82,16 +82,8 @@
   srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
     <StyleName>mask</StyleName>
     <Datasource>
-       <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'mask' ) AS q]]></Parameter>
-       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
-       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
-       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
-       <Parameter name="extent"><![CDATA[-43.6834457612267,-22.9671653560144,-43.1710435408641,-22.8051180962776]]></Parameter>
-       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
-       <Parameter name="host"><![CDATA[localhost]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
-       <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
+       <Parameter name="file"><![CDATA[../../../../shp/mask.shp]]></Parameter>
+       <Parameter name="type"><![CDATA[shape]]></Parameter>
     </Datasource>
   </Layer>
 </Map>
