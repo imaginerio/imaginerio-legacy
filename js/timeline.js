@@ -2,6 +2,7 @@ var year = 0,
 	years = [],
 	min = -Infinity,
 	max = Infinity,
+	first = Infinity,
 	px = 0,
 	interval = [ 1, 5, 10, 20, 50, 100, 200, 500, 1000 ];
 
@@ -9,13 +10,14 @@ function init_timeline()
 {
 	$.getJSON( server + "/timeline", function( json )
 	{
-		years = json;
-		min = _.first( years ),
+		years = json,
+		first = _.first( years ),
+		min = Math.floor( first / 50 ) * 50,
 		max = _.last( years ) + 1,
 		years.push( max );
 		
 		build_timeline();
-		update_year( gup( 'year' ) ? parseInt( gup( 'year' ), 10 ) : Math.max( year, min ) );
+		update_year( gup( 'year' ) ? parseInt( gup( 'year' ), 10 ) : Math.max( year, first ) );
 		snap_timeline( year );
 	});
 	
@@ -54,10 +56,10 @@ function init_timeline()
 		}
 		else
 		{
-			visual_years.reverse();
+		years.reverse();
 			var y = _.find( years, function( y ){ return y < year; } );
-			y = y ? y : min;
-			visual_years.reverse();
+			y = y ? y : first;
+			years.reverse();
 		}
 		if( y !== undefined )
 		{
@@ -145,7 +147,7 @@ function build_timeline()
 function get_timeline_year()
 {
 	var l = $( "#puck" ).css( "left" ).replace( "px", "" );
-	return Math.round( l / px ) + min;
+	return Math.round( l / px ) + first;
 }
 
 function snap_timeline( set, dur )
