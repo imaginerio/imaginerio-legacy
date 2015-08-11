@@ -405,13 +405,13 @@
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Caminho')</Filter>
+    <Filter>([featuretyp] = 'Trail')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#ffffff" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Caminho')</Filter>
+    <Filter>([featuretyp] = 'Trail')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#ffffff" />
   </Rule>
   <Rule>
@@ -438,13 +438,13 @@
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Rua')</Filter>
+    <Filter>([featuretyp] = 'Street')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="9" stroke="#ffffff" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Rua')</Filter>
+    <Filter>([featuretyp] = 'Street')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="7" stroke="#ffffff" />
   </Rule>
   <Rule>
@@ -460,13 +460,13 @@
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Avenida')</Filter>
+    <Filter>([featuretyp] = 'Avenue')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="9" stroke="#ffffff" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenida')</Filter>
+    <Filter>([featuretyp] = 'Avenue')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="7" stroke="#ffffff" />
   </Rule>
   <Rule>
@@ -601,13 +601,13 @@
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Caminho')</Filter>
+    <Filter>([featuretyp] = 'Trail')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="7" stroke="#d0bfaf" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Caminho')</Filter>
+    <Filter>([featuretyp] = 'Trail')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="6" stroke="#d0bfaf" />
   </Rule>
   <Rule>
@@ -656,24 +656,24 @@
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Avenida')</Filter>
+    <Filter>([featuretyp] = 'Avenue')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="11" stroke="#d0bfaf" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenida')</Filter>
+    <Filter>([featuretyp] = 'Avenue')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="9" stroke="#d0bfaf" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Rua')</Filter>
+    <Filter>([featuretyp] = 'Street')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="11" stroke="#d0bfaf" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Rua')</Filter>
+    <Filter>([featuretyp] = 'Street')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="9" stroke="#d0bfaf" />
   </Rule>
   <Rule>
@@ -776,35 +776,35 @@
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenida')</Filter>
+    <Filter>([featuretyp] = 'Avenue')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#f2eee9" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenida')</Filter>
+    <Filter>([featuretyp] = 'Avenue')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#f2eee9" />
   </Rule>
   <Rule>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenida')</Filter>
+    <Filter>([featuretyp] = 'Avenue')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#d0bfaf" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Rua')</Filter>
+    <Filter>([featuretyp] = 'Street')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#f2eee9" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Rua')</Filter>
+    <Filter>([featuretyp] = 'Street')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#f2eee9" />
   </Rule>
   <Rule>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Rua')</Filter>
+    <Filter>([featuretyp] = 'Street')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#d0bfaf" />
   </Rule>
   <Rule>
@@ -912,18 +912,18 @@
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Caminho')</Filter>
+    <Filter>([featuretyp] = 'Trail')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="3" stroke="#f2eee9" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Caminho')</Filter>
+    <Filter>([featuretyp] = 'Trail')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#f2eee9" />
   </Rule>
   <Rule>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Caminho')</Filter>
+    <Filter>([featuretyp] = 'Trail')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1" stroke="#daccbf" />
   </Rule>
   <Rule>
@@ -982,35 +982,35 @@
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenida')</Filter>
+    <Filter>([featuretyp] = 'Avenue')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="7" stroke="#d0bfaf" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenida')</Filter>
+    <Filter>([featuretyp] = 'Avenue')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="6" stroke="#d0bfaf" />
   </Rule>
   <Rule>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenida')</Filter>
+    <Filter>([featuretyp] = 'Avenue')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#d0bfaf" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Rua')</Filter>
+    <Filter>([featuretyp] = 'Street')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="7" stroke="#d0bfaf" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Rua')</Filter>
+    <Filter>([featuretyp] = 'Street')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="6" stroke="#d0bfaf" />
   </Rule>
   <Rule>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Rua')</Filter>
+    <Filter>([featuretyp] = 'Street')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#d0bfaf" />
   </Rule>
   <Rule>
@@ -1135,18 +1135,18 @@
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Caminho')</Filter>
+    <Filter>([featuretyp] = 'Trail')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#d0bfaf" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Caminho')</Filter>
+    <Filter>([featuretyp] = 'Trail')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#d0bfaf" />
   </Rule>
   <Rule>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Caminho')</Filter>
+    <Filter>([featuretyp] = 'Trail')</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1" stroke="#daccbf" />
   </Rule>
   <Rule>
@@ -1669,31 +1669,31 @@
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Caminho')</Filter>
+    <Filter>([featuretyp] = 'Trail')</Filter>
     <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Caminho')</Filter>
+    <Filter>([featuretyp] = 'Trail')</Filter>
     <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Caminho')</Filter>
+    <Filter>([featuretyp] = 'Trail')</Filter>
     <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Caminho')</Filter>
+    <Filter>([featuretyp] = 'Trail')</Filter>
     <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Caminho')</Filter>
+    <Filter>([featuretyp] = 'Trail')</Filter>
     <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
@@ -1816,31 +1816,31 @@
 <Style name="roads_labels-med" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Avenida')</Filter>
+    <Filter>([featuretyp] = 'Avenue')</Filter>
     <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenida')</Filter>
+    <Filter>([featuretyp] = 'Avenue')</Filter>
     <TextSymbolizer fill="#574c3b" size="15" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenida')</Filter>
+    <Filter>([featuretyp] = 'Avenue')</Filter>
     <TextSymbolizer size="14" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenida')</Filter>
+    <Filter>([featuretyp] = 'Avenue')</Filter>
     <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenida')</Filter>
+    <Filter>([featuretyp] = 'Avenue')</Filter>
     <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
@@ -1874,31 +1874,31 @@
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Rua')</Filter>
+    <Filter>([featuretyp] = 'Street')</Filter>
     <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Rua')</Filter>
+    <Filter>([featuretyp] = 'Street')</Filter>
     <TextSymbolizer fill="#574c3b" size="15" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Rua')</Filter>
+    <Filter>([featuretyp] = 'Street')</Filter>
     <TextSymbolizer size="14" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Rua')</Filter>
+    <Filter>([featuretyp] = 'Street')</Filter>
     <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Rua')</Filter>
+    <Filter>([featuretyp] = 'Street')</Filter>
     <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
 </Style>
