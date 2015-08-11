@@ -66,7 +66,7 @@ var parseXML = function( req, year, layer, options, callback )
 				});
 				
 				if( dev ){
-  				  _.each( sources, function( item )
+  				  _.each( dbname, function( item )
     				{
     					var t = item.text();
     					item.text( t + 'dev' );
