@@ -172,6 +172,7 @@ exports.details = function( req, res )
 	
 	query.on( 'row', function( result )
 	{
+		if( result.lastdispla == 8888 ) result.lastdispla = 'Present';
 		result.year = result.firstdispl + " - " + result.lastdispla;
 		result = _.objFilter( _.omit( result, [ "globalid", "firstdispl", "lastdispla", ] ), function( value )
 		{
