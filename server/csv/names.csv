@@ -1,86 +1,81 @@
-layer,name_en,name_pr
-ImageViewshedsPoly,Image Viewsheds,Imagem Vista
-Collector,Collector,Via Coletora
-Convent,Monastery/Convent,Mosteiro/Convento
-Cultural,Cultural,Cultural
-Cultural Center,Cultural Center,Centro Cultural
-Culture,Culture,Cultura
-Estrada,Road,Estrada
-Expressway,Expressway,Via Expressa
-Fort,Fort,Forte
-Garden,Garden,Jardim
-Governmental,Governmental,Governamental
-Hospital,Hospital,Hospital
-Industrial,Industrial,Industrial
-Ladeira,Slope,Ladeira
-VisualDocuments,Visual Documents,Documentos Visuais
-creator,Creator,Criador
-occupant,Occupant,Residente
-year,Mapped,Mapeado
-Adminitrative Building,Administrative Building,Prédio Administrativo
-BuildingsPoly,Buildings,Prédios
-BuiltEnvironment,Built Environment,Meio Ambiente Construído
-CemeteriesPoly,Cemeteries,Cemitérios
-Civic,Civic,Cívico
-Commercial,Commercial,Comércio
-Customs,Customs,Alfândega
-firstowner,First Owner,Primeiro Proprietário
-Health and Human Safety,Health and Human Safety,Saúde e Segurança Pública
-InlandWatersPoly,Inland Waters,Águas Cercadas de Terras
-Marsh,Marsh,Alagadiço
-Metro Station,Metro Station,Estação de Metrô
-Minor Arterial,Minor Arterial,Via Arterial Secundária
-Misc,Misc,Vários
-owner,Owner,Proprietário
-Palace,Palace,Palácio
-PoliticalBoundaries,Political Boundaries,Limites Políticos
-Pond Or Reservoir,Pond or Reservoir,Reservatório ou Represa
-Praça,Praça,Praça
-Railroad Station,Railroad Station,Estação de Trem
-Residence,Residence,Residência
-Square,Square,Praça
-SquaresPoly,Squares,Praças
-100 m,100 m,100 m
-10 m,10 m,10 m
-25 m,25 m,25 m
-50 m,50 m,50 m
-5 m,5 m,5 m
-60 m,60 m,60 m
-Aqueduct,Aqueduct,Aqueduto
-Architecture,Architecture,Arquitetura
-Avenida,Avenue,Avenida
-Beco,Alley,Beco
-Boundaries,Boundaries,Limites
-Caminho,Trail,Caminho
-Church,Church,Igreja
-Lagoon,Lagoon,Lagoa
-Largo,Largo,Plaza
-Local,Local,Via Local
-Monuments,Monuments,Monumentos
-Park,Park,Parque
-Plaza,Plaza,Largo
-Praia,Beach,Praia
-Principle Arterial,Principal Arterial,Via Arterial Principal
-Religious,Religious,Religioso
-Rua,Street,Rua
-School,School,Escola
-Sports,Sports,Esportes
-Stock Exchange,Stock Exchange,Bolsa de Valores
-Topography,Topography,Topografia
-Travessa,Passage,Travessa
-Urbanism,Urbanism,Urbanismo
-CityBlocksPoly,City Blocks,Quadras
-CivilEngineering,Civil Engineering,Engenharia Civil
-FountainsPoint,Fountains,Chafarizes
-LandPoly,Land,Solo
-LandscapeArchitecture,Landscape Architecture,Paisagismo
-LotsAndLandUsesPoly,Lots and Land Uses,Lotes e Usos do Solo
-NaturalEnvironment,Natural Environment,Meio Ambiente Natural
-NeighborhoodsPoly,Neighborhoods,Bairros
-RiversAndStreamsLine,Rivers and Streams,Rios e Riachos
-TransportationRoadLine,Road,Via
-Tram Station,Tram Station,Estação de Bonde
-TransportationRailPoint,Railway Station,Estação de Trem
-Water,Water,Água
-WaterLine,Water,Infrastrutura de Água
-BuildingsPoint,Transportation,Transporte
+text,name_en,name_pr,layer
+ImageViewshedsPoly,Image Viewsheds,Imagem Vista,
+VisualDocuments,Visual Documents,Documentos Visuais,
+creator,Creator,Criador,
+occupant,Occupant,Residente,
+year,Mapped,Mapeado,
+BuiltEnvironment,Built Environment,Meio Ambiente Construído,
+firstowner,First Owner,Primeiro Proprietário,
+owner,Owner,Proprietário,
+PoliticalBoundaries,Political Boundaries,Limites Políticos,
+Architecture,Architecture,Arquitetura,
+Boundaries,Boundaries,Limites,
+Plaza,Plaza,Largo,
+Topography,Topography,Topografia,
+Urbanism,Urbanism,Urbanismo,
+CivilEngineering,Civil Engineering,Engenharia Civil,
+LandscapeArchitecture,Landscape Architecture,Paisagismo,
+NaturalEnvironment,Natural Environment,Meio Ambiente Natural,
+Water,Water,Água,
+RoadsLine,Roads,Vias,RoadsLine
+Alley,Alleys,Becos,RoadsLine
+Avenue,Avenues,Avenidas,RoadsLine
+Collector,Collector,Collector,RoadsLine
+Expressway,Expressway,Viaduto,RoadsLine
+Ladeira,Ladeira,Ladeira,RoadsLine
+Local,Local,Local,RoadsLine
+Minor Arterial,Minor Arterial,Minor Arterial,RoadsLine
+Passage,Passage,Travessa,RoadsLine
+Pedestrian,Pedestrian,Pedestrian,RoadsLine
+Praia,Praia,Praia,RoadsLine
+Principle Arterial,Principle Arterial,Principle Arterial,RoadsLine
+Rua,Rua,Rua,RoadsLine
+Street,Streets,Raus,RoadsLine
+Trail,Trails,Caminhos,RoadsLine
+Travessa,Travessa,Travessa,RoadsLine
+UtilitiesLine,Utilities,Obras Públicas,UtilitiesLine
+Aqueducts,Aqueducts,Aquedutos,UtilitiesLine
+Canals,Canals,Canais,UtilitiesLine
+Ditches,Ditches,Valas,UtilitiesLine
+Pipes/Sewage,Sewage Pipes,Canos de Esgoto,UtilitiesLine
+Pipes/Water,Water Pipes,Canos de Água,UtilitiesLine
+UtilitiesPoint,Utilities,Obras Públicas,UtilitiesPoint
+Fountains,Fountains,Chafarizes,UtilitiesPoint
+UtilitiesPoly,UtilitiesPoly,UtilitiesPoly,UtilitiesPoly
+Reservoirs,Reservoirs,Reservoirs,UtilitiesPoly
+address,Address,Address,
+BuildingsPoint,Transportation,Transporte,BuildingsPoint
+Transportation/Metro Station,Metro Station,Estação de Metrô,BuildingsPoint
+Transportation/Railroad Station,Railroad Station,Estação de Trem,BuildingsPoint
+Transportation/Tram Station,Tram Station,Estação de Bonde,BuildingsPoint
+BuildingsPoly,Buildings,Edificações,BuildingsPoly
+Administrative,Administrative,Administrativas,BuildingsPoly
+Administrative Building,Administrative,Administrativas,BuildingsPoly
+Commercial,Commercial,Mercantis,BuildingsPoly
+Corporate,Corporate,Corporativas,BuildingsPoly
+Cultural,Cultural,Culturais,BuildingsPoly
+Educational,Educational,Educacionais,BuildingsPoly
+Health,Health,Saúde,BuildingsPoly
+Military,Military,Militares,BuildingsPoly
+Religion,Religious,Religiosas,BuildingsPoly
+Religious,Religious,Religiosas,BuildingsPoly
+InlandWatersLine,Inland Waters,Hidrologia,InlandWatersLine
+Brooks,Brooks,Brooks,InlandWatersLine
+Creeks,Creeks,Riachos,InlandWatersLine
+Rivers,Rivers,Rios,InlandWatersLine
+Streams,Streams,Córregos,InlandWatersLine
+InlandWatersPoly,Inland Waters,Hidrologia,InlandWatersPoly
+Lagoons,Lagoons,Lagoas,InlandWatersPoly
+Marshes,Marshes,Alagadiços,InlandWatersPoly
+Ponds,Ponds,Represas,InlandWatersPoly
+LandLine,Land,Solo,LandLine
+Beaches,Beaches,Praias,LandLine
+LandPoly,Land,Solo,LandPoly
+NeighborhoodsPoly,Neighborhoods,Bairros,NeighborhoodsPoly
+PublicSpacesPoly,Public Spaces,Espaços Público,PublicSpacesPoly
+Cemeteries,Cemeteries,Cemitérios,PublicSpacesPoly
+Gardens,Gardens,Jardims,PublicSpacesPoly
+Parks,Parks,Parques,PublicSpacesPoly
+Plazas,Plazas,Largos,PublicSpacesPoly
+Polygon,Polygon,Polygon,PublicSpacesPoly
+Squares,Squares,Praça,PublicSpacesPoly
