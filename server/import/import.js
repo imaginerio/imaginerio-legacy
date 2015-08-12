@@ -14,7 +14,6 @@ var pg = require( 'pg' ),
     defaultNull = {
       "NameComple" : null,
       "NameShort" : null,
-      "YearLastDo" : null,
       "Notes" : null,
       "Creator" : null,
       "FirstOwner" : null,
@@ -154,7 +153,7 @@ var newLayer = function( client, ans, callback ) {
     }
     else{
       var props = _.defaults( _.objMap( record.properties, processRecord ), defaultNull ),
-          q = "INSERT INTO " + ans.geom + " (featuretyp, namecomple, nameshort, yearfirstd, yearlastdo, firstdispl, lastdispla, notes, creator, firstowner, owner, occupant, address, geom, uploaddate, globalid, layer) VALUES ( " + props.FeatureTyp + ", " + props.NameComple + ", " + props.NameShort + ", " + props.YearFirstD + ", " + props.YearLastDo + ", " + props.FirstDispl + ", " + props.LastDispla + ", " + props.Notes + ", " + props.Creator + ", " + props.FirstOwner + ", " + props.Owner + ", " + props.Occupant + ", " + props.Address + ", ST_GeomFromGeoJSON('" + JSON.stringify( record.geometry ) + "'), " + num + ", '" + uuid.v1() + "', '" + ans.layer + "')";
+          q = "INSERT INTO " + ans.geom + " (featuretyp, namecomple, nameshort, firstdispl, lastdispla, notes, creator, firstowner, owner, occupant, address, geom, uploaddate, globalid, layer) VALUES ( " + props.FeatureTyp + ", " + props.NameComple + ", " + props.NameShort + ", " + props.FirstDispl + ", " + props.LastDispla + ", " + props.Notes + ", " + props.Creator + ", " + props.FirstOwner + ", " + props.Owner + ", " + props.Occupant + ", " + props.Address + ", ST_GeomFromGeoJSON('" + JSON.stringify( record.geometry ) + "'), " + num + ", '" + uuid.v1() + "', '" + ans.layer + "')";
     }
 
     var query = client.query( q );
