@@ -13,8 +13,11 @@ function init_timeline()
 		years = json,
 		first = _.first( years ),
 		min = Math.floor( first / 50 ) * 50,
-		max = _.last( years ) + 1,
+		max = Math.min( new Date().getFullYear(), _.last( years ) + 1 ),
+		
+		years = _.filter( years, function( val ){ return val < max });
 		years.push( max );
+		
 		
 		build_timeline();
 		update_year( gup( 'year' ) ? parseInt( gup( 'year' ), 10 ) : Math.max( year, first ) );
