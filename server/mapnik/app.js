@@ -113,7 +113,7 @@ var aquire = function( id, options, callback )
 	methods = {
 		create : function( cb )
 		{
-			var obj = new mapnik.Map( options.width || 256, options.height || 256 );
+			var obj = new mapnik.Map( options.width || 384, options.height || 384 );
 			obj.load( id, { strict : true }, function( err, obj )
 			{
 				if( options.bufferSize ) obj.bufferSize = options.bufferSize;
