@@ -58,7 +58,7 @@ function build_layers()
 		if( json.length > 0 )
 		{
 			var folder = build_folder( names.VisualDocuments ),
-				  raster = json;
+				  raster = _.filter( json, function( val ){ return val.layer != "viewsheds" } );
 				
 			if( raster.length < json.length )
 			{

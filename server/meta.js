@@ -93,7 +93,7 @@ exports.raster = function( req, res )
 	client.connect();
 
 	var year = req.params.year,
-		q = "SELECT imageid AS id, 'SSID' || globalid AS file, firstdispl || ' - ' || lastdispla AS date, creator, title AS description, layer FROM mapsplans WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " ORDER BY layer";
+		q = "SELECT imageid AS id, 'SSID' || globalid AS file, firstdispl || ' - ' || lastdispla AS date, creator, title AS description, layer FROM mapsplans WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT imageid AS id, 'SSID' || globalid AS file, firstdispl || ' - ' || lastdispla AS date, creator, title AS description, layer FROM viewsheds WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " ORDER BY layer";
 	
 	var query = client.query( q ),
 		arr = [];
