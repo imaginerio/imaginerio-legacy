@@ -163,25 +163,25 @@
 
 <Style name="inlandwater-outline" filter-mode="first">
   <Rule>
-    <Filter>([featuretyp] = 'Lagoon')</Filter>
+    <Filter>([featuretyp] = 'Lagoons')</Filter>
     <LineSymbolizer stroke="#8fb0cd" stroke-width="1" stroke-linejoin="round" />
   </Rule>
   <Rule>
-    <Filter>([featuretyp] = 'Pond Or Reservoir')</Filter>
+    <Filter>([featuretyp] = 'Ponds')</Filter>
     <LineSymbolizer stroke="#8fb0cd" stroke-width="1" stroke-linejoin="round" />
   </Rule>
 </Style>
 <Style name="inlandwater" filter-mode="first">
   <Rule>
-    <Filter>([featuretyp] = 'Lagoon')</Filter>
+    <Filter>([featuretyp] = 'Lagoons')</Filter>
     <PolygonSymbolizer fill="#b9cee0" />
   </Rule>
   <Rule>
-    <Filter>([featuretyp] = 'Pond Or Reservoir')</Filter>
+    <Filter>([featuretyp] = 'Ponds')</Filter>
     <PolygonSymbolizer fill="#b9cee0" />
   </Rule>
   <Rule>
-    <Filter>([featuretyp] = 'Marsh')</Filter>
+    <Filter>([featuretyp] = 'Marshes')</Filter>
     <PolygonSymbolizer fill="#accdc8" fill-opacity="0.6" />
     <PolygonPatternSymbolizer file="../../../images/ripple2.png" />
   </Rule>
