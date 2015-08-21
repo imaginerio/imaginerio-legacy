@@ -325,7 +325,6 @@ var replaceSeq = function( ans, client ) {
       push.copyDB( client, "rio", "riodev" );
     },
     pullDB = function( ans, client ) {
-      client.end();
       push.copyDB( client, "riodev", "rio" );
     },
     tasks = {

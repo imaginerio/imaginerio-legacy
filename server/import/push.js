@@ -40,7 +40,16 @@ exports.copyDB = function( client, to, from ){
                 }
                 else{
                   console.log( "Database " + chalk.green( from ) + " successfully copied to " + chalk.yellow( to ) );
-                  client.end();
+                  exec( 'psql -d ' + to + ' -c "TRUNCATE cache;"', function( error, stdout, stderr ){
+                    if( error !== null ){
+                      console.log( chalk.red( "ERROR: " ) + error );
+                      client.end();
+                    }
+                    else {
+                      console.log( "Tile cache " + chalk.green( "successfully cleared." ) );
+                      client.end();
+                    }
+                  });
                 }
               });
             }
