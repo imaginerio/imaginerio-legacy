@@ -13,7 +13,7 @@ function init_map()
 	map = L.map( 'map', {
 		center: [ -22.9046, -43.1919 ],
 		zoom: 15,
-		minZoom : 13,
+		minZoom : 14,
 		maxZoom : 17,
 		doubleClickZoom : false,
 		maxBounds : [ [ -23.10243406, -44.04944719  ], [ -22.63003187, -42.65988214 ] ]
@@ -52,7 +52,7 @@ function load_base()
 {
 	if( map.hasLayer( base ) ) map.removeLayer( base );
 	
-	base = L.tileLayer( tileserver + 'tiles/' + year + '/{z}/{x}/{y}.png?layer=base' ).addTo( map );
+	base = L.tileLayer( tileserver + year + '/base/{z}/{x}/{y}.png' ).addTo( map );
 }
 
 function load_tiles()
@@ -65,7 +65,8 @@ function load_tiles()
 	}
 	else
 	{
-		var t = L.tileLayer( tileserver + 'tiles/' + year + '/{z}/{x}/{y}.png?layer=' + off.join( "," )  )
+  	  var layerstring = off.length == 0 ? 'all' : off.join( "," );
+		var t = L.tileLayer( tileserver  + year + '/' + layerstring + '/{z}/{x}/{y}.png'  )
 					.addTo( map )
 					.setOpacity( 0 )
 					.on( "load", function()

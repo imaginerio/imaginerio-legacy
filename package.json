@@ -17,6 +17,8 @@
     "pg": "3.0.3",
     "postgeo": "*",
     "shapefile": "^0.3.0",
+    "tilelive": "^5.8.2",
+    "tilelive-mapnik": "^0.6.17",
     "underscore": "1.6"
   }
 }

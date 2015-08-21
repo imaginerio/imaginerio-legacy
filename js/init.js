@@ -1,5 +1,5 @@
 var server = "http://imaginerio.rice.edu:3000",
-	  tileserver = "http://imaginerio.rice.edu:8000/",
+	  tileserver = "http://imaginerio.rice.edu:8888/",
     rasterserver = "http://imaginerio.rice.edu:9000/";
 
 var lang,
