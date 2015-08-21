@@ -40,72 +40,53 @@ var s3 = new AWS.S3();
 var client = new pg.Client( conn );
 client.connect();
 
-var parseXML = function( req, year, layer, options, callback )
-{
+var parseXML = function( req, year, layer, options, callback ){
 	var file = dev ? "cache/xml/" + year + "/" + layer + "-dev.xml" : "cache/xml/" + year + "/" + layer + ".xml";
-	fs.exists( file, function( exists )
-	{
-		if( exists )
+		
+	if( fs.existsSync( file ) ){
+		callback( file, options );
+	}
+	else{
+		var data = fs.readFileSync( layer == "base" ? "base.xml" : "stylesheet.xml", 'utf8' );
+			
+    var xmlDoc = xml.parseXml( data );
+    var sources = xmlDoc.find( "//Parameter[@name='table']" );
+    var dbname = xmlDoc.find( "//Parameter[@name='dbname']" );
+			
+		_.each( sources, function( item ){
+			var t = item.text();
+			item.text( t.replace( /99999999/g, year ) );
+		});
+			
+    if( dev ){
+      _.each( dbname, function( item ){
+      		var t = item.text();
+        item.text( t + 'dev' );
+      });
+    }
+			
+		var off = layer.split( "," );
+		_.each( off, function( l )
 		{
-			callback( file, options );
-		}
-		else
-		{
-			fs.readFile( layer == "base" ? "base.xml" : "stylesheet.xml", 'utf8', function( err, data )
+			sources = xmlDoc.find( "//Layer[@name='" + l + "']" );
+			_.each( sources, function( item )
 			{
-				if( err ) return console.log( err );
-				
-				var xmlDoc = xml.parseXml( data );
-				var sources = xmlDoc.find( "//Parameter[@name='table']" );
-				var dbname = xmlDoc.find( "//Parameter[@name='dbname']" );
-				
-				_.each( sources, function( item )
-				{
-					var t = item.text();
-					item.text( t.replace( /99999999/g, year ) );
-				});
-				
-				if( dev ){
-  				  _.each( dbname, function( item )
-    				{
-    					var t = item.text();
-    					item.text( t + 'dev' );
-    				});
-				}
-				
-				var off = layer.split( "," );
-				_.each( off, function( l )
-				{
-					sources = xmlDoc.find( "//Layer[@name='" + l + "']" );
-					_.each( sources, function( item )
-					{
-						item.attr( { "status" : "off" } );
-					})
-				});
-				
-				var hs = xmlDoc.find( "//Parameter[@name='file']" );
-				_.each( hs, function( item )
-				{
-					if( item.text().match( /hillshade/ ) ) item.text( _.find( hillshade, function( h ){ return h.year <= year } ).file );
-				});
-				
-				mkdir( "cache/xml/" + year );
-				
-				fs.writeFile( file, xmlDoc.toString(), function( err )
-				{
-					if( err )
-					{
-						console.log( err );
-					}
-					else
-					{
-						console.log( "Wrote file: " + file );
-						callback( file, options );
-					}
-				});
-			});
-		}
-	});
+				item.attr( { "status" : "off" } );
+			})
+		});
+			
+		var hs = xmlDoc.find( "//Parameter[@name='file']" );
+		_.each( hs, function( item )
+		{
+			if( item.text().match( /hillshade/ ) ) item.text( _.find( hillshade, function( h ){ return h.year <= year } ).file );
+		});
+			
+    mkdir( "cache/xml/" + year );
+			
+    fs.writeFileSync( file, xmlDoc.toString() );
+		console.log( "Wrote file: " + file );
+    callback( file, options );
+  }
 }
 
 var aquire = function( id, options, callback )
