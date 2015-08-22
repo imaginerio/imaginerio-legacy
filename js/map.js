@@ -52,7 +52,7 @@ function load_base()
 {
 	if( map.hasLayer( base ) ) map.removeLayer( base );
 	
-	base = L.tileLayer( tileserver + year + '/base/{z}/{x}/{y}.png' ).addTo( map );
+	base = L.tileLayer( baseserver + 'tiles/' + year + '/{z}/{x}/{y}.png?layer=base' ).addTo( map );
 }
 
 function load_tiles()
@@ -65,7 +65,7 @@ function load_tiles()
 	}
 	else
 	{
-  	  var layerstring = off.length == 0 ? 'all' : off.join( "," );
+  	  var layerstring = off.length == 0 ? 'all' : off.sort().join( "," );
 		var t = L.tileLayer( tileserver  + year + '/' + layerstring + '/{z}/{x}/{y}.png'  )
 					.addTo( map )
 					.setOpacity( 0 )

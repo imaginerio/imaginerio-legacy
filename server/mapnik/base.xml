@@ -11,7 +11,7 @@
   <Parameter name="minzoom">14</Parameter>
   <Parameter name="maxzoom">18</Parameter>
   <Parameter name="scale">1</Parameter>
-  <Parameter name="metatile">1</Parameter>
+  <Parameter name="metatile">16</Parameter>
   <Parameter name="id"><![CDATA[Rio]]></Parameter>
   <Parameter name="_updated">1405089520000</Parameter>
   <Parameter name="name"><![CDATA[Rio]]></Parameter>
