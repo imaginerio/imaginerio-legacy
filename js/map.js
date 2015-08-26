@@ -52,7 +52,7 @@ function load_base()
 {
 	if( map.hasLayer( base ) ) map.removeLayer( base );
 	
-	base = L.tileLayer( baseserver + 'tiles/' + year + '/{z}/{x}/{y}.png?layer=base' ).addTo( map );
+	base = L.tileLayer( tileserver + year + '/base/{z}/{x}/{y}.png' ).addTo( map );
 }
 
 function load_tiles()
