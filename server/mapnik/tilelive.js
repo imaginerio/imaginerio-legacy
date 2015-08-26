@@ -9,6 +9,25 @@ var express = require('express'),
     hillshade = [ { year : 1960, file : '../../../../../raster/Hillshade_WGS84_1960_2013.tif' }, { year : 1921, file : '../../../../../raster/Hillshade_WGS84_1921_1959.tif' }, { year : 1906, file : '../../../../../raster/Hillshade_WGS84_1906_1920.tif' }, { year : 1500, file : '../../../../../raster/Hillshade_WGS84_1500_1905.tif' } ];
     
 var app = express();
+
+app.use( function(err, req, res, next) {
+  console.error(err.stack);
+  next(err);
+});
+
+app.use( function(err, req, res, next) {
+  if (req.xhr) {
+    res.send(500, { error: 'Something blew up!' });
+  } else {
+    next(err);
+  }
+});
+
+app.use( function(err, req, res, next) {
+  res.status(500);
+  res.render('error', { error: err });
+});
+
 require('tilelive-mapnik').registerProtocols(tilelive);
 
 //loading AWS config
@@ -19,7 +38,8 @@ var s3 = new AWS.S3();
 var client = new pg.Client( conn );
 client.connect();
 
-app.get('/:year/:layer/:z/:x/:y.*', function( req, res ){
+app.get('/tiles/:year/:layer/:z/:x/:y.*', function( req, res ){
+  console.log( req );
   var png = "cache/png/" + req.params.year + "/" + req.params.layer + "/" + req.params.z + "/" + req.params.x + "/" + req.params.y + ".png",
       exists = false,
       query = client.query( "SELECT id FROM cache WHERE year = " + req.params.year + " AND layer = '" + req.params.layer + "' AND z = " + req.params.z + " AND x = " + req.params.x + " AND y = " + req.params.y );
@@ -127,5 +147,5 @@ function saveTile( params, tile, res ){
   });
 }
 
-console.log('Listening on port: ' + 8888);
-app.listen( 8888 );
+app.listen( 3001 );
+console.log( 'Listening on port: ' + 3001 );
