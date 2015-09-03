@@ -91,7 +91,7 @@ function show_tiles( tile )
 function probe( e )
 {
 	cursor_loading( true, e.containerPoint );
-	clear_highlight();
+	// clear_highlight();
 	clear_results( "probe" );
 	
 	$.getJSON( server + "/probe/" + year + "/" + probeZoom + "/" + e.latlng.lng + "," + e.latlng.lat + "/" + off.join( "," ), function( json )
@@ -206,6 +206,10 @@ function get_styles( color )
 		  pointToLayer: function( feature, latlng )
 		  {
         return L.circleMarker( latlng, topStyle );
+      },
+      onEachFeature: function( feature, layer )
+      {
+        layer.on( 'click', probe );
       }
 	});
 	
@@ -217,6 +221,10 @@ function get_styles( color )
 		  pointToLayer: function( feature, latlng )
 		  {
         return L.circleMarker( latlng, bottomStyle );
+      },
+      onEachFeature: function( feature, layer )
+      {
+        layer.on( 'click', probe );
       }
 	});
 	
