@@ -15,9 +15,7 @@ function init_timeline()
 		min = Math.floor( first / 50 ) * 50,
 		max = Math.min( new Date().getFullYear(), _.last( years ) + 1 ),
 		
-		years = _.filter( years, function( val ){ return val < max });
-		years.push( max );
-		
+		years = _.filter( years, function( val ){ return val <= max });
 		
 		build_timeline();
 		update_year( gup( 'year' ) ? parseInt( gup( 'year' ), 10 ) : Math.max( year, first ) );
@@ -36,6 +34,7 @@ function init_timeline()
         var x = e.clientX;
       }
 			var pos = Math.max( 0, Math.min( x - 300, $( this ).width() ) );
+      pos = Math.min( pos, $( this ).width() - 5 );
 			$( "#puck" ).css( "left", pos );
 			$( "#puck span" ).html( get_timeline_year() );
 		});
