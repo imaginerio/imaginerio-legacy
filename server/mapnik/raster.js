@@ -22,7 +22,7 @@ var maps = mappool.create_pool( 5 );
 
 var usage = 'usage: app.js <stylesheet> <port>\ndemo:  app.js ../../stylesheet.xml 8000';
 
-var base = process.argv[ 2 ];
+var base = 'raster.xml';
 
 if( !base )
 {
@@ -30,7 +30,7 @@ if( !base )
    process.exit( 1 );
 }
 
-var port = process.argv[ 3 ];
+var port = 3002;
 
 if( !port )
 {

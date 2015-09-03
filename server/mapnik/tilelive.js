@@ -39,7 +39,6 @@ var client = new pg.Client( conn );
 client.connect();
 
 app.get('/tiles/:year/:layer/:z/:x/:y.*', function( req, res ){
-  console.log( req );
   var png = "cache/png/" + req.params.year + "/" + req.params.layer + "/" + req.params.z + "/" + req.params.x + "/" + req.params.y + ".png",
       exists = false,
       query = client.query( "SELECT id FROM cache WHERE year = " + req.params.year + " AND layer = '" + req.params.layer + "' AND z = " + req.params.z + " AND x = " + req.params.x + " AND y = " + req.params.y );
