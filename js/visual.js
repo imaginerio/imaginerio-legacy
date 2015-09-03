@@ -76,10 +76,12 @@ function show_visual_details( properties, e )
 		dataType : "json",
 		success : function( json )
 		{
+      var verticalOffset = 100; //this is the header size
+      var y = e.y + verticalOffset;
 			probe.css({
 				"background-image" : "url( http://www.sscommons.org/" + json.imageUrl + " )",
-				"top" : e.y > $( window ).height() / 2 ? e.y - 20 : e.y + probe.outerHeight() + 20,
-				"left" : e.x > $( window ).width() / 2 ? e.x - probe.outerWidth() : e.x
+				"top" : y > $( window ).height() / 2 ? y - probe.outerHeight() - 20 : y + 20,
+				"left" : e.x > $( window ).width() / 2 ? e.x - probe.outerWidth() - 20 : e.x + 20
 			});
 		}
 	});
