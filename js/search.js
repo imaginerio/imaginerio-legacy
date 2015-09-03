@@ -96,6 +96,7 @@ function get_details( id, div )
 						$( this ).animate( { height : "+=" + $( this ).children( ".details" ).attr( "data-height" ) } )
 						$( this ).addClass( "open" );
 						draw( $( this ).attr( "data-id" ), "draw", $( this ), search_loaded );
+            $( ".drawn" ).removeClass( "drawn" );
 					}
 				})
 			
