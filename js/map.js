@@ -130,6 +130,7 @@ function load_raster( id )
 		if( rasters[ id ] )
 		{
 			map.addLayer( rasters[ id ] );
+      rasters[ id ].bringToFront();
 		}
 		else
 		{
