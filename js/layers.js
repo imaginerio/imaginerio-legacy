@@ -6,7 +6,6 @@ function init_layers()
 	$.getJSON( server + "/names/" + lang, function( json )
 	{
 		names = json;
-		build_layers();
 	})
 	
 	$( "#switch" ).click( function()
