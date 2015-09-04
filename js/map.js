@@ -111,7 +111,10 @@ function draw( id, route, el, callback )
 	highlight.bottom = omnivore.geojson( server + "/" + route + "/" + encodeURIComponent( id ), null, styles.bottom )
 				.on( 'ready', function()
 				{
-					map.fitBounds( this.getBounds(), { paddingTopLeft : [ 265, 165 ] } );
+          if( map.getBoundsZoom( this.getBounds() ) <= map.getMinZoom() ) {
+            map.setView( [ -22.9046, -43.1919 ], map.getMinZoom() );
+          } else map.fitBounds( this.getBounds(), { paddingTopLeft : [ 265, 165 ] } );
+          
 					if( callback ) callback( el );
 				})
 				.addTo( map );
