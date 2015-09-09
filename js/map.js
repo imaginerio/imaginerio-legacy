@@ -112,8 +112,10 @@ function draw( id, route, el, callback )
 				.on( 'ready', function()
 				{
           if( map.getBoundsZoom( this.getBounds() ) <= map.getMinZoom() ) {
-            map.setView( [ -22.9046, -43.1919 ], map.getMinZoom() );
-          } else map.fitBounds( this.getBounds(), { paddingTopLeft : [ 265, 165 ] } );
+            map.setZoom( map.getMinZoom() );
+          } else {
+            map.fitBounds( this.getBounds(), { paddingTopLeft : [ 265, 165 ] } );
+          }
           
 					if( callback ) callback( el );
 				})
