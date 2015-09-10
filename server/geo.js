@@ -19,7 +19,7 @@ exports.probe = function( req, res )
 	
 	query.on( 'row', function( result )
 	{
-		if( result.grouping != layers ) results.push( _.omit( result, 'grouping' ) );
+		if( layers.indexOf( result.grouping ) == -1 ) results.push( _.omit( result, 'grouping' ) );
 	})
 	
 	query.on( 'end', function()
