@@ -57,6 +57,26 @@ app.get('/tiles/:year/:layer/:z/:x/:y.*', function( req, res ){
   });
 });
 
+app.get( '/raster/:id/:z/:x/:y.*', function( req, res ){
+  var png = "cache/raster/" + req.params.id + "/" + req.params.z + "/" + req.params.x + "/" + req.params.y + ".png",
+      exists = false,
+      query = client.query( "SELECT id FROM cache WHERE year IS NULL AND layer = '" + req.params.id + "' AND z = " + req.params.z + " AND x = " + req.params.x + " AND y = " + req.params.y );
+      
+  query.on( 'row', function( result ){
+		exists = result.id;
+	});
+	
+	query.on( 'end', function(){
+  	  if( exists ){
+      res.redirect( "http://d3unofsdy0zxgc.cloudfront.net/" + png );
+    }
+    else{
+      req.params.year = null;
+      parseRasterXML( req, res, renderTile );
+    }
+  });
+})
+
 function parseXML( req, res, callback ){
 	var file = __dirname + "/cache/xml/" + req.params.year + "/" + req.params.layer + ".xml";
 		
@@ -64,8 +84,7 @@ function parseXML( req, res, callback ){
 		callback( file, req.params, res );
 	}
 	else{
-		var data = fs.readFileSync( req.params.layer == "base" ? "base.xml" : "stylesheet.xml", 'utf8' );
-			
+		var data = fs.readFileSync( req.params.layer == "base" ? "base.xml" : "stylesheet.xml", 'utf8' );	
     var xmlDoc = xml.parseXml( data );
     var sources = xmlDoc.find( "//Parameter[@name='table']" );
     var dbname = xmlDoc.find( "//Parameter[@name='dbname']" );
@@ -102,6 +121,25 @@ function parseXML( req, res, callback ){
     fs.writeFileSync( file, xmlDoc.toString() );
     callback( file, req.params, res );
   }
+}
+
+function parseRasterXML( req, res, callback ){
+  var file = __dirname + "/cache/raster/" + req.params.id + "/raster.xml";
+  
+  if( fs.existsSync( file ) ){
+		callback( file, req.params, res );
+	}
+	else{
+  	  var data = fs.readFileSync( "raster.xml", 'utf8' );
+  	  var xmlDoc = xml.parseXml( data );
+  	  var sources = xmlDoc.find( "//Parameter[@name='file']" );
+				
+    sources[ 0 ].text( "../../../../../raster/" + req.params.id + ".tif" );
+		mkdir( "cache/raster/" + req.params.id );
+		
+		fs.writeFileSync( file, xmlDoc.toString() );
+    callback( file, req.params, res );
+	}
 }
 
 function mkdir(path, root) {

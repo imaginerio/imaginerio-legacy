@@ -139,7 +139,7 @@ function load_raster( id )
 		}
 		else
 		{
-			rasters[ id ] = L.tileLayer( rasterserver + 'tiles/?year=' + year + '&z={z}&x={x}&y={y}&raster=' + id ).addTo( map ).setOpacity( 0.75 );
+			rasters[ id ] = L.tileLayer( rasterserver + id + '/{z}/{x}/{y}.png' ).addTo( map ).setOpacity( 0.75 );
 			rasters[ id ].bringToBack();
 			base.bringToBack();
 		}

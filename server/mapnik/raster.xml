@@ -9,7 +9,7 @@
   <Parameter name="minzoom">14</Parameter>
   <Parameter name="maxzoom">18</Parameter>
   <Parameter name="scale">1</Parameter>
-  <Parameter name="metatile">1</Parameter>
+  <Parameter name="metatile">16</Parameter>
   <Parameter name="id"><![CDATA[rio-raster]]></Parameter>
   <Parameter name="_updated">1402387594000</Parameter>
   <Parameter name="tilejson"><![CDATA[2.0.0]]></Parameter>
