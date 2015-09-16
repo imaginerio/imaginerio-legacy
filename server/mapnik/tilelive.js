@@ -11,6 +11,12 @@ var express = require('express'),
     
 var app = express();
 
+app.use( function( req, res, next )
+{
+    res.setHeader( 'Access-Control-Allow-Origin', '*' );
+    next();
+});
+
 app.use( function(err, req, res, next) {
   console.error(err.stack);
   next(err);
