@@ -69,7 +69,7 @@ function show_visual_details( properties, e )
 
 	var probe = $( document.createElement( 'div' ) )
 					.addClass( "visual_probe" )
-					.html( "<b>" + properties.creator + "</b><p>" + properties.description + "<p><i>Click for details</i>" )
+					.html( "<b>" + properties.description + "</b><p>" + properties.creator + "<p><i>Click for details</i>" )
 					.appendTo( $( ".wrapper" ) );
 	
 	$.ajax( "http://www.sscommons.org/openlibrary/secure/metadata/" + properties.id,{
