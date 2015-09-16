@@ -23,15 +23,12 @@ exports.copyDB = function( to, from ){
       });
       
       query.on( 'end', function(){
-        //var pushClient = new pg.Client( 'postgres://pg_power_user:XfAfooM4zUD8HG@localhost/' + from );
-        //pushClient.connect();
-        
         console.log( "Dropping " + chalk.green( to ) + " database..." );
-        	var query = client.query( "DROP DATABASE " + to );
+        	var query = pushClient.query( "DROP DATABASE " + to );
         	
         	query.on( 'error', function( error ){
           console.log( error );
-          client.end();
+          pushClient.end();
         });
         	
         	query.on( 'end', function(){
@@ -39,25 +36,25 @@ exports.copyDB = function( to, from ){
           exec( "createdb -T template0 " + to, function( error, stdout, stderr ){
             	if( error !== null ){
               console.log( chalk.red( "ERROR: " ) + error );
-              client.end();
+              pushClient.end();
             }
             else{
               console.log( "Restoring data..." );
               exec( "gunzip -c " + from + ".gz | psql " + to, function( error, stdout, stderr ){
                 	if( error !== null ){
                   console.log( chalk.red( "ERROR: " ) + error );
-                  client.end();
+                  pushClient.end();
                 }
                 else{
                   console.log( "Database " + chalk.green( from ) + " successfully copied to " + chalk.yellow( to ) );
                   exec( 'psql -d ' + to + ' -c "TRUNCATE cache;"', function( error, stdout, stderr ){
                     if( error !== null ){
                       console.log( chalk.red( "ERROR: " ) + error );
-                      client.end();
+                      pushClient.end();
                     }
                     else {
                       console.log( "Tile cache " + chalk.green( "successfully cleared." ) );
-                      client.end();
+                      pushClient.end();
                     }
                   });
                 }
