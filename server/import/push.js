@@ -1,8 +1,12 @@
-var sys = require( 'sys' ),
+var pg = require( 'pg' ),
+    sys = require( 'sys' ),
     	exec = require( 'child_process' ).exec,
     	chalk = require( 'chalk' );
     	
-exports.copyDB = function( client, to, from ){
+exports.copyDB = function( to, from ){
+  var pushClient = new pg.Client( 'postgres://pg_power_user:XfAfooM4zUD8HG@localhost/' + from );
+  pushClient.connect();
+  
   console.log( "Dumping " + chalk.green( from ) + " database structure and data..." );
   exec( "pg_dump " + from + " | gzip > " + from + ".gz", function ( error, stdout, stderr ){
     if( error !== null ){
@@ -11,20 +15,26 @@ exports.copyDB = function( client, to, from ){
     else{
       console.log( "Dropping database connections to " + chalk.green( to ) + "...");
   
-      var query = client.query( "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = 'TARGET_DB' AND pid <> pg_backend_pid();" );
+      var query = pushClient.query( "UPDATE pg_database SET datallowconn = 'false' WHERE datname = '" + to + "'; SELECT pg_terminate_backend( pid ) FROM pg_stat_activity WHERE datname = '" + to + "';" );
       
       query.on( 'error', function( error ){
         console.log( error );
         client.end();
       });
-
-      console.log( "Dropping " + chalk.green( to ) + " database..." );
-      	exec( "dropdb " + to, function( error, stdout, stderr ){
-        	if( error !== null ){
-          console.log( chalk.red( "ERROR: " ) + error );
+      
+      query.on( 'end', function(){
+        //var pushClient = new pg.Client( 'postgres://pg_power_user:XfAfooM4zUD8HG@localhost/' + from );
+        //pushClient.connect();
+        
+        console.log( "Dropping " + chalk.green( to ) + " database..." );
+        	var query = client.query( "DROP DATABASE " + to );
+        	
+        	query.on( 'error', function( error ){
+          console.log( error );
           client.end();
-        }
-        else{
+        });
+        	
+        	query.on( 'end', function(){
           console.log( "Creating empty " + chalk.green( to ) + " database..." );
           exec( "createdb -T template0 " + to, function( error, stdout, stderr ){
             	if( error !== null ){
@@ -54,7 +64,7 @@ exports.copyDB = function( client, to, from ){
               });
             }
           });
-        }
+        });
       });
     }
   });
