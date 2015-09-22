@@ -181,7 +181,7 @@ function renderTile( filename, params, res ){
 
 function saveTile( params, tile, res ){
   var png = "cache/png/" + params.year + "/" + params.layer + "/" + params.z + "/" + params.x + "/" + params.y + ".png";
-  var p = { Bucket : 'imagine-rio', Key : png, Body : tile, ACL : 'public-read' };
+  var p = { Bucket : 'imaginerio', Key : png, Body : tile, ACL : 'public-read' };
   s3.putObject( p, function( err, data ){
     if( err ) return console.log( err );
       
