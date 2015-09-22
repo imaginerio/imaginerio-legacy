@@ -7,6 +7,7 @@ var express = require('express'),
     AWS = require( 'aws-sdk' ),
     dev,
     conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/rio",
+    cloudfront = "http://d3unofsdy0zxgc.cloudfront.net/",
     hillshade = [ { year : 1960, file : '../../../../../raster/Hillshade_WGS84_1960_2013.tif' }, { year : 1921, file : '../../../../../raster/Hillshade_WGS84_1921_1959.tif' }, { year : 1906, file : '../../../../../raster/Hillshade_WGS84_1906_1920.tif' }, { year : 1500, file : '../../../../../raster/Hillshade_WGS84_1500_1905.tif' } ];
     
 var app = express();
@@ -57,7 +58,7 @@ app.get('/tiles/:year/:layer/:z/:x/:y.*', function( req, res ){
 	
 	query.on( 'end', function(){
   	  if( exists && dev === false ){
-      res.redirect( "http://d3unofsdy0zxgc.cloudfront.net/" + png );
+      res.redirect( cloudfront + png );
     }
     else{
       parseXML( req, res, renderTile );
@@ -77,7 +78,7 @@ app.get( '/raster/:id/:z/:x/:y.*', function( req, res ){
 	
 	query.on( 'end', function(){
   	  if( exists ){
-      res.redirect( "http://d3unofsdy0zxgc.cloudfront.net/" + png );
+      res.redirect( cloudfront + png );
     }
     else{
       req.params.year = null;
