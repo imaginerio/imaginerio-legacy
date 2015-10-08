@@ -243,10 +243,10 @@ function export_map()
 	
 	$( "#export" ).addClass( "loading" );
 	
-	leafletImage( map, dimensions, function( err, canvas )
+	leafletImage( map, dimensions, [ base, shown.raster, shown.tiles ], function( err, canvas )
 	{
-	    dimensions.x += 235;
-	    var exp = document.createElement( "canvas" );
+    dimensions.x += 235;
+    var exp = document.createElement( "canvas" );
 		exp.width = dimensions.x;
 		exp.height = dimensions.y;
 		
