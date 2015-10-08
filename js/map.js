@@ -274,19 +274,8 @@ function export_map()
 	
 	function savePNG( data, fname, dimensions )
 	{
-    if( $( "html" ).hasClass( "adownload" ) )
-    {
-	    var pom = document.createElement('a');
-	    document.body.appendChild(pom);
-			pom.setAttribute( 'href', data.replace( 'image/png', 'image/octet-stream' ) );
-	    pom.setAttribute( 'download', fname );
-		  pom.click();
-		  document.body.removeChild(pom);
-		}
-		else
-		{
-			var dim = scale_image( dimensions.x, dimensions.y );
-			var light = $( document.createElement( 'div' ) )
+    var dim = scale_image( dimensions.x, dimensions.y );
+		var light = $( document.createElement( 'div' ) )
 							.addClass( 'drag' )
 							.append( 
 								$( "<img/>" ).attr( "src", data ).width( dim.w ).height( dim.h )
@@ -297,9 +286,7 @@ function export_map()
 									.prepend( $( "<img/>" ).attr( "src", "img/drag.png" ) )
 							)
 			
-			$.featherlight( light );
-		}
-        
-        $( "#export" ).removeClass( "loading" );
-    };
+		$.featherlight( light );
+    $( "#export" ).removeClass( "loading" );
+  }
 }
