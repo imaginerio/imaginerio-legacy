@@ -35,7 +35,7 @@ function draw_visual( layer )
 				this.layer.bringToFront();
 				_.each( this.layer.getLayers(), function( l )
 				{
-					if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0.2 } );
+					if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0.2, fill : true } );
 				});
 	
 				show_visual_details( this.layer.feature.properties, map.latLngToContainerPoint( e.latlng ) );
@@ -44,18 +44,21 @@ function draw_visual( layer )
 			{
 				_.each( this.layer.getLayers(), function( l )
 				{
-					if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0 } );
+					if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0, fill : false } );
 				});
 				$( ".visual_probe" ).remove();
 			});
 			l.on( "click", function()
 			{
 				show_image( this.layer.feature.properties );
+        console.log( l );
 			});
 		}
 		else
 		{
 			l.setStyle({
+        clickable : false,
+        fill : false,
 				fillColor : "#000000",
 				fillOpacity : 0,
 				opacity : 0
