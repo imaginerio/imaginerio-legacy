@@ -251,6 +251,9 @@ function export_map()
 		exp.height = dimensions.y;
 		
 		var context = exp.getContext( "2d" );
+    
+    context.fillStyle = '#fff';
+    context.fillRect( 0, 0, dimensions.x, dimensions.y );
 	    
     context.drawImage( canvas, 235, 100 );
 		context.fillStyle = '#eee';
