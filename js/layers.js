@@ -63,7 +63,7 @@ function build_layers()
 			{
 				var label = add_check( "layer visual", "ImageViewshedsPoly", "viewsheds", function()
 				{
-					if( $( ".visual" ).children( "input" ).is( ":checked" ) )
+					if( $( ".layer.visual" ).children( "input" ).is( ":checked" ) )
 					{
 						map.addLayer( visual[ year ] );
 					}
