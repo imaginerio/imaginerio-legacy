@@ -102,9 +102,7 @@
     }
   }
 
-#squares_labels ::greenspace {
-  [featuretyp = "Parks"],[featuretyp = "Gardens"]{
-  
+#parks_labels ::greenspace {
   [zoom>=15]{
     text-name: "[nameshort]";
     text-placement: interior;
@@ -143,11 +141,9 @@
       text-min-distance: 250;
       }
     }
-  }
-  }
+}
 
   #squares_labels ::urbanspace {
-  [featuretyp = "Squares"],[featuretyp = "Plazas"]{
     [zoom>=16]{
     text-name: "[nameshort]";
     text-placement: interior;
@@ -175,13 +171,11 @@
       text-character-spacing: 1;
       text-wrap-width: 40;
       }
-    }
-  }
+  	}
 }
 
 
-#squares_labels ::icon {
-  [featuretyp = "Parks"],[featuretyp = "Gardens"]{
+#parks_labels ::icon {
   
   [zoom>=16]{
     shield-name: "' '";
@@ -217,7 +211,6 @@
     shield-file: url(images/park2-24.png);
     }
   }
- }
 }
 
 /*  LINES LABELS  */
@@ -282,9 +275,7 @@
 
 
 #roads_labels ::high {
-  [featuretyp = "Expressway"],
-  [featuretyp = "Principle Arterial"],
-  [featuretyp = "Minor Arterial"] {
+  [scalerank=1] {
   
   [zoom>=14]{
     text-name: "[namecomple]";
@@ -323,9 +314,7 @@
 
   
 #roads_labels ::med {
-  [featuretyp = "Collector"],
-  [featuretyp = "Rua"],
-  [featuretyp = "Avenida"] {
+  [scalerank=2] {
     
   [zoom>=14]{
     text-name: "[namecomple]";
@@ -367,15 +356,7 @@
   
   
 #roads_labels ::low {
-  [featuretyp = "Local"],
-  [featuretyp = "Beco"],
-  [featuretyp = "Caminho"],
-  [featuretyp = "Estrada"],
-  [featuretyp = "Ladeira"],
-  [featuretyp = "Largo"],
-  [featuretyp = "Praca"],
-  [featuretyp = "Praia"],
-  [featuretyp = "Travessa"] {
+  [scalerank>2] {
       
   [zoom>=14]{
     text-name: "[namecomple]";

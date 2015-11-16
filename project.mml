@@ -156,7 +156,7 @@
       ],
       "Datasource": {
         "type": "postgis",
-        "table": "( SELECT * FROM basepoly WHERE featuretyp = 'Cemeteries' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "table": "( SELECT * FROM basepoly WHERE stylename = 'cemetery' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
         "key_field": "gid",
         "geometry_field": "geom",
         "extent_cache": "auto",
@@ -183,7 +183,7 @@
       ],
       "Datasource": {
         "type": "postgis",
-        "table": "( SELECT * FROM basepoly WHERE featuretyp = 'Squares' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "table": "( SELECT * FROM basepoly WHERE stylename = 'plaza' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
         "key_field": "gid",
         "geometry_field": "geom",
         "extent_cache": "auto",
@@ -199,6 +199,33 @@
       "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
       "advanced": {},
       "name": "squares"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -44.0494471927581,
+        -23.1024340644629,
+        -42.6598821418086,
+        -22.6300318711334
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoly WHERE stylename = 'park' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "parks",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "parks"
     },
     {
       "geometry": "polygon",
@@ -326,7 +353,10 @@
         "dbname": "riodev",
         "host": "imaginerio.rice.edu",
         "user": "pg_power_user",
-        "password": "XfAfooM4zUD8HG"
+        "password": "XfAfooM4zUD8HG",
+        "id": "roads",
+        "project": "Rio",
+        "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
       },
       "id": "roads",
       "class": "",
@@ -480,7 +510,7 @@
       ],
       "Datasource": {
         "type": "postgis",
-        "table": "( SELECT * FROM basepoly WHERE layer = 'PublicSpacesPoly' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "table": "( SELECT * FROM basepoly WHERE stylename = 'plaza' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
         "key_field": "gid",
         "geometry_field": "geom",
         "extent_cache": "auto",
@@ -496,6 +526,33 @@
       "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
       "advanced": {},
       "name": "squares_labels"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -44.0494471927581,
+        -23.1024340644629,
+        -42.6598821418086,
+        -22.6300318711334
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoly WHERE stylename = 'park' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "parks_labels",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "parks_labels"
     },
     {
       "geometry": "linestring",
@@ -588,7 +645,7 @@
       ],
       "Datasource": {
         "type": "postgis",
-        "table": "( SELECT * FROM basepoly WHERE featuretyp = 'Cemeteries' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "table": "( SELECT * FROM basepoly WHERE stylename = 'cemetery' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
         "key_field": "gid",
         "geometry_field": "geom",
         "extent_cache": "auto",

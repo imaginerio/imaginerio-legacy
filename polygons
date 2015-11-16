@@ -130,8 +130,6 @@
 }
 
 #squares {
-  [featuretyp = "Squares"],
-  [featuretyp = "Plazas"]{
     polygon-fill: @squares;
     polygon-opacity: 0.8;
   	::outline {
@@ -140,9 +138,9 @@
         line-opacity: 0.6;
     	line-join: round;
     }
-  }
-  [featuretyp = "Parks"],
-  [featuretyp = "Gardens"]{
+}
+
+#parks{
     polygon-fill: @greenspace;
     polygon-opacity: 0.6;
   	::outline {
@@ -151,7 +149,6 @@
         line-opacity: 0.5;
     	line-join: round;
     }
-   }
  }
 
 #inlandwater { 
