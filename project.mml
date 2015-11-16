@@ -1,0 +1,615 @@
+{
+  "bounds": [
+    -43.319,
+    -22.9944,
+    -43.1386,
+    -22.8314
+  ],
+  "center": [
+    -43.2073,
+    -22.9039,
+    14
+  ],
+  "format": "png8",
+  "interactivity": {
+    "layer": "",
+    "template_teaser": "",
+    "fields": []
+  },
+  "minzoom": 14,
+  "maxzoom": 18,
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+  "Stylesheet": [
+    "style.mss",
+    "polygons",
+    "lines",
+    "points",
+    "labels"
+  ],
+  "Layer": [
+    {
+      "geometry": "polygon",
+      "extent": [
+        -44.0494471927581,
+        -23.1024340644629,
+        -42.6598821418086,
+        -22.6300318711334
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoly WHERE layer = 'LandPoly' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "land",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "land"
+    },
+    {
+      "geometry": "raster",
+      "extent": [
+        -43.78907514965025,
+        -23.08413346631749,
+        -43.086892149650254,
+        -22.72909946631749
+      ],
+      "id": "hillshade_2013",
+      "class": "",
+      "Datasource": {
+        "file": "layers/hillshade_2013.tif"
+      },
+      "layer": null,
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "hillshade_2013"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -43.091785475333495,
+        -23.077207801443162,
+        -42.46063087864635,
+        -22.726725080462128
+      ],
+      "id": "mask",
+      "class": "",
+      "Datasource": {
+        "file": "layers/mask/mask.shp"
+      },
+      "layer": null,
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "mask"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -43.6834457612267,
+        -22.9671653560144,
+        -43.1710435408641,
+        -22.8051180962776
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoly WHERE layer = 'CityBlocksPoly' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-43.6834457612267,-22.9671653560144,-43.1710435408641,-22.8051180962776",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "cityblocks",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "cityblocks"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -44.0494471927581,
+        -23.1024340644629,
+        -42.6598821418086,
+        -22.6300318711334
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoly WHERE layer = 'LotsAndLandUsesPoly' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334",
+        "host": "imaginerio.rice.edu",
+        "dbname": "riodev",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "lotslanduse",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "lotslanduse"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -44.0494471927581,
+        -23.1024340644629,
+        -42.6598821418086,
+        -22.6300318711334
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoly WHERE featuretyp = 'Cemeteries' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "cemeteries",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "cemeteries"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -44.0494471927581,
+        -23.1024340644629,
+        -42.6598821418086,
+        -22.6300318711334
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoly WHERE featuretyp = 'Squares' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "squares",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "squares"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -44.0494471927581,
+        -23.1024340644629,
+        -42.6598821418086,
+        -22.6300318711334
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoly WHERE layer = 'InlandWatersPoly' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "inlandwater",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "inlandwater"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        -43.7954299139144,
+        -23.0822316762007,
+        -43.0917420245885,
+        -22.7290825466831
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM baseline WHERE layer = 'InlandWatersLine' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-43.7954299139144,-23.0822316762007,-43.0917420245885,-22.7290825466831",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "riversstreams",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "riversstreams"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        -43.7954299139144,
+        -23.0822316762007,
+        -43.0917420245885,
+        -22.7290825466831
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM baseline WHERE featuretyp = 'Aqueducts' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-43.7954299139144,-23.0822316762007,-43.0917420245885,-22.7290825466831",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "waterline",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "waterline"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -44.0494471927581,
+        -23.1024340644629,
+        -42.6598821418086,
+        -22.6300318711334
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoly WHERE layer = 'NeighborhoodsPoly' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "neighborhoods",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "neighborhoods"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        -43.7954299139144,
+        -23.0822316762007,
+        -43.0917420245885,
+        -22.7290825466831
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM baseline WHERE layer = 'RoadsLine' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-43.7954299139144,-23.0822316762007,-43.0917420245885,-22.7290825466831",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "roads",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "roads"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -44.0494471927581,
+        -23.1024340644629,
+        -42.6598821418086,
+        -22.6300318711334
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoly WHERE layer = 'BuildingsPoly' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "buildings",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "buildings"
+    },
+    {
+      "geometry": "point",
+      "extent": [
+        -43.6834457612267,
+        -22.9671653560144,
+        -43.1710435408641,
+        -22.8051180962776
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoint WHERE layer = 'UtilitiesPoint' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-43.6834457612267,-22.9671653560144,-43.1710435408641,-22.8051180962776",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "fountainspoint",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "fountainspoint"
+    },
+    {
+      "geometry": "point",
+      "extent": [
+        -44.0494471927581,
+        -23.1024340644629,
+        -42.6598821418086,
+        -22.6300318711334
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoint WHERE layer = 'BuildingsPoint' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "railpoint",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "railpoint"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -44.0494471927581,
+        -23.1024340644629,
+        -42.6598821418086,
+        -22.6300318711334
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoly WHERE layer = 'InlandWatersPoly' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "inlandwater_labels",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "inlandwater_labels"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -44.0494471927581,
+        -23.1024340644629,
+        -42.6598821418086,
+        -22.6300318711334
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoly WHERE layer = 'NeighborhoodsPoly' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "neighborhoods_labels",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "neighborhoods_labels"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -44.0494471927581,
+        -23.1024340644629,
+        -42.6598821418086,
+        -22.6300318711334
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoly WHERE layer = 'PublicSpacesPoly' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "squares_labels",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "squares_labels"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        -43.7954299139144,
+        -23.0822316762007,
+        -43.0917420245885,
+        -22.7290825466831
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM baseline WHERE layer = 'RoadsLine' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-43.7954299139144,-23.0822316762007,-43.0917420245885,-22.7290825466831",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "roads_labels",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "roads_labels"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        -43.7954299139144,
+        -23.0822316762007,
+        -43.0917420245885,
+        -22.7290825466831
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM baseline WHERE layer = 'InlandWatersLine' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-43.7954299139144,-23.0822316762007,-43.0917420245885,-22.7290825466831",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "riversstreams_labels",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "riversstreams_labels"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        -43.7954299139144,
+        -23.0822316762007,
+        -43.0917420245885,
+        -22.7290825466831
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM baseline WHERE featuretyp = 'Aqueducts' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-43.7954299139144,-23.0822316762007,-43.0917420245885,-22.7290825466831",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "waterline_labels",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "waterline_labels"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -44.0494471927581,
+        -23.1024340644629,
+        -42.6598821418086,
+        -22.6300318711334
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoly WHERE featuretyp = 'Cemeteries' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "cemeteries_marker",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "cemeteries_marker"
+    }
+  ],
+  "scale": 1,
+  "metatile": 1,
+  "name": "Rio",
+  "description": "",
+  "legend": "",
+  "attribution": ""
+}

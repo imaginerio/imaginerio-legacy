@@ -1,0 +1,416 @@
+/* Contents:
+
+ * LABELS AND MARKERS
+ * - inland water labels
+ * - cemeteries markers
+ * - neighborhoods labels
+ * - squares labels and markers
+ * - contour labels
+ * - waterline and rivers/streams labels
+ * - roads labels
+
+*/
+
+@font_reg: "Helvetica Regular";
+@font_bold: "Helvetica Bold";
+@font_italic: "Helvetica Oblique";
+@font_boldital: "Helvetica Bold Oblique";
+
+/*  AREAS LABELS  */
+
+#inlandwater_labels {
+    text-name: "[namecomple]";
+    text-placement: interior;
+    text-face-name:@font_italic;
+    text-fill: darken(@openwater, 35%);
+    text-halo-fill:rgba(255,255,255,0.8);
+    text-halo-radius:1.5;
+    text-character-spacing: 1;
+    text-transform: capitalize;
+    text-min-distance: 350;
+    text-line-spacing: 2;
+   
+      [zoom<=15] {
+      text-size: 12;
+      text-wrap-width: 40;
+      }
+    
+      [zoom=16] {
+      text-size: 14;
+      text-wrap-width: 40;
+      text-line-spacing: 4;
+      }
+    
+      [zoom>=17] {
+      text-size: 16;
+      text-wrap-width: 80;
+      text-line-spacing: 6;
+      }
+    }
+
+
+#cemeteries_marker {
+  [zoom>=17]{
+  marker-file: url(images/cemetery-18.svg);
+  marker-multi-policy: whole;
+  marker-placement: interior;
+  marker-clip: false;
+  marker-fill: darken(@greenspace, 35%);
+  }
+  
+  [zoom>=18]{
+  marker-file: url(images/cemetery-24.svg);
+  marker-multi-policy: whole;
+  marker-placement: interior;
+  marker-clip: false;
+  marker-fill: darken(@greenspace, 35%);
+  }
+ 
+  }
+
+#neighborhoods_labels {
+  [zoom>=14]{
+    text-name: "[nameshort]";
+    text-placement: point;
+    text-face-name:@font_bold;
+    text-fill: @neighborhoods_inline;
+    text-halo-fill:rgba(255,255,255,0.8);
+    text-halo-radius:1.5;
+    text-transform: uppercase;
+    
+      [zoom=14] {
+      text-size: 10;
+      text-character-spacing: 2;
+      }
+
+      [zoom=15] {
+      text-size: 13;
+      text-character-spacing: 3;
+      }
+      
+      [zoom=16] {
+      text-size: 15;
+      text-fill: @roads_labels_light;
+      text-character-spacing: 4;
+      }
+    
+      [zoom>=17] {
+      text-size: 21;
+      text-fill: @roads_labels_light;
+      text-character-spacing: 4;
+      }
+    }
+  }
+
+#squares_labels ::greenspace {
+  [featuretyp = "Parks"],[featuretyp = "Gardens"]{
+  
+  [zoom>=15]{
+    text-name: "[nameshort]";
+    text-placement: interior;
+    text-face-name:@font_italic;
+    text-fill: darken(@greenspace, 45%);
+    text-halo-fill:rgba(255,255,255,0.8);
+    text-halo-radius:1.5;
+    text-line-spacing: 2;
+    text-min-distance: 100;
+    
+
+      [zoom=15] {
+      text-size: 12;
+      text-character-spacing: 1;
+      text-wrap-width: 80;
+      text-wrap-before: true;
+      }
+      
+      [zoom=16] {
+      text-size: 13;
+      text-character-spacing: 1;
+      text-wrap-width: 50;
+      }
+    
+      [zoom=17] {
+      text-size: 14;
+      text-character-spacing: 2;
+      text-wrap-width: 20;
+      text-min-distance: 120;
+      }
+      
+      [zoom>=18] {
+      text-size: 15;
+      text-character-spacing: 2;
+      text-wrap-width: 70;
+      text-min-distance: 250;
+      }
+    }
+  }
+  }
+
+  #squares_labels ::urbanspace {
+  [featuretyp = "Squares"],[featuretyp = "Plazas"]{
+    [zoom>=16]{
+    text-name: "[nameshort]";
+    text-placement: interior;
+    text-face-name:@font_italic;
+    text-fill: darken(@neighborhoods_inline, 10%);
+    text-halo-fill:rgba(255,255,255,0.8);
+    text-halo-radius:1.5;
+    text-line-spacing: 2;
+    text-min-distance: 100;
+      
+      [zoom=16] {
+      text-size: 13;
+      text-character-spacing: 1;
+      text-wrap-width: 40;
+      }
+      
+      [zoom=17] {
+      text-size: 14;
+      text-character-spacing: 1;
+      text-wrap-width: 40;
+      }
+      
+      [zoom=18] {
+      text-size: 14;
+      text-character-spacing: 1;
+      text-wrap-width: 40;
+      }
+    }
+  }
+}
+
+
+#squares_labels ::icon {
+  [featuretyp = "Parks"],[featuretyp = "Gardens"]{
+  
+  [zoom>=16]{
+    shield-name: "' '";
+    shield-file: url(images/park2-18.png);
+    shield-face-name: @font_reg;
+    shield-placement: interior;
+    shield-clip: false;
+    //shield-opacity: 1;
+    }
+
+  [zoom>=16]{
+    shield-file: url(images/park2-18.png);
+    }
+    
+  [zoom>=18]{
+    shield-file: url(images/park2-24.png);
+    }
+    
+
+  [nameshort = "Quinta da Boa Vista"]{
+
+  [zoom>=16]{
+    shield-placement: interior;
+    shield-clip: false;
+    shield-fill: darken(@greenspace, 35%);
+    }
+
+  [zoom>=16]{
+    shield-file: url(images/park2-18.png);
+    }
+      
+  [zoom>=18]{
+    shield-file: url(images/park2-24.png);
+    }
+  }
+ }
+}
+
+/*  LINES LABELS  */
+
+#riversstreams_labels {
+  [zoom>=16]{
+    text-name: "[namecomple]";
+    text-placement: line;
+    text-face-name:@font_italic;
+    text-fill: darken(@openwater, 35%);
+    text-halo-fill:rgba(255,255,255,0.8);
+    text-halo-radius:1.5;
+    text-character-spacing: 1;
+    text-transform: capitalize;
+    text-min-distance: 350;
+   
+      [zoom=16] {
+      text-size: 12;
+      text-min-path-length: 400;
+      }
+    
+      [zoom=17] {
+      text-size: 14;
+      text-min-path-length: 425;
+      }
+    
+      [zoom>=18] {
+      text-size: 14;
+      text-min-path-length: 525;
+      }
+    }
+  }
+
+
+#waterline_labels {
+    text-name: "[namecomple]";
+    text-placement: line;
+    text-face-name:@font_italic;
+    text-fill: darken(@openwater, 35%);
+    text-halo-fill:rgba(255,255,255,0.8);
+    text-halo-radius:1.5;
+    text-character-spacing: 1;
+    text-transform: capitalize;
+    text-min-distance: 350;
+   
+      [zoom<=14] {
+      text-size: 11;
+      text-min-path-length: 300;
+      }
+    
+      [zoom=16] {
+      text-size: 12;
+      text-min-path-length: 400;
+      }
+    
+      [zoom>=17] {
+      text-size: 14;
+      text-min-path-length: 425;
+      }
+  }
+
+
+
+#roads_labels ::high {
+  [featuretyp = "Expressway"],
+  [featuretyp = "Principle Arterial"],
+  [featuretyp = "Minor Arterial"] {
+  
+  [zoom>=14]{
+    text-name: "[namecomple]";
+    text-placement: line;
+    text-face-name:@font_reg;
+    text-fill: @roads_labels_dark;
+    text-halo-fill:rgba(255,255,255,0.8);
+    text-halo-radius:1.5;
+    text-character-spacing: 1;
+   
+      [zoom=14] {
+      text-size: 12;
+      }
+      
+      [zoom=15] {
+      text-size: 13;
+      }
+      
+      [zoom=16] {
+      text-size: 14;
+      text-min-distance: 250;
+      }
+      
+      [zoom=17] {
+      text-size: 16;
+      text-min-distance: 300;
+      }
+      
+      [zoom>=18] {
+      text-size: 16;
+      text-min-distance: 350;
+      }
+    }
+  }
+}
+
+  
+#roads_labels ::med {
+  [featuretyp = "Collector"],
+  [featuretyp = "Rua"],
+  [featuretyp = "Avenida"] {
+    
+  [zoom>=14]{
+    text-name: "[namecomple]";
+    text-placement: line;
+    text-face-name:@font_reg;
+    text-fill: @roads_labels_light;
+    text-halo-fill:rgba(255,255,255,0.8);
+    text-halo-radius:1.5;
+    text-character-spacing: 1;
+
+      [zoom=14] {
+      text-size: 12;
+      }
+      
+      [zoom=15] {
+      text-size: 12;
+      }
+      
+      [zoom=16] {
+      text-size: 14;
+      text-fill: @roads_labels_dark;
+      text-min-distance: 250;
+      }
+      
+      [zoom=17] {
+      text-fill: @roads_labels_dark;
+      text-size: 15;
+      text-min-distance: 300;
+      }
+      
+      [zoom>=18] {
+      text-fill: @roads_labels_dark;
+      text-size: 15;
+      text-min-distance: 350;
+      }
+    }
+  }
+}
+  
+  
+#roads_labels ::low {
+  [featuretyp = "Local"],
+  [featuretyp = "Beco"],
+  [featuretyp = "Caminho"],
+  [featuretyp = "Estrada"],
+  [featuretyp = "Ladeira"],
+  [featuretyp = "Largo"],
+  [featuretyp = "Praca"],
+  [featuretyp = "Praia"],
+  [featuretyp = "Travessa"] {
+      
+  [zoom>=14]{
+    text-name: "[namecomple]";
+    text-placement: line;
+    text-face-name:@font_reg;
+    text-fill: @roads_labels_light;
+    text-halo-fill:rgba(255,255,255,0.8);
+    text-halo-radius:1.5;
+    text-character-spacing: 1;
+    
+      [zoom=14] {
+      text-size: 10;
+      }
+      
+      [zoom=15] {
+      text-size: 10;
+      }
+      
+      [zoom=16] {
+      text-size: 12;
+      text-fill: @roads_labels_dark;
+      text-min-distance: 250;
+      }
+      
+      [zoom=17] {
+      text-fill: @roads_labels_dark;
+      text-size: 14;
+      text-min-distance: 300;
+      }
+      
+      [zoom>=18] {
+      text-fill: @roads_labels_dark;
+      text-size: 15;
+      text-min-distance: 350;
+      }
+    } 
+  }
+}

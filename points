@@ -1,0 +1,47 @@
+/* Contents:
+
+ * POINTS
+ * - fountains point
+ * - rail point
+
+*/
+
+#railpoint {
+  [zoom>=16]{
+    marker-file: url(images/rail-18.svg);
+    marker-multi-policy: whole;
+    marker-placement: point;
+    marker-clip: false;
+    
+  [zoom>=16]{
+    marker-fill: darken(@neighborhoods_inline, 0%);
+    }
+  
+  [zoom>=17]{
+    marker-fill: darken(@neighborhoods_inline, 5%);
+    }
+  
+  [zoom>=17]{
+    marker-file: url(images/rail-24.svg);
+    }
+  }
+}
+
+#fountainspoint{
+    marker-file: url(images/monument-18.svg);
+    marker-multi-policy: whole;
+    marker-placement: point;
+    marker-clip: false;
+  
+  [zoom>=14]{
+    marker-fill: darken(@neighborhoods_inline, 0%);
+    }
+  
+  [zoom>=17]{
+    marker-fill: darken(@neighborhoods_inline, 5%);
+    }
+  
+  [zoom>=17]{
+    marker-file: url(images/monument-24.svg);
+    }
+  }

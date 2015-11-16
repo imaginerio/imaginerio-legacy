@@ -1,0 +1,230 @@
+/* Contents:
+
+ * POLYGONS
+ * - buildings
+ * - cemeteries
+ * - city blocks
+ * - squares
+ * - neighborhoods
+ * - land
+ * - lots landuse
+ * - inland water
+
+*/
+#land {
+  ::offshore {
+    line-color: darken(@openwater, 6%);
+    image-filters: agg-stack-blur(50,50);
+    image-filters-inflate: true;
+    line-opacity: 0.75;
+    line-width: 150;
+    line-join: round;
+    line-cap: round;
+  }
+  
+  ::nearshore {
+    line-color: darken(@openwater, 12%);
+    image-filters: agg-stack-blur(50,50);
+    image-filters-inflate: true;
+    line-opacity: 0.75;
+    line-width: 50;
+    line-join: round;
+    line-cap: round;
+  }
+  
+  ::outline {
+    line-color: @land_outline;
+    line-width: 2;
+    line-join: round;
+  }
+    polygon-fill: @land;
+  }
+/*
+#lotslanduse {
+  [zoom<=14]{
+    polygon-fill: lighten(@lotslanduse, 3%);
+  }
+  
+  [zoom=15]{
+    polygon-fill: @lotslanduse;
+  }
+  
+  [zoom=16]{
+    polygon-fill: fadeout(@lotslanduse,40%);
+  }
+  
+  [zoom>=17]{
+    polygon-fill: fadeout(@lotslanduse,50%);
+  }
+}
+*/
+#neighborhoods {
+  [zoom=15]{
+    ::outline{
+    line-color: @neighborhoods_outline;
+    line-width: 3;
+    line-opacity: 0.3;
+    line-join: round;
+    }
+  
+  	::inline{
+    line-dasharray: 4,2;
+    line-color: @neighborhoods_inline;
+    line-width: 1;
+    line-opacity: 0.5;
+    line-join: round;
+    }
+  }
+ 
+  [zoom>=16]  {
+    ::outline{
+    line-color: @neighborhoods_outline;
+    line-width: 4;
+    line-opacity: 0.3;
+    line-join: round;
+    }
+  
+  	::inline{
+    line-dasharray: 5,3;
+    line-color: darken(@neighborhoods_inline, 10%);
+    line-width: 1;
+    line-opacity: 0.5;
+    line-join: round;
+    }
+  }
+  
+  [zoom>=17]  {
+    ::outline{
+    line-color: @neighborhoods_outline;
+    line-width: 4;
+    line-opacity: 0.3;
+    line-join: round;
+    }
+  
+  	::inline{
+    line-dasharray: 6,4;
+    line-color: darken(@neighborhoods_inline, 10%);
+    line-width: 1.5;
+    line-opacity: 0.5;
+    line-join: round;
+    }
+  }
+}
+/*
+#cityblocks {
+  [zoom>=18]{
+    polygon-fill: @cityblocks;
+    polygon-opacity: 0.4;
+      }
+  }
+*/
+#cemeteries {
+  polygon-fill: @greenspace;
+  polygon-opacity: 0.6;
+  ::outline {
+    line-color: darken(@greenspace, 10%);
+    line-width: 1;
+    line-opacity: 0.5;
+    line-join: round;
+  } 
+}
+
+#squares {
+  [featuretyp = "Squares"],
+  [featuretyp = "Plazas"]{
+    polygon-fill: @squares;
+    polygon-opacity: 0.8;
+  	::outline {
+    	line-color: darken(@land, 10%);
+    	line-width: 1;
+        line-opacity: 0.6;
+    	line-join: round;
+    }
+  }
+  [featuretyp = "Parks"],
+  [featuretyp = "Gardens"]{
+    polygon-fill: @greenspace;
+    polygon-opacity: 0.6;
+  	::outline {
+    	line-color: darken(@greenspace, 10%);
+    	line-width: 1;
+        line-opacity: 0.5;
+    	line-join: round;
+    }
+   }
+ }
+
+#inlandwater { 
+  [featuretyp = "Marshes"]{
+    polygon-fill: desaturate(@marsh, 10%);
+    polygon-opacity: 0.6;
+    polygon-pattern-file: url(images/ripple2.png);
+  }
+  
+  [featuretyp = "Lagoons"],
+  [featuretyp = "Ponds"]{
+    polygon-fill: @openwater;
+  ::outline {
+    line-color: darken(@openwater, 12%);
+    line-width: 1;
+    line-join: round;
+    }
+  }
+}  
+
+#buildings {	
+  	[zoom<=14] {
+    polygon-fill: darken(@lotslanduse,18%);
+      }
+  
+    
+  	[zoom=15]{
+      polygon-fill: darken(@lotslanduse,14%);
+      }
+  
+    [zoom=16]{
+      polygon-fill: darken(@lotslanduse,12%);
+        ::outline{
+          line-color: darken(@land, 35%);
+          line-width: 0.5;
+          line-opacity: 0.5;
+          line-join: round;
+        }
+      }
+
+  	[zoom=17]{
+    	::offset{
+      	  polygon-fill: #000;
+      	  polygon-geometry-transform: translate(1.3,1.3);
+      	  polygon-comp-op: multiply;
+      	  opacity: 0.4;
+     	  }
+    	::set{
+   	      polygon-fill: darken(@lotslanduse,10%);
+          ::outline{
+          	line-color: darken(@land, 35%);
+          	line-width: 0.8;
+          	line-opacity: 0.5;
+          	line-join: round;
+          	}
+     	  }
+        }
+
+    [zoom>=18]{
+      ::offset{
+        polygon-fill: #000;
+      	polygon-geometry-transform: translate(2,2);
+      	polygon-comp-op: multiply;
+      	opacity: 0.4;
+     	}
+      ::set{
+        polygon-fill: darken(@lotslanduse,10%);
+        ::outline{
+          line-color: darken(@land,35%);
+          line-width: 1.0;
+          line-opacity: 0.4;
+          line-join: round;
+          }
+        }
+      }
+    }

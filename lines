@@ -1,0 +1,439 @@
+/* Contents:
+
+ * LINES
+ * - rivers streams
+ * - roads
+ * - water line
+
+*/
+
+/* ROADS
+
+1. First set up the levels in the stack (i.e., ::low vs ::high). Open intersections appear within the same level; closed intersections appear where different levels meet.
+2. Then group roads into classes by featuretyp.
+3. Then style the featuretyp classes for each zoom level, with an ::inline on top of an ::outline.
+
+Note that starting with z17, the stack is flattened to just ::high, so there are open intersections throughout.
+
+*/
+
+#roads ::low{
+  [featuretyp = "Streets"],
+  [featuretyp = "Alleys"],
+  [featuretyp = "Trails"],
+  [featuretyp = "Passages"],
+  [featuretyp = "Local"],
+  [featuretyp = "Beco"],
+  [featuretyp = "Caminho"],
+  [featuretyp = "Estrada"],
+  [featuretyp = "Ladeira"],
+  [featuretyp = "Largo"],
+  [featuretyp = "Praca"],
+  [featuretyp = "Praia"],
+  [featuretyp = "Travessa"] {
+    
+  ::outline {
+      
+      [zoom<=14] {
+      line-join: round;
+      line-cap: round;
+      line-width: 1;
+      line-color: darken(@land, 7%);
+      }
+      
+      [zoom=15] {
+      line-join: round;
+      line-cap: round;
+      line-width: 4;
+      line-color: darken(@land, 12%); 
+      }
+      
+      [zoom=16] {
+      line-join: round;
+      line-cap: round;
+      line-width: 5;
+      line-color: darken(@land, 12%);
+      }
+  }
+    
+  ::inline {
+    
+      [zoom<=14] {
+      line-join: round;
+      line-cap: round;
+      line-width: 1; 
+      line-color: darken(@land, 7%);
+      }
+      
+      [zoom=15] {
+      line-join: round;
+      line-cap: round;
+      line-width: 2;
+      line-color: lighten(@land, 6%);
+      }
+      
+      [zoom=16] {
+      line-join: round;
+      line-cap: round;
+      line-width: 3;
+      line-color:
+      lighten(@land, 6%);
+      }
+   }
+ }
+  [featuretyp = "Avenues"],
+  [featuretyp = "Collector"],
+  [featuretyp = "Rua"],
+  [featuretyp = "Avenida"] {
+ 
+  ::outline {
+      
+      [zoom<=14] {
+      line-join: round;
+      line-cap: round;
+      line-width: 1.5; 
+      line-color: darken(@land, 12%);
+      }
+      
+      [zoom=15] {
+      line-join: round;
+      line-cap: round;
+      line-width: 6;
+      line-color: darken(@land, 12%);
+      }
+      
+      [zoom=16] {
+      line-join: round;
+      line-cap: round;
+      line-width: 7;
+      line-color: darken(@land, 12%);
+      }
+    }
+      
+  ::inline {
+      
+      [zoom<=14] {
+      line-join: round;
+      line-cap: round;
+      line-width: 1.5;
+      line-color: darken(@land, 12%);
+      }
+      
+      [zoom=15] {
+      line-join: round;
+      line-cap: round;
+      line-width: 4;
+      line-color: lighten(@land, 6%);
+      }
+      
+      [zoom=16] {
+      line-join: round;
+      line-cap: round;
+      line-width: 5;
+      line-color: lighten(@land, 6%);
+      }     
+    }
+  }
+}
+
+
+#roads ::high{
+  [featuretyp = "Expressways"],
+  [featuretyp = "Principle Arterial"]{
+    
+    ::outline {
+      
+      [zoom<=14] {
+      line-join: round;
+      line-cap: round;
+      line-color: darken(@land, 12%);
+      line-width: 4;
+      }
+      
+      [zoom=15] {
+      line-join: round;
+      line-cap: round;
+      line-color: darken(@land, 12%);
+      line-width: 6;
+      }
+      
+      [zoom=16] {
+      line-join: round;
+      line-cap: round;
+      line-color: darken(@land, 12%);
+      line-width: 8;
+      }
+      
+      [zoom=17] {
+      line-join: round;
+      line-cap: round;
+      line-color: darken(@land, 12%);
+      line-width: 12;
+      }
+      
+      [zoom>=18] {
+      line-join: round;
+      line-cap: round;
+      line-color: darken(@land, 12%);
+      line-width: 18;
+      }
+    }
+    
+    ::inline {
+      
+      [zoom<=14] {
+      line-join: round;
+      line-cap: round;
+      line-color: @roads;
+      line-width: 2;
+      }
+   
+      [zoom=15] {
+      line-join: round;
+      line-cap: round;
+      line-color: @roads;
+      line-width: 4;
+      }
+      
+      [zoom=16] {
+      line-join: round;
+      line-cap: round;
+      line-color: @roads;
+      line-width: 6;
+      }
+      
+      [zoom=17] {
+      line-join: round;
+      line-cap: round;
+      line-color: @roads;
+      line-width: 10;
+      }
+      
+      [zoom>=18] {
+      line-join: round;
+      line-cap: round;
+      line-color: @roads;
+      line-width: 16;
+      }
+   }
+ }
+
+  [featuretyp = "Minor Arterial"]{
+  
+  ::outline {
+      
+      [zoom<=14] {
+      line-join: round;
+      line-cap: round;
+      line-color: darken(@land, 12%);
+      line-width: 5;
+      }
+      
+      [zoom=15] {
+      line-join: round;
+      line-cap: round;
+      line-color: darken(@land, 12%);
+      line-width: 6;
+      }
+      
+      [zoom=16] {
+      line-join: round;
+      line-cap: round;
+      line-color: darken(@land, 12%);
+      line-width: 6;
+      }
+      
+      [zoom=17] {
+      line-join: round;
+      line-cap: round;
+      line-color: darken(@land, 12%);
+      line-width: 9;
+      }
+      
+      [zoom>=18] {
+      line-join: round;
+      line-cap: round;
+      line-color: darken(@land, 12%);
+      line-width: 11;
+      }
+  }
+    
+  ::inline {
+      
+      [zoom<=14] {
+      line-join: round;
+      line-cap: round;
+      line-color: @roads;
+      line-width: 3;
+      }
+      
+      [zoom=15] {
+      line-join: round;
+      line-cap: round;
+      line-color: @roads;
+      line-width: 4;
+      }
+      
+      [zoom=16] {
+      line-join: round;
+      line-cap: round;
+      line-color: @roads;
+      line-width: 4;
+      }
+      
+      [zoom=17] {
+      line-join: round;
+      line-cap: round;
+      line-color: @roads;
+      line-width: 7;
+      }
+      
+      [zoom>=18] {
+      line-join: round;
+      line-cap: round;
+      line-color: @roads;
+      line-width: 9;
+      }
+    }
+ }
+  [featuretyp = "Avenues"],
+  [featuretyp = "Collector"],
+  [featuretyp = "Rua"],
+  [featuretyp = "Avenida"] {
+  
+  ::outline {
+      
+      [zoom=17] {
+      line-join: round;
+      line-cap: round;
+      line-width: 9;
+      line-color: darken(@land, 12%);
+      }
+      
+      [zoom>=18] {
+      line-join: round;
+      line-cap: round;
+      line-width: 11;
+      line-color: darken(@land, 12%);
+      }
+    }
+     
+  ::inline {
+      
+      [zoom=17] {
+      line-join: round;
+      line-cap: round;
+      line-width: 7;
+      line-color: @roads;
+      }
+      
+      [zoom>=18] {
+      line-join: round;
+      line-cap: round;
+      line-width: 9;
+      line-color: @roads;
+      }
+    }
+  }
+  [featuretyp = "Streets"],
+  [featuretyp = "Alleys"],
+  [featuretyp = "Trails"],
+  [featuretyp = "Passages"],
+  [featuretyp = "Local"],
+  [featuretyp = "Beco"],
+  [featuretyp = "Caminho"],
+  [featuretyp = "Estrada"],
+  [featuretyp = "Ladeira"],
+  [featuretyp = "Largo"],
+  [featuretyp = "Praca"],
+  [featuretyp = "Praia"],
+  [featuretyp = "Travessa"] {
+  
+  ::outline {
+      
+      [zoom=17]{
+      line-join: round;
+      line-cap: round; 
+      line-width: 6;
+      line-color: darken(@land, 12%);
+      }
+      
+      [zoom>=18]{
+      line-join: round;
+      line-cap: round;
+      line-width: 7;
+      line-color: darken(@land, 12%);}
+      }
+      
+  ::inline {
+  
+      [zoom=17]{
+      line-join: round;
+      line-cap: round;
+      line-width: 4;
+      line-color: @roads;
+      } 
+       
+      [zoom>=18]{
+      line-join: round;
+      line-cap: round;
+      line-width: 5;
+      line-color: @roads;
+      }    
+    }
+  }
+}
+
+#riversstreams {
+  [zoom<=14]{
+    line-width: 0.8;
+    line-color: darken(@openwater,12%);
+  }
+  
+  [zoom=15]{
+    line-width: 1.2;
+    line-color: darken(@openwater,12%);
+  }
+  
+  [zoom=16]{
+    line-width: 1.7;
+    line-color: darken(@openwater,12%);
+  }
+  
+  [zoom=17]{
+    line-width: 2.5;
+    line-color: darken(@openwater,12%);
+  }
+  
+  [zoom>=18]{
+    line-width: 3.5;
+    line-color: darken(@openwater,12%);
+  }
+}
+
+#waterline {
+  [zoom<=14]{
+    line-width: 0.8;
+    line-color: darken(@openwater,12%);
+  }
+  
+  [zoom=15]{
+    line-width: 1.2;
+    line-color: darken(@openwater,12%);
+  }
+  
+  [zoom=16]{
+    line-width: 1.7;
+    line-color: darken(@openwater,12%);
+  }
+  
+  [zoom=17]{
+    line-width: 2.5;
+    line-color: darken(@openwater,12%);
+  }
+  
+  [zoom>=18]{
+    line-width: 3.5;
+    line-color: darken(@openwater,12%);
+  }
+}
