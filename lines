@@ -314,7 +314,7 @@ Note that starting with z17, the stack is flattened to just ::high, so there are
     line-color: darken(@openwater,12%);
   }
   
-  [zoom=16]{
+  [zoom=16][scalerank <= 2]{
     line-width: 1.7;
     line-color: darken(@openwater,12%);
   }

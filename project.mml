@@ -291,7 +291,7 @@
       ],
       "Datasource": {
         "type": "postgis",
-        "table": "( SELECT * FROM baseline WHERE featuretyp = 'Aqueducts' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "table": "( SELECT * FROM baseline WHERE layer = 'UtilitiesLine' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
         "key_field": "gid",
         "geometry_field": "geom",
         "extent_cache": "auto",
