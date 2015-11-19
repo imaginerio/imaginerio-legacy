@@ -39,25 +39,6 @@
   }
     polygon-fill: @land;
   }
-/*
-#lotslanduse {
-  [zoom<=14]{
-    polygon-fill: lighten(@lotslanduse, 3%);
-  }
-  
-  [zoom=15]{
-    polygon-fill: @lotslanduse;
-  }
-  
-  [zoom=16]{
-    polygon-fill: fadeout(@lotslanduse,40%);
-  }
-  
-  [zoom>=17]{
-    polygon-fill: fadeout(@lotslanduse,50%);
-  }
-}
-*/
 #neighborhoods {
   [zoom=15]{
     ::outline{
@@ -110,14 +91,6 @@
     }
   }
 }
-/*
-#cityblocks {
-  [zoom>=18]{
-    polygon-fill: @cityblocks;
-    polygon-opacity: 0.4;
-      }
-  }
-*/
 #cemeteries {
   polygon-fill: @greenspace;
   polygon-opacity: 0.6;
