@@ -125,14 +125,13 @@
  }
 
 #inlandwater { 
-  [featuretyp = "Marshes"]{
+  [stylename = "marshes"]{
     polygon-fill: desaturate(@marsh, 10%);
     polygon-opacity: 0.6;
     polygon-pattern-file: url(images/ripple2.png);
   }
   
-  [featuretyp = "Lagoons"],
-  [featuretyp = "Ponds"]{
+  [stylename = "ponds"]{
     polygon-fill: @openwater;
   ::outline {
     line-color: darken(@openwater, 12%);
