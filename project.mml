@@ -102,7 +102,7 @@
       ],
       "Datasource": {
         "type": "postgis",
-        "table": "( SELECT * FROM basepoly WHERE stylename = 'cemetery' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "table": "( SELECT * FROM basepoly WHERE stylename = 'cemeteries' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
         "key_field": "gid",
         "geometry_field": "geom",
         "extent_cache": "auto",
@@ -129,7 +129,7 @@
       ],
       "Datasource": {
         "type": "postgis",
-        "table": "( SELECT * FROM basepoly WHERE stylename = 'plaza' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "table": "( SELECT * FROM basepoly WHERE stylename = 'plazas' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
         "key_field": "gid",
         "geometry_field": "geom",
         "extent_cache": "auto",
@@ -156,7 +156,7 @@
       ],
       "Datasource": {
         "type": "postgis",
-        "table": "( SELECT * FROM basepoly WHERE stylename = 'park' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "table": "( SELECT * FROM basepoly WHERE stylename = 'parks' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
         "key_field": "gid",
         "geometry_field": "geom",
         "extent_cache": "auto",
@@ -456,7 +456,7 @@
       ],
       "Datasource": {
         "type": "postgis",
-        "table": "( SELECT * FROM basepoly WHERE stylename = 'plaza' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "table": "( SELECT * FROM basepoly WHERE stylename = 'plazas' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
         "key_field": "gid",
         "geometry_field": "geom",
         "extent_cache": "auto",
@@ -483,7 +483,7 @@
       ],
       "Datasource": {
         "type": "postgis",
-        "table": "( SELECT * FROM basepoly WHERE stylename = 'park' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "table": "( SELECT * FROM basepoly WHERE stylename = 'parks' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
         "key_field": "gid",
         "geometry_field": "geom",
         "extent_cache": "auto",
@@ -591,7 +591,7 @@
       ],
       "Datasource": {
         "type": "postgis",
-        "table": "( SELECT * FROM basepoly WHERE stylename = 'cemetery' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "table": "( SELECT * FROM basepoly WHERE stylename = 'cemeteries' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
         "key_field": "gid",
         "geometry_field": "geom",
         "extent_cache": "auto",
