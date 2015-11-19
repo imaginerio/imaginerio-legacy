@@ -22,7 +22,7 @@ Note that starting with z17, the stack is flattened to just ::high, so there are
     
   ::outline {
       
-      [zoom<=14] {
+      [zoom<=14][scalerank < 4] {
       line-join: round;
       line-cap: round;
       line-width: 1;
@@ -46,7 +46,7 @@ Note that starting with z17, the stack is flattened to just ::high, so there are
     
   ::inline {
     
-      [zoom<=14] {
+      [zoom<=14][scalerank < 4] {
       line-join: round;
       line-cap: round;
       line-width: 1; 
