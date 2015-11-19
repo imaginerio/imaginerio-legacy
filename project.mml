@@ -183,7 +183,7 @@
       ],
       "Datasource": {
         "type": "postgis",
-        "table": "( SELECT * FROM basepoly WHERE layer = 'InlandWatersPoly' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "table": "( SELECT * FROM basepoly WHERE stylename = 'ponds' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
         "key_field": "gid",
         "geometry_field": "geom",
         "extent_cache": "auto",
@@ -193,12 +193,39 @@
         "user": "pg_power_user",
         "password": "XfAfooM4zUD8HG"
       },
-      "id": "inlandwater",
+      "id": "ponds",
       "class": "",
       "srs-name": "WGS84",
       "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
       "advanced": {},
-      "name": "inlandwater"
+      "name": "ponds"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -44.0494471927581,
+        -23.1024340644629,
+        -42.6598821418086,
+        -22.6300318711334
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoly WHERE stylename = 'marshes' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_power_user",
+        "password": "XfAfooM4zUD8HG"
+      },
+      "id": "marshes",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "marshes"
     },
     {
       "geometry": "linestring",
