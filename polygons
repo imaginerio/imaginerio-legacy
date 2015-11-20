@@ -38,6 +38,8 @@
     line-join: round;
   }
     polygon-fill: @land;
+    polygon-pattern-file: url("images/PolarGranite.jpg");
+    polygon-pattern-opacity: 0.2;
   }
 #neighborhoods {
   [zoom=15]{
@@ -92,8 +94,10 @@
   }
 }
 #cemeteries {
-  polygon-fill: @greenspace;
-  polygon-opacity: 0.6;
+    polygon-fill: @greenspace;
+    polygon-opacity: 0.6;
+    polygon-pattern-file: url("images/PolarGranite.jpg");
+    polygon-pattern-opacity: 0.1;
   ::outline {
     line-color: darken(@greenspace, 10%);
     line-width: 1;
@@ -104,7 +108,9 @@
 
 #squares {
     polygon-fill: @squares;
-    polygon-opacity: 0.8;
+    polygon-opacity: 0.9;
+    polygon-pattern-file: url("images/PolarGranite.jpg");
+    polygon-pattern-opacity: 0.1;
   	::outline {
     	line-color: darken(@land, 10%);
     	line-width: 1;
@@ -116,6 +122,8 @@
 #parks{
     polygon-fill: @greenspace;
     polygon-opacity: 0.6;
+    polygon-pattern-file: url("images/PolarGranite.jpg");
+    polygon-pattern-opacity: 0.1;
   	::outline {
     	line-color: darken(@greenspace, 10%);
     	line-width: 1;
@@ -124,9 +132,19 @@
     }
  }
 
-#ponds { 
-  polygon-fill: @openwater;
-    ::outline {
+#ponds {
+  ::shadow{
+    polygon-fill: darken(@openwater, 12%);
+    }
+  
+  ::fill{
+    polygon-comp-op: multiply;
+    polygon-fill: @openwater;
+    image-filters: agg-stack-blur(10,10);
+    image-filters-inflate: true;
+    }
+  
+  ::outline {
       line-color: darken(@openwater, 12%);
       line-width: 1;
       line-join: round;
@@ -136,7 +154,12 @@
 #marshes{
   polygon-fill: desaturate(@marsh, 10%);
   polygon-opacity: 0.6;
-  polygon-pattern-file: url(images/ripple2.png);
+  image-filters: agg-stack-blur(25,25);
+  image-filters-inflate: true;
+  
+  ::pattern{
+    polygon-pattern-file: url(images/ripple2.png);
+    }
 }
 
 
