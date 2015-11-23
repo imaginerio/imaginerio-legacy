@@ -138,8 +138,8 @@
     }
   
   ::fill{
-    polygon-comp-op: multiply;
-    polygon-fill: @openwater;
+    polygon-fill: #fff;
+    polygon-opacity: 0.5;
     image-filters: agg-stack-blur(10,10);
     image-filters-inflate: true;
     }
