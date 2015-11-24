@@ -32,15 +32,23 @@
     line-cap: round;
   }
   
+  ::fill{
+      polygon-fill: @land;
+    }
+  
+  ::pattern{
+    polygon-pattern-file: url("images/PolarGranite.jpg");
+    polygon-pattern-opacity: 0.2;
+    }
+    
   ::outline {
     line-color: @land_outline;
     line-width: 2;
     line-join: round;
   }
-    polygon-fill: @land;
-    polygon-pattern-file: url("images/PolarGranite.jpg");
-    polygon-pattern-opacity: 0.2;
-  }
+
+}
+
 #neighborhoods {
   [zoom=15]{
     ::outline{
@@ -108,7 +116,7 @@
 
 #squares {
     polygon-fill: @squares;
-    polygon-opacity: 0.9;
+    polygon-opacity: 1;
     polygon-pattern-file: url("images/PolarGranite.jpg");
     polygon-pattern-opacity: 0.1;
   	::outline {
@@ -139,7 +147,7 @@
   
   ::fill{
     polygon-fill: #fff;
-    polygon-opacity: 0.5;
+    polygon-opacity: 0.4;
     image-filters: agg-stack-blur(10,10);
     image-filters-inflate: true;
     }
