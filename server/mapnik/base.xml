@@ -8,26 +8,31 @@
   <Parameter name="format">png8</Parameter>
   <Parameter name="interactivity_layer"></Parameter>
   <Parameter name="interactivity_fields"></Parameter>
-  <Parameter name="minzoom">14</Parameter>
+  <Parameter name="minzoom">13</Parameter>
   <Parameter name="maxzoom">18</Parameter>
   <Parameter name="scale">1</Parameter>
   <Parameter name="metatile">16</Parameter>
   <Parameter name="id"><![CDATA[Rio]]></Parameter>
-  <Parameter name="_updated">1405089520000</Parameter>
+  <Parameter name="_updated">1448900892000</Parameter>
   <Parameter name="name"><![CDATA[Rio]]></Parameter>
   <Parameter name="tilejson"><![CDATA[2.0.0]]></Parameter>
   <Parameter name="scheme"><![CDATA[xyz]]></Parameter>
 </Parameters>
 
 
-<Style name="land" filter-mode="first">
-  <Rule>
-    <PolygonSymbolizer fill="#e7ded6" />
-  </Rule>
-</Style>
 <Style name="land-outline" filter-mode="first">
   <Rule>
     <LineSymbolizer stroke="#a2aabc" stroke-width="2" stroke-linejoin="round" />
+  </Rule>
+</Style>
+<Style name="land-pattern" filter-mode="first">
+  <Rule>
+    <PolygonPatternSymbolizer file="../../../images/PolarGranite.jpg" opacity="0.2" />
+  </Rule>
+</Style>
+<Style name="land-fill" filter-mode="first">
+  <Rule>
+    <PolygonSymbolizer fill="#e7ded6" />
   </Rule>
 </Style>
 <Style name="land-nearshore" filter-mode="first" image-filters="agg-stack-blur(50,50)" image-filters-inflate="true">
@@ -44,11 +49,12 @@
   srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
     <StyleName>land-offshore</StyleName>
     <StyleName>land-nearshore</StyleName>
+    <StyleName>land-fill</StyleName>
+    <StyleName>land-pattern</StyleName>
     <StyleName>land-outline</StyleName>
-    <StyleName>land</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'LandPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'LandPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -59,6 +65,7 @@
        <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
     </Datasource>
   </Layer>
+  
  <Style name="hillshade_2013" filter-mode="first" comp-op="overlay">
   <Rule>
     <RasterSymbolizer opacity="0.5" />
@@ -73,6 +80,7 @@
        <Parameter name="shared">true</Parameter>
     </Datasource>
   </Layer>
+  
 <Style name="mask" filter-mode="first" comp-op="overlay" opacity="0.5">
   <Rule>
     <PolygonSymbolizer fill="#b4b4b4" />

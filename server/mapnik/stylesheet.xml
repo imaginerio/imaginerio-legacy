@@ -8,72 +8,40 @@
   <Parameter name="format">png8</Parameter>
   <Parameter name="interactivity_layer"></Parameter>
   <Parameter name="interactivity_fields"></Parameter>
-  <Parameter name="minzoom">14</Parameter>
+  <Parameter name="minzoom">13</Parameter>
   <Parameter name="maxzoom">18</Parameter>
   <Parameter name="scale">1</Parameter>
   <Parameter name="metatile">1</Parameter>
   <Parameter name="id"><![CDATA[Rio]]></Parameter>
-  <Parameter name="_updated">1405089520000</Parameter>
+  <Parameter name="_updated">1448900892000</Parameter>
   <Parameter name="name"><![CDATA[Rio]]></Parameter>
   <Parameter name="tilejson"><![CDATA[2.0.0]]></Parameter>
   <Parameter name="scheme"><![CDATA[xyz]]></Parameter>
 </Parameters>
 
-<Style name="cityblocks" filter-mode="first">
+<Style name="marshes-pattern" filter-mode="first">
   <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <PolygonSymbolizer fill="#ffffff" fill-opacity="0.4" />
+    <PolygonPatternSymbolizer file="../../../images/ripple2.png" />
   </Rule>
 </Style>
-<Layer name="cityblocks"
-  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>cityblocks</StyleName>
-    <Datasource>
-       <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'CityBlocksPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
-       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
-       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
-       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
-       <Parameter name="extent"><![CDATA[-43.6834457612267,-22.9671653560144,-43.1710435408641,-22.8051180962776]]></Parameter>
-       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
-       <Parameter name="host"><![CDATA[localhost]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
-       <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
-    </Datasource>
-  </Layer>
-
-<Style name="lotslanduse" filter-mode="first">
+<Style name="marshes" filter-mode="first" image-filters="agg-stack-blur(25,25)" image-filters-inflate="true">
   <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <PolygonSymbolizer fill="rgba(237, 207, 174, 0.5)" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <PolygonSymbolizer fill="rgba(237, 207, 174, 0.6)" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <PolygonSymbolizer fill="#edcfae" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <PolygonSymbolizer fill="#f0d6bb" />
+    <PolygonSymbolizer fill="#accdc8" fill-opacity="0.6" />
   </Rule>
 </Style>
-<Layer name="lotslanduse"
+<Layer name="marshes"
   srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>lotslanduse</StyleName>
+    <StyleName>marshes</StyleName>
+    <StyleName>marshes-pattern</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'LotsAndLandUsesPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'marshes' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
        <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
-       <Parameter name="host"><![CDATA[localhost]]></Parameter>
        <Parameter name="dbname"><![CDATA[rio]]></Parameter>
+       <Parameter name="host"><![CDATA[localhost]]></Parameter>
        <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
        <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
     </Datasource>
@@ -87,6 +55,7 @@
 <Style name="cemeteries" filter-mode="first">
   <Rule>
     <PolygonSymbolizer fill="#ccd2aa" fill-opacity="0.6" />
+    <PolygonPatternSymbolizer file="../../../images/PolarGranite.jpg" opacity="0.1" />
   </Rule>
 </Style>
 <Layer name="cemeteries"
@@ -95,7 +64,7 @@
     <StyleName>cemeteries-outline</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'PublicSpacesPoly' AND featuretyp = 'Cemeteries' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'cemeteries' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -109,38 +78,13 @@
 
 <Style name="squares-outline" filter-mode="first">
   <Rule>
-    <Filter>([featuretyp] = 'Gardens')</Filter>
-    <LineSymbolizer stroke="#b8c089" stroke-width="1" stroke-opacity="0.5" stroke-linejoin="round" />
-  </Rule>
-  <Rule>
-    <Filter>([featuretyp] = 'Parks')</Filter>
-    <LineSymbolizer stroke="#b8c089" stroke-width="1" stroke-opacity="0.5" stroke-linejoin="round" />
-  </Rule>
-  <Rule>
-    <Filter>([featuretyp] = 'Squares')</Filter>
-    <LineSymbolizer stroke="#d4c4b6" stroke-width="1" stroke-opacity="0.6" stroke-linejoin="round" />
-  </Rule>
-  <Rule>
-    <Filter>([featuretyp] = 'Plazas')</Filter>
     <LineSymbolizer stroke="#d4c4b6" stroke-width="1" stroke-opacity="0.6" stroke-linejoin="round" />
   </Rule>
 </Style>
 <Style name="squares" filter-mode="first">
   <Rule>
-    <Filter>([featuretyp] = 'Gardens')</Filter>
-    <PolygonSymbolizer fill="#ccd2aa" fill-opacity="0.6" />
-  </Rule>
-  <Rule>
-    <Filter>([featuretyp] = 'Parks')</Filter>
-    <PolygonSymbolizer fill="#ccd2aa" fill-opacity="0.6" />
-  </Rule>
-  <Rule>
-    <Filter>([featuretyp] = 'Squares')</Filter>
-    <PolygonSymbolizer fill="#fcf9d5" fill-opacity="0.8" />
-  </Rule>
-  <Rule>
-    <Filter>([featuretyp] = 'Plazas')</Filter>
-    <PolygonSymbolizer fill="#fcf9d5" fill-opacity="0.8" />
+    <PolygonSymbolizer fill="#fcf9d5" fill-opacity="1" />
+    <PolygonPatternSymbolizer file="../../../images/PolarGranite.jpg" opacity="0.1" />
   </Rule>
 </Style>
 <Layer name="squares"
@@ -149,7 +93,7 @@
     <StyleName>squares-outline</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom, featuretyp FROM basepoly WHERE layer = 'PublicSpacesPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'plazas' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -161,38 +105,24 @@
     </Datasource>
   </Layer>
 
-<Style name="inlandwater-outline" filter-mode="first">
+<Style name="parks-outline" filter-mode="first">
   <Rule>
-    <Filter>([featuretyp] = 'Lagoons')</Filter>
-    <LineSymbolizer stroke="#8fb0cd" stroke-width="1" stroke-linejoin="round" />
-  </Rule>
-  <Rule>
-    <Filter>([featuretyp] = 'Ponds')</Filter>
-    <LineSymbolizer stroke="#8fb0cd" stroke-width="1" stroke-linejoin="round" />
+    <LineSymbolizer stroke="#b8c089" stroke-width="1" stroke-opacity="0.5" stroke-linejoin="round" />
   </Rule>
 </Style>
-<Style name="inlandwater" filter-mode="first">
+<Style name="parks" filter-mode="first">
   <Rule>
-    <Filter>([featuretyp] = 'Lagoons')</Filter>
-    <PolygonSymbolizer fill="#b9cee0" />
-  </Rule>
-  <Rule>
-    <Filter>([featuretyp] = 'Ponds')</Filter>
-    <PolygonSymbolizer fill="#b9cee0" />
-  </Rule>
-  <Rule>
-    <Filter>([featuretyp] = 'Marshes')</Filter>
-    <PolygonSymbolizer fill="#accdc8" fill-opacity="0.6" />
-    <PolygonPatternSymbolizer file="../../../images/ripple2.png" />
+    <PolygonSymbolizer fill="#ccd2aa" fill-opacity="0.6" />
+    <PolygonPatternSymbolizer file="../../../images/PolarGranite.jpg" opacity="0.1" />
   </Rule>
 </Style>
-<Layer name="inlandwater"
+<Layer name="parks"
   srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>inlandwater</StyleName>
-    <StyleName>inlandwater-outline</StyleName>
+    <StyleName>parks</StyleName>
+    <StyleName>parks-outline</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom, featuretyp FROM basepoly WHERE layer = 'InlandWatersPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'parks' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -203,7 +133,70 @@
        <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
     </Datasource>
   </Layer>
+
+<Style name="ponds-outline" filter-mode="first">
+  <Rule>
+    <LineSymbolizer stroke="#8fb0cd" stroke-width="1" stroke-linejoin="round" />
+  </Rule>
+</Style>
+<Style name="ponds-fill" filter-mode="first" image-filters="agg-stack-blur(10,10)" image-filters-inflate="true">
+  <Rule>
+    <PolygonSymbolizer fill="#ffffff" fill-opacity="0.4" />
+  </Rule>
+</Style>
+<Style name="ponds-shadow" filter-mode="first">
+  <Rule>
+    <PolygonSymbolizer fill="#8fb0cd" />
+  </Rule>
+</Style>
+<Layer name="ponds"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>ponds-shadow</StyleName>
+    <StyleName>ponds-fill</StyleName>
+    <StyleName>ponds-outline</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'ponds' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
+       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
+       <Parameter name="host"><![CDATA[localhost]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
+    </Datasource>
+  </Layer>
+
 <Style name="riversstreams" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>25000</MaxScaleDenominator>
+    <MinScaleDenominator>12500</MinScaleDenominator>
+    <Filter>([scalerank] = 1)</Filter>
+    <LineSymbolizer stroke-width="1.2" stroke="#8fb0cd" />
+  </Rule>
+  <Rule>
+    <MinScaleDenominator>25000</MinScaleDenominator>
+    <Filter>([scalerank] = 1)</Filter>
+    <LineSymbolizer stroke-width="0.8" stroke="#8fb0cd" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>2500</MaxScaleDenominator>
+    <Filter>([scalerank] = 1)</Filter>
+    <LineSymbolizer stroke-width="3.5" stroke="#8fb0cd" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>5000</MaxScaleDenominator>
+    <MinScaleDenominator>2500</MinScaleDenominator>
+    <Filter>([scalerank] = 1)</Filter>
+    <LineSymbolizer stroke-width="2.5" stroke="#8fb0cd" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500</MaxScaleDenominator>
+    <MinScaleDenominator>5000</MinScaleDenominator>
+    <Filter>([scalerank] = 1)</Filter>
+    <LineSymbolizer stroke-width="1.7" stroke="#8fb0cd" />
+  </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <LineSymbolizer stroke-width="3.5" stroke="#8fb0cd" />
@@ -218,22 +211,13 @@
     <MinScaleDenominator>5000</MinScaleDenominator>
     <LineSymbolizer stroke-width="1.7" stroke="#8fb0cd" />
   </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <LineSymbolizer stroke-width="1.2" stroke="#8fb0cd" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <LineSymbolizer stroke-width="0.8" stroke="#8fb0cd" />
-  </Rule>
 </Style>
 <Layer name="riversstreams"
   srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
     <StyleName>riversstreams</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM baseline WHERE layer = 'InlandWatersLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM baseline WHERE layer = 'InlandWatersLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -247,6 +231,51 @@
 
 <Style name="waterline" filter-mode="first">
   <Rule>
+    <MaxScaleDenominator>12500</MaxScaleDenominator>
+    <MinScaleDenominator>5000</MinScaleDenominator>
+    <Filter>([scalerank] = 1)</Filter>
+    <LineSymbolizer stroke-width="1.7" stroke="#8fb0cd" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000</MaxScaleDenominator>
+    <MinScaleDenominator>12500</MinScaleDenominator>
+    <Filter>([scalerank] = 1)</Filter>
+    <LineSymbolizer stroke-width="1.2" stroke="#8fb0cd" />
+  </Rule>
+  <Rule>
+    <MinScaleDenominator>25000</MinScaleDenominator>
+    <Filter>([scalerank] = 1)</Filter>
+    <LineSymbolizer stroke-width="0.8" stroke="#8fb0cd" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>2500</MaxScaleDenominator>
+    <Filter>([scalerank] = 1)</Filter>
+    <LineSymbolizer stroke-width="3.5" stroke="#8fb0cd" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>5000</MaxScaleDenominator>
+    <MinScaleDenominator>2500</MinScaleDenominator>
+    <Filter>([scalerank] = 1)</Filter>
+    <LineSymbolizer stroke-width="2.5" stroke="#8fb0cd" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500</MaxScaleDenominator>
+    <MinScaleDenominator>5000</MinScaleDenominator>
+    <Filter>([scalerank] &lt;= 2)</Filter>
+    <LineSymbolizer stroke-width="1.7" stroke="#8fb0cd" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>2500</MaxScaleDenominator>
+    <Filter>([scalerank] &lt;= 2)</Filter>
+    <LineSymbolizer stroke-width="3.5" stroke="#8fb0cd" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>5000</MaxScaleDenominator>
+    <MinScaleDenominator>2500</MinScaleDenominator>
+    <Filter>([scalerank] &lt;= 2)</Filter>
+    <LineSymbolizer stroke-width="2.5" stroke="#8fb0cd" />
+  </Rule>
+  <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <LineSymbolizer stroke-width="3.5" stroke="#8fb0cd" />
   </Rule>
@@ -255,27 +284,13 @@
     <MinScaleDenominator>2500</MinScaleDenominator>
     <LineSymbolizer stroke-width="2.5" stroke="#8fb0cd" />
   </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <LineSymbolizer stroke-width="1.7" stroke="#8fb0cd" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <LineSymbolizer stroke-width="1.2" stroke="#8fb0cd" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <LineSymbolizer stroke-width="0.8" stroke="#8fb0cd" />
-  </Rule>
 </Style>
 <Layer name="waterline"
   srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
     <StyleName>waterline</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM baseline WHERE layer = 'UtilitiesLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM baseline WHERE layer = 'UtilitiesLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -325,7 +340,7 @@
     <StyleName>neighborhoods-inline</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'NeighborhoodsPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'NeighborhoodsPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -336,851 +351,230 @@
        <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
     </Datasource>
   </Layer>
+
 <Style name="roads-high/inline" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Praia')</Filter>
+    <Filter>([scalerank] &gt; 2)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#ffffff" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praia')</Filter>
+    <Filter>([scalerank] &gt; 2)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#ffffff" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Praca')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#ffffff" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praca')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#ffffff" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Largo')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#ffffff" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Largo')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#ffffff" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Ladeira')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#ffffff" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Ladeira')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#ffffff" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Local')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#ffffff" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Local')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#ffffff" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Beco')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#ffffff" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Beco')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#ffffff" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Trail')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#ffffff" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Trail')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#ffffff" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Estrada')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#ffffff" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Estrada')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#ffffff" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Travessa')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#ffffff" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Travessa')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#ffffff" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Street')</Filter>
+    <Filter>([scalerank] = 2)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="9" stroke="#ffffff" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Street')</Filter>
+    <Filter>([scalerank] = 2)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="7" stroke="#ffffff" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Collector')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="9" stroke="#ffffff" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Collector')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="7" stroke="#ffffff" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Avenue')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="9" stroke="#ffffff" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenue')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="7" stroke="#ffffff" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Minor Arterial')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#ffffff" stroke-width="9" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Minor Arterial')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#ffffff" stroke-width="7" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Minor Arterial')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#ffffff" stroke-width="4" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Minor Arterial')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#ffffff" stroke-width="4" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Minor Arterial')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#ffffff" stroke-width="3" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Expressway')</Filter>
+    <Filter>([scalerank] = 1)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#ffffff" stroke-width="16" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Expressway')</Filter>
+    <Filter>([scalerank] = 1)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#ffffff" stroke-width="10" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Expressway')</Filter>
+    <Filter>([scalerank] = 1)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#ffffff" stroke-width="6" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Expressway')</Filter>
+    <Filter>([scalerank] = 1)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#ffffff" stroke-width="4" />
   </Rule>
   <Rule>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Expressway')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#ffffff" stroke-width="2" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Principle Arterial')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#ffffff" stroke-width="16" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Principle Arterial')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#ffffff" stroke-width="10" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Principle Arterial')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#ffffff" stroke-width="6" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Principle Arterial')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#ffffff" stroke-width="4" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Principle Arterial')</Filter>
+    <Filter>([scalerank] = 1)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#ffffff" stroke-width="2" />
   </Rule>
 </Style>
 <Style name="roads-high/outline" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Praca')</Filter>
+    <Filter>([scalerank] &gt; 2)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="7" stroke="#d0bfaf" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praca')</Filter>
+    <Filter>([scalerank] &gt; 2)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="6" stroke="#d0bfaf" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Travessa')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="7" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Travessa')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="6" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Local')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="7" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Local')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="6" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Beco')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="7" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Beco')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="6" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Trail')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="7" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Trail')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="6" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Estrada')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="7" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Estrada')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="6" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Ladeira')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="7" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Ladeira')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="6" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Largo')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="7" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Largo')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="6" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Praia')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="7" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praia')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="6" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Avenue')</Filter>
+    <Filter>([scalerank] = 2)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="11" stroke="#d0bfaf" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenue')</Filter>
+    <Filter>([scalerank] = 2)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="9" stroke="#d0bfaf" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Street')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="11" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Street')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="9" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Collector')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="11" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Collector')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="9" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Minor Arterial')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#d0bfaf" stroke-width="11" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Minor Arterial')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#d0bfaf" stroke-width="9" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Minor Arterial')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#d0bfaf" stroke-width="6" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Minor Arterial')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#d0bfaf" stroke-width="6" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Minor Arterial')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#d0bfaf" stroke-width="5" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Expressway')</Filter>
+    <Filter>([scalerank] = 1)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#d0bfaf" stroke-width="18" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Expressway')</Filter>
+    <Filter>([scalerank] = 1)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#d0bfaf" stroke-width="12" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Expressway')</Filter>
+    <Filter>([scalerank] = 1)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#d0bfaf" stroke-width="8" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Expressway')</Filter>
+    <Filter>([scalerank] = 1)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#d0bfaf" stroke-width="6" />
   </Rule>
   <Rule>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Expressway')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#d0bfaf" stroke-width="4" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Principle Arterial')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#d0bfaf" stroke-width="18" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Principle Arterial')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#d0bfaf" stroke-width="12" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Principle Arterial')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#d0bfaf" stroke-width="8" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Principle Arterial')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#d0bfaf" stroke-width="6" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Principle Arterial')</Filter>
+    <Filter>([scalerank] = 1)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke="#d0bfaf" stroke-width="4" />
   </Rule>
 </Style>
 <Style name="roads-low/inline" filter-mode="first">
   <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenue')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#f2eee9" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenue')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#f2eee9" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenue')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#d0bfaf" />
+    <MaxScaleDenominator>100000</MaxScaleDenominator>
+    <MinScaleDenominator>50000</MinScaleDenominator>
+    <Filter>([scalerank] &gt; 2) and ([scalerank] &lt; 4)</Filter>
+    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="0.5" stroke="#daccbf" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Street')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#f2eee9" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Street')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#f2eee9" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Street')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Collector')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#f2eee9" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Collector')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#f2eee9" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Collector')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Travessa')</Filter>
+    <Filter>([scalerank] &gt; 2) and ([scalerank] &lt; 4)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="3" stroke="#f2eee9" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Travessa')</Filter>
+    <Filter>([scalerank] &gt; 2) and ([scalerank] &lt; 4)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#f2eee9" />
   </Rule>
   <Rule>
+    <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Travessa')</Filter>
+    <Filter>([scalerank] &gt; 2) and ([scalerank] &lt; 4)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1" stroke="#daccbf" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praia')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="3" stroke="#f2eee9" />
+    <Filter>([scalerank] = 2)</Filter>
+    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#fefdfd" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praia')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#f2eee9" />
+    <Filter>([scalerank] = 2)</Filter>
+    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#fefdfd" />
   </Rule>
   <Rule>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praia')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1" stroke="#daccbf" />
+    <Filter>([scalerank] = 2)</Filter>
+    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#fefdfd" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praca')</Filter>
+    <Filter>([scalerank] &gt; 2)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="3" stroke="#f2eee9" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praca')</Filter>
+    <Filter>([scalerank] &gt; 2)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#f2eee9" />
   </Rule>
   <Rule>
+    <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praca')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1" stroke="#daccbf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Ladeira')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="3" stroke="#f2eee9" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Ladeira')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#f2eee9" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Ladeira')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1" stroke="#daccbf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Estrada')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="3" stroke="#f2eee9" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Estrada')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#f2eee9" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Estrada')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1" stroke="#daccbf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Trail')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="3" stroke="#f2eee9" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Trail')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#f2eee9" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Trail')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1" stroke="#daccbf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Largo')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="3" stroke="#f2eee9" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Largo')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#f2eee9" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Largo')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1" stroke="#daccbf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Local')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="3" stroke="#f2eee9" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Local')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#f2eee9" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Local')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1" stroke="#daccbf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Beco')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="3" stroke="#f2eee9" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Beco')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="#f2eee9" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Beco')</Filter>
+    <Filter>([scalerank] &gt; 2)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1" stroke="#daccbf" />
   </Rule>
 </Style>
 <Style name="roads-low/outline" filter-mode="first">
   <Rule>
+    <MaxScaleDenominator>100000</MaxScaleDenominator>
+    <MinScaleDenominator>50000</MinScaleDenominator>
+    <Filter>([scalerank] &gt; 2) and ([scalerank] &lt; 4)</Filter>
+    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="0.5" stroke="#daccbf" />
+  </Rule>
+  <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenue')</Filter>
+    <Filter>([scalerank] &gt; 2) and ([scalerank] &lt; 4)</Filter>
+    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#d0bfaf" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000</MaxScaleDenominator>
+    <MinScaleDenominator>12500</MinScaleDenominator>
+    <Filter>([scalerank] &gt; 2) and ([scalerank] &lt; 4)</Filter>
+    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#d0bfaf" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>50000</MaxScaleDenominator>
+    <MinScaleDenominator>25000</MinScaleDenominator>
+    <Filter>([scalerank] &gt; 2) and ([scalerank] &lt; 4)</Filter>
+    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1" stroke="#daccbf" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500</MaxScaleDenominator>
+    <MinScaleDenominator>5000</MinScaleDenominator>
+    <Filter>([scalerank] = 2)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="7" stroke="#d0bfaf" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenue')</Filter>
+    <Filter>([scalerank] = 2)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="6" stroke="#d0bfaf" />
   </Rule>
   <Rule>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenue')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#d0bfaf" />
+    <Filter>([scalerank] = 2)</Filter>
+    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="3" stroke="#d0bfaf" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Street')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="7" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Street')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="6" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Street')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Collector')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="7" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Collector')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="6" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Collector')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Travessa')</Filter>
+    <Filter>([scalerank] &gt; 2)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#d0bfaf" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Travessa')</Filter>
+    <Filter>([scalerank] &gt; 2)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#d0bfaf" />
   </Rule>
   <Rule>
+    <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Travessa')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1" stroke="#daccbf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praia')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praia')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praia')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1" stroke="#daccbf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praca')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praca')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praca')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1" stroke="#daccbf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Largo')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Largo')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Largo')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1" stroke="#daccbf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Ladeira')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Ladeira')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Ladeira')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1" stroke="#daccbf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Estrada')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Estrada')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Estrada')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1" stroke="#daccbf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Trail')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Trail')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Trail')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1" stroke="#daccbf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Beco')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Beco')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Beco')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1" stroke="#daccbf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Local')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="5" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Local')</Filter>
-    <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="4" stroke="#d0bfaf" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Local')</Filter>
+    <Filter>([scalerank] &gt; 2)</Filter>
     <LineSymbolizer stroke-linejoin="round" stroke-linecap="round" stroke-width="1" stroke="#daccbf" />
   </Rule>
 </Style>
@@ -1192,7 +586,7 @@
     <StyleName>roads-high/inline</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom, featuretyp FROM baseline WHERE layer = 'RoadsLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM baseline WHERE layer = 'RoadsLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -1201,20 +595,12 @@
        <Parameter name="host"><![CDATA[localhost]]></Parameter>
        <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
        <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
+       <Parameter name="id"><![CDATA[roads]]></Parameter>
+       <Parameter name="project"><![CDATA[Rio]]></Parameter>
+       <Parameter name="srs"><![CDATA[+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs]]></Parameter>
     </Datasource>
   </Layer>
 
-<Style name="buildings-set/outline" filter-mode="first">
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <LineSymbolizer stroke="#a58365" stroke-width="1" stroke-opacity="0.4" stroke-linejoin="round" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <LineSymbolizer stroke="#a58365" stroke-width="0.8" stroke-opacity="0.5" stroke-linejoin="round" />
-  </Rule>
-</Style>
 <Style name="buildings-set" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
@@ -1238,6 +624,15 @@
   </Rule>
 </Style>
 <Style name="buildings-outline" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>2500</MaxScaleDenominator>
+    <LineSymbolizer stroke="#a58365" stroke-width="1" stroke-opacity="0.4" stroke-linejoin="round" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>5000</MaxScaleDenominator>
+    <MinScaleDenominator>2500</MinScaleDenominator>
+    <LineSymbolizer stroke="#a58365" stroke-width="0.8" stroke-opacity="0.5" stroke-linejoin="round" />
+  </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
@@ -1266,10 +661,9 @@
     <StyleName>buildings-outline</StyleName>
     <StyleName>buildings-offset</StyleName>
     <StyleName>buildings-set</StyleName>
-    <StyleName>buildings-set/outline</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'BuildingsPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'BuildingsPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -1284,7 +678,7 @@
 <Style name="fountainspoint" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MarkersSymbolizer file="../../../images/monument-24.svg" fill="#876e4a" multi-policy="whole" placement="point" clip="false" />
+    <MarkersSymbolizer fill="#876e4a" file="../../../images/monument-24.svg" multi-policy="whole" placement="point" clip="false" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
@@ -1293,7 +687,7 @@
   </Rule>
   <Rule>
     <MinScaleDenominator>50000</MinScaleDenominator>
-    <MarkersSymbolizer file="../../../images/monument-18.svg" multi-policy="whole" placement="point" clip="false" />
+    <MarkersSymbolizer fill="#977c53" file="../../../images/monument-12.svg" multi-policy="whole" placement="point" clip="false" />
   </Rule>
 </Style>
 <Layer name="fountainspoint"
@@ -1301,7 +695,7 @@
     <StyleName>fountainspoint</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoint WHERE layer = 'FountainsPoint' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoint WHERE layer = 'UtilitiesPoint' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -1329,7 +723,7 @@
     <StyleName>railpoint</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoint WHERE layer = 'BuildingsPoint' AND ( featuretyp = 'Transportation/Metro Station' OR featuretyp = 'Transportation/Railroad Station' OR featuretyp = 'Transportation/Tram Station' ) AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoint WHERE layer = 'BuildingsPoint' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -1344,16 +738,16 @@
 <Style name="inlandwater_labels" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <TextSymbolizer size="16" wrap-width="80" line-spacing="6" placement="interior" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="16" wrap-width="80" line-spacing="6" placement="interior" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <TextSymbolizer size="14" wrap-width="40" line-spacing="4" placement="interior" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="14" wrap-width="40" line-spacing="4" placement="interior" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <TextSymbolizer size="12" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" line-spacing="2" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" line-spacing="2" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Layer name="inlandwater_labels"
@@ -1361,7 +755,7 @@
     <StyleName>inlandwater_labels</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom, featuretyp, namecomple FROM basepoly WHERE layer = 'InlandWatersPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'InlandWatersPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -1376,22 +770,22 @@
 <Style name="neighborhoods_labels" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <TextSymbolizer size="21" fill="#7b6e5a" character-spacing="4" placement="point" face-name="DejaVu Sans Bold" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" text-transform="uppercase" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="21" fill="#7b6e5a" character-spacing="4" placement="point" face-name="Helvetica Bold" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" text-transform="uppercase" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <TextSymbolizer size="15" fill="#7b6e5a" character-spacing="4" placement="point" face-name="DejaVu Sans Bold" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" text-transform="uppercase" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="15" fill="#7b6e5a" character-spacing="4" placement="point" face-name="Helvetica Bold" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" text-transform="uppercase" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <TextSymbolizer size="13" character-spacing="3" placement="point" face-name="DejaVu Sans Bold" fill="#977c53" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" text-transform="uppercase" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="13" character-spacing="3" placement="point" face-name="Helvetica Bold" fill="#977c53" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" text-transform="uppercase" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <TextSymbolizer size="10" character-spacing="2" placement="point" face-name="DejaVu Sans Bold" fill="#977c53" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" text-transform="uppercase" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="10" character-spacing="2" placement="point" face-name="Helvetica Bold" fill="#977c53" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" text-transform="uppercase" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Layer name="neighborhoods_labels"
@@ -1399,7 +793,7 @@
     <StyleName>neighborhoods_labels</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom, nameshort FROM basepoly WHERE layer = 'NeighborhoodsPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'NeighborhoodsPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -1411,134 +805,94 @@
     </Datasource>
   </Layer>
 
-<Style name="squares_labels-icon" filter-mode="first">
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Parks')</Filter>
-    <ShieldSymbolizer file="../../../images/park2-24.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Parks')</Filter>
-    <ShieldSymbolizer file="../../../images/park2-18.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Gardens')</Filter>
-    <ShieldSymbolizer file="../../../images/park2-24.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Gardens')</Filter>
-    <ShieldSymbolizer file="../../../images/park2-18.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
-  </Rule>
-</Style>
 <Style name="squares_labels-urbanspace" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <MinScaleDenominator>1500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Plazas')</Filter>
-    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Plazas')</Filter>
-    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Plazas')</Filter>
-    <TextSymbolizer size="13" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="13" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>1500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Plazas')</Filter>
-    <TextSymbolizer placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <MinScaleDenominator>1500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Squares')</Filter>
-    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Squares')</Filter>
-    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Squares')</Filter>
-    <TextSymbolizer size="13" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>1500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Squares')</Filter>
-    <TextSymbolizer placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
-  </Rule>
-</Style>
-<Style name="squares_labels-greenspace" filter-mode="first">
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Gardens')</Filter>
-    <TextSymbolizer size="15" character-spacing="2" wrap-width="70" minimum-distance="250" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Gardens')</Filter>
-    <TextSymbolizer size="14" character-spacing="2" wrap-width="20" minimum-distance="120" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Gardens')</Filter>
-    <TextSymbolizer size="13" character-spacing="1" wrap-width="50" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Gardens')</Filter>
-    <TextSymbolizer size="12" character-spacing="1" wrap-width="80" wrap-before="true" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Parks')</Filter>
-    <TextSymbolizer size="15" character-spacing="2" wrap-width="70" minimum-distance="250" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Parks')</Filter>
-    <TextSymbolizer size="14" character-spacing="2" wrap-width="20" minimum-distance="120" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Parks')</Filter>
-    <TextSymbolizer size="13" character-spacing="1" wrap-width="50" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Parks')</Filter>
-    <TextSymbolizer size="12" character-spacing="1" wrap-width="80" wrap-before="true" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Layer name="squares_labels"
   srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>squares_labels-greenspace</StyleName>
     <StyleName>squares_labels-urbanspace</StyleName>
-    <StyleName>squares_labels-icon</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom, featuretyp, nameshort FROM basepoly WHERE layer = 'PublicSpacesPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'plazas' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
+       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
+       <Parameter name="host"><![CDATA[localhost]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="parks_labels-icon" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>2500</MaxScaleDenominator>
+    <Filter>([nameshort] = 'Quinta da Boa Vista')</Filter>
+    <ShieldSymbolizer file="../../../images/park2-24.png" placement="interior" clip="false" fill="#7a8446" face-name="Helvetica Regular" ><![CDATA[' ']]></ShieldSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500</MaxScaleDenominator>
+    <MinScaleDenominator>2500</MinScaleDenominator>
+    <Filter>([nameshort] = 'Quinta da Boa Vista')</Filter>
+    <ShieldSymbolizer file="../../../images/park2-18.png" placement="interior" clip="false" fill="#7a8446" face-name="Helvetica Regular" ><![CDATA[' ']]></ShieldSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>2500</MaxScaleDenominator>
+    <ShieldSymbolizer file="../../../images/park2-24.png" face-name="Helvetica Regular" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500</MaxScaleDenominator>
+    <MinScaleDenominator>2500</MinScaleDenominator>
+    <ShieldSymbolizer file="../../../images/park2-18.png" face-name="Helvetica Regular" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
+  </Rule>
+</Style>
+<Style name="parks_labels-greenspace" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>2500</MaxScaleDenominator>
+    <TextSymbolizer size="15" character-spacing="2" wrap-width="70" minimum-distance="250" placement="interior" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>5000</MaxScaleDenominator>
+    <MinScaleDenominator>2500</MinScaleDenominator>
+    <TextSymbolizer size="14" character-spacing="2" wrap-width="20" minimum-distance="120" placement="interior" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500</MaxScaleDenominator>
+    <MinScaleDenominator>5000</MinScaleDenominator>
+    <TextSymbolizer size="13" character-spacing="1" wrap-width="50" placement="interior" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000</MaxScaleDenominator>
+    <MinScaleDenominator>12500</MinScaleDenominator>
+    <TextSymbolizer size="12" character-spacing="1" wrap-width="80" wrap-before="true" placement="interior" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+  </Rule>
+</Style>
+<Layer name="parks_labels"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>parks_labels-greenspace</StyleName>
+    <StyleName>parks_labels-icon</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'parks' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -1553,442 +907,100 @@
 <Style name="roads_labels-low" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Travessa')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <Filter>([scalerank] &gt; 2)</Filter>
+    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Travessa')</Filter>
-    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <Filter>([scalerank] &gt; 2)</Filter>
+    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Travessa')</Filter>
-    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <Filter>([scalerank] &gt; 2)</Filter>
+    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Travessa')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <Filter>([scalerank] &gt; 2)</Filter>
+    <TextSymbolizer size="10" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Travessa')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Largo')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Largo')</Filter>
-    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Largo')</Filter>
-    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Largo')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>50000</MaxScaleDenominator>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Largo')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Ladeira')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Ladeira')</Filter>
-    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Ladeira')</Filter>
-    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Ladeira')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>50000</MaxScaleDenominator>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Ladeira')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Estrada')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Estrada')</Filter>
-    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Estrada')</Filter>
-    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Estrada')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>50000</MaxScaleDenominator>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Estrada')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Trail')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Trail')</Filter>
-    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Trail')</Filter>
-    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Trail')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>50000</MaxScaleDenominator>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Trail')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Beco')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Beco')</Filter>
-    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Beco')</Filter>
-    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Beco')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>50000</MaxScaleDenominator>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Beco')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Local')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Local')</Filter>
-    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Local')</Filter>
-    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Local')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>50000</MaxScaleDenominator>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Local')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Praca')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praca')</Filter>
-    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praca')</Filter>
-    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praca')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>50000</MaxScaleDenominator>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praca')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Praia')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praia')</Filter>
-    <TextSymbolizer fill="#574c3b" size="14" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praia')</Filter>
-    <TextSymbolizer size="12" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praia')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>50000</MaxScaleDenominator>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Praia')</Filter>
-    <TextSymbolizer size="10" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <Filter>([scalerank] &gt; 2)</Filter>
+    <TextSymbolizer size="10" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Style name="roads_labels-med" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Avenue')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <Filter>([scalerank] = 2)</Filter>
+    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenue')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <Filter>([scalerank] = 2)</Filter>
+    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="300" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenue')</Filter>
-    <TextSymbolizer size="14" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <Filter>([scalerank] = 2)</Filter>
+    <TextSymbolizer size="14" fill="#574c3b" minimum-distance="250" placement="line" face-name="Helvetica Regular" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenue')</Filter>
-    <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <Filter>([scalerank] = 2)</Filter>
+    <TextSymbolizer size="12" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Avenue')</Filter>
-    <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Collector')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Collector')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Collector')</Filter>
-    <TextSymbolizer size="14" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Collector')</Filter>
-    <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>50000</MaxScaleDenominator>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Collector')</Filter>
-    <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Street')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Street')</Filter>
-    <TextSymbolizer fill="#574c3b" size="15" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Street')</Filter>
-    <TextSymbolizer size="14" fill="#574c3b" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Street')</Filter>
-    <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>50000</MaxScaleDenominator>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Street')</Filter>
-    <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <Filter>([scalerank] = 2)</Filter>
+    <TextSymbolizer size="12" placement="line" face-name="Helvetica Regular" fill="#7b6e5a" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Style name="roads_labels-high" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Minor Arterial')</Filter>
-    <TextSymbolizer size="16" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <Filter>([scalerank] = 1)</Filter>
+    <TextSymbolizer size="16" minimum-distance="350" placement="line" face-name="Helvetica Regular" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Minor Arterial')</Filter>
-    <TextSymbolizer size="16" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <Filter>([scalerank] = 1)</Filter>
+    <TextSymbolizer size="16" minimum-distance="300" placement="line" face-name="Helvetica Regular" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Minor Arterial')</Filter>
-    <TextSymbolizer size="14" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <Filter>([scalerank] = 1)</Filter>
+    <TextSymbolizer size="14" minimum-distance="250" placement="line" face-name="Helvetica Regular" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Minor Arterial')</Filter>
-    <TextSymbolizer size="13" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <Filter>([scalerank] = 1)</Filter>
+    <TextSymbolizer size="13" placement="line" face-name="Helvetica Regular" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Minor Arterial')</Filter>
-    <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <Filter>([scalerank] = 1)</Filter>
+    <TextSymbolizer size="12" placement="line" face-name="Helvetica Regular" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Expressway')</Filter>
-    <TextSymbolizer size="16" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Expressway')</Filter>
-    <TextSymbolizer size="16" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Expressway')</Filter>
-    <TextSymbolizer size="14" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Expressway')</Filter>
-    <TextSymbolizer size="13" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>50000</MaxScaleDenominator>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Expressway')</Filter>
-    <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([featuretyp] = 'Principle Arterial')</Filter>
-    <TextSymbolizer size="16" minimum-distance="350" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Principle Arterial')</Filter>
-    <TextSymbolizer size="16" minimum-distance="300" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Principle Arterial')</Filter>
-    <TextSymbolizer size="14" minimum-distance="250" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>25000</MaxScaleDenominator>
-    <MinScaleDenominator>12500</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Principle Arterial')</Filter>
-    <TextSymbolizer size="13" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>50000</MaxScaleDenominator>
-    <MinScaleDenominator>25000</MinScaleDenominator>
-    <Filter>([featuretyp] = 'Principle Arterial')</Filter>
-    <TextSymbolizer size="12" placement="line" face-name="DejaVu Sans Book" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <MaxScaleDenominator>100000</MaxScaleDenominator>
+    <MinScaleDenominator>50000</MinScaleDenominator>
+    <Filter>([scalerank] = 1)</Filter>
+    <TextSymbolizer size="10" placement="line" face-name="Helvetica Regular" fill="#574c3b" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Layer name="roads_labels"
@@ -1998,7 +1010,7 @@
     <StyleName>roads_labels-low</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom, featuretyp, namecomple FROM baseline WHERE layer = 'RoadsLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM baseline WHERE layer = 'RoadsLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -2013,17 +1025,17 @@
 <Style name="riversstreams_labels" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <TextSymbolizer size="14" minimum-path-length="525" placement="line" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="14" minimum-path-length="525" placement="line" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <TextSymbolizer size="14" minimum-path-length="425" placement="line" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="14" minimum-path-length="425" placement="line" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <TextSymbolizer size="12" minimum-path-length="400" placement="line" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" minimum-path-length="400" placement="line" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Layer name="riversstreams_labels"
@@ -2031,7 +1043,7 @@
     <StyleName>riversstreams_labels</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom, namecomple FROM baseline WHERE layer = 'InlandWatersLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM baseline WHERE layer = 'InlandWatersLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -2046,21 +1058,21 @@
 <Style name="waterline_labels" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <TextSymbolizer size="14" minimum-path-length="425" placement="line" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="14" minimum-path-length="425" placement="line" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <TextSymbolizer size="12" minimum-path-length="400" placement="line" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" minimum-path-length="400" placement="line" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <TextSymbolizer size="11" minimum-path-length="300" placement="line" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="11" minimum-path-length="300" placement="line" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <TextSymbolizer placement="line" face-name="DejaVu Sans Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer placement="line" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Layer name="waterline_labels"
@@ -2068,7 +1080,7 @@
     <StyleName>waterline_labels</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom, namecomple FROM baseline WHERE layer = 'UtilitiesLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM baseline WHERE featuretyp = 'Aqueducts' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
@@ -2096,7 +1108,7 @@
     <StyleName>cemeteries_marker</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT gid, geom FROM basepoly WHERE layer = 'PublicSpacesPoly' AND featuretyp = 'Cemeteries' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'cemeteries' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
