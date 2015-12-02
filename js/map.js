@@ -13,8 +13,8 @@ function init_map()
 	map = L.map( 'map', {
 		center: [ -22.9046, -43.1919 ],
 		zoom: 15,
-		minZoom : 14,
-		maxZoom : 17,
+		minZoom : 13,
+		maxZoom : 18,
 		doubleClickZoom : false,
 		maxBounds : [ [ -23.10243406, -44.04944719  ], [ -22.63003187, -42.65988214 ] ]
 	})
