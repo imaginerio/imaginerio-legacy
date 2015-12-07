@@ -10,7 +10,7 @@
 @neighborhoods_outline: #fff;
 @cityblocks: #fff;
 @greenspace:#ccd2aa;
-@squares: #fcf9d5;
+@urbanspace: #fcf9d5;
 @buildings: #cfa893;
 
 /* LINES */

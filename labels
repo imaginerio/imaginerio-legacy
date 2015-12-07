@@ -143,7 +143,38 @@
     }
 }
 
-  #squares_labels ::urbanspace {
+#squares_labels ::squares {
+    [zoom>=16]{
+    text-name: "[nameshort]";
+    text-placement: interior;
+    text-face-name:@font_italic;
+    text-fill: darken(@neighborhoods_inline, 10%);
+    text-halo-fill:rgba(255,255,255,0.8);
+    text-halo-radius:1.5;
+    text-line-spacing: 2;
+    text-min-distance: 100;
+      
+      [zoom=16] {
+      text-size: 13;
+      text-character-spacing: 1;
+      text-wrap-width: 40;
+      }
+      
+      [zoom=17] {
+      text-size: 14;
+      text-character-spacing: 1;
+      text-wrap-width: 40;
+      }
+      
+      [zoom=18] {
+      text-size: 14;
+      text-character-spacing: 1;
+      text-wrap-width: 40;
+      }
+  	}
+}
+
+#plazas_labels ::plazas {
     [zoom>=16]{
     text-name: "[nameshort]";
     text-placement: interior;
@@ -277,7 +308,7 @@
 #roads_labels ::high {
   [scalerank=1] {
   
-  [zoom>=14]{
+  [zoom>=13]{
     text-name: "[namecomple]";
     text-placement: line;
     text-face-name:@font_reg;
@@ -286,6 +317,10 @@
     text-halo-radius:1.5;
     text-character-spacing: 1;
    
+      [zoom=13] {
+      text-size: 10;
+      }
+      
       [zoom=14] {
       text-size: 12;
       }

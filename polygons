@@ -107,7 +107,7 @@
 }
 
 #squares {
-  polygon-fill: @squares;
+  polygon-fill: @urbanspace;
   polygon-opacity: 0.8;
 
   	::outline {
@@ -116,6 +116,13 @@
       line-opacity: 0.6;
       line-join: round;
     }
+}
+
+#plazas {
+  polygon-fill: @urbanspace;
+  polygon-opacity: 0.8;
+  image-filters: agg-stack-blur(5,5);
+  image-filters-inflate: true;
 }
 
 #parks{
