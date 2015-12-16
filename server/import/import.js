@@ -8,6 +8,7 @@ var pg = require( 'pg' ),
     inquirer = require( 'inquirer' ),
     chalk = require( 'chalk' ),
     uuid = require('uuid'),
+    table = require( 'cli-table' ),
     shapefile  = require( 'shapefile' ),
     questions = require( './questions' ),
     push = require( './push' ),
@@ -248,6 +249,20 @@ var deleteNames = function( client, ans, callback ){
   });
 }
 
+var listLayers = function( client ) {
+  var layers = new table(),
+      query = client.query( "SELECT * FROM ( SELECT layer, 'point' AS geometry FROM basepoint GROUP BY layer UNION SELECT layer, 'line' AS geometry FROM baseline GROUP BY layer UNION SELECT layer, 'poly' AS geometry FROM basepoly GROUP BY layer ) AS q WHERE layer IS NOT NULL ORDER BY layer" );
+  
+  query.on( 'row', function( result ){
+    layers.push( _.values( result ) );
+  });
+  
+  query.on( 'end', function(){
+    console.log( layers.toString() );
+    client.end();
+  })
+}
+
 var waterfallExit = function( err, client ) {
   if( err ) console.log( chalk.red( "ERROR: " ) + err );
   client.end();
@@ -269,7 +284,7 @@ var replaceSeq = function( ans, client ) {
         ],
         waterfallExit
       );
-    }
+    },
     newSeq = function( ans, client ) {
       async.waterfall([
           function( callback ) {
@@ -322,7 +337,7 @@ var replaceSeq = function( ans, client ) {
         ],
         waterfallExit
       );
-    }
+    },
     pushDB = function( ans, client ) {
       client.end();
       push.copyDB( "rio", "riodev" );
@@ -331,6 +346,9 @@ var replaceSeq = function( ans, client ) {
       client.end();
       push.copyDB( "riodev", "rio" );
     },
+    list = function( ans, client ) {
+      listLayers( client );
+    },
     tasks = {
       'replace' : replaceSeq,
       'new' : newSeq,
@@ -338,11 +356,12 @@ var replaceSeq = function( ans, client ) {
       'visual' : visualSeq,
       'planned' : plannedSeq,
       'push' : pushDB,
-      'pull' : pullDB
+      'pull' : pullDB,
+      'list' : list
     };
 
 inquirer.prompt( questions.q, function( ans ) {
-  if( ans.confirm ){
+  if( ans.confirm || ans.task == 'list' ){
     var client = new pg.Client( conn );
     client.connect();
     tasks[ ans.task ]( ans, client );

@@ -15,7 +15,9 @@ exports.q = [
       { name : "Import an urban project", value : 'planned' },
       new inquirer.Separator(),
       { name : "Push development database to live", value : 'push' },
-      { name : "Reset development database from live", value : 'pull' }
+      { name : "Reset development database from live", value : 'pull' },
+      new inquirer.Separator(),
+      { name : "List layers in development database", value : 'list' }
     ]
   },
   {
@@ -45,7 +47,7 @@ exports.q = [
       }
     },
     when : function( ans ){ 
-      return ans.task != 'push' && ans.task != 'pull';
+      return ans.task != 'push' && ans.task != 'pull' && ans.task != 'list';
     }
   },
   {
@@ -53,7 +55,7 @@ exports.q = [
     name : 'layer',
     message : 'Enter layer name:',
     when : function( ans ){ 
-      return ans.task != 'push' && ans.task != 'pull' && ans.task != 'visual';
+      return ans.task != 'push' && ans.task != 'pull' && ans.task != 'visual' && ans.task != 'list';
     }
   },
   {
@@ -96,6 +98,9 @@ exports.q = [
           break;
       }
       return str;
+    },
+    when : function( ans ){ 
+      return ans.task != 'list';
     }
   }
 ];
