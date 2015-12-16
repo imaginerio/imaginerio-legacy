@@ -25,11 +25,6 @@
     <LineSymbolizer stroke="#a2aabc" stroke-width="2" stroke-linejoin="round" />
   </Rule>
 </Style>
-<Style name="land-pattern" filter-mode="first">
-  <Rule>
-    <PolygonPatternSymbolizer file="../../../images/PolarGranite.jpg" opacity="0.2" />
-  </Rule>
-</Style>
 <Style name="land-fill" filter-mode="first">
   <Rule>
     <PolygonSymbolizer fill="#e7ded6" />
@@ -50,7 +45,6 @@
     <StyleName>land-offshore</StyleName>
     <StyleName>land-nearshore</StyleName>
     <StyleName>land-fill</StyleName>
-    <StyleName>land-pattern</StyleName>
     <StyleName>land-outline</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>

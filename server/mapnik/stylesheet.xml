@@ -12,8 +12,8 @@
   <Parameter name="maxzoom">18</Parameter>
   <Parameter name="scale">1</Parameter>
   <Parameter name="metatile">1</Parameter>
-  <Parameter name="id"><![CDATA[Rio]]></Parameter>
-  <Parameter name="_updated">1448900892000</Parameter>
+  <Parameter name="id"><![CDATA[rio]]></Parameter>
+  <Parameter name="_updated">1449520709000</Parameter>
   <Parameter name="name"><![CDATA[Rio]]></Parameter>
   <Parameter name="tilejson"><![CDATA[2.0.0]]></Parameter>
   <Parameter name="scheme"><![CDATA[xyz]]></Parameter>
@@ -55,7 +55,6 @@
 <Style name="cemeteries" filter-mode="first">
   <Rule>
     <PolygonSymbolizer fill="#ccd2aa" fill-opacity="0.6" />
-    <PolygonPatternSymbolizer file="../../../images/PolarGranite.jpg" opacity="0.1" />
   </Rule>
 </Style>
 <Layer name="cemeteries"
@@ -76,6 +75,28 @@
     </Datasource>
   </Layer>
 
+<Style name="plazas" filter-mode="first" image-filters="agg-stack-blur(5,5)" image-filters-inflate="true">
+  <Rule>
+    <PolygonSymbolizer fill="#fcf9d5" fill-opacity="0.8" />
+  </Rule>
+</Style>
+<Layer name="plazas"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>plazas</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'plazas' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
+       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
+       <Parameter name="host"><![CDATA[localhost]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
+    </Datasource>
+  </Layer>
+
 <Style name="squares-outline" filter-mode="first">
   <Rule>
     <LineSymbolizer stroke="#d4c4b6" stroke-width="1" stroke-opacity="0.6" stroke-linejoin="round" />
@@ -83,8 +104,7 @@
 </Style>
 <Style name="squares" filter-mode="first">
   <Rule>
-    <PolygonSymbolizer fill="#fcf9d5" fill-opacity="1" />
-    <PolygonPatternSymbolizer file="../../../images/PolarGranite.jpg" opacity="0.1" />
+    <PolygonSymbolizer fill="#fcf9d5" fill-opacity="0.8" />
   </Rule>
 </Style>
 <Layer name="squares"
@@ -113,7 +133,6 @@
 <Style name="parks" filter-mode="first">
   <Rule>
     <PolygonSymbolizer fill="#ccd2aa" fill-opacity="0.6" />
-    <PolygonPatternSymbolizer file="../../../images/PolarGranite.jpg" opacity="0.1" />
   </Rule>
 </Style>
 <Layer name="parks"
@@ -805,7 +824,7 @@
     </Datasource>
   </Layer>
 
-<Style name="squares_labels-urbanspace" filter-mode="first">
+<Style name="squares_labels-squares" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <MinScaleDenominator>1500</MinScaleDenominator>
@@ -828,14 +847,52 @@
 </Style>
 <Layer name="squares_labels"
   srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>squares_labels-urbanspace</StyleName>
+    <StyleName>squares_labels-squares</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'squares' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
+       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
+       <Parameter name="host"><![CDATA[localhost]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="plazas_labels-plazas" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>2500</MaxScaleDenominator>
+    <MinScaleDenominator>1500</MinScaleDenominator>
+    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>5000</MaxScaleDenominator>
+    <MinScaleDenominator>2500</MinScaleDenominator>
+    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500</MaxScaleDenominator>
+    <MinScaleDenominator>5000</MinScaleDenominator>
+    <TextSymbolizer size="13" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>1500</MaxScaleDenominator>
+    <TextSymbolizer placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+  </Rule>
+</Style>
+<Layer name="plazas_labels"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>plazas_labels-plazas</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
        <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'plazas' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
-       <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
+       <Parameter name="extent"><![CDATA[-44.0495149580022,-23.1024155607895,-42.6599378514538,-22.6300079267944]]></Parameter>
        <Parameter name="dbname"><![CDATA[rio]]></Parameter>
        <Parameter name="host"><![CDATA[localhost]]></Parameter>
        <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
