@@ -171,40 +171,42 @@ var newLayer = function( client, ans, callback ) {
 }
 
 var getNames = function( client, ans, callback ){
-  if( ans.geom == 'viewsheds' || ans.geom == 'mapsplans' ) callback( null, client, ans, null );
-  var features = [ ans.layer ],
-      langs = { 'en' : 'English', 'pr' : 'Portuguese' },
-      q = [],
-      query = client.query( "SELECT featuretyp FROM " + ans.geom + " WHERE layer = '" + ans.layer + "' AND featuretyp IS NOT NULL GROUP BY featuretyp ORDER BY featuretyp" );
-  
-  query.on( 'row', function( result ){
-    features.push( result.featuretyp );
-  });
-  
-  query.on( 'error', function( error ) {
-    callback( error, client );
-  });
+  inquirer.prompt( [ { type : 'confirm', name : 'confirm', message : 'Update English / Portuguese names for ' + ans.layer } ], function( nameConfirm ){
+    if( nameConfirm.confirm === false || ans.geom == 'viewsheds' || ans.geom == 'mapsplans' ) callback( null, client, ans, null );
+    var features = [ ans.layer ],
+        langs = { 'en' : 'English', 'pr' : 'Portuguese' },
+        q = [],
+        query = client.query( "SELECT featuretyp FROM " + ans.geom + " WHERE layer = '" + ans.layer + "' AND featuretyp IS NOT NULL GROUP BY featuretyp ORDER BY featuretyp" );
     
-  query.on( 'end', function() {
-    _.each( features, function( value ){
-      _.each( langs, function( name, code ){
-        q.push({
-          type : 'input',
-          name : value + "-" + code,
-          message : 'Enter the ' + chalk.yellow( name ) + ' translation for: ' + chalk.blue( value ),
-          default : value
-        });
-      });
+    query.on( 'row', function( result ){
+      features.push( result.featuretyp );
     });
     
-    inquirer.prompt( q, function( names ) {
-      callback( null, client, ans, names );
+    query.on( 'error', function( error ) {
+      callback( error, client );
+    });
+      
+    query.on( 'end', function() {
+      _.each( features, function( value ){
+        _.each( langs, function( name, code ){
+          q.push({
+            type : 'input',
+            name : value + "-" + code,
+            message : 'Enter the ' + chalk.yellow( name ) + ' translation for: ' + chalk.blue( value ),
+            default : value
+          });
+        });
+      });
+      
+      inquirer.prompt( q, function( names ) {
+        callback( null, client, ans, names );
+      });
     });
   });
 }
 
 var updateNames = function( client, ans, names, callback ){
-  if( ans.geom == 'viewsheds' || ans.geom == 'mapsplans' ) callback( null, client );
+  if( names === null ) callback( null, client );
   var translate = {},
       i = 0;
   _.each( names, function( value, key ){
