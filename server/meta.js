@@ -54,7 +54,7 @@ exports.layers = function( req, res )
 	client.connect();
 
 	var year = req.params.year;	
-	var q = "SELECT folder, geo.layer, geo.featuretyp, geo.stylename, fill, stroke, shape FROM ( SELECT layer, featuretyp, stylename FROM baseline WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp, stylename  UNION SELECT layer, featuretyp, stylename FROM basepoint WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp, stylename  UNION SELECT layer, featuretyp, stylename FROM basepoly WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp, stylename ) AS geo INNER JOIN legend2 ON geo.stylename = legend2.stylename INNER JOIN layers ON geo.layer = layers.layer AND geo.featuretyp = layers.featuretyp WHERE geo.featuretyp IS NOT NULL ORDER BY sort";
+	var q = "SELECT folder, geo.layer, geo.featuretyp, geo.stylename, fill, stroke, shape FROM ( SELECT layer, featuretyp, stylename FROM baseline WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp, stylename  UNION SELECT layer, featuretyp, stylename FROM basepoint WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp, stylename  UNION SELECT layer, featuretyp, stylename FROM basepoly WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp, stylename ) AS geo INNER JOIN legend ON geo.stylename = legend.stylename INNER JOIN layers ON geo.layer = layers.layer AND geo.featuretyp = layers.featuretyp WHERE geo.featuretyp IS NOT NULL ORDER BY sort";
 	
 	var query = client.query( q ),
 		arr = [],
