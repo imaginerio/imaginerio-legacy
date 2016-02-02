@@ -88,9 +88,9 @@ function build_layers()
 								
 				_.each( val, function( val, key )
 				{
-					add_check( "geodb", key, folder, switch_layers );
-					_.each( val, function( val, key )
-					{
+					//add_check( "geodb", key, folder, switch_layers );
+					//_.each( val, function( val, key )
+					//{
 						var label = add_check( "layer", key, val.id, switch_layers ).appendTo( folder );
 						delete val.id;
 						
@@ -107,7 +107,7 @@ function build_layers()
 									.appendTo( folder );
 							});
 						}
-					});
+					//});
 				});
 			});
       
