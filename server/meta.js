@@ -54,31 +54,26 @@ exports.layers = function( req, res )
 	client.connect();
 
 	var year = req.params.year;	
-	var q = "SELECT * FROM ( SELECT q.*, l.folder, l.geodatabas, l.fill, l.stroke, l.shape, l.id FROM ( SELECT layer, featuretyp FROM baseline WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp UNION SELECT layer, featuretyp FROM basepoint WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp UNION SELECT layer, featuretyp FROM basepoly WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp ) AS q LEFT OUTER JOIN legend AS l ON q.layer = l.layer AND ( q.featuretyp = l.featuretyp OR ( l.featuretyp IS NULL AND q.featuretyp IS NULL ) ) ) AS q2 WHERE fill IS NOT NULL OR folder = 'VisualDocuments' OR stroke IS NOT NULL OR shape IS NOT NULL ORDER BY layer, featuretyp";
+	var q = "SELECT folder, geo.layer, geo.featuretyp, geo.stylename, fill, stroke, shape FROM ( SELECT layer, featuretyp, stylename FROM baseline WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp, stylename  UNION SELECT layer, featuretyp, stylename FROM basepoint WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp, stylename  UNION SELECT layer, featuretyp, stylename FROM basepoly WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp, stylename ) AS geo INNER JOIN legend2 ON geo.stylename = legend2.stylename INNER JOIN layers ON geo.layer = layers.layer AND geo.featuretyp = layers.featuretyp WHERE geo.featuretyp IS NOT NULL ORDER BY sort";
 	
 	var query = client.query( q ),
 		arr = [],
 		layers = {};
-	query.on( 'row', function( result )
-	{
+	query.on( 'row', function( result ){
 		arr.push( result );
 	});
 	
-	query.on( 'end', function()
-	{
-		_.each( arr, function( val )
-		{
+	query.on( 'end', function(){
+		_.each( arr, function( val ){
 			if( !layers[ val.folder ] ) layers[ val.folder ] = {};
-			if( !layers[ val.folder ][ val.geodatabas ] ) layers[ val.folder ][ val.geodatabas ] = {};
-			if( !layers[ val.folder ][ val.geodatabas ][ val.layer ] )
-			{
-				layers[ val.folder ][ val.geodatabas ][ val.layer ] = {};
-				layers[ val.folder ][ val.geodatabas ][ val.layer ].id = val.id;
-				layers[ val.folder ][ val.geodatabas ][ val.layer ].features = [];
+			if( !layers[ val.folder ][ val.layer ] ){
+				layers[ val.folder ][ val.layer ] = {};
+				layers[ val.folder ][ val.layer ].id = val.stylename;
+				layers[ val.folder ][ val.layer ].features = [];
 			}
 			
-			if( val.shape ) layers[ val.folder ][ val.geodatabas ][ val.layer ].style = { fill : val.fill, stroke : val.stroke, shape : val.shape };
-			if( val.featuretyp ) layers[ val.folder ][ val.geodatabas ][ val.layer ].features.push( val.featuretyp );
+			if( val.shape ) layers[ val.folder ][ val.layer ].style = { fill : val.fill, stroke : val.stroke, shape : val.shape };
+			if( val.featuretyp ) layers[ val.folder ][ val.layer ].features.push( val.featuretyp );
 		});
 		
 		res.send( layers );
