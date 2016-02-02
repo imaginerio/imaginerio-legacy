@@ -59,21 +59,26 @@ exports.layers = function( req, res )
 	var query = client.query( q ),
 		arr = [],
 		layers = {};
-	query.on( 'row', function( result ){
+	query.on( 'row', function( result )
+	{
 		arr.push( result );
 	});
 	
-	query.on( 'end', function(){
-		_.each( arr, function( val ){
+	query.on( 'end', function()
+	{
+		_.each( arr, function( val )
+		{
 			if( !layers[ val.folder ] ) layers[ val.folder ] = {};
-			if( !layers[ val.folder ][ val.layer ] ){
-				layers[ val.folder ][ val.layer ] = {};
-				layers[ val.folder ][ val.layer ].id = val.stylename;
-				layers[ val.folder ][ val.layer ].features = [];
+			if( !layers[ val.folder ][ val.layer ] ) layers[ val.folder ][ val.layer ] = {};
+			if( !layers[ val.folder ][ val.layer ][ val.stylename ] )
+			{
+				layers[ val.folder ][ val.layer ][ val.stylename ] = {};
+				layers[ val.folder ][ val.layer ][ val.stylename ].id = val.stylename;
+				layers[ val.folder ][ val.layer ][ val.stylename ].features = [];
 			}
 			
-			if( val.shape ) layers[ val.folder ][ val.layer ].style = { fill : val.fill, stroke : val.stroke, shape : val.shape };
-			if( val.featuretyp ) layers[ val.folder ][ val.layer ].features.push( val.featuretyp );
+			if( val.shape ) layers[ val.folder ][ val.layer ][ val.stylename ].style = { fill : val.fill, stroke : val.stroke, shape : val.shape };
+			if( val.featuretyp ) layers[ val.folder ][ val.layer ][ val.stylename ].features.push( val.featuretyp );
 		});
 		
 		res.send( layers );
