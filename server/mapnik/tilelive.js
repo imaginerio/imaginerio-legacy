@@ -111,7 +111,7 @@ function parseXML( req, res, callback ){
       });
     }
 
-		var off = req.params.layer.split( "," );
+		var off = [ req.params.layer, req.params.layer + "_labels" ];
 		_.each( off, function( l ){
 			sources = xmlDoc.find( "//Layer[@name='" + l + "']" );
 			_.each( sources, function( item ){
