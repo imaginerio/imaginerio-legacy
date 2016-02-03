@@ -54,31 +54,27 @@ exports.layers = function( req, res )
 	client.connect();
 
 	var year = req.params.year;	
-	var q = "SELECT folder, geo.layer, geo.featuretyp, geo.stylename, fill, stroke, shape FROM ( SELECT layer, featuretyp, stylename FROM baseline WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp, stylename  UNION SELECT layer, featuretyp, stylename FROM basepoint WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp, stylename  UNION SELECT layer, featuretyp, stylename FROM basepoly WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp, stylename ) AS geo INNER JOIN legend ON geo.stylename = legend.stylename INNER JOIN layers ON geo.layer = layers.layer AND geo.featuretyp = layers.featuretyp WHERE geo.featuretyp IS NOT NULL ORDER BY sort";
+	var q = "SELECT folder, geo.layer, geo.featuretyp, geo.stylename, layername, fill, stroke, shape FROM ( SELECT layer, featuretyp, stylename FROM baseline WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp, stylename  UNION SELECT layer, featuretyp, stylename FROM basepoint WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp, stylename  UNION SELECT layer, featuretyp, stylename FROM basepoly WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp, stylename ) AS geo INNER JOIN legend ON geo.stylename = legend.stylename INNER JOIN layers ON geo.layer = layers.layer AND geo.featuretyp = layers.featuretyp WHERE geo.featuretyp IS NOT NULL ORDER BY sort";
 	
 	var query = client.query( q ),
 		arr = [],
 		layers = {};
-	query.on( 'row', function( result )
-	{
+	query.on( 'row', function( result ){
 		arr.push( result );
 	});
 	
-	query.on( 'end', function()
-	{
-		_.each( arr, function( val )
-		{
+	query.on( 'end', function(){
+		_.each( arr, function( val ){
 			if( !layers[ val.folder ] ) layers[ val.folder ] = {};
 			if( !layers[ val.folder ][ val.layer ] ) layers[ val.folder ][ val.layer ] = {};
-			if( !layers[ val.folder ][ val.layer ][ val.stylename ] )
-			{
-				layers[ val.folder ][ val.layer ][ val.stylename ] = {};
-				layers[ val.folder ][ val.layer ][ val.stylename ].id = val.stylename;
-				layers[ val.folder ][ val.layer ][ val.stylename ].features = [];
+			if( !layers[ val.folder ][ val.layer ][ val.layername ] ){
+				layers[ val.folder ][ val.layer ][ val.layername ] = {};
+				layers[ val.folder ][ val.layer ][ val.layername ].id = val.stylename;
+				layers[ val.folder ][ val.layer ][ val.layername ].features = [];
 			}
 			
-			if( val.shape ) layers[ val.folder ][ val.layer ][ val.stylename ].style = { fill : val.fill, stroke : val.stroke, shape : val.shape };
-			if( val.featuretyp ) layers[ val.folder ][ val.layer ][ val.stylename ].features.push( val.featuretyp );
+			if( val.shape ) layers[ val.folder ][ val.layer ][ val.layername ].style = { fill : val.fill, stroke : val.stroke, shape : val.shape };
+			if( val.featuretyp ) layers[ val.folder ][ val.layer ][ val.layername ].features.push( val.featuretyp );
 		});
 		
 		res.send( layers );
