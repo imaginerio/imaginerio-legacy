@@ -1,6 +1,6 @@
 var pg = require( 'pg' ),
 	_ = require( 'underscore' ),
-	conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/rio";
+	db = require( './db' );
 	
 _.mixin({
   // ### _.objMap
@@ -26,7 +26,7 @@ _.mixin({
 	
 exports.timeline = function( req, res )
 {
-	if( req.headers.host.match( /-dev/ ) ) conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/riodev";
+	var conn = req.headers.host.match( /-dev/ ) ? db.conn + 'dev' : db.conn;
 	var client = new pg.Client( conn );
 	client.connect();
 	
@@ -49,7 +49,7 @@ exports.timeline = function( req, res )
 
 exports.layers = function( req, res )
 {
-	if( req.headers.host.match( /-dev/ ) ) conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/riodev";
+	var conn = req.headers.host.match( /-dev/ ) ? db.conn + 'dev' : db.conn;
 	var client = new pg.Client( conn );
 	client.connect();
 
@@ -84,7 +84,7 @@ exports.layers = function( req, res )
 
 exports.raster = function( req, res )
 {
-	if( req.headers.host.match( /-dev/ ) ) conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/riodev";
+	var conn = req.headers.host.match( /-dev/ ) ? db.conn + 'dev' : db.conn;
 	var client = new pg.Client( conn );
 	client.connect();
 
@@ -108,7 +108,7 @@ exports.raster = function( req, res )
 
 exports.search = function( req, res )
 {
-	if( req.headers.host.match( /-dev/ ) ) conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/riodev";
+	var conn = req.headers.host.match( /-dev/ ) ? db.conn + 'dev' : db.conn;
 	var client = new pg.Client( conn );
 	client.connect();
 
@@ -134,7 +134,7 @@ exports.search = function( req, res )
 
 exports.plans = function( req, res )
 {
-	if( req.headers.host.match( /-dev/ ) ) conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/riodev";
+	var conn = req.headers.host.match( /-dev/ ) ? db.conn + 'dev' : db.conn;
 	var client = new pg.Client( conn );
 	client.connect();
 	
@@ -157,7 +157,7 @@ exports.plans = function( req, res )
 
 exports.details = function( req, res )
 {
-	if( req.headers.host.match( /-dev/ ) ) conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/riodev";
+	var conn = req.headers.host.match( /-dev/ ) ? db.conn + 'dev' : db.conn;
 	var client = new pg.Client( conn );
 	client.connect();
 		
@@ -185,7 +185,7 @@ exports.details = function( req, res )
 }
 exports.names = function( req, res )
 {
-	if( req.headers.host.match( /-dev/ ) ) conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/riodev";
+	var conn = req.headers.host.match( /-dev/ ) ? db.conn + 'dev' : db.conn;
 	var client = new pg.Client( conn );
 	client.connect();
 	

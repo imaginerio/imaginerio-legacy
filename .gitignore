@@ -7,3 +7,4 @@ Build/*
 server/mapnik/aws-config.json
 *.pem
 server/import/db.js
+server/db.js
