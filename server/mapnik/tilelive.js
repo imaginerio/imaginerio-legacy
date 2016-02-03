@@ -6,7 +6,7 @@ var express = require('express'),
     pg = require( 'pg' ),
     AWS = require( 'aws-sdk' ),
     dev,
-    conn = "postgres://pg_query_user:U6glEdd0igS2@localhost/rio",
+    db = require( '../db' ),
     cloudfront = "http://d1nxja8ugt29ju.cloudfront.net/",
     hillshade = [ { year : 1960, file : '../../../../../raster/Hillshade_WGS84_1960_2013.tif' }, { year : 1921, file : '../../../../../raster/Hillshade_WGS84_1921_1959.tif' }, { year : 1906, file : '../../../../../raster/Hillshade_WGS84_1906_1920.tif' }, { year : 1500, file : '../../../../../raster/Hillshade_WGS84_1500_1905.tif' } ];
     
@@ -43,7 +43,7 @@ AWS.config.loadFromPath( './aws-config.json' );
 var s3 = new AWS.S3();
 
 //postgres connect
-var client = new pg.Client( conn );
+var client = new pg.Client( db.conn );
 client.connect();
 
 app.get('/tiles/:year/:layer/:z/:x/:y.*', function( req, res ){
