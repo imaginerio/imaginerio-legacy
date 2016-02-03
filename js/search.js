@@ -67,7 +67,7 @@ function add_result( name, id, layer, div, reg )
 				"class" : "header",
 				"name" : layer
 			})
-			.html( names[ layer ] )
+			.html( names[ layer.toLowerCase() ] )
 			.appendTo( div );
 	}
 }
@@ -108,7 +108,7 @@ function get_details( id, div )
 			
 			_.each( json, function( val, key )
 			{
-				if( key != "years" ) details.append( "<b>" + names[ key ] + ":</b> " + val + "<br />" );
+				if( key != "years" ) details.append( "<b>" + names[ key.toLowerCase() ] + ":</b> " + val + "<br />" );
 			});
 			
 			details.attr( "data-height", details.outerHeight() + 20 );

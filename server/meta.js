@@ -196,7 +196,7 @@ exports.names = function( req, res )
 	var names = {},
 		lang = req.params.lang;
 	
-	var query = client.query( "SELECT text, name_en, name_pr FROM names" );
+	var query = client.query( "SELECT LOWER( text ) AS text, name_en, name_pr FROM names" );
 	
 	query.on( 'row', function( result )
 	{

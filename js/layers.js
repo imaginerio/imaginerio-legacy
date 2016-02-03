@@ -84,7 +84,7 @@ function build_layers()
 		{	
 			_.each( json, function( val, key )
 			{
-				var folder = build_folder( names[ key ] );
+				var folder = build_folder( names[ key.toLowerCase() ] );
 								
 				_.each( val, function( val, key )
 				{
@@ -101,7 +101,7 @@ function build_layers()
 								$( document.createElement( 'div' ) )
 									.addClass( "feature" )
 									.attr( "id", name )
-									.html( names[ name ] )
+									.html( names[ name.toLowerCase() ] )
 									.prepend( "<span>Clear</span>" )
 									.appendTo( folder );
 							});
@@ -198,9 +198,10 @@ function build_layers()
 	
 	function add_check( cclass, html, id, on_click )
 	{
+		console.log( html );
 		var label = $( document.createElement( 'label' ) )
 						.addClass( cclass )
-						.html( "<span>" + names[ html ] + "</span>" );
+						.html( "<span>" + names[ html.toLowerCase() ] + "</span>" );
 		
 		if( id )
 		{
