@@ -56,7 +56,7 @@
        <Parameter name="dbname"><![CDATA[rio]]></Parameter>
        <Parameter name="host"><![CDATA[localhost]]></Parameter>
        <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
-       <Parameter name="password"><![CDATA[U6glEdd0igS2]]></Parameter>
+       <Parameter name="password"><![CDATA[99999999]]></Parameter>
     </Datasource>
   </Layer>
   

@@ -96,12 +96,17 @@ function parseXML( req, res, callback ){
 	else{
 		var data = fs.readFileSync( req.params.layer == "base" ? "base.xml" : "stylesheet.xml", 'utf8' );	
     var xmlDoc = xml.parseXml( data );
-    var sources = xmlDoc.find( "//Parameter[@name='table']" );
-    var dbname = xmlDoc.find( "//Parameter[@name='dbname']" );
+    var sources = xmlDoc.find( "//Parameter[@name='table']" ),
+        passwords = xmlDoc.find( "//Parameter[@name='password']" ),
+        dbname = xmlDoc.find( "//Parameter[@name='dbname']" );
 			
 		_.each( sources, function( item ){
 			var t = item.text();
 			item.text( t.replace( /99999999/g, req.params.year ) );
+		});
+		
+		_.each( passwords, function( item ){
+  		item.text( db.conn.replace( /.*:(.*)@.*/g, "$1" ) );
 		});
 		
     if( dev ){
