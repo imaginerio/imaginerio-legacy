@@ -1,10 +1,11 @@
 var pg = require( 'pg' ),
     sys = require( 'sys' ),
-    	exec = require( 'child_process' ).exec,
-    	chalk = require( 'chalk' );
+    exec = require( 'child_process' ).exec,
+    db = require( './db' ),
+    chalk = require( 'chalk' );
     	
 exports.copyDB = function( to, from ){
-  var pushClient = new pg.Client( 'postgres://pg_power_user:XfAfooM4zUD8HG@localhost/' + from );
+  var pushClient = new pg.Client( db.conn + from );
   pushClient.connect();
   
   console.log( "Dumping " + chalk.green( from ) + " database structure and data..." );

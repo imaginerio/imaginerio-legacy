@@ -4,7 +4,7 @@ var pg = require( 'pg' ),
     _ = require( 'underscore' ),
     fs = require( 'fs' ),
     async = require( 'async' ),
-    conn = "postgres://pg_power_user:XfAfooM4zUD8HG@localhost/riodev",
+    db = require( './db' ),
     inquirer = require( 'inquirer' ),
     chalk = require( 'chalk' ),
     uuid = require('uuid'),
@@ -364,7 +364,7 @@ var replaceSeq = function( ans, client ) {
 
 inquirer.prompt( questions.q, function( ans ) {
   if( ans.confirm || ans.task == 'list' ){
-    var client = new pg.Client( conn );
+    var client = new pg.Client( db.conn + 'riodev' );
     client.connect();
     tasks[ ans.task ]( ans, client );
   }

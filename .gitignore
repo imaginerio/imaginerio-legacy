@@ -2,8 +2,8 @@ node_modules/*
 server/import/node_modules/*
 tiles*
 server/mapnik/cache/*
-raster
 raster/*
 Build/*
 server/mapnik/aws-config.json
 *.pem
+server/import/db.js
