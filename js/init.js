@@ -9,7 +9,7 @@ var lang,
 		"#plans" : "Projetos Urbanos",
 		"#switch" : "Legenda do Mapa",
 		"#instruction" : "Clique no mapa para explorar...",
-		"#export" : "Exporte a imagem do mapa <span></span>"
+		"#export" : "Exportar o mapa <span></span>"
 	};
 
 function init()

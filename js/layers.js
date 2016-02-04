@@ -101,7 +101,7 @@ function build_layers()
 								$( document.createElement( 'div' ) )
 									.addClass( "feature" )
 									.attr( "id", name )
-									.html( names[ name.toLowerCase() ] )
+									.html( names.highlight + " " + names[ name.toLowerCase() ] )
 									.prepend( "<span>Clear</span>" )
 									.appendTo( folder );
 							});
@@ -172,7 +172,7 @@ function build_layers()
                   "class" : "visual-link",
                   "target" : "_blank"
               })
-              .text( "View full image" )
+              .text( names.viewfull )
               .append(
                 $( document.createElement( 'img' ) )
                   .attr({
