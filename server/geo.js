@@ -100,7 +100,7 @@ exports.plan = function( req, res )
 
 exports.feature = function( req, res )
 {
-	postgeo.connect( conn );
+	var conn = req.headers.host.match( /-dev/ ) ? db.conn + 'dev' : db.conn;
 	
 	var year = req.params.year,
 		id = req.params.id;
