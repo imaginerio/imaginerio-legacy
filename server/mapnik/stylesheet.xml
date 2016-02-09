@@ -22,26 +22,26 @@
 <Style name="beaches" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <LineSymbolizer stroke-width="12" stroke="#ffd270" stroke-linejoin="round" stroke-linecap="round" stroke-opacity="0.8" />
+    <LineSymbolizer stroke-width="8" stroke="#ffd270" stroke-linejoin="round" stroke-linecap="round" stroke-opacity="0.9" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <LineSymbolizer stroke-width="10" stroke="#ffd270" stroke-linejoin="round" stroke-linecap="round" stroke-opacity="0.8" />
+    <LineSymbolizer stroke-width="6" stroke="#ffd270" stroke-linejoin="round" stroke-linecap="round" stroke-opacity="0.9" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <LineSymbolizer stroke-width="8" stroke="#ffd270" stroke-linejoin="round" stroke-linecap="round" stroke-opacity="0.8" />
+    <LineSymbolizer stroke-width="4" stroke="#ffd270" stroke-linejoin="round" stroke-linecap="round" stroke-opacity="0.9" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <LineSymbolizer stroke-width="6" stroke="#ffd270" stroke-linejoin="round" stroke-linecap="round" stroke-opacity="0.8" />
+    <LineSymbolizer stroke-width="3" stroke="#ffd270" stroke-linejoin="round" stroke-linecap="round" stroke-opacity="0.9" />
   </Rule>
   <Rule>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <LineSymbolizer stroke-width="4" stroke="#ffd270" stroke-linejoin="round" stroke-linecap="round" stroke-opacity="0.8" />
+    <LineSymbolizer stroke-width="2" stroke="#ffd270" stroke-linejoin="round" stroke-linecap="round" stroke-opacity="0.9" />
   </Rule>
 </Style>
 <Layer name="beaches"
