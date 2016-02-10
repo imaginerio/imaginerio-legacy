@@ -228,7 +228,51 @@
     </Datasource>
   </Layer>
 
-<Style name="riversstreams" filter-mode="first">
+<Style name="riversstreams-solid" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>25000</MaxScaleDenominator>
+    <MinScaleDenominator>12500</MinScaleDenominator>
+    <Filter>([scalerank] = 1)</Filter>
+    <LineSymbolizer stroke="#8fb0cd" stroke-width="0.6" />
+  </Rule>
+  <Rule>
+    <MinScaleDenominator>25000</MinScaleDenominator>
+    <Filter>([scalerank] = 1)</Filter>
+    <LineSymbolizer stroke="#8fb0cd" stroke-width="0.4" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>2500</MaxScaleDenominator>
+    <Filter>([scalerank] = 1)</Filter>
+    <LineSymbolizer stroke="#8fb0cd" stroke-width="1.75" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>5000</MaxScaleDenominator>
+    <MinScaleDenominator>2500</MinScaleDenominator>
+    <Filter>([scalerank] = 1)</Filter>
+    <LineSymbolizer stroke="#8fb0cd" stroke-width="1.25" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500</MaxScaleDenominator>
+    <MinScaleDenominator>5000</MinScaleDenominator>
+    <Filter>([scalerank] = 1)</Filter>
+    <LineSymbolizer stroke="#8fb0cd" stroke-width="0.85" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>2500</MaxScaleDenominator>
+    <LineSymbolizer stroke="#8fb0cd" stroke-width="1.75" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>5000</MaxScaleDenominator>
+    <MinScaleDenominator>2500</MinScaleDenominator>
+    <LineSymbolizer stroke="#8fb0cd" stroke-width="1.25" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500</MaxScaleDenominator>
+    <MinScaleDenominator>5000</MinScaleDenominator>
+    <LineSymbolizer stroke="#8fb0cd" stroke-width="0.85" />
+  </Rule>
+</Style>
+<Style name="riversstreams" filter-mode="first" image-filters="agg-stack-blur(4,4),agg-stack-blur(3,3),agg-stack-blur(2,2)" image-filters-inflate="true">
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
@@ -271,10 +315,14 @@
     <MinScaleDenominator>5000</MinScaleDenominator>
     <LineSymbolizer stroke-width="1.7" stroke="#8fb0cd" />
   </Rule>
+  <Rule>
+    <MinScaleDenominator>12500</MinScaleDenominator>
+  </Rule>
 </Style>
 <Layer name="riversstreams"
   srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
     <StyleName>riversstreams</StyleName>
+    <StyleName>riversstreams-solid</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
        <Parameter name="table"><![CDATA[( SELECT * FROM baseline WHERE layer = 'InlandWatersLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
