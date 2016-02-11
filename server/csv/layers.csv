@@ -1,0 +1,45 @@
+sort,folder,layer,featuretyp,stylename
+2.1.1,Geography/Geografia,GroundCoverPoly,Forests,
+2.1.2,Geography/Geografia,GroundCoverPoly,Riparian Forests,
+2.1.3,Geography/Geografia,GroundCoverPoly,Spit Vegetation,
+2.1.4,Geography/Geografia,GroundCoverPoly,Mangroves,
+2.1.5,Geography/Geografia,GroundCoverPoly,Agriculture,
+2.2.1,Geography/Geografia,InlandWatersPoly,Lagoons,ponds
+2.2.2,Geography/Geografia,InlandWatersPoly,Marshes,marshes
+2.2.3,Geography/Geografia,InlandWatersPoly,Salty Marshes,marshes
+2.2.4,Geography/Geografia,InlandWatersPoly,Ponds,ponds
+2.3.1,Geography/Geografia,InlandWatersLine,Rivers,riversstreams
+2.3.2,Geography/Geografia,InlandWatersLine,Streams,riversstreams
+2.3.3,Geography/Geografia,InlandWatersLine,Brooks,riversstreams
+2.3.4,Geography/Geografia,InlandWatersLine,Creeks,riversstreams
+2.4.1,Geography/Geografia,LandLine,Beaches,beaches
+3.1.1,Urbanism/Urbanismo,NeighborhoodsPoly,Parishes,neighborhoods
+3.1.2,Urbanism/Urbanismo,NeighborhoodsPoly,Neighborhoods,neighborhoods
+3.1.3,Urbanism/Urbanismo,NeighborhoodsPoly,Favelas,neighborhoods
+3.2.2,Urbanism/Urbanismo,BuildingsPoly,Military,buildings
+3.2.3,Urbanism/Urbanismo,BuildingsPoly,Religious,buildings
+3.2.4,Urbanism/Urbanismo,BuildingsPoly,Health,buildings
+3.3.1,Urbanism/Urbanismo,PublicSpacesPoly,Plazas,plazas
+3.3.2,Urbanism/Urbanismo,PublicSpacesPoly,Squares,squares
+3.3.3,Urbanism/Urbanismo,PublicSpacesPoly,Parks,parks
+3.3.4,Urbanism/Urbanismo,PublicSpacesPoly,Gardens,parks
+3.3.5,Urbanism/Urbanismo,PublicSpacesPoly,Cemeteries,cemeteries
+3.4.1,Urbanism/Urbanismo,RoadsLine,Trails,roads
+3.4.2,Urbanism/Urbanismo,RoadsLine,Streets,roads
+3.4.3,Urbanism/Urbanismo,RoadsLine,Alleys,roads
+3.4.5,Urbanism/Urbanismo,RoadsLine,Slopes,roads
+3.4.6,Urbanism/Urbanismo,RoadsLine,Passages,roads
+3.4.7,Urbanism/Urbanismo,RoadsLine,Avenues,roads
+3.4.8,Urbanism/Urbanismo,RoadsLine,Overpasses,roads
+3.4.9,Urbanism/Urbanismo,RoadsLine,Expressways,roads
+3.5.1,Urbanism/Urbanismo,BuildingsPoint,Tram Stations,railpoint
+3.5.2,Urbanism/Urbanismo,BuildingsPoint,Train Stations,railpoint
+3.5.3,Urbanism/Urbanismo,BuildingsPoint,Metro Stations,railpoint
+3.6.1,Urbanism/Urbanismo,UtilitiesLine,Aqueducts,waterline
+3.6.2,Urbanism/Urbanismo,UtilitiesLine,Canals,waterline
+3.6.3,Urbanism/Urbanismo,UtilitiesLine,Ditches,waterline
+3.6.4,Urbanism/Urbanismo,UtilitiesLine,Sewage Pipes,waterline
+3.6.5,Urbanism/Urbanismo,UtilitiesLine,Water Pipes,waterline
+3.7.1,Urbanism/Urbanismo,UtilitiesPoly,Fountains,fountains
+3.7.2,Urbanism/Urbanismo,UtilitiesPoly,Reservoirs,ponds
+3.2.1,Urbanism/Urbanismo,BuildingsPoly,Civilia,buildings

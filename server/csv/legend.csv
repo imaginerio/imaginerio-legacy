@@ -1,64 +1,15 @@
-gid,folder,geodatabas,layer,featuretyp,fill,stroke,shape,id
-1,BuiltEnvironment,Architecture,BuildingsPoly,,,,,buildings
-4,Boundaries,PoliticalBoundaries,NeighborhoodsPoly,,,#b9a589,dashed_line.svg,"neighborhoods_labels,neighborhoods"
-5,NaturalEnvironment,Topography,LandPoly,,#e7ded6,,poly.svg,
-8,BuiltEnvironment,Urbanism,FountainsPoint,,,,monument.png,fountainspoint
-9,Boundaries,PoliticalBoundaries,LotsAndLandUsesPoly,,#e9d4be,,poly.svg,lotslanduse
-10,BuiltEnvironment,Architecture,BuildingsPoly,Adminitrative Building,#e3b587,,poly.svg,buildings
-11,BuiltEnvironment,Architecture,BuildingsPoly,Church,#e3b587,,poly.svg,buildings
-12,BuiltEnvironment,Architecture,BuildingsPoly,Civic,#e3b587,,poly.svg,buildings
-13,BuiltEnvironment,Architecture,BuildingsPoly,Commercial,#e3b587,,poly.svg,buildings
-14,BuiltEnvironment,Architecture,BuildingsPoly,Convent,#e3b587,,poly.svg,buildings
-15,BuiltEnvironment,Architecture,BuildingsPoly,Cultural,#e3b587,,poly.svg,buildings
-16,BuiltEnvironment,Architecture,BuildingsPoly,Cultural Center,#e3b587,,poly.svg,buildings
-17,BuiltEnvironment,Architecture,BuildingsPoly,Culture,#e3b587,,poly.svg,buildings
-18,BuiltEnvironment,Architecture,BuildingsPoly,Customs,#e3b587,,poly.svg,buildings
-19,BuiltEnvironment,Architecture,BuildingsPoly,Fort,#e3b587,,poly.svg,buildings
-20,BuiltEnvironment,Architecture,BuildingsPoly,Governmental,#e3b587,,poly.svg,buildings
-21,BuiltEnvironment,Architecture,BuildingsPoly,Health and Human Safety,#e3b587,,poly.svg,buildings
-22,BuiltEnvironment,Architecture,BuildingsPoly,Hospital,#e3b587,,poly.svg,buildings
-23,BuiltEnvironment,Architecture,BuildingsPoly,Industrial,#e3b587,,poly.svg,buildings
-24,BuiltEnvironment,Architecture,BuildingsPoly,Misc,#e3b587,,poly.svg,buildings
-25,BuiltEnvironment,Architecture,BuildingsPoly,Monuments,#e3b587,,poly.svg,buildings
-26,BuiltEnvironment,Architecture,BuildingsPoly,Palace,#e3b587,,poly.svg,buildings
-27,BuiltEnvironment,Architecture,BuildingsPoly,Religious,#e3b587,,poly.svg,buildings
-28,BuiltEnvironment,Architecture,BuildingsPoly,Residence,#e3b587,,poly.svg,buildings
-29,BuiltEnvironment,Architecture,BuildingsPoly,School,#e3b587,,poly.svg,buildings
-30,BuiltEnvironment,Architecture,BuildingsPoly,Sports,#e3b587,,poly.svg,buildings
-31,BuiltEnvironment,Architecture,BuildingsPoly,Stock Exchange,#e3b587,,poly.svg,buildings
-48,BuiltEnvironment,Urbanism,CityBlocksPoly,,#ebe3dd,,poly.svg,cityblocks
-55,BuiltEnvironment,CivilEngineering,BuildingsPoint,Transportation/Railroad Station,,,rail.png,railpoint
-56,BuiltEnvironment,CivilEngineering,BuildingsPoint,Transportation/Metro Station,,,rail.png,railpoint
-57,BuiltEnvironment,CivilEngineering,BuildingsPoint,Transportation/Tram Station,,,rail.png,railpoint
-59,NaturalEnvironment,Water,InlandWatersLine,Streams,#90b0cc,#90b0cc,line.svg,"riversstreams,riversstreams_labels"
-58,NaturalEnvironment,Water,InlandWatersLine,Brooks,#90b0cc,#90b0cc,line.svg,"riversstreams,riversstreams_labels"
-60,NaturalEnvironment,Water,InlandWatersLine,Rivers,#90b0cc,#90b0cc,line.svg,"riversstreams,riversstreams_labels"
-61,NaturalEnvironment,Water,InlandWatersLine,Creeks,#90b0cc,#90b0cc,line.svg,"riversstreams,riversstreams_labels"
-3,BuiltEnvironment,Urbanism,PublicSpacesPoly,,,,,"squares_labels,squares,cemeteries_marker,cemeteries"
-50,BuiltEnvironment,Urbanism,PublicSpacesPoly,Parks,#ccd1ac,,poly.svg,"squares_labels,squares,cemeteries_marker,cemeteries"
-49,BuiltEnvironment,Urbanism,PublicSpacesPoly,Gardens,#ccd1ac,,poly.svg,"squares_labels,squares,cemeteries_marker,cemeteries"
-52,BuiltEnvironment,Urbanism,PublicSpacesPoly,Squares,#fcf8d7,,poly.svg,"squares_labels,squares,cemeteries_marker,cemeteries"
-33,BuiltEnvironment,CivilEngineering,RoadsLine,Alley,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
-34,BuiltEnvironment,CivilEngineering,RoadsLine,Trail,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
-42,BuiltEnvironment,CivilEngineering,RoadsLine,Passage,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
-36,BuiltEnvironment,CivilEngineering,RoadsLine,Ladeira,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
-35,BuiltEnvironment,CivilEngineering,RoadsLine,Collector,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
-6,NaturalEnvironment,Water,InlandWatersPoly,Lagoons,#b9cee0,#93b2cd,poly.svg,
-38,BuiltEnvironment,CivilEngineering,RoadsLine,Expressway,#ffffff,#d2c1b3,line.svg,"roads_labels,roads"
-53,NaturalEnvironment,Water,InlandWatersPoly,Marshes,#c3d3cd,,ripple.png,
-40,BuiltEnvironment,CivilEngineering,RoadsLine,Local,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
-41,BuiltEnvironment,CivilEngineering,RoadsLine,Minor Arterial,#ffffff,#d2c1b3,line.svg,"roads_labels,roads"
-45,BuiltEnvironment,CivilEngineering,RoadsLine,Street,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
-43,BuiltEnvironment,CivilEngineering,RoadsLine,Praia,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
-44,BuiltEnvironment,CivilEngineering,RoadsLine,Principle Arterial,#ffffff,#d2c1b3,line.svg,"roads_labels,roads"
-54,NaturalEnvironment,Water,InlandWatersPoly,Ponds,#b9cee0,#93b2cd,poly.svg,
-46,BuiltEnvironment,CivilEngineering,RoadsLine,Travessa,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
-2,BuiltEnvironment,CivilEngineering,RoadsLine,,,,,"roads_labels,roads"
-32,BuiltEnvironment,CivilEngineering,RoadsLine,Avenue,#f2eee9,#d2c1b3,line.svg,"roads_labels,roads"
-7,BuiltEnvironment,CivilEngineering,WaterLine,Aqueducts,#90b0cc,#90b0cc,line.svg,"waterline_labels,waterline"
-62,BuiltEnvironment,CivilEngineering,WaterLine,Canals,#90b0cc,#90b0cc,line.svg,"waterline_labels,waterline"
-63,BuiltEnvironment,CivilEngineering,WaterLine,Pipes/Water,#90b0cc,#90b0cc,line.svg,"waterline_labels,waterline"
-64,BuiltEnvironment,CivilEngineering,WaterLine,Ditches,#90b0cc,#90b0cc,line.svg,"waterline_labels,waterline"
-65,BuiltEnvironment,CivilEngineering,WaterLine,Pipes/Sewage,#90b0cc,#90b0cc,line.svg,"waterline_labels,waterline"
-51,BuiltEnvironment,Urbanism,PublicSpacesPoly,Plazas,#fcf8d7,,poly.svg,"squares_labels,squares,cemeteries_marker,cemeteries"
-47,BuiltEnvironment,Urbanism,PublicSpacesPoly,Cemeteries,#ccd1ac,,poly.svg,"squares_labels,squares,cemeteries_marker,cemeteries"
+id,stylename,fill,stroke,shape,layername
+10,riversstreams,#8fb0cd,#8fb0cd,line.svg,InlandWatersLine
+8,ponds,#bbcfe1,#8fb0cd,poly.svg,InlandWatersPoly
+14,marshes,,,ripple.png,Marshes
+2,buildings,#e3b587,,poly.svg,BuildingsPoly
+3,cemeteries,#ccd2aa,#b8c089,poly.svg,Cemeteries
+5,neighborhoods,,#766141,dashed_line.svg,NeighborhoodsPoly
+6,parks,#ccd2aa,#b8c089,poly.svg,Parks
+7,plazas,#fcf9d5,,poly.svg,Plazas
+9,railpoint,,,rail.png,BuildingsPoint
+11,roads,#f2eee9,#d2c1b3,line.svg,RoadsLine
+12,squares,#fcf9d5,#d4c4b6,poly.svg,Squares
+1,beaches,,,,LandLine
+13,waterline,#8fb0cd,#8fb0cd,line.svg,UtilitiesLine
+4,fountains,,,monument.png,UtilitiesPoly

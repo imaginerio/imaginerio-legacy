@@ -1,5 +1,4 @@
 text,name_en,name_pr,layer
-ImageViewshedsPoly,Image Viewsheds,Imagem Vista,
 VisualDocuments,Visual Documents,Documentos Visuais,
 creator,Creator,Criador,
 occupant,Occupant,Residente,
@@ -12,70 +11,72 @@ Architecture,Architecture,Arquitetura,
 Boundaries,Boundaries,Limites,
 Plaza,Plaza,Largo,
 Topography,Topography,Topografia,
-Urbanism,Urbanism,Urbanismo,
 CivilEngineering,Civil Engineering,Engenharia Civil,
 LandscapeArchitecture,Landscape Architecture,Paisagismo,
 NaturalEnvironment,Natural Environment,Meio Ambiente Natural,
 Water,Water,Água,
-RoadsLine,Roads,Vias,RoadsLine
-Alley,Alleys,Becos,RoadsLine
-Avenue,Avenues,Avenidas,RoadsLine
-Collector,Collector,Collector,RoadsLine
-Expressway,Expressway,Viaduto,RoadsLine
-Ladeira,Ladeira,Ladeira,RoadsLine
-Local,Local,Local,RoadsLine
-Minor Arterial,Minor Arterial,Minor Arterial,RoadsLine
-Passage,Passage,Travessa,RoadsLine
-Pedestrian,Pedestrian,Pedestrian,RoadsLine
-Praia,Praia,Praia,RoadsLine
-Principle Arterial,Principle Arterial,Principle Arterial,RoadsLine
-Rua,Rua,Rua,RoadsLine
-Street,Streets,Raus,RoadsLine
-Trail,Trails,Caminhos,RoadsLine
-Travessa,Travessa,Travessa,RoadsLine
-UtilitiesLine,Utilities,Obras Públicas,UtilitiesLine
-Aqueducts,Aqueducts,Aquedutos,UtilitiesLine
-Canals,Canals,Canais,UtilitiesLine
-Ditches,Ditches,Valas,UtilitiesLine
-Pipes/Sewage,Sewage Pipes,Canos de Esgoto,UtilitiesLine
-Pipes/Water,Water Pipes,Canos de Água,UtilitiesLine
-UtilitiesPoint,Utilities,Obras Públicas,UtilitiesPoint
-Fountains,Fountains,Chafarizes,UtilitiesPoint
-UtilitiesPoly,UtilitiesPoly,UtilitiesPoly,UtilitiesPoly
-Reservoirs,Reservoirs,Reservoirs,UtilitiesPoly
-address,Address,Address,
-BuildingsPoint,Transportation,Transporte,BuildingsPoint
-Transportation/Metro Station,Metro Station,Estação de Metrô,BuildingsPoint
-Transportation/Railroad Station,Railroad Station,Estação de Trem,BuildingsPoint
-Transportation/Tram Station,Tram Station,Estação de Bonde,BuildingsPoint
+Geography/Geografia,Geography,Geografia,
+BuildingsPoint,Stops,Paradas,BuildingsPoint
+Tram Stations,Tram Stations,Estações de Bonde,BuildingsPoint
+Train Stations,Train Stations,Estações de Trem,BuildingsPoint
+Metro Stations,Metro Stations,Estações de  Metrô,BuildingsPoint
 BuildingsPoly,Buildings,Edificações,BuildingsPoly
-Administrative,Administrative,Administrativas,BuildingsPoly
-Administrative Building,Administrative,Administrativas,BuildingsPoly
-Commercial,Commercial,Mercantis,BuildingsPoly
-Corporate,Corporate,Corporativas,BuildingsPoly
-Cultural,Cultural,Culturais,BuildingsPoly
-Educational,Educational,Educacionais,BuildingsPoly
+Civillian,Civilian,Civil,BuildingsPoly
+Civilian,Civilian,Civil,BuildingsPoly
+address,Address,Address,
+Religious,Religious,Religiosos,BuildingsPoly
+Military,Military,Militar,BuildingsPoly
 Health,Health,Saúde,BuildingsPoly
-Military,Military,Militares,BuildingsPoly
-Religion,Religious,Religiosas,BuildingsPoly
-Religious,Religious,Religiosas,BuildingsPoly
-InlandWatersLine,Inland Waters,Hidrologia,InlandWatersLine
-Brooks,Brooks,Brooks,InlandWatersLine
-Creeks,Creeks,Riachos,InlandWatersLine
+Forests,Forests,Forests,GroundCoverPoly
+GroundCoverPoly,Ground Cover,Cobertura Vegetal,GroundCoverPoly
+Mangroves,Mangroves,Mangues,GroundCoverPoly
+Agriculture,Agriculture,Agricultura,GroundCoverPoly
+Spit Vegetation,Spit Vegetation,Restingas,GroundCoverPoly
+Riparian Forests,Riparian Forests,Matas Ciliares,GroundCoverPoly
+InlandWatersLine,Rivers and Streams,Rios e Riachos,InlandWatersLine
+Creeks,Creeks,Ribeiros,InlandWatersLine
 Rivers,Rivers,Rios,InlandWatersLine
+Brooks,Brooks,Riachos,InlandWatersLine
 Streams,Streams,Córregos,InlandWatersLine
-InlandWatersPoly,Inland Waters,Hidrologia,InlandWatersPoly
+Marshes,Marshes,Brejos,InlandWatersPoly
+InlandWatersPoly,Lagoons and Ponds,Lagos e Reservatórios,InlandWatersPoly
 Lagoons,Lagoons,Lagoas,InlandWatersPoly
-Marshes,Marshes,Alagadiços,InlandWatersPoly
 Ponds,Ponds,Represas,InlandWatersPoly
-LandLine,Land,Solo,LandLine
+Salty Marshes,Salty Marshes,Campos Salinos,InlandWatersPoly
+LandLine,Land Features,Acidentes Físicos,LandLine
 Beaches,Beaches,Praias,LandLine
-LandPoly,Land,Solo,LandPoly
-NeighborhoodsPoly,Neighborhoods,Bairros,NeighborhoodsPoly
-PublicSpacesPoly,Public Spaces,Espaços Público,PublicSpacesPoly
-Cemeteries,Cemeteries,Cemitérios,PublicSpacesPoly
-Gardens,Gardens,Jardims,PublicSpacesPoly
-Parks,Parks,Parques,PublicSpacesPoly
+LandPoly,LandPoly,LandPoly,LandPoly
+NeighborhoodsPoly,Areas,Áreas,NeighborhoodsPoly
+Favelas,Favelas,Comunidades,NeighborhoodsPoly
+Neighborhoods,Neighborhoods,Bairos,NeighborhoodsPoly
+Parishes,Parishes,Freguesias,NeighborhoodsPoly
+PublicSpacesPoly,Public Spaces,Espaços Públicos,PublicSpacesPoly
+Cemeteries,Cemeteries,Cemiterios,PublicSpacesPoly
+Squares,Squares,Praças,PublicSpacesPoly
 Plazas,Plazas,Largos,PublicSpacesPoly
-Polygon,Polygon,Polygon,PublicSpacesPoly
-Squares,Squares,Praça,PublicSpacesPoly
+Parks,Parks,Parques,PublicSpacesPoly
+Gardens,Gardens,Jardins,PublicSpacesPoly
+Overpasses,Overpasses,Passarelas,RoadsLine
+Expressways,Expressways,Vias Expressas,RoadsLine
+Avenues,Avenues,Avenidas,RoadsLine
+Alleys,Alleys,Becos,RoadsLine
+RoadsLine,Roads,Vias,RoadsLine
+Trails,Trails,Caminhos,RoadsLine
+Streets,Streets,Ruas,RoadsLine
+Slopes,Slopes,Ladeiras,RoadsLine
+Passages,Passages,Travessas,RoadsLine
+UtilitiesPoint,UtilitiesPoint,UtilitiesPoint,UtilitiesPoint
+Urbanism/Urbanismo,Urbanism,Urbanismo,
+Iconography,Iconography,Iconografia,
+UtilitiesLine,Water Canalization,Canalização de Água,UtilitiesLine
+UtilitiesPoly,Water Storage and Distribution,Reservas e Distribuição de Água,UtilitiesPoly
+highlight,Highlight,Destacar,
+ImageViewshedsPoly,Viewsheds,Vistas,
+viewfull,View full map,Ver o mapa,
+Aqueducts,Aqueducts,Aquedutos,UtilitiesLine
+Ditches,Ditches,Valas,UtilitiesLine
+Sewage Pipes,Sewage Pipes,Canos de Esgoto,UtilitiesLine
+Water Pipes,Water Pipes,Canos de Água,UtilitiesLine
+Canals,Canals,Canais,UtilitiesLine
+Fountains,Fountains,Chafarizes,UtilitiesPoly
+Reservoirs,Reservoirs,Açudes,UtilitiesPoly
