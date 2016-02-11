@@ -842,6 +842,39 @@
        <Parameter name="password"><![CDATA[99999999]]></Parameter>
     </Datasource>
   </Layer>
+  
+<Style name="beaches_labels" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>2500</MaxScaleDenominator>
+    <TextSymbolizer size="14" minimum-path-length="275" placement="line" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>5000</MaxScaleDenominator>
+    <MinScaleDenominator>2500</MinScaleDenominator>
+    <TextSymbolizer size="14" minimum-path-length="250" placement="line" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500</MaxScaleDenominator>
+    <MinScaleDenominator>5000</MinScaleDenominator>
+    <TextSymbolizer size="12" minimum-path-length="200" placement="line" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+  </Rule>
+</Style>
+<Layer name="beaches_labels"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>beaches_labels</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM baseline WHERE layer = 'LandLine' AND firstdispl <= 99999999 AND lastdispla >= 99999999 ) AS q]]></Parameter>
+       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-43.7954794708309,-23.0734120840858,-43.1025330477069,-22.7491145667833]]></Parameter>
+       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
+       <Parameter name="host"><![CDATA[localhost]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[99999999]]></Parameter>
+    </Datasource>
+  </Layer>
 
 <Style name="inlandwater_labels" filter-mode="first">
   <Rule>
