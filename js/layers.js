@@ -101,7 +101,7 @@ function build_layers()
 								$( document.createElement( 'div' ) )
 									.addClass( "feature" )
 									.attr( "id", name )
-									.html( names.highlight + " " + names[ name.toLowerCase() ] )
+									.html( "<i>" + names.highlight + "</i> " + names[ name.toLowerCase() ] )
 									.prepend( "<span>Clear</span>" )
 									.appendTo( folder );
 							});

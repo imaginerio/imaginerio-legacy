@@ -205,6 +205,10 @@
 	cursor: pointer;
 }
 
+.feature i{
+  color: #999;
+}
+
 .swatch{
 	margin-top: 5px;
 	overflow: hidden;
