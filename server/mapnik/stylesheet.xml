@@ -844,12 +844,12 @@
 <Style name="railpoint" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MarkersSymbolizer file="../../../images/rail-24.svg" fill="#876e4a" multi-policy="whole" placement="point" clip="false" />
+    <MarkersSymbolizer fill="#876e4a" file="../../../images/rail-24.svg" multi-policy="whole" placement="point" clip="false" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <MarkersSymbolizer fill="#977c53" file="../../../images/rail-18.svg" multi-policy="whole" placement="point" clip="false" />
+    <MarkersSymbolizer file="../../../images/rail-18.svg" multi-policy="whole" placement="point" clip="false" fill="#977c53" />
   </Rule>
 </Style>
 <Layer name="railpoint"
@@ -862,10 +862,10 @@
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
        <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
-       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
-       <Parameter name="host"><![CDATA[localhost]]></Parameter>
+       <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
+       <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
        <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
-       <Parameter name="password"><![CDATA[99999999]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
   </Layer>
   
