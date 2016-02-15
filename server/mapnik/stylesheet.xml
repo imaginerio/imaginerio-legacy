@@ -783,35 +783,61 @@
     </Datasource>
   </Layer>
 
-<Style name="fountainspoint" filter-mode="first">
+<Style name="fountains" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>25000</MaxScaleDenominator>
+    <MinScaleDenominator>5000</MinScaleDenominator>
+    <MarkersSymbolizer placement="interior" clip="false" file="../../../images/monument-18.svg" fill="#977c53" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>2500</MaxScaleDenominator>
+    <PolygonSymbolizer fill="#c1ad8f" />
+    <LineSymbolizer stroke="#766141" />
+  </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MarkersSymbolizer fill="#876e4a" file="../../../images/monument-24.svg" multi-policy="whole" placement="point" clip="false" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>50000</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <MarkersSymbolizer fill="#977c53" file="../../../images/monument-18.svg" multi-policy="whole" placement="point" clip="false" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>50000</MinScaleDenominator>
-    <MarkersSymbolizer fill="#977c53" file="../../../images/monument-12.svg" multi-policy="whole" placement="point" clip="false" />
+    <MinScaleDenominator>2500</MinScaleDenominator>
+    <MarkersSymbolizer placement="interior" clip="false" ignore-placement="true" file="../../../images/monument-24.png" fill="#876e4a" />
   </Rule>
 </Style>
-<Layer name="fountainspoint"
+<Layer name="fountains"
   srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>fountainspoint</StyleName>
+    <StyleName>fountains</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM basepoint WHERE layer = 'UtilitiesPoint' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'fountains' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
        <Parameter name="extent"><![CDATA[-43.6834457612267,-22.9671653560144,-43.1710435408641,-22.8051180962776]]></Parameter>
-       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
-       <Parameter name="host"><![CDATA[localhost]]></Parameter>
+       <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
+       <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
        <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
-       <Parameter name="password"><![CDATA[99999999]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="fountains_labels" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>2500</MaxScaleDenominator>
+    <TextSymbolizer placement="interior" face-name="DejaVu Sans Regular" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" size="10" character-spacing="1" wrap-width="40" text-transform="uppercase" dx="8" dy="-8" ><![CDATA[[namecomple]]]></TextSymbolizer>
+  </Rule>
+</Style>
+<Layer name="fountains_labels"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>fountains_labels</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'fountains' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q
+]]></Parameter>
+       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-44.0497381775892,-23.102799251023,-42.6598428820212,-22.6297988204215]]></Parameter>
+       <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
+       <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
   </Layer>
 
