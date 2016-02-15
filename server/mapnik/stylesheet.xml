@@ -109,10 +109,10 @@
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
        <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
-       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
-       <Parameter name="host"><![CDATA[localhost]]></Parameter>
+       <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
+       <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
        <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
-       <Parameter name="password"><![CDATA[99999999]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
   </Layer>
 
@@ -130,11 +130,11 @@
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
-       <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
-       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
-       <Parameter name="host"><![CDATA[localhost]]></Parameter>
+       <Parameter name="extent"><![CDATA[-44.0495149580022,-23.1024155607895,-42.6599378514538,-22.6300079267944]]></Parameter>
+       <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
+       <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
        <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
-       <Parameter name="password"><![CDATA[99999999]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
   </Layer>
 
@@ -154,15 +154,15 @@
     <StyleName>squares-outline</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'plazas' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'squares' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
        <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
-       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
-       <Parameter name="host"><![CDATA[localhost]]></Parameter>
+       <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
+       <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
        <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
-       <Parameter name="password"><![CDATA[99999999]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
   </Layer>
 
@@ -187,13 +187,13 @@
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
        <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
-       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
-       <Parameter name="host"><![CDATA[localhost]]></Parameter>
+       <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
+       <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
        <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
-       <Parameter name="password"><![CDATA[99999999]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
   </Layer>
-
+  
 <Style name="ponds-outline" filter-mode="first">
   <Rule>
     <LineSymbolizer stroke="#8fb0cd" stroke-width="1" stroke-linejoin="round" />
@@ -946,30 +946,30 @@
     </Datasource>
   </Layer>
 
-<Style name="squares_labels-squares" filter-mode="first">
+<Style name="squares_labels" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <MinScaleDenominator>1500</MinScaleDenominator>
-    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <TextSymbolizer size="13" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="13" character-spacing="1" wrap-width="40" minimum-distance="20" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>1500</MaxScaleDenominator>
-    <TextSymbolizer placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Layer name="squares_labels"
   srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>squares_labels-squares</StyleName>
+    <StyleName>squares_labels</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
        <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'squares' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
@@ -977,37 +977,40 @@
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
        <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
-       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
-       <Parameter name="host"><![CDATA[localhost]]></Parameter>
+       <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
+       <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
        <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
-       <Parameter name="password"><![CDATA[99999999]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
+       <Parameter name="id"><![CDATA[squares_labels]]></Parameter>
+       <Parameter name="project"><![CDATA[rio]]></Parameter>
+       <Parameter name="srs"><![CDATA[+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs]]></Parameter>
     </Datasource>
   </Layer>
 
-<Style name="plazas_labels-plazas" filter-mode="first">
+<Style name="plazas_labels" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <MinScaleDenominator>1500</MinScaleDenominator>
-    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <TextSymbolizer size="13" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="13" character-spacing="1" wrap-width="40" minimum-distance="20" placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>1500</MaxScaleDenominator>
-    <TextSymbolizer placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer placement="interior" face-name="DejaVu Sans Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Layer name="plazas_labels"
   srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>plazas_labels-plazas</StyleName>
+    <StyleName>plazas_labels</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
        <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'plazas' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
@@ -1015,60 +1018,41 @@
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
        <Parameter name="extent"><![CDATA[-44.0495149580022,-23.1024155607895,-42.6599378514538,-22.6300079267944]]></Parameter>
-       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
-       <Parameter name="host"><![CDATA[localhost]]></Parameter>
+       <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
+       <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
        <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
-       <Parameter name="password"><![CDATA[99999999]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
   </Layer>
 
-<Style name="parks_labels-icon" filter-mode="first">
+<Style name="parks_labels" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([nameshort] = 'Quinta da Boa Vista')</Filter>
-    <ShieldSymbolizer file="../../../images/park2-24.png" placement="interior" clip="false" fill="#7a8446" face-name="DejaVu Sans Book" ><![CDATA[' ']]></ShieldSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([nameshort] = 'Quinta da Boa Vista')</Filter>
-    <ShieldSymbolizer file="../../../images/park2-18.png" placement="interior" clip="false" fill="#7a8446" face-name="DejaVu Sans Book" ><![CDATA[' ']]></ShieldSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <ShieldSymbolizer file="../../../images/park2-24.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <ShieldSymbolizer file="../../../images/park2-18.png" face-name="DejaVu Sans Book" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
-  </Rule>
-</Style>
-<Style name="parks_labels-greenspace" filter-mode="first">
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <TextSymbolizer size="15" character-spacing="2" wrap-width="70" minimum-distance="250" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="15" dx="12" dy="12" wrap-width="40" minimum-distance="15" placement="interior" placement-type="simple" placements="S,N,E,W" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <MarkersSymbolizer file="../../../images/park2-24.svg" placement="interior" fill="#7a8446" multi-policy="whole" clip="false" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <TextSymbolizer size="14" character-spacing="2" wrap-width="20" minimum-distance="120" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="14" dx="12" dy="12" wrap-width="40" minimum-distance="15" placement="interior" placement-type="simple" placements="S,N,E,W" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <MarkersSymbolizer file="../../../images/park2-24.svg" placement="interior" fill="#7a8446" multi-policy="whole" clip="false" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <TextSymbolizer size="13" character-spacing="1" wrap-width="50" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="13" wrap-width="40" minimum-distance="15" placement="interior" placement-type="simple" placements="S,N,E,W" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" dx="10" dy="10" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <MarkersSymbolizer placement="interior" file="../../../images/park2-18.svg" fill="#7a8446" multi-policy="whole" clip="false" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <TextSymbolizer size="12" character-spacing="1" wrap-width="80" wrap-before="true" placement="interior" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer placement="interior" placement-type="simple" placements="S,N,E,W" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" dx="10" dy="10" size="12" ><![CDATA['']]></TextSymbolizer>
+    <MarkersSymbolizer placement="interior" file="../../../images/park2-18.svg" fill="#7a8446" multi-policy="whole" clip="false" />
   </Rule>
 </Style>
 <Layer name="parks_labels"
   srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>parks_labels-greenspace</StyleName>
-    <StyleName>parks_labels-icon</StyleName>
+    <StyleName>parks_labels</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
        <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'parks' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
@@ -1076,10 +1060,52 @@
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
        <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
-       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
-       <Parameter name="host"><![CDATA[localhost]]></Parameter>
+       <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
+       <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
        <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
-       <Parameter name="password"><![CDATA[99999999]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="cemeteries_labels" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>2500</MaxScaleDenominator>
+    <TextSymbolizer size="15" dx="12" dy="12" wrap-width="40" minimum-distance="15" placement="interior" placement-type="simple" placements="S,N,E,W" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <MarkersSymbolizer file="../../../images/cemetery-24.png" placement="interior" fill="#7a8446" multi-policy="whole" clip="false" opacity="0.9" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>5000</MaxScaleDenominator>
+    <MinScaleDenominator>2500</MinScaleDenominator>
+    <TextSymbolizer size="14" dx="12" dy="12" wrap-width="40" minimum-distance="15" placement="interior" placement-type="simple" placements="S,N,E,W" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <MarkersSymbolizer file="../../../images/cemetery-24.png" placement="interior" fill="#7a8446" multi-policy="whole" clip="false" opacity="0.9" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500</MaxScaleDenominator>
+    <MinScaleDenominator>5000</MinScaleDenominator>
+    <TextSymbolizer size="13" wrap-width="40" minimum-distance="15" placement="interior" placement-type="simple" placements="S,N,E,W" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" dx="10" dy="10" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <MarkersSymbolizer placement="interior" file="../../../images/cemetery-18.png" fill="#7a8446" multi-policy="whole" clip="false" opacity="0.9" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000</MaxScaleDenominator>
+    <MinScaleDenominator>12500</MinScaleDenominator>
+    <TextSymbolizer placement="interior" placement-type="simple" placements="S,N,E,W" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" dx="10" dy="10" size="12" ><![CDATA['']]></TextSymbolizer>
+    <MarkersSymbolizer placement="interior" file="../../../images/cemetery-18.png" fill="#7a8446" multi-policy="whole" clip="false" opacity="0.9" />
+  </Rule>
+</Style>
+<Layer name="cemeteries_labels"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>cemeteries_labels</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'cemeteries' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
+       <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
+       <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
   </Layer>
 
