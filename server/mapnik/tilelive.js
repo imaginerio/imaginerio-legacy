@@ -6,6 +6,7 @@ var express = require('express'),
     pg = require( 'pg' ),
     AWS = require( 'aws-sdk' ),
     dev,
+    cache,
     db = require( '../db' ),
     cloudfront = "http://d1nxja8ugt29ju.cloudfront.net/",
     hillshade = [ { year : 1960, file : '../../../../../raster/Hillshade_WGS84_1960_2013.tif' }, { year : 1921, file : '../../../../../raster/Hillshade_WGS84_1921_1959.tif' }, { year : 1906, file : '../../../../../raster/Hillshade_WGS84_1906_1920.tif' }, { year : 1500, file : '../../../../../raster/Hillshade_WGS84_1500_1905.tif' } ];
@@ -25,15 +26,15 @@ app.use( function(err, req, res, next) {
 
 app.use( function(err, req, res, next) {
   if (req.xhr) {
-    res.send(500, { error: 'Something blew up!' });
+    res.send( 500, { error: 'Something blew up!' } );
   } else {
     next(err);
   }
 });
 
 app.use( function(err, req, res, next) {
-  res.status(500);
-  res.render('error', { error: err });
+  res.status( 500 );
+  res.render( 'error', { error: err } );
 });
 
 require('tilelive-mapnik').registerProtocols(tilelive);
@@ -48,16 +49,17 @@ client.connect();
 
 app.get('/tiles/:year/:layer/:z/:x/:y.*', function( req, res ){
   dev = req.headers.host.match( /-dev/ ) ? true : false;
+  cache = req.query.cache == undefined;
   var png = "cache/png/" + req.params.year + "/" + req.params.layer + "/" + req.params.z + "/" + req.params.x + "/" + req.params.y + ".png",
       exists = false,
       query = client.query( "SELECT id FROM cache WHERE year = " + req.params.year + " AND layer = '" + req.params.layer + "' AND z = " + req.params.z + " AND x = " + req.params.x + " AND y = " + req.params.y );
-      
+  
   query.on( 'row', function( result ){
 		exists = result.id;
 	});
 	
 	query.on( 'end', function(){
-  	  if( exists && dev === false ){
+    if( exists && dev === false && cache === true ){
       res.redirect( cloudfront + png );
     }
     else{
@@ -68,6 +70,7 @@ app.get('/tiles/:year/:layer/:z/:x/:y.*', function( req, res ){
 
 app.get( '/raster/:id/:z/:x/:y.*', function( req, res ){
   dev = req.headers.host.match( /-dev/ ) ? true : false;
+  cache = req.query.cache == undefined;
   var png = "cache/raster/" + req.params.id + "/" + req.params.z + "/" + req.params.x + "/" + req.params.y + ".png",
       exists = false,
       query = client.query( "SELECT id FROM cache WHERE year IS NULL AND layer = '" + req.params.id + "' AND z = " + req.params.z + " AND x = " + req.params.x + " AND y = " + req.params.y );
@@ -77,7 +80,7 @@ app.get( '/raster/:id/:z/:x/:y.*', function( req, res ){
 	});
 	
 	query.on( 'end', function(){
-  	  if( exists ){
+    if( exists && cache === true ){
       res.redirect( cloudfront + png );
     }
     else{
@@ -156,7 +159,7 @@ function parseRasterXML( req, res, callback ){
 	}
 }
 
-function mkdir(path, root) {
+function mkdir( path, root ) {
   var dirs = path.split('/'), dir = dirs.shift(), root = (root||'')+dir+'/';
   try { fs.mkdirSync(root); }
   catch (e) {
@@ -186,6 +189,7 @@ function renderTile( filename, params, res ){
 }
 
 function saveTile( params, tile, res ){
+  if( cache === false ) return false;
   var png = "cache/png/" + params.year + "/" + params.layer + "/" + params.z + "/" + params.x + "/" + params.y + ".png";
   var p = { Bucket : 'imaginerio', Key : png, Body : tile, ACL : 'public-read' };
   s3.putObject( p, function( err, data ){
