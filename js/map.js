@@ -108,7 +108,7 @@ function draw( id, route, el, callback )
 	route = route ? route : "draw";
 	var styles = get_styles( "#1a1a1a" );
 	
-	highlight.bottom = omnivore.geojson( server + "/" + route + "/" + encodeURIComponent( id ), null, styles.bottom )
+	highlight.bottom = omnivore.geojson( server + "/" + route + "/" + year + "/" + encodeURIComponent( id ), null, styles.bottom )
 				.on( 'ready', function(){
   				var intersect = false;
   				this.eachLayer( function( layer ){
@@ -125,7 +125,7 @@ function draw( id, route, el, callback )
           if( callback ) callback( el );
 				})
 				.addTo( map );
-	highlight.top = omnivore.geojson( server + "/" + route + "/" + encodeURIComponent( id ), null, styles.top ).addTo( map );
+	highlight.top = omnivore.geojson( server + "/" + route + "/" + year + "/" + encodeURIComponent( id ), null, styles.top ).addTo( map );
 }
 
 function load_raster( id )

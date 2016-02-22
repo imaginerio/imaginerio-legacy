@@ -34,40 +34,33 @@ exports.draw = function( req, res )
 	var conn = req.headers.host.match( /-dev/ ) ? db.conn + 'dev' : db.conn;
 	postgeo.connect( conn );
 	
-	var id = req.params.id;
+	var id = req.params.id,
+	    year = req.params.year;
 	
-	postgeo.query( "SELECT name, ST_AsGeoJSON( geom ) AS geometry FROM ( SELECT name, ST_Union( geom ) AS geom FROM ( SELECT namecomple AS name, geom FROM baseline WHERE namecomple = '" + id + "' UNION SELECT namecomple AS name, geom FROM basepoly WHERE namecomple = '" + id + "' UNION SELECT namecomple AS name, geom FROM basepoint WHERE namecomple = '" + id + "' ) AS q GROUP BY name ) AS q1", "geojson", function( data )
-	{
-		if( data.features[ 0 ].geometry.type == "Point" )
-		{
+	postgeo.query( "SELECT name, ST_AsGeoJSON( geom ) AS geometry FROM ( SELECT name, ST_Union( geom ) AS geom FROM ( SELECT namecomple AS name, geom FROM baseline WHERE namecomple = '" + id + "' AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT namecomple AS name, geom FROM basepoly WHERE namecomple = '" + id + "' AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT namecomple AS name, geom FROM basepoint WHERE namecomple = '" + id + "' AND firstdispl <= " + year + " AND lastdispla >= " + year + " ) AS q GROUP BY name ) AS q1", "geojson", function( data ){
+		if( data.features[ 0 ].geometry.type == "Point" ){
 			var coords = data.features[ 0 ].geometry.coordinates.join( " " ),
 				  id = data.features[ 0 ].properties.id;
 			
-			postgeo.query( "SELECT '" + id + "' AS id, ST_AsGeoJSON( ST_Buffer( ST_GeomFromText( 'POINT(" + coords + ")' ), 0.0005 ) ) AS geometry", "geojson", function( data )
-			{
+			postgeo.query( "SELECT '" + id + "' AS id, ST_AsGeoJSON( ST_Buffer( ST_GeomFromText( 'POINT(" + coords + ")' ), 0.0005 ) ) AS geometry", "geojson", function( data ){
 				res.send( data );
 			});
 		}
-		else if( data.features[ 0 ].geometry.type == "MultiLineString" )
-		{
-  		  var client = new pg.Client( conn );
+		else if( data.features[ 0 ].geometry.type == "MultiLineString" ){
+  		var client = new pg.Client( conn );
       client.connect();
       
-    		var query = client.query( "SELECT ST_AsGeoJSON( ST_LineMerge( ST_GeomFromGeoJSON( '" + JSON.stringify( data.features[ 0 ].geometry ) + "' ) ) ) AS geom" );
+      var query = client.query( "SELECT ST_AsGeoJSON( ST_LineMerge( ST_GeomFromGeoJSON( '" + JSON.stringify( data.features[ 0 ].geometry ) + "' ) ) ) AS geom" );
     		
-    		query.on( 'row', function( results )
-    		{
-      		data.features[ 0 ].geometry = JSON.parse( results.geom );
-    		});
-    		
-    		query.on( 'end', function()
-    		{
-      		res.send( data );
+      query.on( 'row', function( results ){
+        data.features[ 0 ].geometry = JSON.parse( results.geom );
       });
-		}
-		else
-		{
-  		  res.send( data );
+    		
+      query.on( 'end', function(){
+        res.send( data );
+      });
+		} else {
+      res.send( data );
 		}
 	});
 }
