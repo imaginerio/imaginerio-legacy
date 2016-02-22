@@ -120,7 +120,7 @@
 	font-size: 14px;
 	clear: both;
 	width: 235px;
-	height: 40px;
+	height: 30px;
   position: relative;
 }
 
@@ -154,8 +154,13 @@
 }
 
 .geodb{
+  margin-bottom: -5px;
 	font-weight: bold;
 	font-style: italic;
+}
+
+.geodb input{
+  display: none;
 }
 
 .layer{
