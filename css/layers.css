@@ -159,10 +159,6 @@
 	font-style: italic;
 }
 
-.geodb input{
-  display: none;
-}
-
 .layer{
 	padding-left: 40px;
   cursor: pointer;
