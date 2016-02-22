@@ -109,15 +109,20 @@ function draw( id, route, el, callback )
 	var styles = get_styles( "#1a1a1a" );
 	
 	highlight.bottom = omnivore.geojson( server + "/" + route + "/" + encodeURIComponent( id ), null, styles.bottom )
-				.on( 'ready', function()
-				{
-          if( map.getBoundsZoom( this.getBounds() ) <= map.getMinZoom() ) {
-            map.setZoom( map.getMinZoom() );
-          } else {
-            map.fitBounds( this.getBounds(), { paddingTopLeft : [ 265, 165 ] } );
-          }
+				.on( 'ready', function(){
+  				var intersect = false;
+  				this.eachLayer( function( layer ){
+    				if( map.getBounds().intersects( layer.getBounds() ) ) intersect = true;
+          })
           
-					if( callback ) callback( el );
+          if( intersect === false ){
+            if( map.getBoundsZoom( this.getBounds() ) <= map.getMinZoom() ) {
+              map.setZoom( map.getMinZoom() );
+            } else {
+              map.fitBounds( this.getBounds(), { paddingTopLeft : [ 265, 165 ] } );
+            }
+          }
+          if( callback ) callback( el );
 				})
 				.addTo( map );
 	highlight.top = omnivore.geojson( server + "/" + route + "/" + encodeURIComponent( id ), null, styles.top ).addTo( map );
