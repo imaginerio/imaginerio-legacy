@@ -820,7 +820,7 @@
 <Style name="fountains_labels" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <TextSymbolizer placement="interior" face-name="DejaVu Sans Regular" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" size="10" character-spacing="1" wrap-width="40" text-transform="uppercase" dx="8" dy="-8" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer placement="interior" face-name="DejaVu Sans Regular" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" size="10" character-spacing="1" wrap-width="40" dx="8" dy="-8" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Layer name="fountains_labels"
@@ -937,22 +937,22 @@
 <Style name="neighborhoods_labels" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <TextSymbolizer size="21" fill="#7b6e5a" character-spacing="4" placement="point" face-name="DejaVu Sans Bold" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" text-transform="uppercase" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="21" fill="#7b6e5a" character-spacing="4" placement="point" face-name="DejaVu Sans Bold" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <TextSymbolizer size="15" fill="#7b6e5a" character-spacing="4" placement="point" face-name="DejaVu Sans Bold" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" text-transform="uppercase" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="15" fill="#7b6e5a" character-spacing="4" placement="point" face-name="DejaVu Sans Bold" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <TextSymbolizer size="13" character-spacing="3" placement="point" face-name="DejaVu Sans Bold" fill="#977c53" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" text-transform="uppercase" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="13" character-spacing="3" placement="point" face-name="DejaVu Sans Bold" fill="#977c53" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <MinScaleDenominator>25000</MinScaleDenominator>
-    <TextSymbolizer size="10" character-spacing="2" placement="point" face-name="DejaVu Sans Bold" fill="#977c53" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" text-transform="uppercase" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="10" character-spacing="2" placement="point" face-name="DejaVu Sans Bold" fill="#977c53" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Layer name="neighborhoods_labels"
