@@ -4,25 +4,60 @@
  * - rivers streams
  * - roads
  * - water line
+ * - beaches
 
 */
+
+#beaches {
+  line-color: @beach;
+  line-join: round;
+  line-cap: round;
+  line-opacity: 0.9;
+  
+    [zoom<=14]{
+      line-width: 2;
+    }
+  
+    [zoom=15]{
+      line-width: 3;
+    }
+  
+    [zoom=16]{
+      line-width: 4;
+    }
+  
+    [zoom=17]{
+      line-width: 6;
+    }
+  
+    [zoom>=18]{
+      line-width: 8;
+    }
+}
 
 /* ROADS
 
 1. First set up the levels in the stack (i.e., ::low vs ::high). Open intersections appear within the same level; closed intersections appear where different levels meet.
-2. Then group roads into classes by featuretyp.
-3. Then style the featuretyp classes for each zoom level, with an ::inline on top of an ::outline.
+2. Then group roads into classes by scalerank.
+3. Then style the scalerank classes for each zoom level, with an ::inline on top of an ::outline.
 
 Note that starting with z17, the stack is flattened to just ::high, so there are open intersections throughout.
 
 */
 
 #roads ::low{
-  [scalerank>2] {
-    
-  ::outline {
+  [scalerank>2] {  
+  
+    ::outline {
       
-      [zoom<=14][scalerank < 4] {
+      [zoom=13][scalerank < 4] {
+      line-join: round;
+      line-cap: round;
+      line-width: 0.5; 
+      line-color: darken(@land, 7%);
+      }
+      
+      [zoom=14]{
       line-join: round;
       line-cap: round;
       line-width: 1;
@@ -45,8 +80,15 @@ Note that starting with z17, the stack is flattened to just ::high, so there are
   }
     
   ::inline {
+      
+      [zoom=13][scalerank < 4] {
+      line-join: round;
+      line-cap: round;
+      line-width: 0.5; 
+      line-color: darken(@land, 7%);
+      }
     
-      [zoom<=14][scalerank < 4] {
+      [zoom=14]{
       line-join: round;
       line-cap: round;
       line-width: 1; 
@@ -277,29 +319,61 @@ Note that starting with z17, the stack is flattened to just ::high, so there are
 }
 
 #riversstreams {
+  image-filters: agg-stack-blur(2,2);
+  image-filters-inflate: true;
+  
   [zoom<=14][scalerank=1]{
     line-width: 0.8;
     line-color: darken(@openwater,12%);
+    
+    ::solid{
+      line-color: darken(@openwater,12%);
+      line-width: 0.4;
+      }
   }
   
   [zoom=15][scalerank=1]{
     line-width: 1.2;
     line-color: darken(@openwater,12%);
+    
+    ::solid{
+      line-color: darken(@openwater,12%);
+      line-width: 0.6;
+      }
   }
   
   [zoom=16]{
     line-width: 1.7;
     line-color: darken(@openwater,12%);
+    
+    ::solid{
+      line-color: darken(@openwater,12%);
+      line-width: 0.85;
+      }
   }
   
   [zoom=17]{
+    image-filters: agg-stack-blur(3,3);
+    image-filters-inflate: true;
     line-width: 2.5;
     line-color: darken(@openwater,12%);
+    
+    ::solid{
+      line-color: darken(@openwater,12%);
+      line-width: 1.25;
+      }
   }
   
   [zoom>=18]{
+    image-filters: agg-stack-blur(4,4);
+    image-filters-inflate: true;
     line-width: 3.5;
     line-color: darken(@openwater,12%);
+    
+    ::solid{
+      line-color: darken(@openwater,12%);
+      line-width: 1.75;
+      }
   }
 }
 

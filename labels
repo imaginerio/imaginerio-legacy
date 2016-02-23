@@ -4,9 +4,13 @@
  * - inland water labels
  * - cemeteries markers
  * - neighborhoods labels
- * - squares labels and markers
- * - contour labels
- * - waterline and rivers/streams labels
+ * - squares labels
+ * - plazas labels
+ * - parks labels and markers
+ * - beach labels
+ * - fountains labels
+ * - waterline labels
+ * - rivers/streams labels
  * - roads labels
 
 */
@@ -26,7 +30,6 @@
     text-halo-fill:rgba(255,255,255,0.8);
     text-halo-radius:1.5;
     text-character-spacing: 1;
-    text-transform: capitalize;
     text-min-distance: 350;
     text-line-spacing: 2;
    
@@ -48,26 +51,6 @@
       }
     }
 
-
-#cemeteries_marker {
-  [zoom>=17]{
-  marker-file: url(images/cemetery-18.svg);
-  marker-multi-policy: whole;
-  marker-placement: interior;
-  marker-clip: false;
-  marker-fill: darken(@greenspace, 35%);
-  }
-  
-  [zoom>=18]{
-  marker-file: url(images/cemetery-24.svg);
-  marker-multi-policy: whole;
-  marker-placement: interior;
-  marker-clip: false;
-  marker-fill: darken(@greenspace, 35%);
-  }
- 
-  }
-
 #neighborhoods_labels {
   [zoom>=14]{
     text-name: "[nameshort]";
@@ -78,173 +61,220 @@
     text-halo-radius:1.5;
     text-transform: uppercase;
     
-      [zoom=14] {
-      text-size: 10;
-      text-character-spacing: 2;
-      }
+  [zoom=14] {
+    text-size: 10;
+    text-character-spacing: 2;
+    }
 
-      [zoom=15] {
-      text-size: 13;
-      text-character-spacing: 3;
-      }
+  [zoom=15] {
+    text-size: 13;
+    text-character-spacing: 3;
+    }
       
-      [zoom=16] {
-      text-size: 15;
-      text-fill: @roads_labels_light;
-      text-character-spacing: 4;
-      }
+  [zoom=16] {
+    text-size: 15;
+    text-fill: @roads_labels_light;
+    text-character-spacing: 4;
+    }
     
-      [zoom>=17] {
-      text-size: 21;
-      text-fill: @roads_labels_light;
-      text-character-spacing: 4;
-      }
+  [zoom>=17] {
+    text-size: 21;
+    text-fill: @roads_labels_light;
+    text-character-spacing: 4;
     }
   }
+}
 
-#parks_labels ::greenspace {
-  [zoom>=15]{
-    text-name: "[nameshort]";
-    text-placement: interior;
-    text-face-name:@font_italic;
-    text-fill: darken(@greenspace, 45%);
-    text-halo-fill:rgba(255,255,255,0.8);
-    text-halo-radius:1.5;
-    text-line-spacing: 2;
-    text-min-distance: 100;
+#squares_labels {
+    [zoom>=16]{
+      text-name: "[nameshort]";
+      text-placement: interior;
+      text-face-name:@font_italic;
+      text-fill: darken(@neighborhoods_inline, 10%);
+      text-halo-fill:rgba(255,255,255,0.8);
+      text-halo-radius:1.5;
+      text-line-spacing: 2;
     
+    [zoom=16] {
+      text-size: 13;
+      text-character-spacing: 1;
+      text-wrap-width: 40;
+      text-min-distance: 20;
+    }
+      
+    [zoom=17] {
+      text-size: 14;
+      text-character-spacing: 1;
+      text-wrap-width: 40;
+    }
+      
+    [zoom=18] {
+      text-size: 14;
+      text-character-spacing: 1;
+      text-wrap-width: 40;
+    }
+ }
+}
 
-      [zoom=15] {
+#plazas_labels {
+    [zoom>=16]{
+      text-name: "[nameshort]";
+      text-placement: interior;
+      text-face-name:@font_italic;
+      text-fill: darken(@neighborhoods_inline, 10%);
+      text-halo-fill:rgba(255,255,255,0.8);
+      text-halo-radius:1.5;
+      text-line-spacing: 2;
+      
+    [zoom=16] {
+      text-size: 13;
+      text-character-spacing: 1;
+      text-wrap-width: 40;
+      text-min-distance: 20;
+    }
+      
+    [zoom=17] {
+      text-size: 14;
+      text-character-spacing: 1;
+      text-wrap-width: 40;
+    }
+    
+    [zoom=18] {
+      text-size: 14;
+      text-character-spacing: 1;
+      text-wrap-width: 40;
+    }
+ }
+}
+
+#parks_labels {
+    [zoom>=15]{
+      text-name: "''";
+      text-placement: interior;
+      text-placement-type: simple;
+      text-placements: "S,N,E,W";
+      text-face-name:@font_italic;
+      text-fill: darken(@greenspace, 45%);
+      text-halo-fill: rgba(255,255,255,0.8);
+      text-halo-radius: 1.5;
+      text-line-spacing: 2;
+      text-dx: 10;
+      text-dy: 10;
       text-size: 12;
-      text-character-spacing: 1;
-      text-wrap-width: 80;
-      text-wrap-before: true;
-      }
-      
-      [zoom=16] {
-      text-size: 13;
-      text-character-spacing: 1;
-      text-wrap-width: 50;
-      }
+      marker-placement: interior;
+      marker-file: url(images/park2-18.svg);
+      marker-fill: darken(@greenspace, 35%);
+      marker-multi-policy: whole;
+      marker-clip: false;
+      //marker-opacity: 0.9;
     
-      [zoom=17] {
+    [zoom>=16]{
+      text-name: "[nameshort]";
+      text-size: 13;
+      text-wrap-width: 40;
+      text-min-distance: 15;
+    }
+    
+    [zoom>=17]{
+      marker-file: url(images/park2-24.svg);
       text-size: 14;
-      text-character-spacing: 2;
-      text-wrap-width: 20;
-      text-min-distance: 120;
-      }
-      
-      [zoom>=18] {
+      text-dx: 12;
+      text-dy: 12;
+    }
+    
+    [zoom>=18]{
       text-size: 15;
-      text-character-spacing: 2;
-      text-wrap-width: 70;
-      text-min-distance: 250;
-      }
-    }
-}
-
-#squares_labels ::squares {
-    [zoom>=16]{
-    text-name: "[nameshort]";
-    text-placement: interior;
-    text-face-name:@font_italic;
-    text-fill: darken(@neighborhoods_inline, 10%);
-    text-halo-fill:rgba(255,255,255,0.8);
-    text-halo-radius:1.5;
-    text-line-spacing: 2;
-    text-min-distance: 100;
-      
-      [zoom=16] {
-      text-size: 13;
-      text-character-spacing: 1;
-      text-wrap-width: 40;
-      }
-      
-      [zoom=17] {
-      text-size: 14;
-      text-character-spacing: 1;
-      text-wrap-width: 40;
-      }
-      
-      [zoom=18] {
-      text-size: 14;
-      text-character-spacing: 1;
-      text-wrap-width: 40;
-      }
-  	}
-}
-
-#plazas_labels ::plazas {
-    [zoom>=16]{
-    text-name: "[nameshort]";
-    text-placement: interior;
-    text-face-name:@font_italic;
-    text-fill: darken(@neighborhoods_inline, 10%);
-    text-halo-fill:rgba(255,255,255,0.8);
-    text-halo-radius:1.5;
-    text-line-spacing: 2;
-    text-min-distance: 100;
-      
-      [zoom=16] {
-      text-size: 13;
-      text-character-spacing: 1;
-      text-wrap-width: 40;
-      }
-      
-      [zoom=17] {
-      text-size: 14;
-      text-character-spacing: 1;
-      text-wrap-width: 40;
-      }
-      
-      [zoom=18] {
-      text-size: 14;
-      text-character-spacing: 1;
-      text-wrap-width: 40;
-      }
-  	}
-}
-
-
-#parks_labels ::icon {
-  
-  [zoom>=16]{
-    shield-name: "' '";
-    shield-file: url(images/park2-18.png);
-    shield-face-name: @font_reg;
-    shield-placement: interior;
-    shield-clip: false;
-    //shield-opacity: 1;
-    }
-
-  [zoom>=16]{
-    shield-file: url(images/park2-18.png);
-    }
-    
-  [zoom>=18]{
-    shield-file: url(images/park2-24.png);
-    }
-    
-
-  [nameshort = "Quinta da Boa Vista"]{
-
-  [zoom>=16]{
-    shield-placement: interior;
-    shield-clip: false;
-    shield-fill: darken(@greenspace, 35%);
-    }
-
-  [zoom>=16]{
-    shield-file: url(images/park2-18.png);
-    }
-      
-  [zoom>=18]{
-    shield-file: url(images/park2-24.png);
     }
   }
 }
+
+#cemeteries_labels {
+    [zoom>=15]{
+      text-name: "''";
+      text-placement: interior;
+      text-placement-type: simple;
+      text-placements: "S,N,E,W";
+      text-face-name:@font_italic;
+      text-fill: darken(@greenspace, 45%);
+      text-halo-fill: rgba(255,255,255,0.8);
+      text-halo-radius: 1.5;
+      text-line-spacing: 2;
+      text-dx: 10;
+      text-dy: 10;
+      text-size: 12;
+      marker-placement: interior;
+      marker-file: url(images/cemetery-18.png);
+      marker-fill: darken(@greenspace, 35%);
+      marker-multi-policy: whole;
+      marker-clip: false;
+      marker-opacity: 0.9;
+    
+    [zoom>=16]{
+      text-name: "[namecomple]";
+      text-size: 13;
+      text-wrap-width: 40;
+      text-min-distance: 15;
+    }
+    
+    [zoom>=17]{
+      marker-file: url(images/cemetery-24.png);
+      text-size: 14;
+      text-dx: 12;
+      text-dy: 12;
+    }
+    
+    [zoom>=18]{
+      text-size: 15;
+    }
+  }
+}
+
+#fountains_labels {
+    [zoom>=18]{
+      text-name: "[namecomple]";
+      text-placement: interior;
+      text-face-name:@font_reg;
+      text-fill: darken(@neighborhoods_inline, 10%);
+      text-halo-fill:rgba(255,255,255,0.8);
+      text-halo-radius:1.5;
+      text-line-spacing: 2;
+      text-size: 10;
+      text-character-spacing: 1;
+      text-wrap-width: 40;
+      text-transform: uppercase;
+      text-dx: 8;
+      text-dy: -8;
+    }
+ }
 
 /*  LINES LABELS  */
+
+#beaches_labels {
+    [zoom>=16]{
+      text-name: "[namecomple]";
+      text-placement: line;
+      text-face-name:@font_italic;
+      text-fill: darken(@neighborhoods_inline, 10%);
+      text-halo-fill:rgba(255,255,255,0.8);
+      text-halo-radius:1.5;
+      text-character-spacing: 1;
+   
+    [zoom=16] {
+      text-size: 12;
+      text-min-path-length: 200;
+    }
+    
+    [zoom=17] {
+      text-size: 14;
+      text-min-path-length: 250;
+    }
+    
+    [zoom>=18] {
+      text-size: 14;
+      text-min-path-length: 275;
+    }
+  }
+}
 
 #riversstreams_labels {
   [zoom>=16]{

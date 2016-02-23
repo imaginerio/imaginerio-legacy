@@ -12,6 +12,7 @@
 @greenspace:#ccd2aa;
 @urbanspace: #fcf9d5;
 @buildings: #cfa893;
+@beach: #ffd270;
 
 /* LINES */
 @roads: #fff;

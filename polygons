@@ -3,14 +3,17 @@
  * POLYGONS
  * - buildings
  * - cemeteries
- * - city blocks
  * - squares
+ * - plazas
+ * - parks
+ * - ponds
+ * - marshes
  * - neighborhoods
+ * - fountains
  * - land
- * - lots landuse
- * - inland water
 
 */
+
 #land {
   ::offshore {
     line-color: darken(@openwater, 6%);
@@ -42,6 +45,7 @@
     line-join: round;
   }
 }
+
 
 #neighborhoods {
   [zoom=15]{
@@ -95,6 +99,29 @@
     }
   }
 }
+
+#fountains{
+    [zoom>=15][zoom<17]{
+      marker-placement: interior;
+      marker-clip: false;
+      marker-file: url(images/monument-18.svg);
+      marker-fill: darken(@neighborhoods_inline, 0%);
+  }
+  
+    [zoom=17]{
+      marker-placement: interior;
+      marker-clip: false;
+      marker-ignore-placement: true;
+      marker-file: url(images/monument-24.png);
+      marker-fill: darken(@neighborhoods_inline, 5%);
+  }
+  
+    [zoom>=18]{
+      polygon-fill: lighten(@neighborhoods_inline, 20%);
+      line-color: darken(@neighborhoods_inline, 10%);
+  }
+}
+
 #cemeteries {
   polygon-fill: @greenspace;
   polygon-opacity: 0.6;
