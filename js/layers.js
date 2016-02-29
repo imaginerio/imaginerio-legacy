@@ -39,7 +39,7 @@ function init_layers()
 		}
 		else
 		{
-			draw( $( this ).attr( "id" ), "feature/" + year, $( this ), feature_drawn );
+			draw( $( this ).attr( "id" ), "feature", $( this ), feature_drawn );
 			$( this ).addClass( "loading" );
 		}
 		
