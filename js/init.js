@@ -19,7 +19,7 @@ function init()
 	
 	lang = gup( 'lang' ) == "pr" ? "pr" : "en";
 	if( gup( 'dev' ) == 'true' ){
-    	server = "http://imaginerio-dev.rice.edu:3000";
+    server = "http://imaginerio-dev.rice.edu:3000";
 	  tileserver = "http://imaginerio-dev.rice.edu:3001/tiles/";
     rasterserver = "http://imaginerio-dev.rice.edu:3001/raster/";
 	}

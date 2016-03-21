@@ -45,7 +45,7 @@ function init_map()
 	{
 		$( "#export" ).hide();
 	}
-	
+	$( ".leaflet-control-zoom" ).addClass( 'open' );
 }
 
 function load_base()
