@@ -1,5 +1,6 @@
 var express = require( 'express' ),
-	bodyParser = require( 'body-parser' ),
+	  bodyParser = require( 'body-parser' ),
+	  http = require( 'http' ),
     meta = require( './server/meta' ),
     geo = require( './server/geo' );
 
@@ -62,3 +63,12 @@ app.post( '/save', meta.save );
 
 app.listen( 3000 );
 console.log( 'Listening on port 3000...' );
+
+http.createServer( urlRedirect ).listen( 80 );
+
+function urlRedirect( req, res ){
+  res.writeHead(302, {
+    'Location': 'http://imaginerio.org'
+  });
+  res.end();
+}
