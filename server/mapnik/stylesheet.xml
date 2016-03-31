@@ -934,6 +934,44 @@
     </Datasource>
   </Layer>
 
+<Style name="land_labels" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>5000</MaxScaleDenominator>
+    <TextSymbolizer size="21" fill="#7b6e5a" character-spacing="3" placement="point" face-name="DejaVu Sans Bold" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" ><![CDATA[[namecomple]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500</MaxScaleDenominator>
+    <MinScaleDenominator>5000</MinScaleDenominator>
+    <TextSymbolizer size="15" fill="#7b6e5a" character-spacing="3" placement="point" face-name="DejaVu Sans Bold" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" ><![CDATA[[namecomple]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000</MaxScaleDenominator>
+    <MinScaleDenominator>12500</MinScaleDenominator>
+    <TextSymbolizer size="13" character-spacing="2" placement="point" face-name="DejaVu Sans Bold" fill="#977c53" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" ><![CDATA[[namecomple]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>50000</MaxScaleDenominator>
+    <MinScaleDenominator>25000</MinScaleDenominator>
+    <TextSymbolizer size="10" character-spacing="2" placement="point" face-name="DejaVu Sans Bold" fill="#977c53" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" ><![CDATA[[namecomple]]]></TextSymbolizer>
+  </Rule>
+</Style>
+<Layer name="land_labels"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>land_labels</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'LandPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
+       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
+       <Parameter name="host"><![CDATA[localhost]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[99999999]]></Parameter>
+    </Datasource>
+  </Layer>
+
 <Style name="neighborhoods_labels" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
