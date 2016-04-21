@@ -19,6 +19,7 @@
     "shapefile": "^0.3.0",
     "tilelive": "^5.8.2",
     "tilelive-mapnik": "^0.6.17",
-    "underscore": "1.6"
+    "underscore": "1.6",
+    "uuid": "^2.0.1"
   }
 }
