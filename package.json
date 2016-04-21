@@ -11,6 +11,7 @@
     "express": "4.1.1",
     "generic-pool": "*",
     "graceful-fs": "3.0.2",
+    "images": "^2.1.11",
     "inquirer": "^0.8.5",
     "libxmljs": "*",
     "mapnik": "*",

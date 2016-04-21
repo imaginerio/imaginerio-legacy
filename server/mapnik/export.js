@@ -1,5 +1,6 @@
 var express = require('express'),
     fs = require( 'graceful-fs' ),
+    images = require( 'images' ),
     mapnik = require('mapnik'),
     uuid = require('uuid');
 
@@ -74,19 +75,25 @@ function drawLayers( req, res, id, callback ){
         fs.writeFile( 'layers' + id + '.png', buffer, function( err ){
           if( err ) throw err;
           console.log( 'Saved base image to layers' + id + '.png');
-          callback( req, res, id, drawRaster );
+          callback( req, res, id, combineImage );
         });
       });
     });
   });
 }
 
-function drawRaster( req, res, callback ){
-  
+function drawRaster( req, res, id, callback ){
+  if( req.params.raster == 'null' ){
+    callback( req, res, id );
+  }
 }
 
-function combineImage( req, res, callback ){
-  
+function combineImage( req, res, id ){
+  images( 1024, 768 )
+    .draw( images( 'base' + id + '.png' ), 0, 0 )
+    .draw( images( 'layers' + id + '.png' ), 0, 0 )
+    .draw( images( 'images/legend_' + req.params.lang + '.png' ), 0, 0 )
+    .save( 'map' + id + '.png' );
 }
 
 function geo_mercator( lon_deg, lat_deg ){
