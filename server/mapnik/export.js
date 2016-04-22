@@ -152,6 +152,10 @@ function combineImage( req, res, id ){
     'Content-Disposition': 'attachment; filename=rio-' + req.params.year + '.png'
   });
   res.send( new Buffer( canvas.toDataURL().substr( 22 ), 'base64' ) );
+  
+  fs.unlinkSync( 'base' + id + '.png' );
+  if( req.params.raster != 'null' ) fs.unlinkSync( 'raster' + id + '.png' );
+  fs.unlinkSync( 'layers' + id + '.png' );
 }
 
 function geo_mercator( lon_deg, lat_deg ){
