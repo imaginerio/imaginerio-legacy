@@ -127,8 +127,7 @@ function combineImage( req, res, id ){
         
         res.set({
           'Content-type': 'image/png',
-          'Content-Disposition': 'attachment',
-          'filename': 'rio-' + req.params.year
+          'Content-Disposition': 'attachment; filename=rio-' + req.params.year + '.png'
         })
         res.send( new Buffer( canvas.toDataURL().substr( 22 ), 'base64' ) );
       });
