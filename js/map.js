@@ -240,7 +240,10 @@ function get_styles( color )
 
 function export_map()
 {
+  $( "#export" ).addClass( "loading" );
 	var layerstring = off.length == 0 ? 'all' : off.sort().join( "," );
 	var raster = map.hasLayer( shown.raster ) ? shown.raster._url.replace( /.*raster\/(.*?)\/.*/g, "$1" ) : 'null';
-	window.open( server + "/export/" + lang + "/" + year + "/" + layerstring + "/" + raster + "/" + map.getBounds().toBBoxString() + "/" );
+	var url = server + "/export/" + lang + "/" + year + "/" + layerstring + "/" + raster + "/" + map.getBounds().toBBoxString() + "/";
+	document.getElementById( 'download_iframe' ).src = url;
+	window.setTimeout( function(){ $( "#export" ).removeClass( "loading" ); }, 2000 );
 }
