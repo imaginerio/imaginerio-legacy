@@ -2,7 +2,8 @@ var express = require( 'express' ),
 	  bodyParser = require( 'body-parser' ),
 	  http = require( 'http' ),
     meta = require( './server/meta' ),
-    geo = require( './server/geo' );
+    geo = require( './server/geo' ),
+    download = require( './server/mapnik/export' );
 
 var app = express();
 
@@ -59,7 +60,8 @@ app.get( '/plan/:name', geo.plan );
 app.get( '/details/:id', meta.details );
 app.get( '/names/:lang', meta.names );
 app.get( '/feature/:year/:id', geo.feature );
-app.post( '/save', meta.save );
+app.get( '/export/:lang/:year/:layer/:raster/:bounds/', download.exportMap )
+
 
 app.listen( 3000 );
 console.log( 'Listening on port 3000...' );
