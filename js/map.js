@@ -59,13 +59,10 @@ function load_tiles()
 {
 	clear_highlight();
 	map_loading( true );
-	if( tiles[ year ] && off.length == 0 )
-	{
+	if( tiles[ year ] && off.length == 0 ){
 		map.addLayer( tiles[ year ].setOpacity( 0 ) );
-	}
-	else
-	{
-  	  var layerstring = off.length == 0 ? 'all' : off.sort().join( "," );
+	}else{
+    var layerstring = off.length == 0 ? 'all' : off.sort().join( "," );
 		var t = L.tileLayer( tileserver  + year + '/' + layerstring + '/{z}/{x}/{y}.png'  )
 					.addTo( map )
 					.setOpacity( 0 )
@@ -241,6 +238,9 @@ function get_styles( color )
 	return { top : topLayer, bottom : bottomLayer };
 }
 
-function export_map(){
-  
+function export_map()
+{
+	var layerstring = off.length == 0 ? 'all' : off.sort().join( "," );
+	var raster = map.hasLayer( shown.raster ) ? shown.raster._url.replace( /.*raster\/(.*?)\/.*/g, "$1" ) : 'null';
+	window.open( server + "/export/" + lang + "/" + year + "/" + layerstring + "/" + raster + "/" + map.getBounds().toBBoxString() + "/" );
 }
