@@ -29,7 +29,6 @@ js-page-prereq =	lib/modernizr.custom.96959.js \
 					lib/underscore-min.js \
 					lib/bloodhound.js \
 					lib/featherlight.js \
-					lib/leaflet-image.js \
 					$(js-path)layers.js \
 					$(js-path)map.js \
 					$(js-path)timeline.js \
