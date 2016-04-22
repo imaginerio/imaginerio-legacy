@@ -241,60 +241,6 @@ function get_styles( color )
 	return { top : topLayer, bottom : bottomLayer };
 }
 
-function export_map()
-{
-	var dimensions = map.getSize();
-	dimensions.y += 100;
-	
-	$( "#export" ).addClass( "loading" );
-	
-	leafletImage( map, dimensions, [ base, shown.raster, shown.tiles ], function( err, canvas )
-	{
-    dimensions.x += 235;
-    var exp = document.createElement( "canvas" );
-		exp.width = dimensions.x;
-		exp.height = dimensions.y;
-		
-		var context = exp.getContext( "2d" );
-    
-    context.fillStyle = '#fff';
-    context.fillRect( 0, 0, dimensions.x, dimensions.y );
-	    
-    context.drawImage( canvas, 235, 100 );
-		context.fillStyle = '#eee';
-		context.fillRect( 0, 0, dimensions.x, 100 );
-		context.fillStyle = '#666';
-		context.fillRect( 0, 99, dimensions.x, 1 );
-		context.font = '100 60px Helvetica Neue, HelveticaNeue, TeXGyreHeros, FreeSans, Nimbus Sans L, Liberation Sans, Arimo, Helvetica, Arial, sans-serif';
-		context.fillText( $( "header h1" ).text(), 20, 70 );
-		
-		context.font = 'bold 30px Helvetica Neue, HelveticaNeue, TeXGyreHeros, FreeSans, Nimbus Sans L, Liberation Sans, Arimo, Helvetica, Arial, sans-serif';
-		context.fillText( year, dimensions.x - 100, 70 );
-		
-		var legend = new Image();
-		legend.src = 'img/legend_' + lang + '.png';
-		legend.onload = function()
-		{
-			context.drawImage( legend, 0, 100);
-			savePNG( exp.toDataURL(), "rio-" + year + ".png", dimensions );
-		}
-	});
-	
-	function savePNG( data, fname, dimensions )
-	{
-    var dim = scale_image( dimensions.x, dimensions.y );
-		var light = $( document.createElement( 'div' ) )
-							.addClass( 'drag' )
-							.append( 
-								$( "<img/>" ).attr( "src", data ).width( dim.w ).height( dim.h )
-							)
-							.append(
-								$( document.createElement( 'div' ) )
-									.html( " Drag the image to your desktop to save" )
-									.prepend( $( "<img/>" ).attr( "src", "img/drag.png" ) )
-							)
-			
-		$.featherlight( light );
-    $( "#export" ).removeClass( "loading" );
-  }
+function export_map(){
+  
 }
