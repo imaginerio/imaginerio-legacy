@@ -7,7 +7,8 @@ var Canvas = require( 'canvas' ),
 
 var app = express();
 
-var dimensions = { x : 1024, y : 768 };
+var dimensions = { x : 1024, y : 768 },
+    titleHeight = 50;
 
 app.use( function( req, res, next ){
   res.setHeader( 'Access-Control-Allow-Origin', '*' );
@@ -112,17 +113,17 @@ function combineImage( req, res, id ){
         if (err) throw err;
         img = new Image;
         img.src = legend;
-        context.drawImage( img, 0, 0, 235, 768 );
+        context.drawImage( img, 0, titleHeight, 235, 768 );
     
-        context.fillStyle = '#eee';
-        context.fillRect( 0, 0, dimensions.x, 100 );
+        context.fillStyle = 'rgba( 230, 230, 230, 0.8 )';
+        context.fillRect( 0, 0, dimensions.x, titleHeight );
         context.fillStyle = '#666';
-        context.fillRect( 0, 99, dimensions.x, 1 );
-        context.font = '100 60px DejaVu Sans, sans-serif';
-        context.fillText( req.params.lang == 'en' ? 'imagineRio' : 'imagináRio', 20, 70 );
+        context.fillRect( 0, titleHeight - 1, dimensions.x, 1 );
+        context.font = '100 30px Raleway';
+        context.fillText( req.params.lang == 'en' ? 'imagineRio' : 'imagináRio', 20, 35 );
 		
-        context.font = 'bold 30px DejaVu Sans, sans-serif';
-        context.fillText( req.params.year, dimensions.x - 100, 70 );
+        context.font = 'bold 20px Raleway';
+        context.fillText( req.params.year, dimensions.x - 100, 35 );
         
         res.set({
           'Content-type': 'image/png',
