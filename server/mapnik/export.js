@@ -1,10 +1,13 @@
-var express = require('express'),
-    fs = require( 'graceful-fs' ),
-    images = require( 'images' ),
+var Canvas = require( 'canvas' ),
+    express = require('express'),
+    fs = require( 'fs' ),
+    //images = require( 'images' ),
     mapnik = require('mapnik'),
     uuid = require('uuid');
 
 var app = express();
+
+var dimensions = { x : 1024, y : 768 };
 
 app.use( function( req, res, next ){
   res.setHeader( 'Access-Control-Allow-Origin', '*' );
@@ -45,7 +48,7 @@ function drawBase( req, res, id, callback ){
     var bounds = req.params.bounds.split( ',' );
     var merc = geo_mercator( bounds[ 0 ], bounds[ 1 ] ).concat( geo_mercator( bounds[ 2 ], bounds[ 3 ] ) );
     map.extent = merc;
-    var im = new mapnik.Image( 1024, 768 );
+    var im = new mapnik.Image( dimensions.x, dimensions.y );
     map.render( im, function( err, im ){
       if( err ) throw err;
       im.encode( 'png', function( err, buffer ){
@@ -67,7 +70,7 @@ function drawLayers( req, res, id, callback ){
     var bounds = req.params.bounds.split( ',' );
     var merc = geo_mercator( bounds[ 0 ], bounds[ 1 ] ).concat( geo_mercator( bounds[ 2 ], bounds[ 3 ] ) );
     map.extent = merc;
-    var im = new mapnik.Image( 1024, 768 );
+    var im = new mapnik.Image( dimensions.x, dimensions.y );
     map.render( im, function( err, im ){
       if( err ) throw err;
       im.encode( 'png', function( err, buffer ){
@@ -89,11 +92,47 @@ function drawRaster( req, res, id, callback ){
 }
 
 function combineImage( req, res, id ){
-  images( 1024, 768 )
-    .draw( images( 'base' + id + '.png' ), 0, 0 )
-    .draw( images( 'layers' + id + '.png' ), 0, 0 )
-    .draw( images( 'images/legend_' + req.params.lang + '.png' ), 0, 0 )
-    .save( 'map' + id + '.png' );
+  var Image = Canvas.Image,
+      canvas = new Canvas( dimensions.x, dimensions.y ),
+      context = canvas.getContext( '2d' );
+    
+  fs.readFile( 'base' + id + '.png', function( err, base ){
+    if (err) throw err;
+    img = new Image;
+    img.src = base;
+    context.drawImage( img, 0, 0, dimensions.x, dimensions.y );
+    
+    fs.readFile( 'layers' + id + '.png', function( err, layers ){
+      if (err) throw err;
+      img = new Image;
+      img.src = layers;
+      context.drawImage( img, 0, 0, dimensions.x, dimensions.y );
+      
+      fs.readFile( 'images/legend_' + req.params.lang + '.png', function( err, legend ){
+        if (err) throw err;
+        img = new Image;
+        img.src = legend;
+        context.drawImage( img, 0, 0, 235, 768 );
+    
+        context.fillStyle = '#eee';
+        context.fillRect( 0, 0, dimensions.x, 100 );
+        context.fillStyle = '#666';
+        context.fillRect( 0, 99, dimensions.x, 1 );
+        context.font = '100 60px DejaVu Sans, sans-serif';
+        context.fillText( req.params.lang == 'en' ? 'imagineRio' : 'imagináRio', 20, 70 );
+		
+        context.font = 'bold 30px DejaVu Sans, sans-serif';
+        context.fillText( req.params.year, dimensions.x - 100, 70 );
+        
+        res.set({
+          'Content-type': 'image/png',
+          'Content-Disposition': 'attachment',
+          'filename': 'rio-' + req.params.year
+        })
+        res.send( new Buffer( canvas.toDataURL().substr( 22 ), 'base64' ) );
+      });
+    });
+  });
 }
 
 function geo_mercator( lon_deg, lat_deg ){
