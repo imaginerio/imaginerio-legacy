@@ -117,42 +117,41 @@ function combineImage( req, res, id ){
       canvas = new Canvas( dimensions.x, dimensions.y ),
       context = canvas.getContext( '2d' );
     
-  fs.readFile( 'base' + id + '.png', function( err, base ){
-    if (err) throw err;
-    img = new Image;
-    img.src = base;
-    context.drawImage( img, 0, 0, dimensions.x, dimensions.y );
+  var base = new Image;
+  base.src = fs.readFileSync( 'base' + id + '.png' );
+  context.drawImage( base, 0, 0, dimensions.x, dimensions.y );
+  
+  if( req.params.raster != 'null' ){
+    var raster = new Image;
+    raster.src = fs.readFileSync( 'raster' + id + '.png' );
+    context.globalAlpha = 0.75;
+    context.drawImage( raster, 0, 0, dimensions.x, dimensions.y );
+    context.globalAlpha = 1;
+  }
+  
+  var layers = new Image;
+  layers.src = fs.readFileSync( 'layers' + id + '.png' );
+  context.drawImage( layers, 0, 0, dimensions.x, dimensions.y );
+  
+  var legend = new Image;
+  legend.src = fs.readFileSync( 'images/legend_' + req.params.lang + '.png' );
+  context.drawImage( legend, 0, titleHeight, 235, 768 );
     
-    fs.readFile( 'layers' + id + '.png', function( err, layers ){
-      if (err) throw err;
-      img = new Image;
-      img.src = layers;
-      context.drawImage( img, 0, 0, dimensions.x, dimensions.y );
-      
-      fs.readFile( 'images/legend_' + req.params.lang + '.png', function( err, legend ){
-        if (err) throw err;
-        img = new Image;
-        img.src = legend;
-        context.drawImage( img, 0, titleHeight, 235, 768 );
-    
-        context.fillStyle = 'rgba( 230, 230, 230, 0.8 )';
-        context.fillRect( 0, 0, dimensions.x, titleHeight );
-        context.fillStyle = '#666';
-        context.fillRect( 0, titleHeight - 1, dimensions.x, 1 );
-        context.font = '100 30px Raleway';
-        context.fillText( req.params.lang == 'en' ? 'imagineRio' : 'imagináRio', 20, 35 );
-		
-        context.font = 'bold 20px Raleway';
-        context.fillText( req.params.year, dimensions.x - 100, 35 );
-        
-        res.set({
-          'Content-type': 'image/png',
-          'Content-Disposition': 'attachment; filename=rio-' + req.params.year + '.png'
-        })
-        res.send( new Buffer( canvas.toDataURL().substr( 22 ), 'base64' ) );
-      });
-    });
+  context.fillStyle = 'rgba( 230, 230, 230, 0.8 )';
+  context.fillRect( 0, 0, dimensions.x, titleHeight );
+  context.fillStyle = '#666';
+  context.fillRect( 0, titleHeight - 1, dimensions.x, 1 );
+  context.font = '100 30px Raleway';
+  context.fillText( req.params.lang == 'en' ? 'imagineRio' : 'imagináRio', 20, 35 );
+
+  context.font = 'bold 20px Raleway';
+  context.fillText( req.params.year, dimensions.x - 100, 35 );
+  
+  res.set({
+    'Content-type': 'image/png',
+    'Content-Disposition': 'attachment; filename=rio-' + req.params.year + '.png'
   });
+  res.send( new Buffer( canvas.toDataURL().substr( 22 ), 'base64' ) );
 }
 
 function geo_mercator( lon_deg, lat_deg ){
