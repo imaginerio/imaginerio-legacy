@@ -33,17 +33,17 @@ app.use( function(err, req, res, next) {
   res.render( 'error', { error: err } );
 });
 
-
-mapnik.register_default_fonts();
-mapnik.register_default_input_plugins();
-
 app.get('/export/:lang/:year/:layer/:raster/:bounds/', function( req, res ){
+  mapnik.register_default_fonts();
+  mapnik.register_system_fonts()
+  mapnik.register_default_input_plugins();
+  
   var id = uuid.v1();
   drawBase( req, res, id, drawLayers );
 });
 
 function drawBase( req, res, id, callback ){
-  var map = new mapnik.Map( 1024, 768 );
+  var map = new mapnik.Map( dimensions.x, dimensions.y );
   map.load( __dirname + "/cache/xml/" + req.params.year + "/base.xml", function( err, map ){
     if( err ) throw err;
     var bounds = req.params.bounds.split( ',' );
@@ -65,7 +65,7 @@ function drawBase( req, res, id, callback ){
 }
 
 function drawLayers( req, res, id, callback ){
-  var map = new mapnik.Map( 1024, 768 );
+  var map = new mapnik.Map( dimensions.x, dimensions.y );
   map.load( __dirname + "/cache/xml/" + req.params.year + "/" + req.params.layer + ".xml", function( err, map ){
     if( err ) throw err;
     var bounds = req.params.bounds.split( ',' );
