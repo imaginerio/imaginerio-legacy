@@ -121,6 +121,87 @@
     {
       "geometry": "polygon",
       "extent": [
+        -44.0494970728529,
+        -23.1024444437218,
+        -42.6599298776301,
+        -22.6300394834366
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoly WHERE layer = 'GroundCoverPoly' AND stylename='forests' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-44.0494970728529,-23.1024444437218,-42.6599298776301,-22.6300394834366",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_query_user",
+        "password": "FXB429KJ7a7a7sF2KdKN6q93"
+      },
+      "id": "forests",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "forests"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -44.0494970728529,
+        -23.1024444437218,
+        -42.6599298776301,
+        -22.6300394834366
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoly WHERE layer = 'GroundCoverPoly' AND stylename ='spit' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-44.0494970728529,-23.1024444437218,-42.6599298776301,-22.6300394834366",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_query_user",
+        "password": "FXB429KJ7a7a7sF2KdKN6q93"
+      },
+      "id": "spit",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "spit"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -44.0494970728529,
+        -23.1024444437218,
+        -42.6599298776301,
+        -22.6300394834366
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoly WHERE layer = 'GroundCoverPoly' AND stylename ='mangroves' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-44.0494970728529,-23.1024444437218,-42.6599298776301,-22.6300394834366",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_query_user",
+        "password": "FXB429KJ7a7a7sF2KdKN6q93"
+      },
+      "id": "mangroves",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "mangroves"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
         -44.0494471927581,
         -23.1024340644629,
         -42.6598821418086,
@@ -144,6 +225,33 @@
       "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
       "advanced": {},
       "name": "marshes"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -44.0494970728529,
+        -23.1024444437218,
+        -42.6599298776301,
+        -22.6300394834366
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoly WHERE layer = 'GroundCoverPoly' AND stylename ='agriculture' AND firstdispl <= 1812 AND lastdispla >= 1812  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-44.0494970728529,-23.1024444437218,-42.6599298776301,-22.6300394834366",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_query_user",
+        "password": "FXB429KJ7a7a7sF2KdKN6q93"
+      },
+      "id": "agriculture",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "agriculture"
     },
     {
       "geometry": "polygon",
@@ -732,6 +840,36 @@
       "name": "roads_labels"
     },
     {
+      "geometry": "polygon",
+      "extent": [
+        -44.0494970728529,
+        -23.1024444437218,
+        -42.6599298776301,
+        -22.6300394834366
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM basepoly WHERE layer = 'GroundCoverPoly' AND stylename ='agriculture' AND firstdispl <= 1812 AND lastdispla >= 1812  ) AS q",
+        "key_field": "gid",
+        "geometry_field": "geom",
+        "extent_cache": "auto",
+        "extent": "-44.0494970728529,-23.1024444437218,-42.6599298776301,-22.6300394834366",
+        "dbname": "riodev",
+        "host": "imaginerio.rice.edu",
+        "user": "pg_query_user",
+        "password": "FXB429KJ7a7a7sF2KdKN6q93",
+        "id": "agriculture_labels",
+        "project": "rio",
+        "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+      },
+      "id": "agriculture_labels",
+      "class": "",
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "advanced": {},
+      "name": "agriculture_labels"
+    },
+    {
       "geometry": "linestring",
       "extent": [
         -43.7954299139144,
@@ -776,7 +914,10 @@
         "dbname": "riodev",
         "host": "imaginerio.rice.edu",
         "user": "pg_query_user",
-        "password": "FXB429KJ7a7a7sF2KdKN6q93"
+        "password": "FXB429KJ7a7a7sF2KdKN6q93",
+        "id": "waterline_labels",
+        "project": "rio",
+        "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
       },
       "id": "waterline_labels",
       "class": "",

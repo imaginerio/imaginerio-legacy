@@ -13,6 +13,9 @@
 @urbanspace: #fcf9d5;
 @buildings: #cfa893;
 @beach: #ffd270;
+@agriculture: #a3ca9f;
+@mangroves: #acc0b4;
+@spit: #d9d6a7;
 
 /* LINES */
 @roads: #fff;

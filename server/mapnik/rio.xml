@@ -13,7 +13,7 @@
   <Parameter name="scale">1</Parameter>
   <Parameter name="metatile">1</Parameter>
   <Parameter name="id"><![CDATA[rio]]></Parameter>
-  <Parameter name="_updated">1449520709000</Parameter>
+  <Parameter name="_updated">1463689910000</Parameter>
   <Parameter name="name"><![CDATA[Rio]]></Parameter>
   <Parameter name="tilejson"><![CDATA[2.0.0]]></Parameter>
   <Parameter name="scheme"><![CDATA[xyz]]></Parameter>
@@ -55,8 +55,50 @@
        <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="beaches" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>2500</MaxScaleDenominator>
+    <LineSymbolizer stroke-width="8" stroke="#ffd270" stroke-linejoin="round" stroke-linecap="round" stroke-opacity="0.9" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>5000</MaxScaleDenominator>
+    <MinScaleDenominator>2500</MinScaleDenominator>
+    <LineSymbolizer stroke-width="6" stroke="#ffd270" stroke-linejoin="round" stroke-linecap="round" stroke-opacity="0.9" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500</MaxScaleDenominator>
+    <MinScaleDenominator>5000</MinScaleDenominator>
+    <LineSymbolizer stroke-width="4" stroke="#ffd270" stroke-linejoin="round" stroke-linecap="round" stroke-opacity="0.9" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000</MaxScaleDenominator>
+    <MinScaleDenominator>12500</MinScaleDenominator>
+    <LineSymbolizer stroke-width="3" stroke="#ffd270" stroke-linejoin="round" stroke-linecap="round" stroke-opacity="0.9" />
+  </Rule>
+  <Rule>
+    <MinScaleDenominator>25000</MinScaleDenominator>
+    <LineSymbolizer stroke-width="2" stroke="#ffd270" stroke-linejoin="round" stroke-linecap="round" stroke-opacity="0.9" />
+  </Rule>
+</Style>
+<Layer name="beaches"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>beaches</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM baseline WHERE layer = 'LandLine' AND firstdispl <= 2013 AND lastdispla >= 2013 ) AS q]]></Parameter>
+       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-43.7954794708309,-23.0734120840858,-43.1025330477069,-22.7491145667833]]></Parameter>
+       <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
+       <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
   </Layer>
 
@@ -88,6 +130,84 @@
     </Datasource>
   </Layer>
 
+<Style name="forests" filter-mode="first">
+  <Rule>
+    <PolygonPatternSymbolizer file="images/forest.png" opacity="0.2" />
+  </Rule>
+</Style>
+<Layer name="forests"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>forests</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'GroundCoverPoly' AND stylename='forests' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q]]></Parameter>
+       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-44.0494970728529,-23.1024444437218,-42.6599298776301,-22.6300394834366]]></Parameter>
+       <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
+       <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="spit-pattern" filter-mode="first">
+  <Rule>
+    <PolygonPatternSymbolizer opacity="0.9" file="images/spit.png" />
+  </Rule>
+</Style>
+<Style name="spit" filter-mode="first" image-filters="agg-stack-blur(5,5)" image-filters-inflate="true">
+  <Rule>
+    <PolygonSymbolizer fill="#d9d6a7" fill-opacity="0.6" />
+  </Rule>
+</Style>
+<Layer name="spit"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>spit</StyleName>
+    <StyleName>spit-pattern</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'GroundCoverPoly' AND stylename ='spit' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q]]></Parameter>
+       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-44.0494970728529,-23.1024444437218,-42.6599298776301,-22.6300394834366]]></Parameter>
+       <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
+       <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="mangroves-pattern" filter-mode="first">
+  <Rule>
+    <PolygonPatternSymbolizer opacity="0.6" file="images/mangroves.png" />
+  </Rule>
+</Style>
+<Style name="mangroves" filter-mode="first" image-filters="agg-stack-blur(5,5)" image-filters-inflate="true">
+  <Rule>
+    <PolygonSymbolizer fill="#acc0b4" fill-opacity="0.6" />
+  </Rule>
+</Style>
+<Layer name="mangroves"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>mangroves</StyleName>
+    <StyleName>mangroves-pattern</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'GroundCoverPoly' AND stylename ='mangroves' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q]]></Parameter>
+       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-44.0494970728529,-23.1024444437218,-42.6599298776301,-22.6300394834366]]></Parameter>
+       <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
+       <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
+    </Datasource>
+  </Layer>
+
 <Style name="marshes-pattern" filter-mode="first">
   <Rule>
     <PolygonPatternSymbolizer file="images/ripple2.png" />
@@ -111,8 +231,36 @@
        <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="agriculture-outline" filter-mode="first">
+  <Rule>
+    <LineSymbolizer stroke="#84b87e" stroke-width="1" stroke-opacity="0.4" stroke-linejoin="round" />
+  </Rule>
+</Style>
+<Style name="agriculture" filter-mode="first">
+  <Rule>
+    <PolygonSymbolizer fill="#a3ca9f" fill-opacity="0.4" />
+  </Rule>
+</Style>
+<Layer name="agriculture"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>agriculture</StyleName>
+    <StyleName>agriculture-outline</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'GroundCoverPoly' AND stylename ='agriculture' AND firstdispl <= 1812 AND lastdispla >= 1812  ) AS q]]></Parameter>
+       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-44.0494970728529,-23.1024444437218,-42.6599298776301,-22.6300394834366]]></Parameter>
+       <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
+       <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
   </Layer>
 
@@ -139,8 +287,8 @@
        <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
   </Layer>
 
@@ -156,13 +304,13 @@
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
        <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'plazas' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
-       <Parameter name="geometry_field"><![CDATA[]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
        <Parameter name="extent"><![CDATA[-44.0495149580022,-23.1024155607895,-42.6599378514538,-22.6300079267944]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
        <Parameter name="id"><![CDATA[plazas]]></Parameter>
        <Parameter name="project"><![CDATA[rio]]></Parameter>
        <Parameter name="srs"><![CDATA[+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs]]></Parameter>
@@ -192,8 +340,8 @@
        <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
        <Parameter name="id"><![CDATA[squares]]></Parameter>
        <Parameter name="project"><![CDATA[rio]]></Parameter>
        <Parameter name="srs"><![CDATA[+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs]]></Parameter>
@@ -223,8 +371,8 @@
        <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
   </Layer>
 
@@ -257,12 +405,56 @@
        <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
   </Layer>
 
-<Style name="riversstreams" filter-mode="first">
+<Style name="riversstreams-solid" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>25000</MaxScaleDenominator>
+    <MinScaleDenominator>12500</MinScaleDenominator>
+    <Filter>([scalerank] = 1)</Filter>
+    <LineSymbolizer stroke="#8fb0cd" stroke-width="0.6" />
+  </Rule>
+  <Rule>
+    <MinScaleDenominator>25000</MinScaleDenominator>
+    <Filter>([scalerank] = 1)</Filter>
+    <LineSymbolizer stroke="#8fb0cd" stroke-width="0.4" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>2500</MaxScaleDenominator>
+    <Filter>([scalerank] = 1)</Filter>
+    <LineSymbolizer stroke="#8fb0cd" stroke-width="1.75" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>5000</MaxScaleDenominator>
+    <MinScaleDenominator>2500</MinScaleDenominator>
+    <Filter>([scalerank] = 1)</Filter>
+    <LineSymbolizer stroke="#8fb0cd" stroke-width="1.25" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500</MaxScaleDenominator>
+    <MinScaleDenominator>5000</MinScaleDenominator>
+    <Filter>([scalerank] = 1)</Filter>
+    <LineSymbolizer stroke="#8fb0cd" stroke-width="0.85" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>2500</MaxScaleDenominator>
+    <LineSymbolizer stroke="#8fb0cd" stroke-width="1.75" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>5000</MaxScaleDenominator>
+    <MinScaleDenominator>2500</MinScaleDenominator>
+    <LineSymbolizer stroke="#8fb0cd" stroke-width="1.25" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500</MaxScaleDenominator>
+    <MinScaleDenominator>5000</MinScaleDenominator>
+    <LineSymbolizer stroke="#8fb0cd" stroke-width="0.85" />
+  </Rule>
+</Style>
+<Style name="riversstreams" filter-mode="first" image-filters="agg-stack-blur(4,4),agg-stack-blur(3,3),agg-stack-blur(2,2)" image-filters-inflate="true">
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
@@ -305,10 +497,14 @@
     <MinScaleDenominator>5000</MinScaleDenominator>
     <LineSymbolizer stroke-width="1.7" stroke="#8fb0cd" />
   </Rule>
+  <Rule>
+    <MinScaleDenominator>12500</MinScaleDenominator>
+  </Rule>
 </Style>
 <Layer name="riversstreams"
   srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
     <StyleName>riversstreams</StyleName>
+    <StyleName>riversstreams-solid</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
        <Parameter name="table"><![CDATA[( SELECT * FROM baseline WHERE layer = 'InlandWatersLine' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q]]></Parameter>
@@ -318,8 +514,8 @@
        <Parameter name="extent"><![CDATA[-43.7954299139144,-23.0822316762007,-43.0917420245885,-22.7290825466831]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
   </Layer>
 
@@ -391,8 +587,8 @@
        <Parameter name="extent"><![CDATA[-43.7954299139144,-23.0822316762007,-43.0917420245885,-22.7290825466831]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
   </Layer>
 
@@ -441,8 +637,8 @@
        <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
   </Layer>
 
@@ -687,8 +883,8 @@
        <Parameter name="extent"><![CDATA[-43.7954299139144,-23.0822316762007,-43.0917420245885,-22.7290825466831]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
        <Parameter name="id"><![CDATA[roads]]></Parameter>
        <Parameter name="project"><![CDATA[Rio]]></Parameter>
        <Parameter name="srs"><![CDATA[+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs]]></Parameter>
@@ -764,52 +960,81 @@
        <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
   </Layer>
 
-<Style name="fountainspoint" filter-mode="first">
+<Style name="fountains" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>25000</MaxScaleDenominator>
+    <MinScaleDenominator>5000</MinScaleDenominator>
+    <MarkersSymbolizer placement="interior" clip="false" file="images/monument-18.svg" fill="#977c53" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>2500</MaxScaleDenominator>
+    <PolygonSymbolizer fill="#c1ad8f" />
+    <LineSymbolizer stroke="#766141" />
+  </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MarkersSymbolizer fill="#876e4a" file="images/monument-24.svg" multi-policy="whole" placement="point" clip="false" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>50000</MaxScaleDenominator>
-    <MinScaleDenominator>5000</MinScaleDenominator>
-    <MarkersSymbolizer fill="#977c53" file="images/monument-18.svg" multi-policy="whole" placement="point" clip="false" />
-  </Rule>
-  <Rule>
-    <MinScaleDenominator>50000</MinScaleDenominator>
-    <MarkersSymbolizer fill="#977c53" file="images/monument-12.svg" multi-policy="whole" placement="point" clip="false" />
+    <MinScaleDenominator>2500</MinScaleDenominator>
+    <MarkersSymbolizer placement="interior" clip="false" ignore-placement="true" file="images/monument-24.png" fill="#876e4a" />
   </Rule>
 </Style>
-<Layer name="fountainspoint"
+<Layer name="fountains"
   srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>fountainspoint</StyleName>
+    <StyleName>fountains</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM basepoint WHERE layer = 'UtilitiesPoint' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'fountains' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
        <Parameter name="extent"><![CDATA[-43.6834457612267,-22.9671653560144,-43.1710435408641,-22.8051180962776]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="fountains_labels" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>2500</MaxScaleDenominator>
+    <TextSymbolizer placement="interior" face-name="Helvetica Regular" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" size="10" character-spacing="1" wrap-width="40" text-transform="uppercase" dx="8" dy="-8" ><![CDATA[[namecomple]]]></TextSymbolizer>
+  </Rule>
+</Style>
+<Layer name="fountains_labels"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>fountains_labels</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'fountains' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q
+]]></Parameter>
+       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-44.0497381775892,-23.102799251023,-42.6598428820212,-22.6297988204215]]></Parameter>
+       <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
+       <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
+       <Parameter name="id"><![CDATA[fountains_labels]]></Parameter>
+       <Parameter name="project"><![CDATA[rio]]></Parameter>
+       <Parameter name="srs"><![CDATA[+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs]]></Parameter>
     </Datasource>
   </Layer>
 
 <Style name="railpoint" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MarkersSymbolizer file="images/rail-24.svg" fill="#876e4a" multi-policy="whole" placement="point" clip="false" />
+    <MarkersSymbolizer fill="#876e4a" file="images/rail-24.svg" multi-policy="whole" placement="point" clip="false" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <MarkersSymbolizer fill="#977c53" file="images/rail-18.svg" multi-policy="whole" placement="point" clip="false" />
+    <MarkersSymbolizer file="images/rail-18.svg" multi-policy="whole" placement="point" clip="false" fill="#977c53" />
   </Rule>
 </Style>
 <Layer name="railpoint"
@@ -824,24 +1049,60 @@
        <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="beaches_labels" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>2500</MaxScaleDenominator>
+    <TextSymbolizer size="14" minimum-path-length="275" placement="line" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>5000</MaxScaleDenominator>
+    <MinScaleDenominator>2500</MinScaleDenominator>
+    <TextSymbolizer size="14" minimum-path-length="250" placement="line" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500</MaxScaleDenominator>
+    <MinScaleDenominator>5000</MinScaleDenominator>
+    <TextSymbolizer size="12" minimum-path-length="200" placement="line" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" ><![CDATA[[namecomple]]]></TextSymbolizer>
+  </Rule>
+</Style>
+<Layer name="beaches_labels"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>beaches_labels</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM baseline WHERE layer = 'LandLine' AND firstdispl <= 2013 AND lastdispla >= 2013 ) AS q]]></Parameter>
+       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-43.7954794708309,-23.0734120840858,-43.1025330477069,-22.7491145667833]]></Parameter>
+       <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
+       <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
+       <Parameter name="id"><![CDATA[beaches_labels]]></Parameter>
+       <Parameter name="project"><![CDATA[rio]]></Parameter>
+       <Parameter name="srs"><![CDATA[+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs]]></Parameter>
     </Datasource>
   </Layer>
 
 <Style name="inlandwater_labels" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <TextSymbolizer size="16" wrap-width="80" line-spacing="6" placement="interior" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="16" wrap-width="80" line-spacing="6" placement="interior" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <TextSymbolizer size="14" wrap-width="40" line-spacing="4" placement="interior" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="14" wrap-width="40" line-spacing="4" placement="interior" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" minimum-distance="350" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <TextSymbolizer size="12" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" text-transform="capitalize" minimum-distance="350" line-spacing="2" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <TextSymbolizer size="12" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#4777a0" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" character-spacing="1" minimum-distance="350" line-spacing="2" ><![CDATA[[namecomple]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Layer name="inlandwater_labels"
@@ -856,8 +1117,8 @@
        <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
   </Layer>
 
@@ -894,73 +1155,76 @@
        <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
   </Layer>
 
-<Style name="squares_labels-squares" filter-mode="first">
+<Style name="squares_labels" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <MinScaleDenominator>1500</MinScaleDenominator>
-    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <TextSymbolizer size="13" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="13" character-spacing="1" wrap-width="40" minimum-distance="20" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>1500</MaxScaleDenominator>
-    <TextSymbolizer placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Layer name="squares_labels"
   srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>squares_labels-squares</StyleName>
+    <StyleName>squares_labels</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'squares' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'squares' AND firstdispl <= 2013 AND lastdispla >= 2013 ) AS q]]></Parameter>
        <Parameter name="key_field"><![CDATA[gid]]></Parameter>
        <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
        <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
        <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
+       <Parameter name="id"><![CDATA[squares_labels]]></Parameter>
+       <Parameter name="project"><![CDATA[rio]]></Parameter>
+       <Parameter name="srs"><![CDATA[+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs]]></Parameter>
     </Datasource>
   </Layer>
 
-<Style name="plazas_labels-plazas" filter-mode="first">
+<Style name="plazas_labels" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <MinScaleDenominator>1500</MinScaleDenominator>
-    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="14" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <TextSymbolizer size="13" character-spacing="1" wrap-width="40" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="13" character-spacing="1" wrap-width="40" minimum-distance="20" placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
   <Rule>
     <MaxScaleDenominator>1500</MaxScaleDenominator>
-    <TextSymbolizer placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer placement="interior" face-name="Helvetica Oblique" fill="#766141" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
   </Rule>
 </Style>
 <Layer name="plazas_labels"
   srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>plazas_labels-plazas</StyleName>
+    <StyleName>plazas_labels</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
        <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'plazas' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q]]></Parameter>
@@ -970,58 +1234,39 @@
        <Parameter name="extent"><![CDATA[-44.0495149580022,-23.1024155607895,-42.6599378514538,-22.6300079267944]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
   </Layer>
 
-<Style name="parks_labels-icon" filter-mode="first">
+<Style name="parks_labels" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <Filter>([nameshort] = 'Quinta da Boa Vista')</Filter>
-    <ShieldSymbolizer file="images/park2-24.png" placement="interior" clip="false" fill="#7a8446" face-name="Helvetica Regular" ><![CDATA[' ']]></ShieldSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <Filter>([nameshort] = 'Quinta da Boa Vista')</Filter>
-    <ShieldSymbolizer file="images/park2-18.png" placement="interior" clip="false" fill="#7a8446" face-name="Helvetica Regular" ><![CDATA[' ']]></ShieldSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <ShieldSymbolizer file="images/park2-24.png" face-name="Helvetica Regular" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>12500</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <ShieldSymbolizer file="images/park2-18.png" face-name="Helvetica Regular" placement="interior" clip="false" ><![CDATA[' ']]></ShieldSymbolizer>
-  </Rule>
-</Style>
-<Style name="parks_labels-greenspace" filter-mode="first">
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <TextSymbolizer size="15" character-spacing="2" wrap-width="70" minimum-distance="250" placement="interior" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="15" dx="12" dy="12" wrap-width="40" minimum-distance="15" placement="interior" placement-type="simple" placements="S,N,E,W" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <MarkersSymbolizer file="images/park2-24.svg" placement="interior" fill="#7a8446" multi-policy="whole" clip="false" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
-    <TextSymbolizer size="14" character-spacing="2" wrap-width="20" minimum-distance="120" placement="interior" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="14" dx="12" dy="12" wrap-width="40" minimum-distance="15" placement="interior" placement-type="simple" placements="S,N,E,W" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <MarkersSymbolizer file="images/park2-24.svg" placement="interior" fill="#7a8446" multi-policy="whole" clip="false" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
-    <TextSymbolizer size="13" character-spacing="1" wrap-width="50" placement="interior" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer size="13" wrap-width="40" minimum-distance="15" placement="interior" placement-type="simple" placements="S,N,E,W" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" dx="10" dy="10" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <MarkersSymbolizer placement="interior" file="images/park2-18.svg" fill="#7a8446" multi-policy="whole" clip="false" />
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
-    <TextSymbolizer size="12" character-spacing="1" wrap-width="80" wrap-before="true" placement="interior" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" minimum-distance="100" ><![CDATA[[nameshort]]]></TextSymbolizer>
+    <TextSymbolizer placement="interior" placement-type="simple" placements="S,N,E,W" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" dx="10" dy="10" size="12" ><![CDATA['']]></TextSymbolizer>
+    <MarkersSymbolizer placement="interior" file="images/park2-18.svg" fill="#7a8446" multi-policy="whole" clip="false" />
   </Rule>
 </Style>
 <Layer name="parks_labels"
   srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>parks_labels-greenspace</StyleName>
-    <StyleName>parks_labels-icon</StyleName>
+    <StyleName>parks_labels</StyleName>
     <Datasource>
        <Parameter name="type"><![CDATA[postgis]]></Parameter>
        <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'parks' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q]]></Parameter>
@@ -1031,8 +1276,53 @@
        <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="cemeteries_labels" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>2500</MaxScaleDenominator>
+    <TextSymbolizer size="15" dx="12" dy="12" wrap-width="40" minimum-distance="15" placement="interior" placement-type="simple" placements="S,N,E,W" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <MarkersSymbolizer file="images/cemetery-24.png" placement="interior" fill="#7a8446" multi-policy="whole" clip="false" opacity="0.9" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>5000</MaxScaleDenominator>
+    <MinScaleDenominator>2500</MinScaleDenominator>
+    <TextSymbolizer size="14" dx="12" dy="12" wrap-width="40" minimum-distance="15" placement="interior" placement-type="simple" placements="S,N,E,W" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <MarkersSymbolizer file="images/cemetery-24.png" placement="interior" fill="#7a8446" multi-policy="whole" clip="false" opacity="0.9" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>12500</MaxScaleDenominator>
+    <MinScaleDenominator>5000</MinScaleDenominator>
+    <TextSymbolizer size="13" wrap-width="40" minimum-distance="15" placement="interior" placement-type="simple" placements="S,N,E,W" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" dx="10" dy="10" ><![CDATA[[namecomple]]]></TextSymbolizer>
+    <MarkersSymbolizer placement="interior" file="images/cemetery-18.png" fill="#7a8446" multi-policy="whole" clip="false" opacity="0.9" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000</MaxScaleDenominator>
+    <MinScaleDenominator>12500</MinScaleDenominator>
+    <TextSymbolizer placement="interior" placement-type="simple" placements="S,N,E,W" face-name="Helvetica Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" dx="10" dy="10" size="12" ><![CDATA['']]></TextSymbolizer>
+    <MarkersSymbolizer placement="interior" file="images/cemetery-18.png" fill="#7a8446" multi-policy="whole" clip="false" opacity="0.9" />
+  </Rule>
+</Style>
+<Layer name="cemeteries_labels"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>cemeteries_labels</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'cemeteries' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q]]></Parameter>
+       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
+       <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
+       <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
+       <Parameter name="id"><![CDATA[cemeteries_labels]]></Parameter>
+       <Parameter name="project"><![CDATA[rio]]></Parameter>
+       <Parameter name="srs"><![CDATA[+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs]]></Parameter>
     </Datasource>
   </Layer>
 
@@ -1149,8 +1439,39 @@
        <Parameter name="extent"><![CDATA[-43.7954299139144,-23.0822316762007,-43.0917420245885,-22.7290825466831]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="agriculture_labels" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>5000</MaxScaleDenominator>
+    <MarkersSymbolizer file="images/farm-24.svg" opacity="0.9" placement="interior" multi-policy="whole" clip="false" fill="#50864a" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000</MaxScaleDenominator>
+    <MinScaleDenominator>5000</MinScaleDenominator>
+    <MarkersSymbolizer opacity="0.9" placement="interior" multi-policy="whole" clip="false" fill="#50864a" file="images/farm-18.svg" />
+  </Rule>
+</Style>
+<Layer name="agriculture_labels"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>agriculture_labels</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'GroundCoverPoly' AND stylename ='agriculture' AND firstdispl <= 1812 AND lastdispla >= 1812  ) AS q]]></Parameter>
+       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-44.0494970728529,-23.1024444437218,-42.6599298776301,-22.6300394834366]]></Parameter>
+       <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
+       <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
+       <Parameter name="id"><![CDATA[agriculture_labels]]></Parameter>
+       <Parameter name="project"><![CDATA[rio]]></Parameter>
+       <Parameter name="srs"><![CDATA[+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs]]></Parameter>
     </Datasource>
   </Layer>
 
@@ -1182,8 +1503,8 @@
        <Parameter name="extent"><![CDATA[-43.7954299139144,-23.0822316762007,-43.0917420245885,-22.7290825466831]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
   </Layer>
 
@@ -1219,36 +1540,11 @@
        <Parameter name="extent"><![CDATA[-43.7954299139144,-23.0822316762007,-43.0917420245885,-22.7290825466831]]></Parameter>
        <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
        <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
-    </Datasource>
-  </Layer>
-
-<Style name="cemeteries_marker" filter-mode="first">
-  <Rule>
-    <MaxScaleDenominator>2500</MaxScaleDenominator>
-    <MarkersSymbolizer file="images/cemetery-24.svg" multi-policy="whole" placement="interior" clip="false" fill="#7a8446" />
-  </Rule>
-  <Rule>
-    <MaxScaleDenominator>5000</MaxScaleDenominator>
-    <MinScaleDenominator>2500</MinScaleDenominator>
-    <MarkersSymbolizer file="images/cemetery-18.svg" multi-policy="whole" placement="interior" clip="false" fill="#7a8446" />
-  </Rule>
-</Style>
-<Layer name="cemeteries_marker"
-  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
-    <StyleName>cemeteries_marker</StyleName>
-    <Datasource>
-       <Parameter name="type"><![CDATA[postgis]]></Parameter>
-       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE stylename = 'cemeteries' AND firstdispl <= 2013 AND lastdispla >= 2013  ) AS q]]></Parameter>
-       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
-       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
-       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
-       <Parameter name="extent"><![CDATA[-44.0494471927581,-23.1024340644629,-42.6598821418086,-22.6300318711334]]></Parameter>
-       <Parameter name="dbname"><![CDATA[riodev]]></Parameter>
-       <Parameter name="host"><![CDATA[imaginerio.rice.edu]]></Parameter>
-       <Parameter name="user"><![CDATA[pg_power_user]]></Parameter>
-       <Parameter name="password"><![CDATA[XfAfooM4zUD8HG]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
+       <Parameter name="id"><![CDATA[waterline_labels]]></Parameter>
+       <Parameter name="project"><![CDATA[rio]]></Parameter>
+       <Parameter name="srs"><![CDATA[+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs]]></Parameter>
     </Datasource>
   </Layer>
 

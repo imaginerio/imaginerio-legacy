@@ -11,6 +11,10 @@
  * - neighborhoods
  * - fountains
  * - land
+ * - forests
+ * - spit
+ * - mangroves
+ * - agriculture
 
 */
 
@@ -251,4 +255,42 @@
       line-join: round;
     }
   }
+}
+
+#spit{
+  polygon-fill: @spit;
+  polygon-opacity: 0.6;
+  image-filters: agg-stack-blur(5,5);
+  image-filters-inflate: true;
+    ::pattern{
+      polygon-pattern-opacity: 0.9;
+      polygon-pattern-file: url(images/spit.png);
+    }
+  }
+
+#mangroves{
+  polygon-fill: @mangroves;
+  polygon-opacity: 0.6;
+  image-filters: agg-stack-blur(5,5);
+  image-filters-inflate: true;
+    ::pattern{
+      polygon-pattern-opacity: 0.6;
+      polygon-pattern-file: url(images/mangroves.png);
+    }
+  }
+
+#forests{
+    polygon-pattern-file: url(images/forest.png);
+    polygon-pattern-opacity: 0.2;
+   }
+
+#agriculture {
+    polygon-fill: @agriculture;
+    polygon-opacity: 0.4;
+      ::outline {
+        line-color: darken(@agriculture, 10%);
+        line-width: 1;
+        line-opacity: 0.4;
+        line-join: round;
+      } 
 }

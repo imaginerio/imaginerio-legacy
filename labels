@@ -229,6 +229,21 @@
   }
 }
 
+#agriculture_labels {
+    [zoom>=15]{
+      marker-opacity: 0.9;
+      marker-placement: interior;
+      marker-multi-policy: whole;
+      marker-clip: false;
+      marker-fill: darken(@agriculture, 30%);
+      marker-file: url(images/farm-18.svg);    
+      }
+    [zoom>=17]{
+      marker-file: url(images/farm-24.svg);
+  }
+}
+
+
 #fountains_labels {
     [zoom>=18]{
       text-name: "[namecomple]";
