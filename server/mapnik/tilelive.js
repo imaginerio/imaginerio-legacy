@@ -189,7 +189,7 @@ function renderTile( filename, params, res ){
 }
 
 function saveTile( params, tile, res ){
-  if( cache === false ) return false;
+  if( cache === false || dev === true ) return false;
   var png = "cache/png/" + params.year + "/" + params.layer + "/" + params.z + "/" + params.x + "/" + params.y + ".png";
   var p = { Bucket : 'imaginerio', Key : png, Body : tile, ACL : 'public-read' };
   s3.putObject( p, function( err, data ){
@@ -198,6 +198,9 @@ function saveTile( params, tile, res ){
     var query = client.query( "INSERT INTO cache ( year, layer, z, x, y ) VALUES ( " + params.year + ", '" + params.layer + "', " + params.z + ", " + params.x + ", " + params.y + " )" );
     query.on( 'end', function(){
       console.log( png + " uploaded to S3" );
+    });
+    query.on( 'error', function( error ){
+      console.log( error.detail );
     });
   });
 }
