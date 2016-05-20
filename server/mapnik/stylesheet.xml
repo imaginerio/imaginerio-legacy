@@ -19,6 +19,42 @@
   <Parameter name="scheme"><![CDATA[xyz]]></Parameter>
 </Parameters>
 
+
+<Style name="groundcover" filter-mode="first">
+  <Rule>
+    <Filter>([stylename] = 'agriculture')</Filter>
+    <PolygonSymbolizer fill="#659150" fill-opacity="0.6" />
+  </Rule>
+  <Rule>
+    <Filter>([stylename] = 'mangroves')</Filter>
+    <PolygonSymbolizer fill="#618374" fill-opacity="0.6" />
+  </Rule>
+  <Rule>
+    <Filter>([stylename] = 'spit')</Filter>
+    <PolygonSymbolizer fill="#979638" fill-opacity="0.6" />
+  </Rule>
+  <Rule>
+    <Filter>([stylename] = 'forests')</Filter>
+    <PolygonPatternSymbolizer file="../../../images/forest12.png" opacity="0.2" />
+  </Rule>
+</Style>
+<Layer name="groundcover"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>groundcover</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM basepoly WHERE layer = 'GroundCoverPoly' AND firstdispl <= 99999999 AND lastdispla >= 99999999  ) AS q]]></Parameter>
+       <Parameter name="key_field"><![CDATA[gid]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-43.7954794708309,-23.0734120840858,-43.1025330477069,-22.7491145667833]]></Parameter>
+       <Parameter name="dbname"><![CDATA[rio]]></Parameter>
+       <Parameter name="host"><![CDATA[localhost]]></Parameter>
+       <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
+       <Parameter name="password"><![CDATA[99999999]]></Parameter>
+    </Datasource>
+  </Layer>
+
 <Style name="beaches" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
