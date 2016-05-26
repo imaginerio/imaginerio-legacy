@@ -150,7 +150,11 @@ h1, header{
   border-left: none;
 }
 
-
+#disclaimer{
+  padding: 150px;
+  font-size: 11px;
+  color: #666;
+}
 
 .featherlight{
 	z-index: 9999;
