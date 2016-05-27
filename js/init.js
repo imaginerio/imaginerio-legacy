@@ -6,7 +6,7 @@ var lang,
 	pr = {
 		"h1" : "imagináRio",
 		"#enter" : "Ver o mapa <span></span>",
-		"#plans" : "Projetos Urbanos",
+		"#plans" : "Projetos Urbanos  &nbsp;&#9662;",
 		"#switch" : "Legenda do Mapa",
 		"#instruction" : "Clique no mapa para explorar...",
 		"#export" : "Exportar o mapa <span></span>",

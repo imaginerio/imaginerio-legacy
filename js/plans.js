@@ -53,7 +53,7 @@ function load_plan( plan )
 	{
 		$( "#plans" )
 			.addClass( "back" )
-			.html( "Clear project" );
+			.html( names.clear );
 			
 		$( "#plan_info" )
 			.show()
@@ -87,7 +87,7 @@ function clear_plan()
 	
 	$( "#plans" )
 		.removeClass( "back" )
-		.html( "Urban Projects &nbsp;&#9662;" );
+		.html( lang == "en" ? "Urban Projects &nbsp;&#9662;" : pr[ "#plans" ] );
 		
 	$( "#plan_info" ).hide();
 	$( "#track, #puck" ).fadeIn();
