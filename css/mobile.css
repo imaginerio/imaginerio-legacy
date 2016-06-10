@@ -1,0 +1,7 @@
+@media (max-width: 650px) {
+  #plans,
+  #search,
+  #export {
+    display: none;
+  }
+}
