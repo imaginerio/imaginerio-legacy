@@ -33,6 +33,9 @@ function init()
 	init_timeline();
 	init_search();
 
+	// Mobile start
+	if( $( window ).width() <= 650 ) $('.open').removeClass('open');
+
 	$( window ).resize( resize );
 
 	$( "#enter" ).click( function()
