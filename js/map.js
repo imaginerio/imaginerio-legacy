@@ -49,12 +49,10 @@ function init_map()
 
 	if ( $( window ).width() > 650 )
 	{
-		console.log('here');
 		map.addControl(L.control.zoom( { position: 'topleft' } ) );
 	}
 	else
 	{
-		console.log('there');
 		map.addControl(L.control.zoom( { position: 'bottomright' } ) );
 	}
 	$( ".leaflet-control-zoom" ).addClass( 'open' );
