@@ -47,14 +47,28 @@ function init_map()
 		$( "#export" ).hide();
 	}
 
+	// Set up controls
 	if ( $( window ).width() > 650 )
 	{
 		map.addControl(L.control.zoom( { position: 'topleft' } ) );
 	}
+	// mobile with geolocation control
 	else
 	{
-		map.addControl(L.control.zoom( { position: 'bottomright' } ) );
+		map.addControl( L.control.zoom( { position: 'bottomright' } ) );
+		var geo = L.control( { position: 'bottomright' } );
+		geo.onAdd = function ( map ) {
+			this._div = L.DomUtil.create( "div", "geolocate leaflet-bar" );
+
+			L.DomEvent.addListener( this._div, 'click', function () {
+				map.locate( { setView: true, maxZoom: 16 } );
+			});
+
+			return this._div;
+		}
+		geo.addTo( map );
 	}
+
 	$( ".leaflet-control-zoom" ).addClass( 'open' );
 }
 

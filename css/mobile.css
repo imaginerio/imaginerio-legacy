@@ -13,7 +13,7 @@
   #next,
   #switch,
   #layers,
-  .leaflet-top,
+  .leaflet-left,
   .layer input {
     display: none !important;
   }
@@ -160,5 +160,13 @@
 
   #disclaimer {
     padding: 10px;
+  }
+
+  /* Geolocation */
+  .geolocate {
+    background-color: #fff;
+    cursor: pointer;
+    height: 26px;
+    width: 26px;
   }
 }
