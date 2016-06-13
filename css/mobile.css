@@ -23,6 +23,19 @@
     padding: 5px 20px;
   }
 
+  header h1 {
+    display: inline-block;
+  }
+
+  #hamburger {
+    background: url('../img/hamburger.png') no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    display: inline-block;
+    height: 22px;
+    width: 26px;
+  }
+
   /* Timeline */
   #timeline {
     height: 30px;
