@@ -88,6 +88,7 @@
     box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.25);
     height: 100%;
     left: 0;
+    top: 0;
     transition: left 1s;
     overflow: hidden;
     position: absolute;
@@ -103,6 +104,16 @@
     pointer-events: none;
   }
 
+  /* Map */
+  #wrapper {
+    transition: height 0.5s;
+  }
+
+  #map {
+    transition: height 0.5s;
+    top: -30px;
+  }
+
   /* Probe */
   #results {
     background-color: #fff;
@@ -110,7 +121,7 @@
     height: 0;
     left: 0;
     max-height: 200px;
-    top: inherit;
+    top: auto;
     transition: height 0.5s;
     width: 100%;
   }
@@ -118,15 +129,6 @@
   #results.open-probe {
     height: 200px;
     overflow-y: auto;
-  }
-
-  #wrapper {
-    height: auto;
-    transition: height 0.5s;
-  }
-
-  #wrapper.open-probe {
-    height: auto;
   }
 
   .result {

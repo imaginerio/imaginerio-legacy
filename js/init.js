@@ -44,9 +44,27 @@ function init()
 function resize()
 {
 	var h = $( window ).height();
-	if( $( "#results" ).hasClass( "open-probe" ) ) $( "#map" ).height( h - 300 );
-	else	$( "#map" ).height( h - 100 );
-	$( "#layers" ).height( h - 210 );
+
+	//mobile
+	if( $( window ).width() <= 650 )
+	{
+		if( $( "#results" ).hasClass( "open-probe" ) )
+		{
+			$( "#wrapper" ).height( h - 270 );
+			$( "#map" ).height( h - 241 );
+		}
+		else
+		{
+			$( "#wrapper" ).height( h - 70 );
+			$( "#map" ).height( h - 41 );
+		}
+	}
+	else
+	{
+		$( "#map" ).height( h - 100 );
+		$( "#layers" ).height( h - 210 );
+	}
+
 	build_timeline();
 	snap_timeline( year, 0 );
 }
