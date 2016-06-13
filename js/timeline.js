@@ -14,16 +14,17 @@ function init_timeline()
 		first = _.first( years ),
 		min = Math.floor( first / 50 ) * 50,
 		max = Math.min( new Date().getFullYear(), _.last( years ) + 1 ),
-		
+
 		years = _.filter( years, function( val ){ return val <= max });
-		
+
 		build_timeline();
 		update_year( gup( 'year' ) ? parseInt( gup( 'year' ), 10 ) : Math.max( year, first ) );
 		snap_timeline( year );
 	});
-	
+
   $( "#puck" ).on( 'touchstart mousedown', function( e )
 	{
+		var mobile = $( window ).width() <= 650;
     e.preventDefault();
 		$( "#puck span" ).fadeIn( "fast" );
     $( "#timeline" ).on( 'touchmove mousemove', function( e )
@@ -33,22 +34,31 @@ function init_timeline()
       } else {
         var x = e.clientX;
       }
-			var pos = Math.max( 0, Math.min( x - 300, $( this ).width() ) );
-      pos = Math.min( pos, $( this ).width() - 5 );
+
+			if (!mobile)
+			{
+				var pos = Math.max( 0, Math.min( x - 300, $( this ).width() ) );
+				pos = Math.min( pos, $( this ).width() - 5 );
+				$( "#puck span" ).html( get_timeline_year() );
+			}
+			else
+			{
+				pos = Math.max( 0, Math.min( x, $( this ).width() - 5 ) );
+				$( "#year span" ).html( get_timeline_year() );
+			}
 			$( "#puck" ).css( "left", pos );
-			$( "#puck span" ).html( get_timeline_year() );
 		});
-		
+
 		$( window ).on( 'touchend mouseup', function()
 		{
 			$( "#timeline" ).off( "touchmove mousemove" );
 			$( window ).off( "touchend mouseup" );
 			$( "#puck span" ).fadeOut( "fast" );
-			
+
 			update_year( snap_timeline() );
 		})
 	});
-	
+
 	$( "#year div" ).click( function()
 	{
 		if( $( this ).attr( "id" ) == "next" )
@@ -74,13 +84,13 @@ function init_timeline()
 function update_year( y )
 {
 	if( year == y ) return false;
-	
+
 	clear_visual();
 	clear_results( "shadow");
-	
+
 	year = y;
 	$( "#year span, #puck span" ).html( year );
-	
+
 	load_base();
 	load_tiles();
 	build_layers();
@@ -90,13 +100,13 @@ function update_year( y )
 function build_timeline()
 {
 	$( "#track" ).empty();
-	
+
 	if( years.length == 0 ) return false;
-	
+
 	var w = $( "#timeline" ).width(),
 		y = min,
 		width = 0;
-	
+
 	px = w / ( max - min );
 	var gap = _.find( interval, function( i ){ return px * i > 70; } );
 
@@ -113,17 +123,17 @@ function build_timeline()
 	{
 		$( "#track" ).append( add_tick( i ) );
 	}
-	
+
 	$( ".tick" ).last().find( "span" ).last().remove();
 	$( ".tick" ).first().find( "span" ).first().addClass( "first" ).html( min );
-	
+
 	$( "#track" ).append(
 		$( document.createElement( 'div' ) )
 			.addClass( "tick minor" )
 			.width( $( "#track" ).width() - width - 10 )
 			.html( "<span>" + max + "</span>" )
 	);
-	
+
 	function add_tick( i )
 	{
 		var div = $( document.createElement( 'div' ) )
@@ -143,9 +153,9 @@ function build_timeline()
 					.width( i - min < gap ? Math.floor( ( gap * px ) - ( ( i - min ) * px ) ) : "50%" )
 			);
 		}
-		
+
 		width += div.width();
-		
+
 		return div;
 	}
 }
@@ -160,7 +170,7 @@ function snap_timeline( set, dur )
 {
 	var y = set ? set : get_timeline_year(),
 		speed = dur ? dur : "fast";
-	
+
 	if( y > year )
 	{
 		y = _.find( years, function( d ){ return d >= y } );
@@ -169,8 +179,8 @@ function snap_timeline( set, dur )
 	{
 		y = _.find( _.clone( years ).reverse(), function( d ){ return d <= y } );
 	}
-	
+
 	$( "#puck" ).stop().animate( { "left" : ( y - min ) * px }, dur );
-	
+
 	return y;
 }
