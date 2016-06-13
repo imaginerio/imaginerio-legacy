@@ -17,41 +17,43 @@
 		<link href="css/mobile.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
-		<header>
-      <div id="info-page"><a target="_blank" href="http://hrc.rice.edu/imagineRio/">
-        <span>I</span></a>
-      </div>
-      <div class="header-bar">|</div>
-			<div id="export">Export map image <span></span></div>
-			<div id="hamburger"></div>
-			<h1>imagineRio</h1>
-		</header>
-		<nav>
-			<form id="search" class="shadow">
-				<div id="clear"></div>
-				<input type="text" placeholder="Search..." class="typeahead" />
-			</form>
-			<div id="plans">Urban Projects &nbsp;&#9662;</div>
-			<div id="year"><div id="prev"></div><span>1565</span><div id="next"></div>
+		<div class="mobile-wrapper open">
+			<header>
+	      <div id="info-page"><a target="_blank" href="http://hrc.rice.edu/imagineRio/">
+	        <span>I</span></a>
+	      </div>
+	      <div class="header-bar">|</div>
+				<div id="export">Export map image <span></span></div>
+				<div id="hamburger"></div>
+				<h1>imagineRio</h1>
+			</header>
+			<nav>
+				<form id="search" class="shadow">
+					<div id="clear"></div>
+					<input type="text" placeholder="Search..." class="typeahead" />
+				</form>
+				<div id="plans">Urban Projects &nbsp;&#9662;</div>
+				<div id="year"><div id="prev"></div><span>1565</span><div id="next"></div>
+				</div>
+				<div id="plan_info"></div>
+				<div id="timeline">
+					<div id="track"></div>
+					<div id="puck"><span></span></div>
+				</div>
+			</nav>
+			<div id="menu" class="shadow"></div>
+			<div id="switch" class="open">Map Legend</div>
+			<div class="wrapper">
+				<div id="map"></div>
 			</div>
-			<div id="plan_info"></div>
-			<div id="timeline">
-				<div id="track"></div>
-				<div id="puck"><span></span></div>
+			<div id="results">
+				<div class="search shadow"></div>
+				<div id="instruction" class="shadow">Click the map to explore...</div>
+				<div class="probe shadow"></div>
 			</div>
-		</nav>
-		<div id="menu" class="shadow"></div>
-		<div id="switch" class="open">Map Legend</div>
-		<div class="wrapper">
-			<div id="map"></div>
 		</div>
 		<div id="layers" class="open">
 			<div id="list"></div>
-		</div>
-		<div id="results">
-			<div class="search shadow"></div>
-			<div id="instruction" class="shadow">Click the map to explore...</div>
-			<div class="probe shadow"></div>
 		</div>
 		<div id="intro">
 			<div id="language">

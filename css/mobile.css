@@ -24,22 +24,23 @@
   }
 
   header {
+    height: 30px;
     padding: 5px 20px;
   }
 
   header h1 {
     display: inline-block;
     margin-left: 10px;
+    vertical-align: text-top;
   }
 
   #hamburger {
-    background: url('../img/hamburger.png') no-repeat;
+    background: url('../img/hamburger.png') no-repeat center;
     background-size: contain;
     cursor: pointer;
     display: inline-block;
-    height: 22px;
+    height: 30px;
     width: 26px;
-    vertical-align: bottom;
   }
 
   /* Timeline */
@@ -55,7 +56,6 @@
 
   #year {
     color: #000;
-    float: right;
     font-size: 24px;
     line-height: 1;
     position: absolute;
@@ -63,9 +63,39 @@
     top: -30px;
   }
 
+  .mobile-wrapper.open #year {
+    right: -400px;
+  }
+
   .tick {
     height: 20px;
   }
+
+  /* Legend */
+  #layers {
+    display: block !important;
+    height: 100% !important;
+    left: 0;
+    top: 0;
+    width: 90%;
+  }
+
+  .mobile-wrapper {
+    background-color: #fff;
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.25);
+    height: 100%;
+    left: 0;
+    transition: all 2s;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+  }
+
+  .mobile-wrapper.open {
+    left: 90%;
+  }
+
 
   /* Map */
 
