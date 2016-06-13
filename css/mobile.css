@@ -11,7 +11,8 @@
   #prev,
   #next,
   #switch,
-  #layers {
+  #layers,
+  .leaflet-top {
     display: none !important;
   }
 
@@ -61,4 +62,7 @@
   .tick {
     height: 20px;
   }
+
+  /* Map */
+  
 }
