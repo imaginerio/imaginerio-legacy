@@ -1,4 +1,5 @@
 @media (max-width: 650px) {
+  /* Hide everything */
   #plans,
   #search,
   #export,
@@ -12,7 +13,8 @@
   #next,
   #switch,
   #layers,
-  .leaflet-top {
+  .leaflet-top,
+  .layer input {
     display: none !important;
   }
 
@@ -96,6 +98,9 @@
     left: 90%;
   }
 
+  .layer {
+    pointer-events: none;
+  }
 
   /* Map */
 
