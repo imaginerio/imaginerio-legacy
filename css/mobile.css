@@ -87,7 +87,7 @@
     box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.25);
     height: 100%;
     left: 0;
-    transition: all 2s;
+    transition: left 1s;
     overflow: hidden;
     position: absolute;
     width: 100%;
@@ -102,6 +102,29 @@
     pointer-events: none;
   }
 
-  /* Map */
+  /* Probe */
+  #results {
+    background-color: #fff;
+    bottom: 0;
+    height: 0;
+    left: 0;
+    max-height: 200px;
+    top: inherit;
+    transition: height 0.5s;
+    width: 100%;
+  }
 
+  #results.open-probe {
+    height: 200px;
+    overflow-y: auto;
+  }
+
+  #wrapper {
+    height: auto;
+    transition: height 0.5s;
+  }
+
+  #wrapper.open-probe {
+    height: auto;
+  }
 }

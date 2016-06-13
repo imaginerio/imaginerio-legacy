@@ -17,14 +17,14 @@ function init()
 {
 	L_PREFER_CANVAS = true;
 	L.Icon.Default.imagePath = 'img';
-	
+
 	lang = gup( 'lang' ) == "pr" ? "pr" : "en";
 	if( gup( 'dev' ) == 'true' ){
     server = "http://imaginerio-dev.rice.edu:3000";
 	  tileserver = "http://imaginerio-dev.rice.edu:3001/tiles/";
     rasterserver = "http://imaginerio-dev.rice.edu:3001/raster/";
 	}
-	
+
 	set_language();
 	resize();
 	init_map();
@@ -32,9 +32,9 @@ function init()
 	init_plans();
 	init_timeline();
 	init_search();
-	
+
 	$( window ).resize( resize );
-	
+
 	$( "#enter" ).click( function()
 	{
 		$( "#intro" ).fadeOut( "slow" );
@@ -44,7 +44,8 @@ function init()
 function resize()
 {
 	var h = $( window ).height();
-	$( "#map" ).height( h - 100 );
+	if( $( "#results" ).hasClass( "open-probe" ) ) $( "#map" ).height( h - 300 );
+	else	$( "#map" ).height( h - 100 );
 	$( "#layers" ).height( h - 210 );
 	build_timeline();
 	snap_timeline( year, 0 );
@@ -54,7 +55,7 @@ function cursor_loading( show, p )
 {
 	if( show )
 	{
-		$( "#map" ).append( 
+		$( "#map" ).append(
 			$( document.createElement( 'div' ) )
 				.attr( "class", "animated zoomIn" )
 				.css({
@@ -76,13 +77,13 @@ function map_loading( show )
 		$( "#map" ).append(
 			$( document.createElement( 'div' ) ).attr( "id", "loading" )
 		);
-    
+
     $( "#loading" ).mouseover( function( e ){
       map.dragging.disable();
       map.touchZoom.disable();
       map.doubleClickZoom.disable();
       map.scrollWheelZoom.disable();
-    });    
+    });
 	}
 	else if( show === false )
 	{
@@ -106,7 +107,7 @@ function set_language()
 		{
 			$( sel ).html( text );
 		});
-		
+
 		$( "#search input" ).attr( "placeholder", "Pesquisa..." );
 	}
 }

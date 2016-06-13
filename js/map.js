@@ -104,6 +104,11 @@ function probe( e )
 	$.getJSON( server + "/probe/" + year + "/" + probeZoom + "/" + e.latlng.lng + "," + e.latlng.lat + "/" + off.join( "," ), function( json )
 	{
 		_.each( json, function( l ){ add_result( l.name, l.id, l.layer, $( "#results .probe" ) ); });
+
+		if( $( ".result" ).length > 0 )	$( "#results, #wrapper" ).addClass( "open-probe" );
+		else $( "#results, #wrapper" ).removeClass( "open-probe" );
+		resize();
+		map.invalidateSize();
 		cursor_loading( false );
 	})
 }
