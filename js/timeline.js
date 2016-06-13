@@ -101,10 +101,17 @@ function build_timeline()
 	var gap = _.find( interval, function( i ){ return px * i > 70; } );
 		
 	while( Math.round( y / gap ) != y / gap )
+
+	if (gap !== undefined)
 	{
 		y++;
+		while( Math.round( y / gap ) != y / gap )
+		{
+			y++;
+		}
 	}
 	
+
 	for( var i = y; i <= max; i += gap )
 	{
 		$( "#track" ).append( add_tick( i ) );
