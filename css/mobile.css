@@ -38,6 +38,7 @@
     display: inline-block;
     height: 22px;
     width: 26px;
+    vertical-align: bottom;
   }
 
   /* Timeline */
