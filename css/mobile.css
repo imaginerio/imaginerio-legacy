@@ -136,4 +136,29 @@
     height: 14px;
     line-height: 1;
   }
+
+  /* Intro screen */
+  #language {
+    float: none;
+    height: 20px;
+    margin: 10px;
+    text-align: right;
+  }
+
+  #title {
+    margin-top: 0;
+  }
+
+  #intro h1 {
+    font-size: 52px;
+  }
+
+  .logo {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  #disclaimer {
+    padding: 10px;
+  }
 }
