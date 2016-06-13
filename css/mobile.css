@@ -1,7 +1,43 @@
 @media (max-width: 650px) {
   #plans,
   #search,
-  #export {
-    display: none;
+  #export,
+  .feature,
+  #instruction,
+  .header-bar,
+  #info-page,
+  .tick span,
+  #prev,
+  #next {
+    display: none !important;
+  }
+
+  /* Header */
+  header,
+  header h1 {
+    font-size: 30px;
+    line-height: 1;
+  }
+
+  header {
+    padding: 5px 20px;
+  }
+
+  /* Timeline */
+  #timeline {
+    height: 30px;
+    margin: 0;
+  }
+
+  #puck {
+    height: 36px;
+  }
+
+  #year {
+    color: #000;
+    float: right;
+    font-size: 24px;
+    line-height: 1;
+    margin-top: -30px;
   }
 }
