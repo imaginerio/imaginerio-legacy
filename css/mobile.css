@@ -7,8 +7,11 @@
   .header-bar,
   #info-page,
   .tick span,
+  .tick .minor,
   #prev,
-  #next {
+  #next,
+  #switch,
+  #layers {
     display: none !important;
   }
 
@@ -40,6 +43,7 @@
   #timeline {
     height: 30px;
     margin: 0;
+    padding: 0 10px;
   }
 
   #puck {
@@ -52,5 +56,9 @@
     font-size: 24px;
     line-height: 1;
     margin-top: -30px;
+  }
+
+  .tick {
+    height: 20px;
   }
 }
