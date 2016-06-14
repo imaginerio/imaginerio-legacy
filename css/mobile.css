@@ -160,6 +160,7 @@
   }
 
   .logo {
+    border: none !important;
     display: block !important;
     width: 100% !important;
   }
