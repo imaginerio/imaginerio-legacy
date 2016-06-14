@@ -41,15 +41,17 @@ function init_map()
 	.on( "locationfound", function(l){
 		if( L.latLngBounds( maxBounds ).contains( l.latlng ) )
 		{
-			map.panTo( l.latlng );
+			map.locate( { setView: true, maxZoom: 16, watch: true });
 			$( ".geolocate" ).addClass( 'selected' );
 		}
 		else
 		{
+			map.stopLocate();
 			alert( lang === "pr" ? pr.locationOutsideBounds : en.locationOutsideBounds );
 		}
 	})
 	.on( "locationerror", function(){
+		map.stopLocate();
 		alert( lang === "pr" ? pr.locationerror : en.locationerror );
 	});
 
@@ -79,7 +81,12 @@ function init_map()
 			this._div = $div[0];
 
 			L.DomEvent.addListener( this._div, 'click', function () {
-				map.locate();
+				if( $( ".geolocate" ).hasClass( "selected" ) ) {
+					map.stopLocate();
+					$( ".geolocate" ).removeClass( "selected" );
+				} else {
+					map.locate();
+				}
 			});
 
 			return this._div;
