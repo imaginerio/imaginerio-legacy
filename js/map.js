@@ -42,6 +42,7 @@ function init_map()
 		if( L.latLngBounds( maxBounds ).contains( l.latlng ) )
 		{
 			map.panTo( l.latlng );
+			$( ".geolocate" ).addClass( 'selected' );
 		}
 		else
 		{

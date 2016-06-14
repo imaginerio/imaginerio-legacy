@@ -180,7 +180,8 @@
     width: 26px;
   }
 
-  .geolocate:hover {
+  .geolocate:hover,
+  .geolocate.selected {
     color: #3D96FF;
   }
 }
