@@ -39,15 +39,17 @@ function init_map()
     }
   })
 	.on( "locationfound", function(l){
+		console.log(l);
+		yahIcon.setRotationAngle(Math.random() * 360);
 		if( L.latLngBounds( maxBounds ).contains( l.latlng ) )
 		{
 			map.locate( { setView: true, maxZoom: 16, watch: true });
-			$( ".geolocate" ).addClass( 'selected' );
+			yahIcon.setLatLng( l.latlng );
 		}
 		else
 		{
 			map.stopLocate();
-			alert( lang === "pr" ? pr.locationOutsideBounds : en.locationOutsideBounds );
+			// alert( lang === "pr" ? pr.locationOutsideBounds : en.locationOutsideBounds );
 		}
 	})
 	.on( "locationerror", function(){
@@ -93,11 +95,18 @@ function init_map()
 			return this._div;
 		}
 		geo.addTo( map );
-
-		yahIcon = L.marker( [ -22.908695, -43.193135 ], { icon : L.divIcon( { className : 'you-are-here-icon' } ) } ).addTo( map );
-		$( '.you-are-here-icon' )
-			.html( '<i class="icon icon-sort-up"></i>');
 	}
+
+	yahIcon = L.marker( [ -22.908695, -43.193135 ],
+		{
+			icon : L.divIcon(
+			{
+				className : 'you-are-here-icon',
+				html: '<i class="icon icon-sort-up"></i>',
+				iconAnchor: L.point(6, 6),
+				rotationOrigin: 'center center'
+			} )
+		} ).addTo( map ); //TODO - hide the icon on first run, after testing
 
 	$( ".leaflet-control-zoom" ).addClass( 'open' );
 }

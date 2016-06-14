@@ -189,12 +189,16 @@
     background-color: #3D96FF;
     border-radius: 50%;
     border: 1px solid #fff;
+    height: 12px;
+    text-align: center;
+    width: 12px;
   }
 
   .you-are-here-icon i {
     color: #3D96FF;
     display: block;
-    font-size: 16px;
-    margin: -12px 0 0 -5px;
+    font-size: 18px;
+    line-height: 1;
+    margin: -9px 0 0 -7px;
   }
 }
