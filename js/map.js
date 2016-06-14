@@ -39,15 +39,6 @@ function init_map()
     }
   })
 	.on( "locationfound", function(l){
-
-		// Goes in the if inside maxBounds block if this works
-		if( l.heading || l.heading === 0 ) {
-			$( ".you-are-here-icon i" ).show();
-			yahIcon.setRotationAngle(l.heading);
-		} else {
-			$( ".you-are-here-icon i" ).hide();
-		}
-
 		if( L.latLngBounds( maxBounds ).contains( l.latlng ) )
 		{
 			map.locate( { setView: true, maxZoom: 16, watch: true });
@@ -114,6 +105,17 @@ function init_map()
 				rotationOrigin: 'center center'
 			} )
 		} ).addTo( map ); //TODO - hide the icon on first run, after testing
+
+		// Check to make sure the browser supprots DeviceOrientationEvents
+		if (window.DeviceOrientationEvent) {
+			console.log('supported');
+		  window.addEventListener('deviceorientation', function(event) {
+				$( ".you-are-here-icon i" ).show();
+				yahIcon.setRotationAngle(event.alpha);
+		  });
+		} else {
+			$( ".you-are-here-icon i" ).hide();
+		}
 
 	$( ".leaflet-control-zoom" ).addClass( 'open' );
 }
