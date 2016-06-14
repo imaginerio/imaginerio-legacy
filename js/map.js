@@ -5,7 +5,8 @@ var map,
 	rasters = {},
 	shown = {},
 	highlight = {},
-  probeZoom = .5;
+  probeZoom = .5,
+	maxBounds = [ [ -23.10243406, -44.04944719  ], [ -22.63003187, -42.65988214 ] ];
 
 function init_map()
 {
@@ -17,7 +18,7 @@ function init_map()
 		maxZoom : 18,
 		doubleClickZoom : false,
 		zoomControl: false,
-		maxBounds : [ [ -23.10243406, -44.04944719  ], [ -22.63003187, -42.65988214 ] ]
+		maxBounds : maxBounds
 	})
 	.on( "click", probe )
   .on( "zoomend", function(){
@@ -36,7 +37,20 @@ function init_map()
         probeZoom = .6;
         break;
     }
-  });
+  })
+	.on( "locationfound", function(l){
+		if( L.latLngBounds( maxBounds ).contains( l.latlng ) )
+		{
+			map.panTo( l.latlng );
+		}
+		else
+		{
+			alert( lang === "pr" ? pr.locationOutsideBounds : en.locationOutsideBounds );
+		}
+	})
+	.on( "locationerror", function(){
+		alert( lang === "pr" ? pr.locationerror : en.locationerror );
+	});
 
 	if( $( "html" ).hasClass( "canvas" ) )
 	{
@@ -61,7 +75,7 @@ function init_map()
 			this._div = L.DomUtil.create( "div", "geolocate leaflet-bar" );
 
 			L.DomEvent.addListener( this._div, 'click', function () {
-				map.locate( { setView: true, maxZoom: 16 } );
+				map.locate();
 			});
 
 			return this._div;
