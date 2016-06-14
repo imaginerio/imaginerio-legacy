@@ -110,14 +110,18 @@ function init_map()
 		if (window.DeviceOrientationEvent) {
 		  window.addEventListener('deviceorientation', function(event) {
 				$( ".you-are-here-icon i" ).show();
-				if( event.webkitCompassHeading ) //for safari
+				if( event.webkitCompassHeading ) //for ios devices
 				{
-      		compassdir = event.webkitCompassHeading;
+      		var compassdir = event.webkitCompassHeading;
     		}
-				else
+				else if ( event.absolute === true )
 				{
     			compassdir = compassHeading(event.alpha, event.beta, event.gamma);
     		}
+				else {
+					$( ".you-are-here-icon i" ).hide();
+					compassdir = 0;
+				}
 				yahIcon.setRotationAngle(compassdir);
 		  });
 		} else {
