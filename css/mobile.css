@@ -190,7 +190,6 @@
     border-radius: 50%;
     border: 1px solid #fff;
     height: 12px;
-    text-align: center;
     width: 12px;
   }
 
@@ -198,7 +197,14 @@
     color: #3D96FF;
     display: block;
     font-size: 18px;
+    height: 11px;
     line-height: 1;
-    margin: -9px 0 0 -7px;
+    margin: -10px 0 0 -1px;
+    width: 11px;
+  }
+
+  .you-are-here-icon i::before {
+    margin-left: -.1em;
+    margin-right: 0;
   }
 }
