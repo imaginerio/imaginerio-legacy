@@ -106,22 +106,41 @@ function init_map()
 			} )
 		} ).addTo( map ); //TODO - hide the icon on first run, after testing
 
-		// Check to make sure the browser supprots DeviceOrientationEvents
-		if (window.DeviceOrientationEvent) {
+
+		/* Device Orientation Events */
+
+		// For Chrome 50+
+		if ('ondeviceorientationabsolute' in window) {
+			console.log('chrome 50+');
+			$( ".you-are-here-icon i" ).show();
+			window.addEventListener('deviceorientationabsolute', function(event) {
+				// console.log(event.alpha, event.beta, event.gamma);
+				// alert(event.alpha);
+				compassdir = compassHeading(event.alpha, event.beta, event.gamma);
+				// alert(compassdir);
+				yahIcon.setRotationAngle(compassdir);
+			});
+		// Other Browsers
+		} else if (window.DeviceOrientationEvent) {
+			console.log('safari or <50 Chrome');
 		  window.addEventListener('deviceorientation', function(event) {
-				$( ".you-are-here-icon i" ).show();
-				if( event.webkitCompassHeading ) //for ios devices
+				$( ".you-are-here-icon i" ).hide();
+				// Safari
+				if( event.webkitCompassHeading )
 				{
       		var compassdir = event.webkitCompassHeading;
     		}
+				// Chrome <50
 				else if ( event.absolute === true )
 				{
     			compassdir = compassHeading(event.alpha, event.beta, event.gamma);
     		}
 				else {
-					$( ".you-are-here-icon i" ).hide();
-					compassdir = 0;
+					console.log('here');
+					return;
 				}
+
+				$( ".you-are-here-icon i" ).show();
 				yahIcon.setRotationAngle(compassdir);
 		  });
 		} else {
