@@ -72,7 +72,10 @@ function init_map()
 		map.addControl( L.control.zoom( { position: 'bottomright' } ) );
 		var geo = L.control( { position: 'bottomright' } );
 		geo.onAdd = function ( map ) {
-			this._div = L.DomUtil.create( "div", "geolocate leaflet-bar" );
+			var $div = $( '<div>' )
+				.addClass( 'geolocate leaflet-bar' )
+				.html( '<i class="icon icon-target"></i>' );
+			this._div = $div[0];
 
 			L.DomEvent.addListener( this._div, 'click', function () {
 				map.locate();

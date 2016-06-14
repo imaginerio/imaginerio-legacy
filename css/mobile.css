@@ -43,12 +43,12 @@
   }
 
   #hamburger {
-    background: url('../img/hamburger.png') no-repeat center;
-    background-size: contain;
     cursor: pointer;
     display: inline-block;
+    font-size: 21px;
     height: 30px;
     width: 30px;
+    vertical-align: middle;
   }
 
   /* Timeline */
@@ -171,8 +171,16 @@
   /* Geolocation */
   .geolocate {
     background-color: #fff;
+    color: #333;
     cursor: pointer;
+    font-size: 16px;
     height: 26px;
+    line-height: 26px;
+    text-align: center;
     width: 26px;
+  }
+
+  .geolocate:hover {
+    color: #3D96FF;
   }
 }
