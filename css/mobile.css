@@ -184,4 +184,17 @@
   .geolocate.selected {
     color: #3D96FF;
   }
+
+  .you-are-here-icon {
+    background-color: #3D96FF;
+    border-radius: 50%;
+    border: 1px solid #fff;
+  }
+
+  .you-are-here-icon i {
+    color: #3D96FF;
+    display: block;
+    font-size: 16px;
+    margin: -12px 0 0 -5px;
+  }
 }

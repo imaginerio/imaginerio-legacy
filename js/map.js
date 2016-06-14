@@ -73,6 +73,7 @@ function init_map()
 	else
 	{
 		map.addControl( L.control.zoom( { position: 'bottomright' } ) );
+
 		var geo = L.control( { position: 'bottomright' } );
 		geo.onAdd = function ( map ) {
 			var $div = $( '<div>' )
@@ -92,6 +93,10 @@ function init_map()
 			return this._div;
 		}
 		geo.addTo( map );
+
+		yahIcon = L.marker( [ -22.908695, -43.193135 ], { icon : L.divIcon( { className : 'you-are-here-icon' } ) } ).addTo( map );
+		$( '.you-are-here-icon' )
+			.html( '<i class="icon icon-sort-up"></i>');
 	}
 
 	$( ".leaflet-control-zoom" ).addClass( 'open' );
