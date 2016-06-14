@@ -39,8 +39,15 @@ function init_map()
     }
   })
 	.on( "locationfound", function(l){
-		console.log(l);
-		yahIcon.setRotationAngle(Math.random() * 360);
+
+		// Goes in the if inside maxBounds block if this works
+		if( l.heading || l.heading === 0 ) {
+			$( ".you-are-here-icon i" ).show();
+			yahIcon.setRotationAngle(l.heading);
+		} else {
+			$( ".you-are-here-icon i" ).hide();
+		}
+
 		if( L.latLngBounds( maxBounds ).contains( l.latlng ) )
 		{
 			map.locate( { setView: true, maxZoom: 16, watch: true });
@@ -49,7 +56,7 @@ function init_map()
 		else
 		{
 			map.stopLocate();
-			// alert( lang === "pr" ? pr.locationOutsideBounds : en.locationOutsideBounds );
+			alert( lang === "pr" ? pr.locationOutsideBounds : en.locationOutsideBounds );
 		}
 	})
 	.on( "locationerror", function(){
