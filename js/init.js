@@ -10,6 +10,7 @@ var lang,
 		"#switch" : "Legenda do Mapa",
 		"#instruction" : "Clique no mapa para explorar...",
 		"#export" : "Exportar o mapa <span></span>",
+		"#tagline" : "Um Atlas ilustrado e diacronico da evolução social e urbana do Rio de Janeiro",
 		"#disclaimer" : "Este produto tem fins informativos e não foi preparado nem é adequado para fins legais, de engenharia ou de levantamento topográfico. Não representa um estudo in sitiu e apenas representa localizações relativas aproximadas. Não há qualquer garantia referente à precisão específica ou ao caráter integral deste produto e a Rice University assim como a equipe de pesquisa de imagineRio não assumem qualquer responsabilidade nem respondem por danos decorrentes de erros e omissões."
 	};
 

@@ -59,6 +59,13 @@ h1, header{
 	z-index: 99999999;
 }
 
+#intro i{
+  font-size: 16px;
+  color: #666;
+  margin: -20px auto 40px;
+  display: block;
+}
+
 #language{
 	float: right;
 	margin: 40px;
