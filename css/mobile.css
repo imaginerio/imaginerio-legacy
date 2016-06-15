@@ -14,7 +14,7 @@
   .header-bar,
   #info-page,
   .tick span,
-  .tick .minor,
+  #track > .tick:last-of-type,
   #prev,
   #next,
   #switch,
@@ -87,7 +87,8 @@
     pointer-events: none;
   }
 
-  .tick {
+  .tick,
+  .minor {
     height: 20px;
   }
 
