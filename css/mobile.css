@@ -33,7 +33,7 @@
 
   header {
     height: 30px;
-    padding: 5px 20px;
+    padding: 5px 10px;
   }
 
   header h1 {
@@ -92,7 +92,7 @@
     left: 0;
     padding-top: 0;
     top: 0;
-    width: 90%;
+    width: calc(100% - 50px);
   }
 
   .mobile-wrapper {
@@ -109,7 +109,7 @@
   }
 
   .mobile-wrapper.open {
-    left: 90%;
+    left: calc(100% - 50px);
   }
 
   .layer {
