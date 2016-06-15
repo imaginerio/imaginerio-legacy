@@ -195,6 +195,12 @@
     width: 26px;
   }
 
+  .leaflet-touch .geolocate {
+    height: 30px;
+    line-height: 30px;
+    width: 30px;
+  }
+
   .geolocate:hover,
   .geolocate.selected {
     color: #3D96FF;
