@@ -2,7 +2,7 @@ var server = "http://imaginerio.rice.edu:3000",
 	  tileserver = "http://imaginerio.rice.edu:3001/tiles/",
     rasterserver = "http://imaginerio.rice.edu:3001/raster/";
 
-var mobileSize = 650;
+var mobileSize = 800;
 
 var lang,
 	pr = {
