@@ -73,6 +73,11 @@
     top: -41px;
   }
 
+  .mobile-wrapper nav,
+  .mobile-wrapper .wrapper {
+    pointer-events: all;
+  }
+
   .mobile-wrapper.open #year {
     right: -400px;
   }
@@ -168,14 +173,14 @@
   }
 
   .logo {
-    border: none !important;
-    display: block !important;
-    width: 100% !important;
+    box-sizing: border-box;
+    padding: 10px 20px;
   }
 
   #logos img {
     height: auto;
-    width: 40%;
+    padding: 0;
+    width: 100%;
   }
 
   #disclaimer {
