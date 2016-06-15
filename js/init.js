@@ -2,6 +2,8 @@ var server = "http://imaginerio.rice.edu:3000",
 	  tileserver = "http://imaginerio.rice.edu:3001/tiles/",
     rasterserver = "http://imaginerio.rice.edu:3001/raster/";
 
+var mobileSize = 650;
+
 var lang,
 	pr = {
 		"h1" : "imagináRio",
@@ -41,7 +43,7 @@ function init()
 	init_search();
 
 	// Mobile start
-	if( $( window ).width() <= 650 ) $('.open').removeClass('open');
+	if( $( window ).width() <= mobileSize ) $('.open').removeClass('open');
 
 	$( window ).resize( resize );
 
@@ -56,7 +58,7 @@ function resize()
 	var h = $( window ).height();
 
 	//mobile
-	if( $( window ).width() <= 650 )
+	if( $( window ).width() <= mobileSize )
 	{
 		if( $( "#results" ).hasClass( "open-probe" ) )
 		{
