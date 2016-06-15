@@ -126,11 +126,9 @@
 
   /* Map */
   #wrapper {
-    transition: height 0.5s;
   }
 
   #map {
-    transition: height 0.5s;
     top: -30px;
   }
 
@@ -138,16 +136,13 @@
   #results {
     background-color: #fff;
     bottom: 0;
-    height: 0;
     left: 0;
-    max-height: 200px;
     top: auto;
-    transition: height 0.5s;
     width: 100%;
   }
 
   #results.open-probe {
-    height: 200px;
+    max-height: 200px;
     overflow-y: auto;
   }
 

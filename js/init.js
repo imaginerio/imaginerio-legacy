@@ -62,8 +62,9 @@ function resize()
 	{
 		if( $( "#results" ).hasClass( "open-probe" ) )
 		{
-			$( "#wrapper" ).height( h - 270 );
-			$( "#map" ).height( h - 241 );
+			var probeh = $( ".open-probe" ).height();
+			$( "#wrapper" ).height( h - 70 - probeh );
+			$( "#map" ).height( h - 41 - probeh );
 		}
 		else
 		{
