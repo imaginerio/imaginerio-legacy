@@ -75,6 +75,11 @@
     right: -400px;
   }
 
+  .mobile-wrapper.open nav,
+  .mobile-wrapper.open .wrapper {
+    pointer-events: none;
+  }
+
   .tick {
     height: 20px;
   }
