@@ -25,12 +25,21 @@ function init_layers()
 		if( $( "#layers" ).hasClass( "open" ) )
 		{
 			$( "#layers, .mobile-wrapper" ).removeClass( "open" );
+			$( ".mobile-wrapper" ).css( "width", '100%' );
+			$( "#hamburger" ).removeClass( "open" );
+			$( "#year, .leaflet-bar, header h1" ).show();
 			resize();
 			map.invalidateSize();
 		}
 		else
 		{
 			$( "#layers, .mobile-wrapper" ).addClass( "open" );
+			console.log('here');
+			setTimeout(function () {
+				$( ".mobile-wrapper" ).width(50);
+				$( "#year, .leaflet-bar, header h1" ).hide();
+				$( "#hamburger" ).addClass( "open" );
+			}, 1000);
 		}
 	});
 

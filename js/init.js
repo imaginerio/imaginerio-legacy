@@ -51,6 +51,9 @@ function init()
 	{
 		$( "#intro" ).fadeOut( "slow" );
 	});
+
+	resize();
+	map.invalidateSize();
 }
 
 function resize()

@@ -48,8 +48,14 @@
     display: inline-block;
     font-size: 21px;
     height: 30px;
+    line-height: 1;
     width: 30px;
     vertical-align: middle;
+  }
+
+  #hamburger.open {
+    line-height: 30px;
+    vertical-align: bottom;
   }
 
   /* Timeline */
@@ -112,11 +118,7 @@
   }
 
   .mobile-wrapper.open nav,
-  .mobile-wrapper.open .wrapper {
-    pointer-events: none;
-  }
-
-
+  .mobile-wrapper.open .wrapper,
   .layer {
     pointer-events: none;
   }
