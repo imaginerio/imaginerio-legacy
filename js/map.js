@@ -41,6 +41,7 @@ function init_map()
 	.on( "locationfound", function(l){
 		if( L.latLngBounds( maxBounds ).contains( l.latlng ) )
 		{
+			$( ".you-are-here-icon" ).show();
 			map.locate( { setView: true, maxZoom: 16, watch: true });
 			yahIcon.setLatLng( l.latlng );
 		}
@@ -104,48 +105,28 @@ function init_map()
 				iconAnchor: L.point(6, 6),
 				rotationOrigin: 'center center'
 			} )
-		} ).addTo( map ); //TODO - hide the icon on first run, after testing
+		} ).addTo( map );
 
+	// $( ".you-are-here-icon" ).hide(); //TODO - uncomment before merging into master
 
-		/* Device Orientation Events */
+	/* Device Orientation Events */
 
-		// For Chrome 50+
-		if ('ondeviceorientationabsolute' in window) {
-			console.log('chrome 50+');
-			$( ".you-are-here-icon i" ).show();
-			window.addEventListener('deviceorientationabsolute', function(event) {
-				// console.log(event.alpha, event.beta, event.gamma);
-				// alert(event.alpha);
-				compassdir = compassHeading(event.alpha, event.beta, event.gamma);
-				// alert(compassdir);
-				yahIcon.setRotationAngle(compassdir);
-			});
-		// Other Browsers
-		} else if (window.DeviceOrientationEvent) {
-			console.log('safari or <50 Chrome');
-		  window.addEventListener('deviceorientation', function(event) {
-				$( ".you-are-here-icon i" ).hide();
-				// Safari
-				if( event.webkitCompassHeading )
-				{
-      		var compassdir = event.webkitCompassHeading;
-    		}
-				// Chrome <50
-				else if ( event.absolute === true )
-				{
-    			compassdir = compassHeading(event.alpha, event.beta, event.gamma);
-    		}
-				else {
-					console.log('here');
-					return;
-				}
-
-				$( ".you-are-here-icon i" ).show();
-				yahIcon.setRotationAngle(compassdir);
-		  });
-		} else {
+	if (window.DeviceOrientationEvent) {
+	  window.addEventListener('deviceorientation', function(event) {
 			$( ".you-are-here-icon i" ).hide();
-		}
+			// iOS
+			if( event.webkitCompassHeading )
+			{
+    		var compassdir = event.webkitCompassHeading;
+  		}
+			else return;
+
+			$( ".you-are-here-icon i" ).show();
+			yahIcon.setRotationAngle(compassdir);
+	  });
+	} else {
+		$( ".you-are-here-icon i" ).hide();
+	}
 
 	$( ".leaflet-control-zoom" ).addClass( 'open' );
 }
@@ -353,36 +334,4 @@ function export_map()
 	var url = server + "/export/" + lang + "/" + year + "/" + layerstring + "/" + raster + "/" + map.getBounds().toBBoxString() + "/";
 	document.getElementById( 'download_iframe' ).src = url;
 	window.setTimeout( function(){ $( "#export" ).removeClass( "loading" ); }, 2000 );
-}
-
-function compassHeading( alpha, beta, gamma )
-{
-	var degtorad = Math.PI / 180; // Degree-to-Radian conversion
-
-  var _x = beta  ? beta  * degtorad : 0; // beta value
-  var _y = gamma ? gamma * degtorad : 0; // gamma value
-  var _z = alpha ? alpha * degtorad : 0; // alpha value
-
-  var cX = Math.cos( _x );
-  var cY = Math.cos( _y );
-  var cZ = Math.cos( _z );
-  var sX = Math.sin( _x );
-  var sY = Math.sin( _y );
-  var sZ = Math.sin( _z );
-
-  // Calculate Vx and Vy components
-  var Vx = - cZ * sY - sZ * sX * cY;
-  var Vy = - sZ * sY + cZ * sX * cY;
-
-  // Calculate compass heading
-  var compassHeading = Math.atan( Vx / Vy );
-
-  // Convert compass heading to use whole unit circle
-  if( Vy < 0 ) {
-    compassHeading += Math.PI;
-  } else if( Vx < 0 ) {
-    compassHeading += 2 * Math.PI;
-  }
-
-  return compassHeading * ( 180 / Math.PI ); // Compass Heading (in degrees)
 }
