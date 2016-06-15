@@ -73,20 +73,6 @@
     top: -41px;
   }
 
-  .mobile-wrapper nav,
-  .mobile-wrapper .wrapper {
-    pointer-events: all;
-  }
-
-  .mobile-wrapper.open #year {
-    right: -400px;
-  }
-
-  .mobile-wrapper.open nav,
-  .mobile-wrapper.open .wrapper {
-    pointer-events: none;
-  }
-
   .tick,
   .minor {
     height: 20px;
@@ -116,18 +102,26 @@
     z-index: 10;
   }
 
+  .mobile-wrapper nav,
+  .mobile-wrapper .wrapper {
+    pointer-events: all;
+  }
+
   .mobile-wrapper.open {
     left: calc(100% - 50px);
   }
+
+  .mobile-wrapper.open nav,
+  .mobile-wrapper.open .wrapper {
+    pointer-events: none;
+  }
+
 
   .layer {
     pointer-events: none;
   }
 
   /* Map */
-  #wrapper {
-  }
-
   #map {
     top: -30px;
   }
