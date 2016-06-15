@@ -66,7 +66,7 @@ function init_map()
 	}
 
 	// Set up controls
-	if ( $( window ).width() > mobileSize )
+	if ( !mobile )
 	{
 		map.addControl(L.control.zoom( { position: 'topleft' } ) );
 	}

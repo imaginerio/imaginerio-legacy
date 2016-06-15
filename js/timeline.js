@@ -24,7 +24,6 @@ function init_timeline()
 
   $( "#puck" ).on( 'touchstart mousedown', function( e )
 	{
-		var mobile = $( window ).width() <= mobileSize;
     e.preventDefault();
 		$( "#puck span" ).fadeIn( "fast" );
     $( "#timeline" ).on( 'touchmove mousemove', function( e )

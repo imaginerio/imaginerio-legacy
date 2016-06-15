@@ -3,6 +3,7 @@ var server = "http://imaginerio.rice.edu:3000",
     rasterserver = "http://imaginerio.rice.edu:3001/raster/";
 
 var mobileSize = 800;
+var mobile = $( window ).width() <= mobileSize;
 
 var lang,
 	pr = {
@@ -43,7 +44,7 @@ function init()
 	init_search();
 
 	// Mobile start
-	if( $( window ).width() <= mobileSize ) $('.open').removeClass('open');
+	if( mobile ) $('.open').removeClass('open');
 
 	$( window ).resize( resize );
 
@@ -61,7 +62,7 @@ function resize()
 	var h = $( window ).height();
 
 	//mobile
-	if( $( window ).width() <= mobileSize )
+	if( mobile )
 	{
 		if( $( "#results" ).hasClass( "open-probe" ) )
 		{
