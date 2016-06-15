@@ -48,11 +48,33 @@ function draw_visual( layer )
 				});
 				$( ".visual_probe" ).remove();
 			});
-			l.on( "click", function()
+
+			// mousedown is used to help differentiate touch events from click events
+			l.on( "mousedown", function(e)
 			{
-				show_image( this.layer.feature.properties );
-        console.log( l );
+				l.selected = true;
 			});
+			l.on('click', function (e) {
+				if( l.selected ) {
+					l.selected = false;
+					show_image( this.layer.feature.properties );
+					_.each( this.layer.getLayers(), function( l )
+					{
+						if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0, fill : false } );
+					});
+					// $( ".visual_probe" ).remove();
+				}
+				else {
+					l.selected = true;
+					this.layer.bringToFront();
+					_.each( this.layer.getLayers(), function( l )
+					{
+						if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0.2, fill : true } );
+					});
+
+					// show_visual_details( this.layer.feature.properties, map.latLngToContainerPoint( e.latlng ) );
+				}
+			})
 		}
 		else
 		{
