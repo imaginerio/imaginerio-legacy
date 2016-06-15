@@ -27,17 +27,17 @@ function draw_visual( layer )
 				iconSize : [ 25, 22 ],
 				iconAnchor : [ 12, 11 ]
 			}));
-			
+
 			l.layer = layer;
-			
+
 			l.on( "mouseover", function( e )
-			{	
+			{
 				this.layer.bringToFront();
 				_.each( this.layer.getLayers(), function( l )
 				{
 					if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0.2, fill : true } );
 				});
-	
+
 				show_visual_details( this.layer.feature.properties, map.latLngToContainerPoint( e.latlng ) );
 			});
 			l.on( "mouseout", function( e )
@@ -74,7 +74,7 @@ function show_visual_details( properties, e )
 					.addClass( "visual_probe" )
 					.html( "<b>" + properties.description + "</b><p>" + properties.creator + "<p><i>Click for details</i>" )
 					.appendTo( $( ".wrapper" ) );
-	
+
 	$.ajax( "http://www.sscommons.org/openlibrary/secure/metadata/" + properties.id,{
 		dataType : "json",
 		success : function( json )
@@ -91,7 +91,7 @@ function show_visual_details( properties, e )
 }
 
 function show_image( data )
-{	
+{
 	$.getJSON( "http://www.sscommons.org/openlibrary/secure/imagefpx/" + data.id + "/7729935/5", function( json )
 	{
 		$.ajax( "http://www.sscommons.org/openlibrary/secure/metadata/" + data.id + "?_method=FpHtml",{
@@ -113,23 +113,32 @@ function clear_visual()
 
 function scale_image( width, height )
 {
-	var maxWidth = Math.floor( $( window ).width() * 0.9 ) - 100,
+	if( $( window ).width() > mobileSize )
+	{
+		var maxWidth = Math.floor( $( window ).width() * 0.9 ) - 100,
 		maxHeight = $( window ).height() - 250,
 		ratio = 0;
-	
+	}
+	else
+	{
+		maxWidth = $( window ).width() - 20;
+		maxHeight = $( window ).height() - 150;
+		ratio = 0;
+	}
+
 	if( width > maxWidth )
 	{
 		ratio = maxWidth / width;
 		height = height * ratio;
 		width = width * ratio;
 	}
-	
-	if( height > maxHeight )
+
+	if ( height > maxHeight )
 	{
 		ratio = maxHeight / height;
 		width = width * ratio;
 		height = height * ratio;
 	}
-	
+
 	return { w : Math.round( width ), h : Math.round( height ) };
 }
