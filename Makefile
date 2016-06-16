@@ -5,6 +5,7 @@ html-replace =		$(build-dir)index.html
 html-prereq =		index.html \
 
 dir-prereq =		img \
+								font \
 
 lib-path =			lib/
 
