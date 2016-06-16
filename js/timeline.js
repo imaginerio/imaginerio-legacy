@@ -13,7 +13,7 @@ function init_timeline()
 		years = json,
 		first = _.first( years ),
 		min = Math.floor( first / 50 ) * 50,
-		max = Math.min( new Date().getFullYear(), _.last( years ) + 1 ),
+		max = Math.min( new Date().getFullYear(), _.last( years ) ),
 
 		years = _.filter( years, function( val ){ return val <= max });
 
@@ -37,12 +37,11 @@ function init_timeline()
 			if (!mobile)
 			{
 				var pos = Math.max( 0, Math.min( x - 300, $( this ).width() ) );
-				pos = Math.min( pos, $( this ).width() - 5 );
 				$( "#puck span" ).html( get_timeline_year() );
 			}
 			else
 			{
-				pos = Math.max( 0, Math.min( x, $( this ).width() - 5 ) );
+				pos = Math.max( 0, Math.min( x, $( this ).width() ) );
 				$( "#year span" ).html( get_timeline_year() );
 			}
 			$( "#puck" ).css( "left", pos );
