@@ -7,7 +7,7 @@ function init_layers()
 	{
 		names = json;
 	})
-	
+
 	$( "#switch" ).click( function()
 	{
 		if( $( "#layers" ).hasClass( "open" ) )
@@ -19,6 +19,31 @@ function init_layers()
 			$( "#layers, #switch, .leaflet-control-zoom" ).addClass( "open" );
 		}
 	});
+
+	$( "#hamburger" ).click( function ()
+	{
+		if( $( "#layers" ).hasClass( "open" ) )
+		{
+			$( "#layers, .mobile-wrapper" ).removeClass( "open" );
+			$( ".mobile-wrapper" ).css( "width", '100%' );
+			$( "#hamburger" ).removeClass( "open" );
+			$( "#year, .leaflet-bar, header h1" ).show();
+			resize();
+			map.invalidateSize();
+		}
+		else
+		{
+			$( "#layers, .mobile-wrapper" ).addClass( "open" );
+			console.log('here');
+			setTimeout(function () {
+				$( ".mobile-wrapper" ).width(50);
+				$( "#year, .leaflet-bar, header h1" ).hide();
+				$( "#hamburger" ).addClass( "open" );
+			}, 1000);
+		}
+	});
+
+
 	$( "#layers" ).on( "click", ".folder h4", function()
 	{
 		var folder = $( this ).parent();
@@ -42,7 +67,7 @@ function init_layers()
 			draw( $( this ).attr( "id" ), "feature", $( this ), feature_drawn );
 			$( this ).addClass( "loading" );
 		}
-		
+
 		$( ".drawn" ).removeClass( "drawn" );
 		e.stopPropagation();
 	});
@@ -51,14 +76,14 @@ function init_layers()
 function build_layers()
 {
 	$( "#list" ).empty();
-	
+
 	$.getJSON( server + "/raster/" + year, function( json )
 	{
 		if( json.length > 0 )
 		{
 			var folder = build_folder( names[ "iconography" ] ),
 				  raster = _.filter( json, function( val ){ return val.layer != "viewsheds" } );
-				
+
 			if( raster.length < json.length )
 			{
 				var label = add_check( "layer visual", "ImageViewshedsPoly", "viewsheds", function()
@@ -79,13 +104,13 @@ function build_layers()
 				build_visual( val, folder );
 			});
 		}
-		
+
 		$.getJSON( server + "/layers/" + year, function( json )
-		{	
+		{
 			_.each( json, function( val, key )
 			{
 				var folder = build_folder( names[ key.toLowerCase() ] );
-								
+
 				_.each( val, function( val, key )
 				{
   				add_check( "geodb", key ).appendTo( folder );
@@ -93,7 +118,7 @@ function build_layers()
 					{
 						var label = add_check( "layer", key, val.id, switch_layers ).appendTo( folder );
 						delete val.id;
-						
+
 						if( val.style ) label.prepend( add_swatch( val.style ) );
 						if( val.features )
 						{
@@ -110,14 +135,14 @@ function build_layers()
 					});
 				});
 			});
-      
+
       $( "#layers label:not( .visual ) input:not( :checked )" ).each( function()
       {
         $( this ).parent().nextUntil( "label.layer" ).addClass( "off" );
       });
 		});
 	});
-	
+
 	function build_folder( name )
 	{
 		return $( document.createElement( 'div' ) )
@@ -125,7 +150,7 @@ function build_layers()
 					.html( "<h4>" + name + "</h4>" )
 					.appendTo( $( "#list" ) );
 	}
-	
+
 	function build_visual( r, div )
 	{
 		var label = $( document.createElement( 'label' ) )
@@ -150,16 +175,16 @@ function build_layers()
 									{
 										load_raster( false );
 									}
-											
+
 									e.stopPropagation();
 								})
-						);							
+						);
 		$.getJSON( "http://www.sscommons.org/openlibrary/secure/imagefpx/" + r.id + "/7729935/5", function( json )
 		{
 			var w = json[ 0 ].width,
 				h = json[ 0 ].height,
 				s = Math.max( 120 / h, 185 / w );
-			
+
       $.ajax( "http://www.sscommons.org/openlibrary/secure/metadata/" + r.id + "?_method=FpHtml",
       {
         dataType : "html",
@@ -180,9 +205,9 @@ function build_layers()
                     "src" : "img/External_link.png"
                   })
               )
-              
+
           );
-          
+
           label.after(
             $( document.createElement( 'img' ) )
               .attr( "src", json[ 0 ].imageServer + json[ 0 ].imageUrl + "&&wid=" + Math.round( w * s )  + "&hei=" + Math.round( h * s ) + "&rgnn=0,0,1,1&cvt=JPEG" )
@@ -196,12 +221,12 @@ function build_layers()
       });
 		});
 	}
-	
+
 	function add_check( cclass, html, id, on_click ){
 		var label = $( document.createElement( 'label' ) )
 						.addClass( cclass )
 						.html( "<span>" + names[ html.toLowerCase() ] + "</span>" );
-		
+
 		if( id ){
 			label.prepend(
 				$( document.createElement( 'input' ) )
@@ -213,26 +238,26 @@ function build_layers()
 					.click( on_click )
 			);
 		}
-		
+
 		return label;
 	}
-	
+
 	function switch_layers( e )
 	{
 		off = [];
 		$( ".feature.off" ).removeClass( "off" );
-		
+
 		$( "#layers label:not( .visual ) input:not( :checked )" ).each( function()
 		{
 			off = off.concat( $( this ).val() );
 			$( this ).parent().nextUntil( "label.layer" ).addClass( "off" );
 		});
-		
+
     clear_results( "probe" );
 		e.stopPropagation();
 		load_tiles();
 	}
-	
+
 	function add_swatch( style )
 	{
 		var swatch = $( document.createElement( 'div' ) ).addClass( "swatch" );
@@ -248,7 +273,7 @@ function build_layers()
 		}
 
 		swatch.css( style );
-		
+
 		return swatch;
 	}
 }

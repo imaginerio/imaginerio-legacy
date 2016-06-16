@@ -5,7 +5,8 @@ var map,
 	rasters = {},
 	shown = {},
 	highlight = {},
-  probeZoom = .5;
+  probeZoom = .5,
+	maxBounds = [ [ -23.10243406, -44.04944719  ], [ -22.63003187, -42.65988214 ] ];
 
 function init_map()
 {
@@ -16,7 +17,8 @@ function init_map()
 		minZoom : 13,
 		maxZoom : 18,
 		doubleClickZoom : false,
-		maxBounds : [ [ -23.10243406, -44.04944719  ], [ -22.63003187, -42.65988214 ] ]
+		zoomControl: false,
+		maxBounds : maxBounds
 	})
 	.on( "click", probe )
   .on( "zoomend", function(){
@@ -35,8 +37,25 @@ function init_map()
         probeZoom = .6;
         break;
     }
-  });
-	
+  })
+	.on( "locationfound", function(l){
+		if( L.latLngBounds( maxBounds ).contains( l.latlng ) )
+		{
+			$( ".you-are-here-icon" ).show();
+			map.locate( { setView: true, maxZoom: 16, watch: true });
+			yahIcon.setLatLng( l.latlng );
+		}
+		else
+		{
+			map.stopLocate();
+			alert( lang === "pr" ? pr.locationOutsideBounds : en.locationOutsideBounds );
+		}
+	})
+	.on( "locationerror", function(){
+		map.stopLocate();
+		alert( lang === "pr" ? pr.locationerror : en.locationerror );
+	});
+
 	if( $( "html" ).hasClass( "canvas" ) )
 	{
 		$( "#export" ).click( export_map );
@@ -45,13 +64,77 @@ function init_map()
 	{
 		$( "#export" ).hide();
 	}
+
+	// Set up controls
+	if ( !mobile )
+	{
+		map.addControl(L.control.zoom( { position: 'topleft' } ) );
+	}
+	// mobile with geolocation control
+	else
+	{
+		map.addControl( L.control.zoom( { position: 'bottomright' } ) );
+
+		var geo = L.control( { position: 'bottomright' } );
+		geo.onAdd = function ( map ) {
+			var $div = $( '<div>' )
+				.addClass( 'geolocate leaflet-bar' )
+				.html( '<i class="icon icon-target"></i>' );
+			this._div = $div[0];
+
+			L.DomEvent.addListener( this._div, 'click', function () {
+				if( $( ".geolocate" ).hasClass( "selected" ) ) {
+					map.stopLocate();
+					$( ".geolocate" ).removeClass( "selected" );
+				} else {
+					map.locate();
+				}
+			});
+
+			return this._div;
+		}
+		geo.addTo( map );
+	}
+
+	yahIcon = L.marker( [ -22.908695, -43.193135 ],
+		{
+			icon : L.divIcon(
+			{
+				className : 'you-are-here-icon',
+				html: '<i class="icon icon-sort-up"></i>',
+				iconAnchor: L.point(6, 6),
+				rotationOrigin: 'center center'
+			} )
+		} ).addTo( map );
+
+	// $( ".you-are-here-icon" ).hide(); //TODO - uncomment before merging into master
+
+	/* Device Orientation Events */
+
+	if (window.DeviceOrientationEvent) {
+	  window.addEventListener('deviceorientation', function(event) {
+			$( ".you-are-here-icon i" ).hide();
+			// iOS
+			if( event.webkitCompassHeading )
+			{
+    		var compassdir = event.webkitCompassHeading;
+  		}
+			else return;
+
+			$( ".you-are-here-icon i" ).show();
+			yahIcon.setRotationAngle(compassdir);
+	  });
+	} else {
+		$( ".you-are-here-icon i" ).hide();
+	}
+
 	$( ".leaflet-control-zoom" ).addClass( 'open' );
 }
 
 function load_base()
 {
 	if( map.hasLayer( base ) ) map.removeLayer( base );
-	
+
 	base = L.tileLayer( tileserver + year + '/base/{z}/{x}/{y}.png' ).addTo( map );
 }
 
@@ -70,7 +153,7 @@ function load_tiles()
 					{
 						show_tiles( this );
 					});
-		
+
 		if( off.length == 0 ) tiles[ year ] = t;
 	}
 	load_visual();
@@ -90,10 +173,15 @@ function probe( e )
 	cursor_loading( true, e.containerPoint );
 	// clear_highlight();
 	clear_results( "probe" );
-	
+
 	$.getJSON( server + "/probe/" + year + "/" + probeZoom + "/" + e.latlng.lng + "," + e.latlng.lat + "/" + off.join( "," ), function( json )
 	{
 		_.each( json, function( l ){ add_result( l.name, l.id, l.layer, $( "#results .probe" ) ); });
+
+		if( $( ".result" ).length > 0 )	$( "#results, #wrapper" ).addClass( "open-probe" );
+		else $( "#results, #wrapper" ).removeClass( "open-probe" );
+		resize();
+		map.invalidateSize();
 		cursor_loading( false );
 	})
 }
@@ -101,17 +189,17 @@ function probe( e )
 function draw( id, route, el, callback )
 {
 	clear_highlight();
-	
+
 	route = route ? route : "draw";
 	var styles = get_styles( "#1a1a1a" );
-	
+
 	highlight.bottom = omnivore.geojson( server + "/" + route + "/" + year + "/" + encodeURIComponent( id ), null, styles.bottom )
 				.on( 'ready', function(){
   				var intersect = false;
   				this.eachLayer( function( layer ){
     				if( map.getBounds().intersects( layer.getBounds() ) ) intersect = true;
           })
-          
+
           if( intersect === false ){
             if( map.getBoundsZoom( this.getBounds() ) <= map.getMinZoom() ) {
               map.setZoom( map.getMinZoom() );
@@ -159,7 +247,7 @@ function tile_fadeOut( tile_out )
 		if( i <= 0 ) clearInterval( timer );
 		tile_out.setOpacity( Math.max( 0, i ) );
 	}, 50 );
-	
+
 	return tile_out;
 }
 
@@ -176,7 +264,7 @@ function tile_fadeIn( tile_in )
 		}
 		tile_in.setOpacity( Math.min( 1, i ) );
 	}, 50 );
-	
+
 	return tile_in;
 }
 
@@ -189,14 +277,14 @@ function clear_highlight()
 
 function get_styles( color )
 {
-	var topStyle = { 
+	var topStyle = {
       		color: color,
       		fillColor: color,
       		fillOpacity : 0.2,
       		weight : 2,
       		radius : 4
       },
-      bottomStyle = { 
+      bottomStyle = {
       		color: color,
       		fillColor: color,
       		fillOpacity : 0,
@@ -204,7 +292,7 @@ function get_styles( color )
       		weight : 6,
       		radius : 4
       	};
-  
+
 	var topLayer = L.geoJson( null, {
 	    style : function( feature )
 	    {
@@ -219,7 +307,7 @@ function get_styles( color )
         layer.on( 'click', probe );
       }
 	});
-	
+
 	var bottomLayer = L.geoJson( null, {
 	    style : function( feature )
 	    {
@@ -234,7 +322,7 @@ function get_styles( color )
         layer.on( 'click', probe );
       }
 	});
-	
+
 	return { top : topLayer, bottom : bottomLayer };
 }
 

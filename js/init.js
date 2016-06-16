@@ -2,6 +2,9 @@ var server = "http://imaginerio.rice.edu:3000",
 	  tileserver = "http://imaginerio.rice.edu:3001/tiles/",
     rasterserver = "http://imaginerio.rice.edu:3001/raster/";
 
+var mobileSize = 800;
+var mobile = $( window ).width() <= mobileSize;
+
 var lang,
 	pr = {
 		"h1" : "imagináRio",
@@ -11,21 +14,28 @@ var lang,
 		"#instruction" : "Clique no mapa para explorar...",
 		"#export" : "Exportar o mapa <span></span>",
 		"#tagline" : "Um Atlas ilustrado e diacronico da evolução social e urbana do Rio de Janeiro",
+		"locationOutsideBounds" : "Este produto",
+		"locationError" : "Este produto",
 		"#disclaimer" : "Este produto tem fins informativos e não foi preparado nem é adequado para fins legais, de engenharia ou de levantamento topográfico. Não representa um estudo in sitiu e apenas representa localizações relativas aproximadas. Não há qualquer garantia referente à precisão específica ou ao caráter integral deste produto e a Rice University assim como a equipe de pesquisa de imagineRio não assumem qualquer responsabilidade nem respondem por danos decorrentes de erros e omissões."
 	};
+
+	en = {
+		"locationOutsideBounds" : "Your location is not within the bounds of the map.",
+		"locationError" : "Sorry, we were not able to find your location."
+	}
 
 function init()
 {
 	L_PREFER_CANVAS = true;
 	L.Icon.Default.imagePath = 'img';
-	
+
 	lang = gup( 'lang' ) == "pr" ? "pr" : "en";
 	if( gup( 'dev' ) == 'true' ){
     server = "http://imaginerio-dev.rice.edu:3000";
 	  tileserver = "http://imaginerio-dev.rice.edu:3001/tiles/";
     rasterserver = "http://imaginerio-dev.rice.edu:3001/raster/";
 	}
-	
+
 	set_language();
 	resize();
 	init_map();
@@ -33,20 +43,46 @@ function init()
 	init_plans();
 	init_timeline();
 	init_search();
-	
+
+	// Mobile start
+	if( mobile ) $('.open').removeClass('open');
+
 	$( window ).resize( resize );
-	
+
 	$( "#enter" ).click( function()
 	{
 		$( "#intro" ).fadeOut( "slow" );
 	});
+
+	resize();
+	map.invalidateSize();
 }
 
 function resize()
 {
 	var h = $( window ).height();
-	$( "#map" ).height( h - 100 );
-	$( "#layers" ).height( h - 210 );
+
+	//mobile
+	if( mobile )
+	{
+		if( $( "#results" ).hasClass( "open-probe" ) )
+		{
+			var probeh = $( ".open-probe" ).height();
+			$( "#wrapper" ).height( h - 70 - probeh );
+			$( "#map" ).height( h - 41 - probeh );
+		}
+		else
+		{
+			$( "#wrapper" ).height( h - 70 );
+			$( "#map" ).height( h - 41 );
+		}
+	}
+	else
+	{
+		$( "#map" ).height( h - 100 );
+		$( "#layers" ).height( h - 210 );
+	}
+
 	build_timeline();
 	snap_timeline( year, 0 );
 }
@@ -55,7 +91,7 @@ function cursor_loading( show, p )
 {
 	if( show )
 	{
-		$( "#map" ).append( 
+		$( "#map" ).append(
 			$( document.createElement( 'div' ) )
 				.attr( "class", "animated zoomIn" )
 				.css({
@@ -77,13 +113,13 @@ function map_loading( show )
 		$( "#map" ).append(
 			$( document.createElement( 'div' ) ).attr( "id", "loading" )
 		);
-    
+
     $( "#loading" ).mouseover( function( e ){
       map.dragging.disable();
       map.touchZoom.disable();
       map.doubleClickZoom.disable();
       map.scrollWheelZoom.disable();
-    });    
+    });
 	}
 	else if( show === false )
 	{
@@ -107,7 +143,7 @@ function set_language()
 		{
 			$( sel ).html( text );
 		});
-		
+
 		$( "#search input" ).attr( "placeholder", "Pesquisa..." );
 	}
 }

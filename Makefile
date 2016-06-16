@@ -19,6 +19,8 @@ css-page-prereq =	lib/leaflet.css \
 					$(css-path)probe.css \
 					$(css-path)top.css \
 					$(css-path)animate.css \
+					$(css-path)mobile.css \
+					$(css-path)fontello.css \
 
 js-path =			js/
 js-build-path =		$(build-dir)js/
