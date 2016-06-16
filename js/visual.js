@@ -39,7 +39,7 @@ function draw_visual( layer )
 			});
 			l.on( "mouseout", function( e )
 			{
-				hide_cones.call(this);
+				hide_cone.call(this);
 				$( ".visual_probe" ).remove();
 			});
 
@@ -51,15 +51,18 @@ function draw_visual( layer )
 			l.on('click', function (e) {
 				if( l.selected )
 				{
-					l.selected = false;
 					show_image( this.layer.feature.properties );
-					hide_cones.call(this);
 				}
 				else
 				{
+					hide_all_cones();
 					l.selected = true;
 					this.layer.bringToFront();
 					show_cone.call(this);
+					map.once( "click", function ()
+					{
+						hide_cone.call(this);
+					}.bind(this));
 				}
 			})
 		}
@@ -84,11 +87,35 @@ function show_cone()
 	});
 }
 
-function hide_cones()
+function hide_cone()
 {
 	_.each( this.layer.getLayers(), function( l )
 	{
-		if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0, fill : false } );
+		if( l instanceof L.Marker === false )
+		{
+			this.selected = false;
+			l.setStyle( { fillOpacity : 0, fill : false } );
+		}
+	}.bind(this));
+}
+
+function hide_all_cones()
+{
+	map.eachLayer( function ( layer )
+	{
+		if( layer.getLayers )
+		{
+			_.each( layer.getLayers(), function( l )
+			{
+				if( l instanceof L.Marker === false )
+				{
+					l.setStyle( { fillOpacity : 0, fill : false } );
+				}
+				else {
+					l.selected = false;
+				}
+			});
+		}
 	});
 }
 
