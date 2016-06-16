@@ -1,6 +1,8 @@
 var names = {},
 	off = [];
 
+var hamburgerTimeout;
+
 function init_layers()
 {
 	$.getJSON( server + "/names/" + lang, function( json )
@@ -24,21 +26,27 @@ function init_layers()
 	{
 		if( $( "#layers" ).hasClass( "open" ) )
 		{
+			clearTimeout(hamburgerTimeout);
 			$( "#layers, .mobile-wrapper" ).removeClass( "open" );
-			$( ".mobile-wrapper" ).css( "width", '100%' );
+			$( ".mobile-wrapper" ).css( "width", "100%" );
 			$( "#hamburger" ).removeClass( "open" );
 			$( "#year, .leaflet-bar, header h1" ).show();
 			resize();
 			map.invalidateSize();
+			$( ".mobile-wrapper" ).off( "swipeleft" );
 		}
 		else
 		{
 			$( "#layers, .mobile-wrapper" ).addClass( "open" );
-			console.log('here');
-			setTimeout(function () {
+			hamburgerTimeout = setTimeout(function () {
 				$( ".mobile-wrapper" ).width(50);
 				$( "#year, .leaflet-bar, header h1" ).hide();
 				$( "#hamburger" ).addClass( "open" );
+
+				$( ".mobile-wrapper" ).on( "swipeleft", function ()
+				{
+					$( "#hamburger" ).click();
+				});
 			}, 1000);
 		}
 	});
