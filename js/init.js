@@ -4,6 +4,7 @@ var server = "http://imaginerio.rice.edu:3000",
 
 var mobileSize = 800;
 var mobile = $( window ).width() <= mobileSize;
+var showIntro = gup( 'intro' ) ? gup( 'intro' ) == 'true' : true;
 
 var lang,
 	pr = {
@@ -56,6 +57,11 @@ function init()
 
 	resize();
 	map.invalidateSize();
+
+	if( !showIntro )
+	{
+		$( "#intro" ).hide();
+	}
 }
 
 function resize()
