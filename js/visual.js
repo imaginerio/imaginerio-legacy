@@ -33,19 +33,13 @@ function draw_visual( layer )
 			l.on( "mouseover", function( e )
 			{
 				this.layer.bringToFront();
-				_.each( this.layer.getLayers(), function( l )
-				{
-					if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0.2, fill : true } );
-				});
+				show_cone.call(this);
 
 				show_visual_details( this.layer.feature.properties, map.latLngToContainerPoint( e.latlng ) );
 			});
 			l.on( "mouseout", function( e )
 			{
-				_.each( this.layer.getLayers(), function( l )
-				{
-					if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0, fill : false } );
-				});
+				hide_cones.call(this);
 				$( ".visual_probe" ).remove();
 			});
 
@@ -55,24 +49,17 @@ function draw_visual( layer )
 				l.selected = true;
 			});
 			l.on('click', function (e) {
-				if( l.selected ) {
+				if( l.selected )
+				{
 					l.selected = false;
 					show_image( this.layer.feature.properties );
-					_.each( this.layer.getLayers(), function( l )
-					{
-						if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0, fill : false } );
-					});
-					// $( ".visual_probe" ).remove();
+					hide_cones.call(this);
 				}
-				else {
+				else
+				{
 					l.selected = true;
 					this.layer.bringToFront();
-					_.each( this.layer.getLayers(), function( l )
-					{
-						if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0.2, fill : true } );
-					});
-
-					// show_visual_details( this.layer.feature.properties, map.latLngToContainerPoint( e.latlng ) );
+					show_cone.call(this);
 				}
 			})
 		}
@@ -86,6 +73,22 @@ function draw_visual( layer )
 				opacity : 0
 			});
 		}
+	});
+}
+
+function show_cone()
+{
+	_.each( this.layer.getLayers(), function( l )
+	{
+		if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0.2, fill : true } );
+	});
+}
+
+function hide_cones()
+{
+	_.each( this.layer.getLayers(), function( l )
+	{
+		if( l instanceof L.Marker === false ) l.setStyle( { fillOpacity : 0, fill : false } );
 	});
 }
 
