@@ -173,6 +173,7 @@ function probe( e )
 	cursor_loading( true, e.containerPoint );
 	// clear_highlight();
 	clear_results( "probe" );
+	$( "#results" ).off( "swipe" );
 
 	$.getJSON( server + "/probe/" + year + "/" + probeZoom + "/" + e.latlng.lng + "," + e.latlng.lat + "/" + off.join( "," ), function( json )
 	{
@@ -183,6 +184,14 @@ function probe( e )
 		resize();
 		map.invalidateSize();
 		cursor_loading( false );
+
+		$( "#results" ).on( "swipedown", function ()
+		{
+			$( "#results, #wrapper" ).removeClass( "open-probe" );
+			resize();
+			map.invalidateSize();
+			cursor_loading( false );
+		});
 	})
 }
 

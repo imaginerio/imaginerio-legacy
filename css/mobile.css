@@ -132,12 +132,14 @@
   #results {
     background-color: #fff;
     bottom: 0;
+    height: 0;
     left: 0;
     top: auto;
     width: 100%;
   }
 
   #results.open-probe {
+    height: auto;
     max-height: 200px;
     overflow-y: auto;
   }
