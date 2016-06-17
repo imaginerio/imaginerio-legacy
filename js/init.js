@@ -52,7 +52,8 @@ function init()
 
 	$( "#enter" ).click( function()
 	{
-		$( "#intro" ).fadeOut( "slow" );
+		if( mobile ) window.open( window.location.href + '?intro=false', '_blank' );
+		else $( "#intro" ).fadeOut( "slow" );
 	});
 
 	resize();
