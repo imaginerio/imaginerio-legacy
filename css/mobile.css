@@ -19,6 +19,7 @@
   #next,
   #switch,
   #layers,
+  .geodb,
   .leaflet-left,
   .layer input {
     display: none !important;
