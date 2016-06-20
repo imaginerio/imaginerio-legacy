@@ -52,7 +52,10 @@ function init()
 
 	$( "#enter" ).click( function()
 	{
-		if( mobile ) window.open( window.location.href + '?intro=false', '_blank' );
+		if( mobile ) {
+			if( window.location.search ) window.open( window.location.href + window.location.search + '&intro=false', '_blank' )
+			else window.open( window.location.href + '?intro=false', '_blank' );
+		}
 		else $( "#intro" ).fadeOut( "slow" );
 	});
 
