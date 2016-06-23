@@ -107,7 +107,7 @@ function init_map()
 			} )
 		} ).addTo( map );
 
-	// $( ".you-are-here-icon" ).hide(); //TODO - uncomment before merging into master
+	$( ".you-are-here-icon" ).hide();
 
 	/* Device Orientation Events */
 
