@@ -28,7 +28,7 @@ header, nav{
 	display: none;
 }
 
-#export, #info-page, .header-bar{
+#export, .info-page, .header-bar{
 	color: #999;
 	font-size: 16px;
 	font-weight: 200;
@@ -40,7 +40,7 @@ header, nav{
 	text-shadow: none;
 }
 
-#export span, #enter span, #info-page span{
+#export span, #enter span, .info-page span{
 	background-color: #ddd;
 	-webkit-border-radius: 10px;
 	border-radius: 100%;
@@ -82,11 +82,11 @@ header, nav{
 	content: '.';
 }
 
-#export:hover, #enter:hover, #info-page:hover{
+#export:hover, #enter:hover, .info-page:hover{
 	color: #666;
 }
 
-#export:hover span, #enter:hover span, #info-page:hover span{
+#export:hover span, #enter:hover span, .info-page:hover span{
 	background-color: #999;
 	color: white;
 }
@@ -102,11 +102,11 @@ header, nav{
   cursor: initial;
 }
 
-#info-page span{
+.info-page span{
   font-weight: 900;
 }
 
-#info-page a{
+.info-page a{
   text-decoration: none;
 }
 
