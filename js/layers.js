@@ -107,8 +107,14 @@ function build_layers()
 				}).appendTo( folder );
 				label.prepend( add_swatch( { shape : "../viewpoint.png" } ) );
 			}
+			
+			var type = '';
 			_.each( raster, function( val )
 			{
+				if( val.layer != type ){
+					add_check( "geodb", val.layer ).appendTo( folder );
+					type = val.layer;
+				}
 				build_visual( val, folder );
 			});
 		}
@@ -121,7 +127,7 @@ function build_layers()
 
 				_.each( val, function( val, key )
 				{
-  				add_check( "geodb", key ).appendTo( folder );
+  				//add_check( "geodb", key ).appendTo( folder );
 					_.each( val, function( val, key )
 					{
 						var label = add_check( "layer", key, val.id, switch_layers ).appendTo( folder );
