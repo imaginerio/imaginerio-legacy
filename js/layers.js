@@ -94,6 +94,7 @@ function build_layers()
 
 			if( raster.length < json.length )
 			{
+				add_check( "geodb", "ImageViewshedsPoly" ).appendTo( folder );
 				var label = add_check( "layer visual", "ImageViewshedsPoly", "viewsheds", function()
 				{
 					if( $( ".layer.visual" ).children( "input" ).is( ":checked" ) )
