@@ -5,6 +5,7 @@ var server = "http://imaginerio.rice.edu:3000",
 var mobileSize = 800;
 var mobile = $( window ).width() <= mobileSize;
 var showIntro = gup( 'intro' ) ? gup( 'intro' ) == 'true' : true;
+var params = {};
 
 var lang,
 	pr = {
@@ -39,6 +40,7 @@ function init()
 
 	set_language();
 	resize();
+	check_hash();
 	init_map();
 	init_layers();
 	init_plans();
@@ -168,6 +170,15 @@ function gup( name )
 		return "";
 	else
 		return results[1];
+}
+
+function check_hash(){
+	var hash = window.location.hash.replace( '#', '' ).split( '/' );
+	if( hash.length == 4 ){
+		params.year = parseInt( hash[ 0 ], 10 );
+		params.zoom = parseInt( hash[ 1 ] );
+		params.center = [ parseFloat( hash[ 2 ] ), parseFloat( hash[ 3 ] ) ];
+	}
 }
 
 init();

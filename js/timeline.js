@@ -18,7 +18,7 @@ function init_timeline()
 		years = _.filter( years, function( val ){ return val <= max });
 
 		build_timeline();
-		update_year( gup( 'year' ) ? parseInt( gup( 'year' ), 10 ) : Math.max( year, first ) );
+		update_year( params.year ? Math.min( Math.max( params.year, first ), max ) : first );
 		snap_timeline( year );
 	});
 
@@ -81,6 +81,8 @@ function init_timeline()
 
 function update_year( y )
 {
+	console.log( year );
+	console.log( y );
 	if( year == y ) return false;
 
 	clear_visual();
@@ -93,6 +95,7 @@ function update_year( y )
 	load_tiles();
 	build_layers();
 	clear_highlight();
+	update_hash();
 }
 
 function build_timeline()

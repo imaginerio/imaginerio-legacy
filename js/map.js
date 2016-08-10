@@ -12,8 +12,8 @@ function init_map()
 {
 	map_loading( true );
 	map = L.map( 'map', {
-		center: [ -22.9046, -43.1919 ],
-		zoom: 15,
+		center: params.center ? params.center : [ -22.9046, -43.1919 ],
+		zoom: params.zoom ? params.zoom : 15,
 		minZoom : 13,
 		maxZoom : 18,
 		doubleClickZoom : false,
@@ -37,7 +37,9 @@ function init_map()
         probeZoom = .6;
         break;
     }
+    update_hash();
   })
+  .on( "moveend", update_hash )
 	.on( "locationfound", function(l){
 		if( L.latLngBounds( maxBounds ).contains( l.latlng ) )
 		{
@@ -343,4 +345,8 @@ function export_map()
 	var url = server + "/export/" + lang + "/" + year + "/" + layerstring + "/" + raster + "/" + map.getBounds().toBBoxString() + "/";
 	document.getElementById( 'download_iframe' ).src = url;
 	window.setTimeout( function(){ $( "#export" ).removeClass( "loading" ); }, 2000 );
+}
+
+function update_hash(){
+  window.location.hash = year + "/" + map.getZoom() + "/" + map.getCenter().lat + "/" + map.getCenter().lng;
 }
