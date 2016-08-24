@@ -14,7 +14,7 @@ sudo rpm -Uvh pgdg*.rpm
 sudo yum -y update
 
 # install deps
-sudo yum -y install make gcc47 gcc-c++ bzip2-devel libpng-devel libtiff-devel zlib-devel libjpeg-devel libxml2-devel python-setuptools git-all python-nose python-devel python proj-devel proj proj-epsg proj-nad freetype-devel freetype libicu-devel libicu git bzip2
+sudo yum -y install make gcc47 gcc-c++ bzip2-devel libpng-devel libtiff-devel zlib-devel libjpeg-devel libxml2-devel python-setuptools git-all python-nose python-devel python proj-devel proj proj-epsg proj-nad freetype-devel freetype libicu-devel libicu git bzip2 pango pango-devel pangomm
 
 # install optional deps
 sudo yum -y install gdal-devel gdal postgresql-devel sqlite-devel sqlite libcurl-devel libcurl cairo-devel cairo pycairo-devel pycairo postgresql93 postgresql93-server postgresql93-libs postgresql93-contrib postgresql93-devel postgis2_93 vim
@@ -96,5 +96,14 @@ npm test
 cd ../
 
 # postgis
-sudo /usr/pgsql-9.3/bin/postgresql93-setup initdb
-sudo service postgresql-9.3 start
+# sudo /usr/pgsql-9.3/bin/postgresql93-setup initdb
+# sudo service postgresql-9.3 start
+
+# install giflib dep for node-canvas
+wget ftp://fr2.rpmfind.net/linux/centos/7.2.1511/os/x86_64/Packages/giflib-devel-4.1.6-9.el7.x86_64.rpm
+sudo rpm -Uvh giflib-devel-4.1.6-9.el7.x86_64.rpm
+
+# install pm2 monitoring
+sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
+npm install -g pm2
+
