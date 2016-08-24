@@ -4,8 +4,8 @@ sudo yum -y upgrade
 
 # install epel repo
 sudo yum -y install wget
-wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
-sudo rpm -Uvh epel-release-7*.rpm
+wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+sudo rpm -Uvh epel-release-latest-7.noarch.rpm 
 
 wget http://yum.postgresql.org/9.3/redhat/rhel-7-x86_64/pgdg-redhat93-9.3-1.noarch.rpm
 sudo rpm -Uvh pgdg*.rpm
