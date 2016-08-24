@@ -100,12 +100,22 @@ function parseXML( req, res, callback ){
 		var data = fs.readFileSync( req.params.layer == "base" ? "base.xml" : "stylesheet.xml", 'utf8' );	
     var xmlDoc = xml.parseXml( data );
     var sources = xmlDoc.find( "//Parameter[@name='table']" ),
+        pghost = xmlDoc.find( "//Parameter[@name='host']" ),
+        pguser = xmlDoc.find( "//Parameter[@name='user']" ),
         passwords = xmlDoc.find( "//Parameter[@name='password']" ),
         dbname = xmlDoc.find( "//Parameter[@name='dbname']" );
 			
 		_.each( sources, function( item ){
 			var t = item.text();
 			item.text( t.replace( /99999999/g, req.params.year ) );
+		});
+		
+		_.each( pghost, function( item ){
+  		item.text( db.conn.replace( /.*@(.*)\/.*/, "$1" ) );
+		});
+		
+		_.each( pguser, function( item ){
+  		item.text( db.conn.replace( /.*\/\/(.*):.*/, "$1" ) );
 		});
 		
 		_.each( passwords, function( item ){
