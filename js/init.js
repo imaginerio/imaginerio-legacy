@@ -1,6 +1,6 @@
-var server = "http://imaginerio.rice.edu:3000",
-	  tileserver = "http://imaginerio.rice.edu:3001/tiles/",
-    rasterserver = "http://imaginerio.rice.edu:3001/raster/";
+var server = "http://54.244.196.135:3000",
+	  tileserver = "http://54.244.196.135:3001/tiles/",
+    rasterserver = "http://54.244.196.135:3001/raster/";
 
 var mobileSize = 800;
 var mobile = $( window ).width() <= mobileSize;
