@@ -55,8 +55,8 @@ function init()
 	$( "#enter" ).click( function()
 	{
 		if( mobile ) {
-			if( window.location.search ) window.open( window.location.href + window.location.search + '&intro=false', '_blank' )
-			else window.open( window.location.href + '?intro=false', '_blank' );
+			if( window.location.search ) window.open( window.location.href + window.location.search + '&intro=false', '_blank' + window.location.hash )
+			else window.open( window.location.href + '?intro=false', '_blank' + window.location.hash );
 		}
 		else $( "#intro" ).fadeOut( "slow" );
 	});
