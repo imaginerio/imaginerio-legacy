@@ -1,6 +1,6 @@
-var server = "http://54.244.196.135:3000",
-	  tileserver = "http://54.244.196.135:3001/tiles/",
-    rasterserver = "http://54.244.196.135:3001/raster/";
+var server = "http://54.200.136.234:3000",
+	  tileserver = "http://54.200.136.234:3001/tiles/",
+    rasterserver = "http://54.200.136.234:3001/raster/";
 
 var mobileSize = 800;
 var mobile = $( window ).width() <= mobileSize;
