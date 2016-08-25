@@ -9,7 +9,7 @@ var express = require('express'),
     cache,
     db = require( '../db' ),
     cloudfront = "http://d1nxja8ugt29ju.cloudfront.net/",
-    hillshade = [ { year : 1960, file : '../../../../../raster/Hillshade_WGS84_1960_2013.tif' }, { year : 1921, file : '../../../../../raster/Hillshade_WGS84_1921_1959.tif' }, { year : 1906, file : '../../../../../raster/Hillshade_WGS84_1906_1920.tif' }, { year : 1500, file : '../../../../../raster/Hillshade_WGS84_1500_1905.tif' } ];
+    hillshade = [ { year : 1960, file : '/gis/raster/Hillshade_WGS84_1960_2013.tif' }, { year : 1921, file : '/gis/raster/Hillshade_WGS84_1921_1959.tif' }, { year : 1906, file : '/gis/raster/Hillshade_WGS84_1906_1920.tif' }, { year : 1500, file : '/gis/raster/Hillshade_WGS84_1500_1905.tif' } ];
     
 var app = express();
 
@@ -91,7 +91,7 @@ app.get( '/raster/:id/:z/:x/:y.*', function( req, res ){
 })
 
 function parseXML( req, res, callback ){
-	var file = dev ? __dirname + "/cache/xml/" + req.params.year + "/" + req.params.layer + "-dev.xml" : __dirname + "/cache/xml/" + req.params.year + "/" + req.params.layer + ".xml";
+	var file = dev ? "/gis/cache/xml/" + req.params.year + "/" + req.params.layer + "-dev.xml" : "/gis/cache/xml/" + req.params.year + "/" + req.params.layer + ".xml";
 		
 	if( fs.existsSync( file ) ){
 		callback( file, req.params, res );
@@ -143,7 +143,7 @@ function parseXML( req, res, callback ){
 			if( item.text().match( /hillshade/ ) ) item.text( _.find( hillshade, function( h ){ return h.year <= req.params.year } ).file );
 		});
 			
-    mkdir( "cache/xml/" + req.params.year );
+    mkdir( "/gis/cache/xml/" + req.params.year );
 			
     fs.writeFileSync( file, xmlDoc.toString() );
     callback( file, req.params, res );
@@ -151,7 +151,7 @@ function parseXML( req, res, callback ){
 }
 
 function parseRasterXML( req, res, callback ){
-  var file = __dirname + "/cache/raster/" + req.params.id + "/raster.xml";
+  var file = "/gis/cache/raster/" + req.params.id + "/raster.xml";
   
   if( fs.existsSync( file ) ){
 		callback( file, req.params, res );
@@ -161,8 +161,8 @@ function parseRasterXML( req, res, callback ){
   	  var xmlDoc = xml.parseXml( data );
   	  var sources = xmlDoc.find( "//Parameter[@name='file']" );
 				
-    sources[ 0 ].text( "../../../../../raster/" + req.params.id + ".tif" );
-		mkdir( "cache/raster/" + req.params.id );
+    sources[ 0 ].text( "/gis/raster/" + req.params.id + ".tif" );
+		mkdir( "/gis/cache/raster/" + req.params.id );
 		
 		fs.writeFileSync( file, xmlDoc.toString() );
     callback( file, req.params, res );
@@ -200,7 +200,7 @@ function renderTile( filename, params, res ){
 
 function saveTile( params, tile, res ){
   if( cache === false || dev === true ) return false;
-  var png = "cache/png/" + params.year + "/" + params.layer + "/" + params.z + "/" + params.x + "/" + params.y + ".png";
+  var png = "/gis/cache/png/" + params.year + "/" + params.layer + "/" + params.z + "/" + params.x + "/" + params.y + ".png";
   var p = { Bucket : 'imaginerio', Key : png, Body : tile, ACL : 'public-read' };
   s3.putObject( p, function( err, data ){
     if( err ) return console.log( err );
