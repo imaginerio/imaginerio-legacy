@@ -55,7 +55,7 @@ function init_map()
 	})
 	.on( "locationerror", function(){
 		map.stopLocate();
-		alert( lang === "pr" ? pr.locationerror : en.locationerror );
+		alert( lang === "pr" ? pr.locationError : en.locationError );
 	});
 
 	if( $( "html" ).hasClass( "canvas" ) )
