@@ -66,7 +66,7 @@ app.get( '/export/:lang/:year/:layer/:raster/:bounds/', download.exportMap )
 app.listen( 3000 );
 console.log( 'Listening on port 3000...' );
 
-http.createServer( urlRedirect ).listen( 80 );
+//http.createServer( urlRedirect ).listen( 80 );
 
 function urlRedirect( req, res ){
   res.writeHead(302, {
