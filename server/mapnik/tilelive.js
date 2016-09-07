@@ -71,7 +71,7 @@ app.get('/tiles/:year/:layer/:z/:x/:y.*', function( req, res ){
 app.get( '/raster/:id/:z/:x/:y.*', function( req, res ){
   dev = req.headers.host.match( /-dev/ ) ? true : false;
   cache = req.query.cache == undefined;
-  var png = "cache/raster/" + req.params.id + "/" + req.params.z + "/" + req.params.x + "/" + req.params.y + ".png",
+  var png = "cache/png/null/" + req.params.id + "/" + req.params.z + "/" + req.params.x + "/" + req.params.y + ".png",
       exists = false,
       query = client.query( "SELECT id FROM cache WHERE year IS NULL AND layer = '" + req.params.id + "' AND z = " + req.params.z + " AND x = " + req.params.x + " AND y = " + req.params.y );
       
