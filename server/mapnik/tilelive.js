@@ -182,7 +182,6 @@ function mkdir( path, root ) {
 
 function renderTile( filename, params, res ){
   tilelive.load('mapnik://' + filename, function( err, source ){
-	  console.log( source );
     if( err  ){
       console.log( err );
       res.status( 500 ).send( 'Error reading XML' );
