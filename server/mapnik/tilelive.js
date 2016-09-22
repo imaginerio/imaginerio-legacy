@@ -182,20 +182,23 @@ function mkdir( path, root ) {
 
 function renderTile( filename, params, res ){
   tilelive.load('mapnik://' + filename, function( err, source ){
-    if( err ){
+	  console.log( source );
+    if( err  ){
       console.log( err );
       res.status( 500 ).send( 'Error reading XML' );
     }
-    source.getTile( params.z, params.x, params.y, function( err, tile, headers ){
-      if( !err ){
-        res.send( tile );
-        if( dev === false ) saveTile( params, tile, res );
-      }
-      else {
-        console.log( err );
-        res.status( 500 ).send( 'Error writing tile' );
-      }
-    });
+    else {
+	    source.getTile( params.z, params.x, params.y, function( err, tile, headers ){
+	      if( err ){
+		      console.log( err );
+	        res.status( 500 ).send( 'Error writing tile' );
+	      }
+	      else {
+	        res.send( tile );
+	        if( dev === false ) saveTile( params, tile, res );
+	      }
+	    });
+	  }
   });
 }
 
