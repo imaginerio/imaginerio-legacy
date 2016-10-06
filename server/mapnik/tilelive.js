@@ -5,7 +5,7 @@ var express = require('express'),
     _ = require( 'underscore' ),
     pg = require( 'pg' ),
     AWS = require( 'aws-sdk' ),
-    dev,
+    dev = false,
     cache,
     db = require( '../db' ),
     cloudfront = "http://d1nxja8ugt29ju.cloudfront.net/",
@@ -103,12 +103,14 @@ function parseXML( req, res, callback ){
     var sources = xmlDoc.find( "//Parameter[@name='table']" ),
         pghost = xmlDoc.find( "//Parameter[@name='host']" ),
         pguser = xmlDoc.find( "//Parameter[@name='user']" ),
-        passwords = xmlDoc.find( "//Parameter[@name='password']" ),
-        dbname = xmlDoc.find( "//Parameter[@name='dbname']" );
+        passwords = xmlDoc.find( "//Parameter[@name='password']" );
 			
 		_.each( sources, function( item ){
-			var t = item.text();
-			item.text( t.replace( /99999999/g, req.params.year ) );
+			var t = item.text().replace( /99999999/g, req.params.year );
+			if( dev ){
+				t = t.replace( /FROM (.*?) WHERE/g, 'FROM \$1_dev WHERE' );
+			}
+			item.text( t );
 		});
 		
 		_.each( pghost, function( item ){
@@ -122,13 +124,6 @@ function parseXML( req, res, callback ){
 		_.each( passwords, function( item ){
   		item.text( db.conn.replace( /.*:(.*)@.*/g, "$1" ) );
 		});
-		
-    if( dev ){
-      _.each( dbname, function( item ){
-      		var t = item.text();
-        item.text( t + 'dev' );
-      });
-    }
 
 		var off = req.params.layer.split( "," );
 		off = off.concat( _.map( off, function( val ){ return val + "_labels" } ) );
