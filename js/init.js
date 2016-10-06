@@ -1,6 +1,6 @@
-var server = "http://54.200.136.234:3000",
-	  tileserver = "http://54.200.136.234:3001/tiles/",
-    rasterserver = "http://54.200.136.234:3001/raster/";
+var server = "http://imaginerio.axismaps.io:3000",
+	  tileserver = "http://imaginerio.axismaps.io:3001/tiles/",
+    rasterserver = "http://imaginerio.axismaps.io:3001/raster/";
 
 var mobileSize = 800;
 var mobile = $( window ).width() <= mobileSize;
@@ -33,9 +33,9 @@ function init()
 
 	lang = gup( 'lang' ) == "pr" ? "pr" : "en";
 	if( gup( 'dev' ) == 'true' ){
-    server = "http://imaginerio-dev.rice.edu:3000";
-	  tileserver = "http://imaginerio-dev.rice.edu:3001/tiles/";
-    rasterserver = "http://imaginerio-dev.rice.edu:3001/raster/";
+    server = "http://imaginerio-dev.axismaps.io:3000";
+	  tileserver = "http://imaginerio-dev.axismaps.io:3001/tiles/";
+    rasterserver = "http://imaginerio-dev.axismaps.io:3001/raster/";
 	}
 
 	set_language();
