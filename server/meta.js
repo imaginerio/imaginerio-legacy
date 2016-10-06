@@ -1,6 +1,7 @@
 var pg = require( 'pg' ),
 	_ = require( 'underscore' ),
-	db = require( './db' );
+	db = require( './db' ),
+	dev = require( './dev' );
 	
 _.mixin({
   // ### _.objMap
@@ -24,41 +25,37 @@ _.mixin({
   }
 });
 	
-exports.timeline = function( req, res )
-{
-	var conn = req.headers.host.match( /-dev/ ) ? db.conn + 'dev' : db.conn;
-	var client = new pg.Client( conn );
+exports.timeline = function( req, res ){
+	var client = new pg.Client( db.conn );
 	client.connect();
 	
-	var years = [];
+	var years = [],
+			q = dev.checkQuery( "SELECT * FROM ( SELECT firstdispl AS year FROM basepoint UNION SELECT lastdispla AS year FROM basepoint UNION SELECT firstdispl AS year FROM baseline UNION SELECT lastdispla AS year FROM baseline UNION SELECT firstdispl AS year FROM basepoly UNION SELECT lastdispla AS year FROM basepoly UNION SELECT firstdispl AS year FROM mapsplans UNION SELECT lastdispla AS year FROM mapsplans UNION SELECT firstdispl AS year FROM viewsheds UNION SELECT lastdispla AS year FROM viewsheds ) as q ORDER BY year", req );
 	
-	var query = client.query( "SELECT * FROM ( SELECT firstdispl AS year FROM basepoint UNION SELECT lastdispla AS year FROM basepoint UNION SELECT firstdispl AS year FROM baseline UNION SELECT lastdispla AS year FROM baseline UNION SELECT firstdispl AS year FROM basepoly UNION SELECT lastdispla AS year FROM basepoly UNION SELECT firstdispl AS year FROM mapsplans UNION SELECT lastdispla AS year FROM mapsplans UNION SELECT firstdispl AS year FROM viewsheds UNION SELECT lastdispla AS year FROM viewsheds ) as q ORDER BY year" );
+	var query = client.query( q );
 	
-	query.on( 'row', function( result )
-	{
+	query.on( 'row', function( result ){
 		if( result.year > 0 ) years.push( result.year );
 	});
 	
-	query.on( 'end', function()
-	{
+	query.on( 'end', function(){
 		years.pop();
 		res.send( years );
 		client.end();
 	});
 }
 
-exports.layers = function( req, res )
-{
-	var conn = req.headers.host.match( /-dev/ ) ? db.conn + 'dev' : db.conn;
-	var client = new pg.Client( conn );
+exports.layers = function( req, res ){
+	var client = new pg.Client( db.conn );
 	client.connect();
 
-	var year = req.params.year;	
-	var q = "SELECT folder, geo.layer, geo.featuretyp, geo.stylename, layername, fill, stroke, shape FROM ( SELECT layer, featuretyp, stylename FROM baseline WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp, stylename  UNION SELECT layer, featuretyp, stylename FROM basepoint WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp, stylename  UNION SELECT layer, featuretyp, stylename FROM basepoly WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp, stylename ) AS geo INNER JOIN legend ON geo.stylename = legend.stylename INNER JOIN layers ON geo.layer = layers.layer AND geo.featuretyp = layers.featuretyp WHERE geo.featuretyp IS NOT NULL ORDER BY sort";
+	var year = req.params.year,
+			arr = [],
+			layers = {},
+			q = dev.checkQuery( "SELECT folder, geo.layer, geo.featuretyp, geo.stylename, layername, fill, stroke, shape FROM ( SELECT layer, featuretyp, stylename FROM baseline WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp, stylename  UNION SELECT layer, featuretyp, stylename FROM basepoint WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp, stylename  UNION SELECT layer, featuretyp, stylename FROM basepoly WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " GROUP BY layer, featuretyp, stylename ) AS geo INNER JOIN legend AS le ON geo.stylename = le.stylename INNER JOIN layers AS la ON geo.layer = la.layer AND geo.featuretyp = la.featuretyp WHERE geo.featuretyp IS NOT NULL ORDER BY sort", req );
 	
-	var query = client.query( q ),
-		arr = [],
-		layers = {};
+	var query = client.query( q );
+
 	query.on( 'row', function( result ){
 		arr.push( result );
 	});
@@ -82,125 +79,106 @@ exports.layers = function( req, res )
 	});
 }
 
-exports.raster = function( req, res )
-{
-	var conn = req.headers.host.match( /-dev/ ) ? db.conn + 'dev' : db.conn;
-	var client = new pg.Client( conn );
+exports.raster = function( req, res ){
+	var client = new pg.Client( db.conn );
 	client.connect();
 
 	var year = req.params.year,
-		q = "SELECT imageid AS id, 'SSID' || globalid AS file, firstdispl AS date, creator, title AS description, layer FROM mapsplans WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT imageid AS id, 'SSID' || globalid AS file, firstdispl AS date, creator, title AS description, layer FROM viewsheds WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " ORDER BY layer";
+			arr = [],
+			q = dev.checkQuery( "SELECT imageid AS id, 'SSID' || globalid AS file, firstdispl AS date, creator, title AS description, layer FROM mapsplans WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT imageid AS id, 'SSID' || globalid AS file, firstdispl AS date, creator, title AS description, layer FROM viewsheds WHERE firstdispl <= " + year + " AND lastdispla >= " + year + " ORDER BY layer", req );
 	
-	var query = client.query( q ),
-		arr = [];
+	var query = client.query( q );
 	
-	query.on( 'row', function( result )
-	{
+	query.on( 'row', function( result ){
 		arr.push( result );
 	});
 	
-	query.on( 'end', function()
-	{
+	query.on( 'end', function(){
 		res.send( arr );
 		client.end();
 	});
 }
 
-exports.search = function( req, res )
-{
-	var conn = req.headers.host.match( /-dev/ ) ? db.conn + 'dev' : db.conn;
-	var client = new pg.Client( conn );
+exports.search = function( req, res ){
+	var client = new pg.Client( db.conn );
 	client.connect();
 
 	var year = req.params.year,
-		word = req.params.word;
-		
-	var q = "SELECT array_agg( id ) as gid, namecomple, layer FROM ( SELECT globalid AS id, namecomple, layer FROM basepoint WHERE namecomple ILIKE '%" + word + "%' AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT globalid AS id, namecomple, layer FROM baseline WHERE namecomple ILIKE '%" + word + "%' AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT globalid AS id, namecomple, layer FROM basepoly WHERE namecomple ILIKE '%" + word + "%' AND firstdispl <= " + year + " AND lastdispla >= " + year + " ) as q GROUP BY namecomple, layer ORDER BY layer LIMIT 5";
+			word = req.params.word,
+			names = {},
+			q = dev.checkQuery( "SELECT array_agg( id ) as gid, namecomple, layer FROM ( SELECT globalid AS id, namecomple, layer FROM basepoint WHERE namecomple ILIKE '%" + word + "%' AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT globalid AS id, namecomple, layer FROM baseline WHERE namecomple ILIKE '%" + word + "%' AND firstdispl <= " + year + " AND lastdispla >= " + year + " UNION SELECT globalid AS id, namecomple, layer FROM basepoly WHERE namecomple ILIKE '%" + word + "%' AND firstdispl <= " + year + " AND lastdispla >= " + year + " ) as q GROUP BY namecomple, layer ORDER BY layer LIMIT 5", req );
 	
-	var query = client.query( q ),
-		names = {};
+	var query = client.query( q );
 	
-	query.on( 'row', function( result )
-	{
+	query.on( 'row', function( result ){
 		names[ result.namecomple ] = { id : result.gid, layer : result.layer };
 	});
 	
-	query.on( 'end', function()
-	{
+	query.on( 'end', function(){
 		res.send( names );
 		client.end();
 	});
 }
 
-exports.plans = function( req, res )
-{
-	var conn = req.headers.host.match( /-dev/ ) ? db.conn + 'dev' : db.conn;
-	var client = new pg.Client( conn );
+exports.plans = function( req, res ){
+	var client = new pg.Client( db.conn );
 	client.connect();
 	
-	var plans = [];
+	var plans = [],
+			q = dev.checkQuery( "SELECT planyear, planname FROM plannedline UNION SELECT planyear, planname FROM plannedpoly", req );
 	
-	var query = client.query( "SELECT planyear, planname FROM plannedline UNION SELECT planyear, planname FROM plannedpoly" );
+	var query = client.query( q );
 	
-	query.on( 'row', function( result )
-	{
+	query.on( 'row', function( result ){
 		plans.push( result );
 	});
 	
-	query.on( 'end', function()
-	{
+	query.on( 'end', function(){
 		plans = _.sortBy( plans, function( n ){ return parseInt( n.planyear.replace( /[^0-9].*/gi, "" ) ) } ); 
 		res.send( plans );
 		client.end();
 	});
 }
 
-exports.details = function( req, res )
-{
-	var conn = req.headers.host.match( /-dev/ ) ? db.conn + 'dev' : db.conn;
-	var client = new pg.Client( conn );
+exports.details = function( req, res ){
+	var client = new pg.Client( db.conn );
 	client.connect();
 		
 	var id = _.reduce( req.params.id.split( "," ), function( memo, i ){ return memo += "'" + i + "',"; }, "ANY(ARRAY[" ).replace( /,$/, "])" ),
-		details = [];
+			details = [],
+			q = dev.checkQuery( "SELECT creator, firstowner, owner, occupant, address, firstdispl, lastdispla, globalid FROM basepoint WHERE globalid = " + id + " UNION SELECT creator, firstowner, owner, occupant, address, firstdispl, lastdispla, globalid FROM baseline WHERE globalid = " + id + " UNION SELECT creator, firstowner, owner, occupant, address, firstdispl, lastdispla, globalid FROM basepoly WHERE globalid = " + id, req );
 	
-	var query = client.query( "SELECT creator, firstowner, owner, occupant, address, firstdispl, lastdispla, globalid FROM basepoint WHERE globalid = " + id + " UNION SELECT creator, firstowner, owner, occupant, address, firstdispl, lastdispla, globalid FROM baseline WHERE globalid = " + id + " UNION SELECT creator, firstowner, owner, occupant, address, firstdispl, lastdispla, globalid FROM basepoly WHERE globalid = " + id );
+	var query = client.query( q );
 	
-	query.on( 'row', function( result )
-	{
+	query.on( 'row', function( result ){
 		if( result.lastdispla == 8888 ) result.lastdispla = 'Present';
 		result.year = result.firstdispl + " - " + result.lastdispla;
-		result = _.objFilter( _.omit( result, [ "globalid", "firstdispl", "lastdispla", ] ), function( value )
-		{
+		result = _.objFilter( _.omit( result, [ "globalid", "firstdispl", "lastdispla", ] ), function( value ){
 			return value != null;
 		});
 		details.push( result );
 	});
 	
-	query.on( 'end', function()
-	{
+	query.on( 'end', function(){
 		res.send( details );
 		client.end();
 	});
 }
-exports.names = function( req, res )
-{
-	var conn = req.headers.host.match( /-dev/ ) ? db.conn + 'dev' : db.conn;
-	var client = new pg.Client( conn );
+exports.names = function( req, res ){
+	var client = new pg.Client( db.conn );
 	client.connect();
 	
 	var names = {},
-		lang = req.params.lang;
+			lang = req.params.lang,
+			q = dev.checkQuery( "SELECT LOWER( text ) AS text, name_en, name_pr FROM names", req );
 	
-	var query = client.query( "SELECT LOWER( text ) AS text, name_en, name_pr FROM names" );
+	var query = client.query( q );
 	
-	query.on( 'row', function( result )
-	{
+	query.on( 'row', function( result ){
 		names[ result.text ] = result[ "name_" + lang ];
 	});
 	
-	query.on( 'end', function()
-	{
+	query.on( 'end', function(){
 		res.send( names );
 		client.end();
 	});
