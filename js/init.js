@@ -3,7 +3,7 @@ var server = "http://54.200.136.234:3000",
     rasterserver = "http://54.200.136.234:3001/raster/";
 
 var mobileSize = 800;
-var mobile = $( window ).width() <= mobileSize;
+var mobile = $( window ).width() <= mobileSize || window.matchMedia('(max-device-width: 800px)').matches;
 var showIntro = gup( 'intro' ) ? gup( 'intro' ) == 'true' : true;
 var params = {};
 
