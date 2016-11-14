@@ -27,22 +27,22 @@ exports.q = [
     choices : function( ans ){
       if( ans.task == 'visual' ) {
         return [
-          { name : 'viewsheds', value : 'viewsheds' },
-          { name : 'maps', value : 'maps' },
-          { name : 'plans', value : 'plans' }
+          { name : 'viewsheds', value : 'viewsheds_dev' },
+          { name : 'maps', value : 'maps_dev' },
+          { name : 'plans', value : 'plans_dev' }
         ]
       }
       else if( ans.task == 'planned' ){
         return [
-          { name : 'line', value : 'plannedline' },
-          { name : 'polygon', value : 'plannedpoly' }
+          { name : 'line', value : 'plannedline_dev' },
+          { name : 'polygon', value : 'plannedpoly_dev' }
         ]
       }
       else{
         return [
-          { name : 'point', value : 'basepoint' },
-          { name : 'line', value : 'baseline' },
-          { name : 'polygon', value : 'basepoly' }
+          { name : 'point', value : 'basepoint_dev' },
+          { name : 'line', value : 'baseline_dev' },
+          { name : 'polygon', value : 'basepoly_dev' }
         ]
       }
     },

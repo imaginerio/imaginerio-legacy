@@ -5,11 +5,10 @@ var express = require('express'),
     _ = require( 'underscore' ),
     pg = require( 'pg' ),
     AWS = require( 'aws-sdk' ),
-    dev,
     cache,
     db = require( '../db' ),
     cloudfront = "http://d1nxja8ugt29ju.cloudfront.net/",
-    hillshade = [ { year : 1960, file : '/gis/raster/Hillshade_WGS84_1960_2013.tif' }, { year : 1921, file : '/gis/raster/Hillshade_WGS84_1921_1959.tif' }, { year : 1906, file : '/gis/raster/Hillshade_WGS84_1906_1920.tif' }, { year : 1500, file : '/gis/raster/Hillshade_WGS84_1500_1905.tif' } ];
+    hillshade = [ { year : 1960, file : '/data/raster/Hillshade_WGS84_1960_2013.tif' }, { year : 1921, file : '/data/raster/Hillshade_WGS84_1921_1959.tif' }, { year : 1906, file : '/data/raster/Hillshade_WGS84_1906_1920.tif' }, { year : 1500, file : '/data/raster/Hillshade_WGS84_1500_1905.tif' } ];
     
 var app = express();
 
@@ -48,7 +47,7 @@ var client = new pg.Client( db.conn );
 client.connect();
 
 app.get('/tiles/:year/:layer/:z/:x/:y.*', function( req, res ){
-  dev = req.headers.host.match( /-dev/ ) ? true : false;
+  var dev = req.headers.host.match( /-dev/ ) ? true : false;
   cache = req.query.cache == undefined;
   var png = "cache/png/" + req.params.year + "/" + req.params.layer + "/" + req.params.z + "/" + req.params.x + "/" + req.params.y + ".png",
       exists = false,
@@ -69,7 +68,7 @@ app.get('/tiles/:year/:layer/:z/:x/:y.*', function( req, res ){
 });
 
 app.get( '/raster/:id/:z/:x/:y.*', function( req, res ){
-  dev = req.headers.host.match( /-dev/ ) ? true : false;
+  var dev = req.headers.host.match( /-dev/ ) ? true : false;
   cache = req.query.cache == undefined;
   var png = "cache/png/null/" + req.params.id + "/" + req.params.z + "/" + req.params.x + "/" + req.params.y + ".png",
       exists = false,
@@ -92,10 +91,11 @@ app.get( '/raster/:id/:z/:x/:y.*', function( req, res ){
 })
 
 function parseXML( req, res, callback ){
-	var file = dev ? "/gis/cache/xml/" + req.params.year + "/" + req.params.layer + "-dev.xml" : "/gis/cache/xml/" + req.params.year + "/" + req.params.layer + ".xml";
+	var dev = req.headers.host.match( /-dev/ ) ? true : false,
+			file = dev ? "/data/cache/xml/" + req.params.year + "/" + req.params.layer + "-dev.xml" : "/data/cache/xml/" + req.params.year + "/" + req.params.layer + ".xml";
 		
 	if( fs.existsSync( file ) ){
-		callback( file, req.params, res );
+		callback( file, req, res );
 	}
 	else{
 		var data = fs.readFileSync( req.params.layer == "base" ? "base.xml" : "stylesheet.xml", 'utf8' );	
@@ -103,12 +103,14 @@ function parseXML( req, res, callback ){
     var sources = xmlDoc.find( "//Parameter[@name='table']" ),
         pghost = xmlDoc.find( "//Parameter[@name='host']" ),
         pguser = xmlDoc.find( "//Parameter[@name='user']" ),
-        passwords = xmlDoc.find( "//Parameter[@name='password']" ),
-        dbname = xmlDoc.find( "//Parameter[@name='dbname']" );
+        passwords = xmlDoc.find( "//Parameter[@name='password']" );
 			
 		_.each( sources, function( item ){
-			var t = item.text();
-			item.text( t.replace( /99999999/g, req.params.year ) );
+			var t = item.text().replace( /99999999/g, req.params.year );
+			if( dev ){
+				t = t.replace( /FROM (.*?) WHERE/g, 'FROM \$1_dev WHERE' );
+			}
+			item.text( t );
 		});
 		
 		_.each( pghost, function( item ){
@@ -122,13 +124,6 @@ function parseXML( req, res, callback ){
 		_.each( passwords, function( item ){
   		item.text( db.conn.replace( /.*:(.*)@.*/g, "$1" ) );
 		});
-		
-    if( dev ){
-      _.each( dbname, function( item ){
-      		var t = item.text();
-        item.text( t + 'dev' );
-      });
-    }
 
 		var off = req.params.layer.split( "," );
 		off = off.concat( _.map( off, function( val ){ return val + "_labels" } ) );
@@ -144,29 +139,29 @@ function parseXML( req, res, callback ){
 			if( item.text().match( /hillshade/ ) ) item.text( _.find( hillshade, function( h ){ return h.year <= req.params.year } ).file );
 		});
 			
-    mkdir( "/gis/cache/xml/" + req.params.year );
+    mkdir( "/data/cache/xml/" + req.params.year );
 			
     fs.writeFileSync( file, xmlDoc.toString() );
-    callback( file, req.params, res );
+    callback( file, req, res );
   }
 }
 
 function parseRasterXML( req, res, callback ){
-  var file = "/gis/cache/raster/" + req.params.id + "/raster.xml";
+  var file = "/data/cache/raster/" + req.params.id + "/raster.xml";
   
   if( fs.existsSync( file ) ){
-		callback( file, req.params, res );
+		callback( file, req, res );
 	}
 	else{
   	  var data = fs.readFileSync( "raster.xml", 'utf8' );
   	  var xmlDoc = xml.parseXml( data );
   	  var sources = xmlDoc.find( "//Parameter[@name='file']" );
 				
-    sources[ 0 ].text( "/gis/raster/" + req.params.id + ".tif" );
-		mkdir( "/gis/cache/raster/" + req.params.id );
+    sources[ 0 ].text( "/data/raster/" + req.params.id + ".tif" );
+		mkdir( "/data/cache/raster/" + req.params.id );
 		
 		fs.writeFileSync( file, xmlDoc.toString() );
-    callback( file, req.params, res );
+    callback( file, req, res );
 	}
 }
 
@@ -180,34 +175,40 @@ function mkdir( path, root ) {
   return !dirs.length||mkdir(dirs.join('/'), root);
 }
 
-function renderTile( filename, params, res ){
+function renderTile( filename, req, res ){
+	var dev = req.headers.host.match( /-dev/ ) ? true : false;
+	
   tilelive.load('mapnik://' + filename, function( err, source ){
-    if( err ){
+    if( err  ){
       console.log( err );
       res.status( 500 ).send( 'Error reading XML' );
     }
-    source.getTile( params.z, params.x, params.y, function( err, tile, headers ){
-      if( !err ){
-        res.send( tile );
-        if( dev === false ) saveTile( params, tile, res );
-      }
-      else {
-        console.log( err );
-        res.status( 500 ).send( 'Error writing tile' );
-      }
-    });
+    else {
+	    source.getTile( req.params.z, req.params.x, req.params.y, function( err, tile, headers ){
+	      if( err ){
+		      console.log( err );
+	        res.status( 500 ).send( 'Error writing tile' );
+	      }
+	      else {
+	        res.send( tile );
+	        if( dev === false ) saveTile( req, tile, res );
+	      }
+	    });
+	  }
   });
 }
 
-function saveTile( params, tile, res ){
+function saveTile( req, tile, res ){
+	var dev = req.headers.host.match( /-dev/ ) ? true : false;
+	
   if( cache === false || dev === true ) return false;
-  var png = "cache/png/" + params.year + "/" + params.layer + "/" + params.z + "/" + params.x + "/" + params.y + ".png";
+  var png = "cache/png/" + req.params.year + "/" + req.params.layer + "/" + req.params.z + "/" + req.params.x + "/" + req.params.y + ".png";
   var p = { Bucket : 'imaginerio', Key : png, Body : tile, ACL : 'public-read' };
   s3.putObject( p, function( err, data ){
     if( err ){
       console.log( err );
     } else {
-      var query = client.query( "INSERT INTO cache ( year, layer, z, x, y ) VALUES ( " + params.year + ", '" + params.layer + "', " + params.z + ", " + params.x + ", " + params.y + " )" );
+      var query = client.query( "INSERT INTO cache ( year, layer, z, x, y ) VALUES ( " + req.params.year + ", '" + req.params.layer + "', " + req.params.z + ", " + req.params.x + ", " + req.params.y + " )" );
       query.on( 'end', function(){
         console.log( png + " uploaded to S3" );
       });

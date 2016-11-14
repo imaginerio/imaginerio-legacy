@@ -224,7 +224,7 @@ var updateNames = function( client, ans, names, callback ){
     });
     
     var q = _.reduce( translate, function( memo, trans, text ){
-      return memo + " INSERT INTO names ( text, name_en, name_pr, layer ) SELECT '" + text + "', '" + trans.en + "', '" + trans.pr + "', '" + ans.layer + "' WHERE NOT EXISTS ( SELECT text FROM names WHERE text = '" + text + "' );";
+      return memo + " INSERT INTO names_dev ( text, name_en, name_pr, layer ) SELECT '" + text + "', '" + trans.en + "', '" + trans.pr + "', '" + ans.layer + "' WHERE NOT EXISTS ( SELECT text FROM names_dev WHERE text = '" + text + "' );";
     }, '' );
     
     var query = client.query( q );
@@ -246,7 +246,7 @@ var deleteNames = function( client, ans, callback ){
     if( nameConfirm.confirm == false || ans.geom == 'viewsheds' || ans.geom == 'mapsplans' ){
       callback( null, client, ans, null );
     } else {
-      var query = client.query( "DELETE FROM names WHERE layer = '" + ans.layer + "'" );
+      var query = client.query( "DELETE FROM names_dev WHERE layer = '" + ans.layer + "'" );
     
       query.on( 'error', function( error ) {
         callback( error, client );
@@ -261,7 +261,7 @@ var deleteNames = function( client, ans, callback ){
 
 var listLayers = function( client ) {
   var layers = new table(),
-      query = client.query( "SELECT * FROM ( SELECT layer, 'point' AS geometry FROM basepoint GROUP BY layer UNION SELECT layer, 'line' AS geometry FROM baseline GROUP BY layer UNION SELECT layer, 'poly' AS geometry FROM basepoly GROUP BY layer ) AS q WHERE layer IS NOT NULL ORDER BY layer" );
+      query = client.query( "SELECT * FROM ( SELECT layer, 'point' AS geometry FROM basepoint_dev GROUP BY layer UNION SELECT layer, 'line' AS geometry FROM baseline_dev GROUP BY layer UNION SELECT layer, 'poly' AS geometry FROM basepoly_dev GROUP BY layer ) AS q WHERE layer IS NOT NULL ORDER BY layer" );
   
   query.on( 'row', function( result ){
     layers.push( _.values( result ) );
@@ -302,6 +302,7 @@ var replaceSeq = function( ans, client ) {
           },
           testFile,
           newLayer,
+          deleteNames,
           getNames,
           updateNames
         ],
@@ -322,7 +323,7 @@ var replaceSeq = function( ans, client ) {
     },
     visualSeq = function( ans, client ) {
       ans.layer = ans.geom;
-      ans.geom = ans.layer == 'viewsheds' ? ans.geom : 'mapsplans';
+      ans.geom = ans.layer == 'viewsheds' ? ans.geom : 'mapsplans_dev';
       async.waterfall([
           function( callback ) {
             callback( null, client, ans );
@@ -349,12 +350,10 @@ var replaceSeq = function( ans, client ) {
       );
     },
     pushDB = function( ans, client ) {
-      client.end();
-      push.copyDB( "rio", "riodev" );
+      push.pushDB( client );
     },
     pullDB = function( ans, client ) {
-      client.end();
-      push.copyDB( "riodev", "rio" );
+      push.pullDB( client );
     },
     list = function( ans, client ) {
       listLayers( client );
@@ -372,7 +371,7 @@ var replaceSeq = function( ans, client ) {
 
 inquirer.prompt( questions.q, function( ans ) {
   if( ans.confirm || ans.task == 'list' ){
-    var client = new pg.Client( db.conn + 'riodev' );
+    var client = new pg.Client( db.conn );
     client.connect();
     tasks[ ans.task ]( ans, client );
   }
