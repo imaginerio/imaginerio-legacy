@@ -1,69 +1,135 @@
 var pg = require( 'pg' ),
-    sys = require( 'sys' ),
-    exec = require( 'child_process' ).exec,
-    db = require( './db' ),
+		_ = require( 'underscore' ),
     chalk = require( 'chalk' );
     	
-exports.copyDB = function( to, from ){
-  var pushClient = new pg.Client( db.conn + from );
-  pushClient.connect();
+exports.pushDB = function( client ){
+  getTables( client, copyDev );
+}
+
+exports.pullDB = function( client ){
+	getTables( client, copyLive );
+}
+
+function getTables( client, callback ){
+	var tables = [];
   
-  console.log( "Dumping " + chalk.green( from ) + " database structure and data..." );
-  exec( "pg_dump " + from + " | gzip > " + from + ".gz", function ( error, stdout, stderr ){
-    if( error !== null ){
-      	console.log( chalk.red( "ERROR: " ) + error );
-    }
-    else{
-      console.log( "Dropping database connections to " + chalk.green( to ) + "...");
+  console.log( "Getting information about " + chalk.yellow( "development" ) + " tables" );
   
-      var query = pushClient.query( "UPDATE pg_database SET datallowconn = 'false' WHERE datname = '" + to + "'; SELECT pg_terminate_backend( pid ) FROM pg_stat_activity WHERE datname = '" + to + "';" );
-      
-      query.on( 'error', function( error ){
-        console.log( error );
-        client.end();
-      });
-      
-      query.on( 'end', function(){
-        console.log( "Dropping " + chalk.green( to ) + " database..." );
-        	var query = pushClient.query( "DROP DATABASE " + to );
-        	
-        	query.on( 'error', function( error ){
-          console.log( error );
-          pushClient.end();
-        });
-        	
-        	query.on( 'end', function(){
-          console.log( "Creating empty " + chalk.green( to ) + " database..." );
-          exec( "createdb -T template0 " + to, function( error, stdout, stderr ){
-            	if( error !== null ){
-              console.log( chalk.red( "ERROR: " ) + error );
-              pushClient.end();
-            }
-            else{
-              console.log( "Restoring data..." );
-              exec( "gunzip -c " + from + ".gz | psql " + to, function( error, stdout, stderr ){
-                	if( error !== null ){
-                  console.log( chalk.red( "ERROR: " ) + error );
-                  pushClient.end();
-                }
-                else{
-                  console.log( "Database " + chalk.green( from ) + " successfully copied to " + chalk.yellow( to ) );
-                  exec( 'psql -d ' + to + ' -c "TRUNCATE cache;"', function( error, stdout, stderr ){
-                    if( error !== null ){
-                      console.log( chalk.red( "ERROR: " ) + error );
-                      pushClient.end();
-                    }
-                    else {
-                      console.log( "Tile cache " + chalk.green( "successfully cleared." ) );
-                      pushClient.end();
-                    }
-                  });
-                }
-              });
-            }
-          });
-        });
-      });
-    }
+  var query = client.query( "SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_name LIKE '%_dev'" );
+  
+	query.on( 'row', function( result ){
+		tables.push( result.table_name );
+	});
+
+  query.on( 'error', function( error ){
+		console.log( error );
+		resetDB( client, tables, '' );
   });
+  
+  query.on( 'end', function(){
+		callback( client, tables );
+	});
+}
+
+function copyDev( client, tables ){
+	var q = _.reduce( tables, function( q, t ){
+		var name = t.replace( /_dev$/, '' );
+		  return q += "ALTER TABLE " + name + " RENAME TO " + name + "_old; ";
+	}, "BEGIN; " ) + "COMMIT;";
+	  
+	console.log( chalk.green( "Backing up" ) + " live tables" );
+	  
+	var query = client.query( q );
+	  
+  query.on( 'error', function( error ){
+	  console.log( error );
+	  resetDB( client, tables, '' );
+  });
+	  
+	query.on( 'end', function(){
+		var q = _.reduce( tables, function( q, t ){
+			var name = t.replace( /_dev$/, '' );
+			return q += "CREATE TABLE " + name + " ( LIKE " + t + " INCLUDING ALL ); INSERT INTO " + name + " SELECT * FROM " + t + "; ";
+		  }, "BEGIN; " ) + "COMMIT;";
+		  
+		console.log( chalk.green( "Copying" ) + " development tables to live" );
+		  
+		var query = client.query( q );
+		  
+		query.on( 'error', function( error ){
+			console.log( error );
+			resetDB( client, tables, '' );
+		});
+		  
+		query.on( 'end', function(){
+			var q = _.reduce( tables, function( q, t ){
+				var name = t.replace( /_dev$/, '_old' );
+				return q += "DROP TABLE " + name + "; ";
+			}, "BEGIN; " ) + "TRUNCATE cache; COMMIT;";
+			  
+			var query = client.query( q );
+			  
+			console.log( "Tile cache " + chalk.green( "successfully cleared." ) );
+      client.end();
+		});
+	})
+}
+
+function copyLive( client, tables ){
+	var q = _.reduce( tables, function( q, t ){
+		var name = t.replace( /_dev$/, '' );
+		  return q += "ALTER TABLE " + t + " RENAME TO " + name + "_old; ";
+	}, "BEGIN; " ) + "COMMIT;";
+	  
+	console.log( chalk.green( "Backing up" ) + " live tables" );
+	  
+	var query = client.query( q );
+	  
+  query.on( 'error', function( error ){
+	  console.log( error );
+	  resetDB( client, tables, '' );
+  });
+	  
+	query.on( 'end', function(){
+		var q = _.reduce( tables, function( q, t ){
+			var name = t.replace( /_dev$/, '' );
+			return q += "CREATE TABLE " + t + " ( LIKE " + name + " INCLUDING ALL ); INSERT INTO " + t + " SELECT * FROM " + name + "; ";
+		  }, "BEGIN; " ) + "COMMIT;";
+		  
+		console.log( chalk.green( "Copying" ) + " development tables to live" );
+		  
+		var query = client.query( q );
+		  
+		query.on( 'error', function( error ){
+			console.log( error );
+			resetDB( client, tables, '' );
+		});
+		  
+		query.on( 'end', function(){
+			var q = _.reduce( tables, function( q, t ){
+				var name = t.replace( /_dev$/, '_old' );
+				return q += "DROP TABLE " + name + "; ";
+			}, "BEGIN; " ) + "COMMIT;";
+			  
+			var query = client.query( q );
+			  
+			console.log( "Development database " + chalk.green( "successfully reset." ) );
+      client.end();
+		});
+	})
+}
+
+function resetDB( client, tables, suffix ){
+	var q = _.reduce( tables, function( q, t ){
+	  var old = t.replace( /_dev$/, '_old' );
+	  var name = t.replace( /_dev$/, suffix );
+	  return q += "ALTER TABLE " + old + " RENAME TO " + name + "; ";
+  }, "BEGIN; " ) + "COMMIT;";
+  
+  var query = client.query( q );
+  
+  query.on( 'end', function(){
+	  console.log( chalk.red( "ERROR DETECTED: " ) + "Tables have been reset" );
+	  client.end();
+  })
 }

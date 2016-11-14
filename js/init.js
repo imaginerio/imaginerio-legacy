@@ -3,7 +3,7 @@ var server = "http://imaginerio.axismaps.io:3000",
     rasterserver = "http://imaginerio.axismaps.io:3001/raster/";
 
 var mobileSize = 800;
-var mobile = $( window ).width() <= mobileSize;
+var mobile = $( window ).width() <= mobileSize || window.matchMedia('(max-device-width: 800px)').matches;
 var showIntro = gup( 'intro' ) ? gup( 'intro' ) == 'true' : true;
 var params = {};
 
