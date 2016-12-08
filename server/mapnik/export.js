@@ -105,9 +105,9 @@ exports.exportMap = function( req, res ){
     layers.src = fs.readFileSync( 'layers' + id + '.png' );
     context.drawImage( layers, 0, 0, dimensions.x, dimensions.y );
     
-    var legend = new Image;
-    legend.src = fs.readFileSync( __dirname + '/images/legend_' + req.params.lang + '.png' );
-    context.drawImage( legend, 0, titleHeight, 235, 768 );
+//    var legend = new Image;
+//    legend.src = fs.readFileSync( __dirname + '/images/legend_' + req.params.lang + '.png' );
+//    context.drawImage( legend, 0, titleHeight, 235, 768 );
       
     context.fillStyle = 'rgba( 230, 230, 230, 0.8 )';
     context.fillRect( 0, 0, dimensions.x, titleHeight );
