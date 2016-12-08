@@ -27,9 +27,9 @@ exports.q = [
     choices : function( ans ){
       if( ans.task == 'visual' ) {
         return [
-          { name : 'viewsheds', value : 'viewsheds_dev' },
-          { name : 'maps', value : 'maps_dev' },
-          { name : 'plans', value : 'plans_dev' }
+          { name : 'viewsheds', value : 'viewsheds' },
+          { name : 'maps', value : 'maps' },
+          { name : 'plans', value : 'plans' }
         ]
       }
       else if( ans.task == 'planned' ){
@@ -55,7 +55,7 @@ exports.q = [
     name : 'layer',
     message : 'Enter layer name:',
     when : function( ans ){ 
-      return ans.task != 'push' && ans.task != 'pull' && ans.task != 'list';
+      return ans.task != 'push' && ans.task != 'pull' && ans.task != 'visual' && ans.task != 'list';
     }
   },
   {

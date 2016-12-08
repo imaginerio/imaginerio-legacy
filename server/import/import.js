@@ -323,7 +323,7 @@ var replaceSeq = function( ans, client ) {
     },
     visualSeq = function( ans, client ) {
       ans.layer = ans.geom;
-      ans.geom = ans.layer == 'viewsheds' ? ans.geom : 'mapsplans_dev';
+      ans.geom = ans.layer == 'viewsheds' ? ans.geom + "_dev" : 'mapsplans_dev';
       async.waterfall([
           function( callback ) {
             callback( null, client, ans );
