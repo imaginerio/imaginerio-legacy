@@ -55,7 +55,7 @@ exports.q = [
     name : 'layer',
     message : 'Enter layer name:',
     when : function( ans ){ 
-      return ans.task != 'push' && ans.task != 'pull' && ans.task != 'visual' && ans.task != 'list';
+      return ans.task != 'push' && ans.task != 'pull' && ans.task != 'list';
     }
   },
   {
