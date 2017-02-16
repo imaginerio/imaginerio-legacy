@@ -918,7 +918,7 @@
     </Datasource>
   </Layer>
 
-<Style name="fountains" filter-mode="first">
+<!--<Style name="fountains" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
@@ -974,7 +974,7 @@
        <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
        <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
-  </Layer>
+  </Layer>-->
 
 <Style name="railpoint" filter-mode="first">
   <Rule>
@@ -1228,25 +1228,25 @@
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <TextSymbolizer size="15" dx="12" dy="12" wrap-width="40" minimum-distance="15" placement="interior" placement-type="simple" placements="S,N,E,W" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
-    <MarkersSymbolizer file="../../../images/park2-24.svg" placement="interior" fill="#7a8446" multi-policy="whole" clip="false" />
+    <!--<MarkersSymbolizer file="../../../images/park2-24.svg" placement="interior" fill="#7a8446" multi-policy="whole" clip="false" />-->
   </Rule>
   <Rule>
     <MaxScaleDenominator>5000</MaxScaleDenominator>
     <MinScaleDenominator>2500</MinScaleDenominator>
     <TextSymbolizer size="14" dx="12" dy="12" wrap-width="40" minimum-distance="15" placement="interior" placement-type="simple" placements="S,N,E,W" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[nameshort]]]></TextSymbolizer>
-    <MarkersSymbolizer file="../../../images/park2-24.svg" placement="interior" fill="#7a8446" multi-policy="whole" clip="false" />
+    <!--<MarkersSymbolizer file="../../../images/park2-24.svg" placement="interior" fill="#7a8446" multi-policy="whole" clip="false" />-->
   </Rule>
   <Rule>
     <MaxScaleDenominator>12500</MaxScaleDenominator>
     <MinScaleDenominator>5000</MinScaleDenominator>
     <TextSymbolizer size="13" wrap-width="40" minimum-distance="15" placement="interior" placement-type="simple" placements="S,N,E,W" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" dx="10" dy="10" ><![CDATA[[nameshort]]]></TextSymbolizer>
-    <MarkersSymbolizer placement="interior" file="../../../images/park2-18.svg" fill="#7a8446" multi-policy="whole" clip="false" />
+    <!--<MarkersSymbolizer placement="interior" file="../../../images/park2-18.svg" fill="#7a8446" multi-policy="whole" clip="false" />-->
   </Rule>
   <Rule>
     <MaxScaleDenominator>25000</MaxScaleDenominator>
     <MinScaleDenominator>12500</MinScaleDenominator>
     <TextSymbolizer placement="interior" placement-type="simple" placements="S,N,E,W" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" dx="10" dy="10" size="12" ><![CDATA['']]></TextSymbolizer>
-    <MarkersSymbolizer placement="interior" file="../../../images/park2-18.svg" fill="#7a8446" multi-policy="whole" clip="false" />
+    <!--<MarkersSymbolizer placement="interior" file="../../../images/park2-18.svg" fill="#7a8446" multi-policy="whole" clip="false" />-->
   </Rule>
 </Style>
 <Layer name="parks_labels"
@@ -1266,7 +1266,7 @@
     </Datasource>
   </Layer>
 
-<Style name="cemeteries_labels" filter-mode="first">
+<!--<Style name="cemeteries_labels" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
     <TextSymbolizer size="15" dx="12" dy="12" wrap-width="40" minimum-distance="15" placement="interior" placement-type="simple" placements="S,N,E,W" face-name="DejaVu Sans Oblique" fill="#5b6234" halo-fill="rgba(255, 255, 255, 0.8)" halo-radius="1.5" line-spacing="2" ><![CDATA[[namecomple]]]></TextSymbolizer>
@@ -1306,7 +1306,7 @@
        <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
        <Parameter name="password"><![CDATA[FXB429KJ7a7a7sF2KdKN6q93]]></Parameter>
     </Datasource>
-  </Layer>
+  </Layer>-->
 
 <Style name="roads_labels-low" filter-mode="first">
   <Rule>
@@ -1523,7 +1523,7 @@
        <Parameter name="password"><![CDATA[99999999]]></Parameter>
     </Datasource>
   </Layer>
-
+<!--
 <Style name="cemeteries_marker" filter-mode="first">
   <Rule>
     <MaxScaleDenominator>2500</MaxScaleDenominator>
@@ -1550,6 +1550,6 @@
        <Parameter name="user"><![CDATA[pg_query_user]]></Parameter>
        <Parameter name="password"><![CDATA[99999999]]></Parameter>
     </Datasource>
-  </Layer>
+  </Layer>-->
 
 </Map>
