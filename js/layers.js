@@ -2,6 +2,7 @@ var names = {},
 	off = [];
 
 var hamburgerTimeout;
+var layersInitialCheck = true;
 
 function init_layers()
 {
@@ -108,7 +109,7 @@ function build_layers()
 				}).appendTo( folder );
 				label.prepend( add_swatch( { shape : "../viewpoint.png" } ) );
 			}
-			
+
 			var type = '';
 			_.each( raster, function( val )
 			{
@@ -132,6 +133,10 @@ function build_layers()
 					_.each( val, function( val, key )
 					{
 						var label = add_check( "layer", key, val.id, switch_layers ).appendTo( folder );
+						if ( layersInitialCheck && params.layers && params.layers.length > 0 )
+						{
+							label.find( 'input' ).prop( 'checked', _.contains( params.layers, label.find( 'input' ).attr( 'value' ) ) );
+						}
 						delete val.id;
 
 						if( val.style ) label.prepend( add_swatch( val.style ) );
@@ -155,6 +160,10 @@ function build_layers()
       {
         $( this ).parent().nextUntil( "label.layer" ).addClass( "off" );
       });
+
+			layersInitialCheck = false;
+			switch_layers();
+			update_hash();
 		});
 	});
 
@@ -179,6 +188,15 @@ function build_layers()
 									"class" : "raster",
 									"value" : r.file
 								})
+								.prop( 'checked', function()
+								{
+									if ( layersInitialCheck && params.raster && params.raster === r.file )
+									{
+										load_raster( r.file );
+										return true;
+									}
+									return false;
+								})
 								.click( function( e )
 								{
 									if( $( this ).is( ":checked" ) )
@@ -192,6 +210,7 @@ function build_layers()
 									}
 
 									e.stopPropagation();
+									update_hash();
 								})
 						);
 		$.getJSON( "http://www.sscommons.org/openlibrary/secure/imagefpx/" + r.id + "/7729935/5", function( json )
@@ -269,8 +288,9 @@ function build_layers()
 		});
 
     clear_results( "probe" );
-		e.stopPropagation();
+		if ( e ) e.stopPropagation();
 		load_tiles();
+		update_hash();
 	}
 
 	function add_swatch( style )

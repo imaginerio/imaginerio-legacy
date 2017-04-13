@@ -81,8 +81,6 @@ function init_timeline()
 
 function update_year( y )
 {
-	console.log( year );
-	console.log( y );
 	if( year == y ) return false;
 
 	clear_visual();

@@ -174,11 +174,27 @@ function gup( name )
 
 function check_hash(){
 	var hash = window.location.hash.replace( '#', '' ).split( '/' );
-	if( hash.length == 4 ){
-		params.year = parseInt( hash[ 0 ], 10 );
-		params.zoom = parseInt( hash[ 1 ] );
-		params.center = [ parseFloat( hash[ 2 ] ), parseFloat( hash[ 3 ] ) ];
+	params.year = parseInt( hash[ 0 ], 10 );
+	params.zoom = parseInt( hash[ 1 ] );
+	params.center = [ parseFloat( hash[ 2 ] ), parseFloat( hash[ 3 ] ) ];
+	params.layers = hash[ 4 ] ? hash[ 4 ].split( '&' ) : [];
+	params.raster = hash[ 5 ];
+	params.plan = hash[ 6 ];
+}
+
+function update_hash(){
+	var layers = '';
+	if( off.length !== 0 )
+	{
+		$( '.layer input:checked').each(function (){
+			layers += $( this ).attr( 'value' ) + '&';
+		});
+		layers = layers.slice( 0, layers.length - 1 );
 	}
+
+	var rasters = $( '.visual input:checked' ).attr( 'value' ) || '';
+
+  window.location.hash = year + "/" + map.getZoom() + "/" + map.getCenter().lat + "/" + map.getCenter().lng + "/" + layers + "/" + rasters + "/" + currentPlan + "/";
 }
 
 init();

@@ -37,7 +37,6 @@ function init_map()
         probeZoom = .6;
         break;
     }
-    update_hash();
   })
   .on( "moveend", update_hash )
 	.on( "locationfound", function(l){
@@ -144,9 +143,12 @@ function load_tiles()
 {
 	clear_highlight();
 	map_loading( true );
-	if( tiles[ year ] && off.length == 0 ){
+	if( tiles[ year ] && off.length == 0 )
+	{
 		map.addLayer( tiles[ year ].setOpacity( 0 ) );
-	}else{
+	}
+	else
+	{
     var layerstring = off.length == 0 ? 'all' : off.sort().join( "," );
 		var t = L.tileLayer( tileserver  + year + '/' + layerstring + '/{z}/{x}/{y}.png'  )
 					.addTo( map )
@@ -229,7 +231,7 @@ function load_raster( id )
 	if( map.hasLayer( shown.raster ) )
 	{
 		map.removeLayer( shown.raster );
-		shown.tiles.setOpacity( 1 );
+		if( shown.tiles ) shown.tiles.setOpacity( 1 );
 	}
 	if( id !== false )
 	{
@@ -244,7 +246,7 @@ function load_raster( id )
 			rasters[ id ].bringToBack();
 			base.bringToBack();
 		}
-		shown.tiles.setOpacity( 0.75 );
+		if( shown.tiles ) shown.tiles.setOpacity( 0.75 );
 		shown.raster = rasters[ id ];
 	}
 }
@@ -345,8 +347,4 @@ function export_map()
 	var url = server + "/export/" + lang + "/" + year + "/" + layerstring + "/" + raster + "/" + map.getBounds().toBBoxString() + "/";
 	document.getElementById( 'download_iframe' ).src = url;
 	window.setTimeout( function(){ $( "#export" ).removeClass( "loading" ); }, 2000 );
-}
-
-function update_hash(){
-  window.location.hash = year + "/" + map.getZoom() + "/" + map.getCenter().lat + "/" + map.getCenter().lng;
 }
