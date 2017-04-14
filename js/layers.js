@@ -31,6 +31,7 @@ function init_layers()
 			$( "#layers, .mobile-wrapper" ).removeClass( "open" );
 			$( ".mobile-wrapper" ).css( "width", "100%" );
 			$( "#hamburger" ).removeClass( "open" );
+			$( ".social-media-button" ).show();
 			$( "#year, .leaflet-bar, header h1" ).show();
 			resize();
 			map.invalidateSize();
@@ -41,6 +42,7 @@ function init_layers()
 			$( "#layers, .mobile-wrapper" ).addClass( "open" );
 			hamburgerTimeout = setTimeout(function () {
 				$( ".mobile-wrapper" ).width(50);
+				$( ".social-media-button" ).hide();
 				$( "#year, .leaflet-bar, header h1" ).hide();
 				$( "#hamburger" ).addClass( "open" );
 

@@ -12,7 +12,7 @@
   .feature,
   #instruction,
   .header-bar,
-  .info-page,
+  .info-page:not(.social-media-button),
   .tick span,
   #track > .tick:last-of-type,
   #prev,
@@ -59,6 +59,20 @@
     vertical-align: bottom;
   }
 
+  .social-media-button {
+    margin-top: 0;
+    position: absolute;
+    top: -3px;
+  }
+
+  .twitter-button {
+    right: 5px;
+  }
+
+  .facebook-button {
+    right: 40px;
+  }
+
   /* Timeline */
   #timeline {
     height: 30px;
@@ -76,8 +90,9 @@
     height: 41px;
     line-height: 41px;
     position: absolute;
-    right: 0;
+    right: 80px;
     top: -41px;
+    width: initial;
   }
 
   .tick,
