@@ -196,38 +196,13 @@ function update_hash(){
 
   window.location.hash = year + "/" + map.getZoom() + "/" + map.getCenter().lat + "/" + map.getCenter().lng + "/" + layers + "/" + rasters + "/" + currentPlan + "/";
 
-	if( twttr && twttr.widgets )
-	{
-		var newLink = $( '<a>' )
-			.attr( 'target', '_blank' )
-			.attr( 'href', 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(window.location.href) )
-			.html( '<span class="icon-twitter"></span>');
+	// Update Social Media links
+	$( '.twitter-button a' ).attr( 'href', 'https://twitter.com/intent/tweet?url=' + encodeURIComponent( window.location.href ) );
 
-		$( '.twitter-button' )
-			.empty()
-			.append( newLink )
-
-		twttr.widgets.load( $( '.twitter-button' )[0] );
-	}
+	$( '.facebook-button a' ).attr('href', 'http://www.facebook.com/sharer/sharer.php?u=imaginerio.org/' + encodeURIComponent( window.location.hash ) + '&title=Imagine Rio');
 }
 
 /* Social Media loaders */
-window.twttr = (function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0],
-    t = window.twttr || {};
-  if (d.getElementById(id)) return t;
-  js = d.createElement(s);
-  js.id = id;
-  js.src = "https://platform.twitter.com/widgets.js";
-  fjs.parentNode.insertBefore(js, fjs);
-
-  t._e = [];
-  t.ready = function(f) {
-    t._e.push(f);
-  };
-
-  return t;
-}(document, "script", "twitter-wjs"));
 
 /* Initialize */
 init();
