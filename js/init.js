@@ -174,12 +174,12 @@ function gup( name )
 
 function check_hash(){
 	var hash = window.location.hash.replace( '#', '' ).split( '/' );
-	params.year = parseInt( hash[ 0 ], 10 );
-	params.zoom = parseInt( hash[ 1 ] );
-	params.center = [ parseFloat( hash[ 2 ] ), parseFloat( hash[ 3 ] ) ];
+	params.year = hash[ 0 ] ? parseInt( hash[ 0 ], 10 ) : '';
+	params.zoom = hash[ 1 ] ? parseInt( hash[ 1 ] ) : '';
+	params.center = hash[ 2 ] && hash[ 3 ] ? [ parseFloat( hash[ 2 ] ), parseFloat( hash[ 3 ] ) ] : '';
 	params.layers = hash[ 4 ] ? hash[ 4 ].split( '&' ) : [];
-	params.raster = hash[ 5 ];
-	params.plan = hash[ 6 ];
+	params.raster = hash[ 5 ] ? hash[ 5 ] : '';
+	params.plan = hash[ 6 ] ? hash[ 6 ] : '';
 }
 
 function update_hash(){
