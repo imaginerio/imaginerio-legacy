@@ -192,7 +192,7 @@ function update_hash(){
 		layers = layers.slice( 0, layers.length - 1 );
 	}
 
-	var rasters = $( '.visual input:checked' ).attr( 'value' ) || '';
+	var rasters = $( '.visual:not(.layer) input:checked' ).attr( 'value' ) || '';
 
   window.location.hash = year + "/" + map.getZoom() + "/" + map.getCenter().lat + "/" + map.getCenter().lng + "/" + layers + "/" + rasters + "/" + currentPlan + "/";
 

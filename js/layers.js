@@ -108,6 +108,7 @@ function build_layers()
 					{
 						if( map.hasLayer( visual[ year ] ) ) map.removeLayer( visual[ year ] );
 					}
+					update_hash();
 				}).appendTo( folder );
 				label.prepend( add_swatch( { shape : "../viewpoint.png" } ) );
 			}
