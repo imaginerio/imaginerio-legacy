@@ -195,6 +195,14 @@ function update_hash(){
 	var rasters = $( '.visual input:checked' ).attr( 'value' ) || '';
 
   window.location.hash = year + "/" + map.getZoom() + "/" + map.getCenter().lat + "/" + map.getCenter().lng + "/" + layers + "/" + rasters + "/" + currentPlan + "/";
+
+	// Update Social Media links
+	$( '.twitter-button a' ).attr( 'href', 'https://twitter.com/intent/tweet?url=' + encodeURIComponent( window.location.href ) );
+
+	$( '.facebook-button a' ).attr('href', 'http://www.facebook.com/sharer/sharer.php?u=imaginerio.org/' + encodeURIComponent( window.location.hash ) + '&title=Imagine Rio');
 }
 
+/* Social Media loaders */
+
+/* Initialize */
 init();
