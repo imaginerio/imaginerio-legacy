@@ -1,5 +1,6 @@
 var plans = [];
 var currentPlan = '';
+var currentAttribution = '';
 
 function init_plans()
 {
@@ -66,6 +67,9 @@ function load_plan( planIndex )
 	})
 
 	update_hash();
+	map.attributionControl.removeAttribution( currentAttribution );
+	currentAttribution = planCredits[ planIndex ][ 0 ] + ' - ' + planCredits[ planIndex ][ lang === 'en' ? 1 : 2 ];
+	map.attributionControl.addAttribution( currentAttribution );
 }
 
 function draw_plan( plan )
@@ -101,4 +105,6 @@ function clear_plan()
 
 	currentPlan = '';
 	update_hash();
+	map.attributionControl.removeAttribution( currentAttribution );
+	currentAttribution = '';
 }

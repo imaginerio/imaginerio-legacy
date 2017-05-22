@@ -19,12 +19,19 @@ var lang,
 		"locationOutsideBounds" : "A sua localização não está no mapa",
 		"locationError" : "A sua localização não está disponível",
 		"#disclaimer" : "Este produto tem fins informativos e não foi preparado nem é adequado para fins legais, de engenharia ou de levantamento topográfico. Não representa um estudo in sitiu e apenas representa localizações relativas aproximadas. Não há qualquer garantia referente à precisão específica ou ao caráter integral deste produto e a Rice University assim como a equipe de pesquisa de imagineRio não assumem qualquer responsabilidade nem respondem por danos decorrentes de erros e omissões."
-	};
+	},
 
 	en = {
 		"locationOutsideBounds" : "Your location is not within the bounds of the map.",
 		"locationError" : "Sorry, we were not able to find your location."
-	}
+	},
+
+	planCredits = [
+		["Beaurepaire-Rohan 1840-1843", "Interpreted by Verena Andreatta", "Interpretado por Verena Andreatta"],
+		["Comissão de Melhoramentos 1875-1876", "Interpreted by Verena Andreatta", "Interpretado por Verena Andreatta"],
+		["Pereira Passos 1903-1906", "Interpreted by Verena Andreatta", "Interpretado por Verena Andreatta"],
+		["Le Corbusier", "Interpreted by Farès el-Dahdah", "Interpretado por Farès el-Dahdah"]
+	];
 
 function init()
 {
