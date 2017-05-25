@@ -209,6 +209,12 @@ function update_hash(){
 	$( '.facebook-button a' ).attr('href', 'http://www.facebook.com/sharer/sharer.php?u=imaginerio.org/' + encodeURIComponent( window.location.hash ) + '&title=Imagine Rio');
 }
 
+function serverError(){
+	$( '#enter' ).before(
+		$( '<h4>The server has encountered an error.<br>Please try again later</h4>' )
+	).remove();
+}
+
 /* Social Media loaders */
 
 /* Initialize */

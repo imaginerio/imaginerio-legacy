@@ -8,18 +8,25 @@ var year = 0,
 
 function init_timeline()
 {
-	$.getJSON( server + "/timeline", function( json )
-	{
-		years = json,
-		first = _.first( years ),
-		min = Math.floor( first / 50 ) * 50,
-		max = Math.min( new Date().getFullYear(), _.last( years ) ),
+	$.ajax({
+		url: server + "/timeline",
+		dataType: 'json',
+		success: function( json ){
+			years = json,
+			first = _.first( years ),
+			min = Math.floor( first / 50 ) * 50,
+			max = Math.min( new Date().getFullYear(), _.last( years ) ),
 
-		years = _.filter( years, function( val ){ return val <= max });
+			years = _.filter( years, function( val ){ return val <= max });
 
-		build_timeline();
-		update_year( params.year ? Math.min( Math.max( params.year, first ), max ) : first );
-		snap_timeline( year );
+			build_timeline();
+			update_year( params.year ? Math.min( Math.max( params.year, first ), max ) : first );
+			snap_timeline( year );
+			$( '#enter' ).removeClass( 'disabled' );
+		},
+		error: function( data ){
+			serverError();
+		}
 	});
 
   $( "#puck" ).on( 'touchstart mousedown', function( e )

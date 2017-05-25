@@ -6,10 +6,16 @@ var layersInitialCheck = true;
 
 function init_layers()
 {
-	$.getJSON( server + "/names/" + lang, function( json )
-	{
-		names = json;
-	})
+	$.ajax({
+		url: server + "/names/" + lang,
+		dataType: 'json',
+		success: function( json ){
+			names = json;
+		},
+		error: function( data ){
+			serverError();
+		}
+	});
 
 	$( "#switch" ).click( function()
 	{
