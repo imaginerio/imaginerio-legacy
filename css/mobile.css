@@ -73,6 +73,10 @@
     right: 40px;
   }
 
+  .info-page:hover label{
+    display: none;
+  }
+
   /* Timeline */
   #timeline {
     height: 30px;

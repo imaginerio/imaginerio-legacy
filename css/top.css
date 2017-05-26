@@ -22,13 +22,14 @@ header, nav{
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
+	user-select: none;
 }
 
 #hamburger {
 	display: none;
 }
 
-#export, .info-page, .header-bar{
+.info-page{
 	color: #999;
 	font-size: 16px;
 	font-weight: 200;
@@ -40,7 +41,7 @@ header, nav{
 	text-shadow: none;
 }
 
-#export span, #enter span, .info-page span{
+#enter span, .info-page span{
 	background-color: #ddd;
 	-webkit-border-radius: 10px;
 	border-radius: 100%;
@@ -51,27 +52,6 @@ header, nav{
 	line-height: 30px;
 	display: inline-block;
 	text-align: center;
-	position: relative;
-	top: 8px;
-}
-
-#export span{
-	-moz-transform: rotate(90deg);
-	-webkit-transform: rotate(90deg);
-	-o-transform: rotate(90deg);
-	-ms-transform: rotate(90deg);
-	transform: rotate(90deg);
-}
-
-#export span:before, #enter span:before{
-	content: '';
-	width: 16px;
-	height: 15px;
-	display: block;
-	background: url(../img/arrow.png) no-repeat center bottom;
-	position: relative;
-	top: 8px;
-	left: 7px;
 }
 
 #export.loading span, #export.loading:hover span{
@@ -95,11 +75,13 @@ header, nav{
 	background-position-y: top;
 }
 
-.header-bar{
-  font-size: 30px;
-  margin-left: 10px;
-  margin-right: 5px;
-  cursor: initial;
+.info-page label{
+	margin-left: 20px;
+	display: none;
+}
+
+.info-page:hover label{
+	display: initial;
 }
 
 .info-page span{
