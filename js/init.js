@@ -10,7 +10,7 @@ var params = {};
 var lang,
 	pr = {
 		"h1" : "imagináRio",
-		"#enter" : "Ver o mapa <span></span>",
+		"#enter" : 'Ver o mapa &nbsp;&nbsp;&nbsp; <span class="icon-right-bold"></span>',
 		"#plans" : "Projetos Urbanos  &nbsp;&#9662;",
 		"#switch" : "Legenda do Mapa",
 		"#instruction" : "Clique no mapa para explorar...",
