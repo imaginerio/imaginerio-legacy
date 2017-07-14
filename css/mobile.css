@@ -73,6 +73,11 @@
     right: 40px;
   }
 
+  .info-page a {
+  	display: inline-block;
+  	margin-top: 8px;
+  }
+
   .info-page:hover label{
     display: none;
   }
