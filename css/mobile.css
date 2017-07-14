@@ -1,10 +1,10 @@
-@media (min-width: 801px), (min-device-width: 801px) {
+@media (min-width: 769px), (min-device-width: 737px) {
   #geolocate {
     display: none;
   }
 }
 
-@media (max-width: 800px), (max-device-width: 800px) {
+@media (max-width: 768px), (max-device-width: 736px) {
   /* Hide everything */
   #plans,
   #search,
