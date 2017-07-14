@@ -14,7 +14,11 @@ var lang,
 		"#plans" : "Projetos Urbanos  &nbsp;&#9662;",
 		"#switch" : "Legenda do Mapa",
 		"#instruction" : "Clique no mapa para explorar...",
-		"#export" : "Exportar o mapa <span></span>",
+		"#export" : "Exportar o mapa",
+		"#moreInformation" : "",
+		"#imageGallery" : "",
+		"#twitter" : "",
+		"#facebook" : "",
 		"#tagline" : "Um Atlas ilustrado e diacronico da evolução social e urbana do Rio de Janeiro",
 		"locationOutsideBounds" : "A sua localização não está no mapa",
 		"locationError" : "A sua localização não está disponível",
@@ -160,7 +164,8 @@ function set_language()
 			.attr( "href", "index.html?lang=en" );
 		_.each( pr, function( text, sel )
 		{
-			$( sel ).html( text );
+			if ( $( sel ).find( 'label' ).length > 0 ) $( sel ).find( 'label' ).html( text );
+			else $( sel ).html( text );
 		});
 
 		$( "#search input" ).attr( "placeholder", "Pesquisa..." );
