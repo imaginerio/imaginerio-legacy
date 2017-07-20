@@ -7,6 +7,9 @@ let maxYear = 2017;
 let tiles = {};
 let shown = {};
 
+let pipValues = _.range(1500, 2025, 25);
+pipValues.push(maxYear);
+
 let map = L.map('map', {
   center: [-22.9046, -43.1919],
   zoom: 15,
@@ -28,8 +31,15 @@ let slider = noUiSlider.create($('.slider')[0], {
     max: [2017]
   },
   pips: {
-    mode: 'steps',
-    filter: (val) => val % 50 ? (val % 25 ? 0 : 2) : 1,
+    mode: 'values',
+    filter: (val) => {
+      if (val === maxYear) return 1;
+      else if (val % 50) {
+        if (val % 25) return 0;
+        else return 2;
+      } else return 1;
+    },
+    values: pipValues,
     density: 2
   },
   tooltips: true,
@@ -44,9 +54,6 @@ updateYear(2001);
 /* General functions */
 function updateYear(y) {
   if (year == y) return false;
-
-  // clear_visual();
-
   year = y;
 
   loadBase();
@@ -105,8 +112,6 @@ function loadTiles() {
 
     tiles[year] = t;
   }
-
-  // loadVisual();
 }
 
 function showTiles(tile) {
