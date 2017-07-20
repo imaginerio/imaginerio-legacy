@@ -246,6 +246,8 @@ function secondPointCreated(e) {
   map.on('mousemove', (e) => {
     let c = getMapEdgePoint(map.latLngToLayerPoint(firstPoint), e.layerPoint);
     line2.setLatLngs([firstPoint, e.latlng, map.layerPointToLatLng(c)]);
+
+    console.log(getAngle(line1, line2));
   });
 
   map.on('draw:created', thirdPointCreated);
@@ -304,6 +306,16 @@ function getMapEdgePoint(a, b) {
   c.x = b.x + (b.x - a.x) / length * window.outerWidth;
   c.y = b.y + (b.y - a.y) / length * window.outerWidth;
   return c;
+}
+
+function getAngle(l1, l2) {
+  let l1Points = l1.getLatLngs().map((ll) => map.latLngToLayerPoint(ll));
+  let l2Points = l2.getLatLngs().map((ll) => map.latLngToLayerPoint(ll));
+  let angle1 = Math.atan2(l1Points[0].y - l1Points[1].y, l1Points[0].x - l1Points[1].x);
+  let angle2 = Math.atan2(l2Points[0].y - l2Points[1].y, l2Points[0].x - l2Points[1].x);
+
+  let returnAngle = Math.round(Math.abs(angle1 - angle2) * 180 / Math.PI);
+  return returnAngle > 180 ? 360 - returnAngle : returnAngle;
 }
 
 /* -------------------------*/
