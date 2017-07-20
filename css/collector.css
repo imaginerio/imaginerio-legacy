@@ -1,0 +1,69 @@
+/* imagineRio Cone Collector */
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.wrapper {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+main {
+  flex-grow: 1;
+  height: 100%;
+}
+
+/* Slider */
+.slider-wrapper {
+  box-sizing: border-box;
+  height: 150px;
+  padding: 60px 5%;
+  width: 100%;
+}
+
+.slider {
+  width: 100%;
+}
+
+.noUi-value-horizontal {
+  transform: translate3d(-50%, 100%, 0);
+}
+
+/* Map */
+.map {
+  height: calc(100% - 150px); /* 100% - slider-wrapper height */
+  width: 100%;
+}
+
+.loading{
+	background: rgba( 255,255,255, 0.75 ) url(../img/loading.gif) center center no-repeat;
+	height: 100%;
+  position: relative;
+	width: 100%;
+	z-index: 9999;
+}
+
+.loading:before{
+  color: #333;
+	content: "Loading...";
+  display: block;
+  font-size: 36px;
+  font-weight: 200;
+  position: relative;
+  text-align: center;
+	top: 55%;
+}
+
+/* Sidebar */
+sidebar {
+  flex-shrink: 0;
+  height: 100%;
+  min-width: 250px;
+  width: 25%;
+}
