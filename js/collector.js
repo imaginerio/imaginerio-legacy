@@ -169,16 +169,111 @@ function tileFadeIn(tileIn) {
 }
 
 /* Leaflet Draw Functions */
+let tooling;
+let genericIcon = L.divIcon({ className: 'cone-guidepoint', iconSize: 10 });
+let firstPoint;
+let secondPoint;
+let thirdPoint;
+let line1;
+let line2;
+let finalCone;
+
 function newCone() {
-  let genericIcon = L.divIcon({ className: 'cone-point', iconSize: 10 });
-  let options = { icon: genericIcon };
-  let tooling = new L.Draw.Marker(map, options);
+  let firstPoinIcon = L.divIcon({ className: 'cone-point', iconSize: 10 });
+  tooling = new L.Draw.Marker(map, { icon: firstPoinIcon });
   tooling.enable();
+
+  map.on('draw:created', firstPointCreated);
 }
 
-map.on('draw:created', function (event) {
-  coneLayer.addLayer(event.layer);
-});
+function firstPointCreated(e) {
+  // Add point
+  coneLayer.addLayer(e.layer);
+  firstPoint = e.layer.getLatLng();
+  tooling.disable();
+
+  // Turn off old events
+  map.off('draw:created');
+
+  // Start new point
+  tooling = new L.Draw.Marker(map, { icon: genericIcon });
+  tooling.enable();
+
+  // Draw line between points
+  line1 = L.polyline([firstPoint, firstPoint], { className: 'cone-guideline' }).addTo(coneLayer);
+
+  // New events
+  map.on('mousemove', (e) => {
+    line1.setLatLngs([firstPoint, e.latlng]);
+  });
+  map.on('draw:created', secondPointCreated);
+}
+
+function secondPointCreated(e) {
+  // Add point
+  coneLayer.addLayer(e.layer);
+  secondPoint = e.layer.getLatLng();
+  tooling.disable();
+
+  // Turn off old events
+  map.off('draw:created');
+  map.off('mousemove');
+
+  // Start new point
+  tooling = new L.Draw.Marker(map, { icon: genericIcon });
+  tooling.enable();
+
+  // Draw line between points
+  line1 = L.polyline([firstPoint, firstPoint], { className: 'cone-guideline' }).addTo(coneLayer);
+
+  // New events
+  map.on('mousemove', (e) => {
+    line1.setLatLngs([firstPoint, e.latlng]);
+  });
+
+  map.on('draw:created', thirdPointCreated);
+}
+
+function thirdPointCreated(e) {
+  // Add point
+  coneLayer.addLayer(e.layer);
+  thirdPoint = e.layer.getLatLng();
+  tooling.disable();
+
+  // Turn off old events
+  map.off('draw:created');
+  map.off('mousemove');
+
+  // Start new point
+  tooling = new L.Draw.Marker(map, { icon: genericIcon });
+  tooling.enable();
+
+  // Draw polygon between points
+  finalCone = L.polygon([firstPoint, secondPoint, thirdPoint], { className: 'cone-guidepolygon' }).addTo(coneLayer);
+
+  // New events
+  map.on('mousemove', (e) => {
+    finalCone.setLatLngs([firstPoint, secondPoint, e.latlng, thirdPoint]);
+  });
+
+  map.on('draw:created', fourthPointCreated);
+}
+
+function fourthPointCreated(e) {
+  // Add point
+  coneLayer.addLayer(e.layer);
+  tooling.disable();
+
+  // Turn off old events
+  map.off('draw:created');
+  map.off('mousemove');
+
+  // Remove all guide points/line (leaves polygon and cone focal point)
+  coneLayer.eachLayer(function (l) {
+    if (l.options.className && l.options.className === 'cone-guideline') l.remove();
+    else if (l.options.icon && l.options.icon.options.className && l.options.icon.options.className === 'cone-guidepoint') l.remove();
+  });
+}
 
 /* -------------------------*/
 /* Start */

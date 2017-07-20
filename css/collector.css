@@ -68,6 +68,21 @@ main {
   border: 3px solid #fff;
 }
 
+.cone-guidepoint {
+  background-color: rgba(244,67,54,0.8);
+  border-radius: 50%;
+}
+
+.cone-guideline {
+  stroke: rgba(244,67,54,0.8);
+}
+
+.cone-guidepolygon {
+  fill: #212121;
+  fill-opacity: 0.4;
+  stroke: none;
+}
+
 /* Sidebar */
 sidebar {
   box-sizing: border-box;
