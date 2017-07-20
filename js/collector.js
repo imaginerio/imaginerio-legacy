@@ -200,7 +200,7 @@ function firstPointCreated(e) {
   tooling.enable();
 
   // Draw line between points
-  line1 = L.polyline([firstPoint, firstPoint], { className: 'cone-guideline' }).addTo(coneLayer);
+  line1 = L.polyline([], { className: 'cone-guideline' }).addTo(coneLayer);
 
   // New events
   map.on('mousemove', (e) => {
@@ -224,7 +224,7 @@ function secondPointCreated(e) {
   tooling.enable();
 
   // Draw line between points
-  line1 = L.polyline([firstPoint, firstPoint], { className: 'cone-guideline' }).addTo(coneLayer);
+  line1 = L.polyline([], { className: 'cone-guideline' }).addTo(coneLayer);
 
   // New events
   map.on('mousemove', (e) => {
@@ -249,11 +249,17 @@ function thirdPointCreated(e) {
   tooling.enable();
 
   // Draw polygon between points
-  finalCone = L.polygon([firstPoint, secondPoint, thirdPoint], { className: 'cone-guidepolygon' }).addTo(coneLayer);
+  finalCone = L.curve([], { className: 'cone-guidepolygon' }).addTo(coneLayer);
 
   // New events
   map.on('mousemove', (e) => {
-    finalCone.setLatLngs([firstPoint, secondPoint, e.latlng, thirdPoint]);
+    finalCone.setPath([
+      'M', [firstPoint.lat, firstPoint.lng],
+      'L', [secondPoint.lat, secondPoint.lng],
+      'Q', [e.latlng.lat, e.latlng.lng],
+      [thirdPoint.lat, thirdPoint.lng],
+      'Z'
+    ]);
   });
 
   map.on('draw:created', fourthPointCreated);
