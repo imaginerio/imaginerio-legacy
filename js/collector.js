@@ -1,5 +1,9 @@
 /* imagineRio Cone Collector */
 
+/* -------------------------*/
+/* Vars and Intialization */
+/* -------------------------*/
+
 let maxBounds = [[-23.10243406, -44.04944719], [-22.63003187, -42.65988214]];
 let tileserver = 'http://imaginerio.axismaps.io:3001/tiles/';
 let year;
@@ -7,9 +11,7 @@ let maxYear = 2017;
 let tiles = {};
 let shown = {};
 
-let pipValues = _.range(1500, 2025, 25);
-pipValues.push(maxYear);
-
+/* General Map */
 let map = L.map('map', {
   center: [-22.9046, -43.1919],
   zoom: 15,
@@ -23,6 +25,9 @@ let map = L.map('map', {
 let base = L.tileLayer(tileserver + year + '/base/{z}/{x}/{y}.png').addTo(map);
 
 /* Slider */
+let pipValues = _.range(1500, 2025, 25);
+pipValues.push(maxYear);
+
 let slider = noUiSlider.create($('.slider')[0], {
   start: [1500],
   connect: false,
@@ -54,10 +59,25 @@ slider.on('set', (y) => {
   updateYear(y[0]);
 });
 
-/* INIT HERE */
-slider.set(2000);
+/* Leaflet Draw */
+let coneLayer = new L.FeatureGroup();
+map.addLayer(coneLayer);
 
-/* General functions */
+var drawControl = new L.Control.Draw({
+  draw: false,
+  edit: {
+    edit: false,
+    featureGroup: coneLayer,
+    remove: false
+  }
+});
+map.addControl(drawControl);
+
+/* -------------------------*/
+/* Functions */
+/* -------------------------*/
+
+/* General Functions */
 function updateYear(y) {
   if (year == y) return false;
   year = y;
@@ -147,3 +167,21 @@ function tileFadeIn(tileIn) {
 
   return tileIn;
 }
+
+/* Leaflet Draw Functions */
+function newCone() {
+  let genericIcon = L.divIcon({ className: 'cone-point', iconSize: 10 });
+  let options = { icon: genericIcon };
+  let tooling = new L.Draw.Marker(map, options);
+  tooling.enable();
+}
+
+map.on('draw:created', function (event) {
+  coneLayer.addLayer(event.layer);
+});
+
+/* -------------------------*/
+/* Start */
+/* -------------------------*/
+slider.set(2000);
+newCone();

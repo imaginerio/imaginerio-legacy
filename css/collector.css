@@ -61,6 +61,13 @@ main {
 	top: 55%;
 }
 
+/* Cones */
+.cone-point {
+  background-color: #03A9F4;
+  border-radius: 50%;
+  border: 3px solid #fff;
+}
+
 /* Sidebar */
 sidebar {
   box-sizing: border-box;
@@ -133,9 +140,9 @@ sidebar {
 }
 
 input.button {
-  background-color: rgba(46,204,113,1);
+  background-color: #4CAF50;
 }
 
 input.button:hover {
-  background-color: rgba(39,174,96,1);
+  background-color: #388E3C;
 }
