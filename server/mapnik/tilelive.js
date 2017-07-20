@@ -64,7 +64,12 @@ app.get('/tiles/:year/:layer/:z/:x/:y.*', function( req, res ){
   
   query.on( 'row', function( result ){
 		exists = result.id;
-	});
+  });
+  
+  query.on( 'error', function( error ){
+    console.log( error.detail );
+    res.status( 500 ).send( 'Error checking cache' );
+  });
 	
 	query.on( 'end', function(){
     if( exists && dev === false && cache === true ){
@@ -85,7 +90,12 @@ app.get( '/raster/:id/:z/:x/:y.*', function( req, res ){
       
   query.on( 'row', function( result ){
 		exists = result.id;
-	});
+  });
+  
+  query.on( 'error', function( error ){
+    console.log( error.detail );
+    res.status( 500 ).send( 'Error checking cache' );
+  });
 	
 	query.on( 'end', function(){
     if( exists && cache === true ){
