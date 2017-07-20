@@ -204,7 +204,8 @@ function firstPointCreated(e) {
 
   // New events
   map.on('mousemove', (e) => {
-    line1.setLatLngs([firstPoint, e.latlng]);
+    let c = getMapEdgePoint(map.latLngToLayerPoint(firstPoint), e.layerPoint);
+    line1.setLatLngs([firstPoint, e.latlng, map.layerPointToLatLng(c)]);
   });
   map.on('draw:created', secondPointCreated);
 }
@@ -224,11 +225,12 @@ function secondPointCreated(e) {
   tooling.enable();
 
   // Draw line between points
-  line1 = L.polyline([], { className: 'cone-guideline' }).addTo(coneLayer);
+  line2 = L.polyline([], { className: 'cone-guideline' }).addTo(coneLayer);
 
   // New events
   map.on('mousemove', (e) => {
-    line1.setLatLngs([firstPoint, e.latlng]);
+    let c = getMapEdgePoint(map.latLngToLayerPoint(firstPoint), e.layerPoint);
+    line2.setLatLngs([firstPoint, e.latlng, map.layerPointToLatLng(c)]);
   });
 
   map.on('draw:created', thirdPointCreated);
@@ -279,6 +281,14 @@ function fourthPointCreated(e) {
     if (l.options.className && l.options.className === 'cone-guideline') l.remove();
     else if (l.options.icon && l.options.icon.options.className && l.options.icon.options.className === 'cone-guidepoint') l.remove();
   });
+}
+
+function getMapEdgePoint(a, b) {
+  let length = Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
+  let c = {};
+  c.x = b.x + (b.x - a.x) / length * window.outerWidth;
+  c.y = b.y + (b.y - a.y) / length * window.outerWidth;
+  return c;
 }
 
 /* -------------------------*/
