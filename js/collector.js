@@ -22,8 +22,9 @@ let map = L.map('map', {
 
 let base = L.tileLayer(tileserver + year + '/base/{z}/{x}/{y}.png').addTo(map);
 
+/* Slider */
 let slider = noUiSlider.create($('.slider')[0], {
-  start: [2000],
+  start: [1500],
   connect: false,
   step: 1,
   range: {
@@ -49,7 +50,12 @@ let slider = noUiSlider.create($('.slider')[0], {
   }
 });
 
-updateYear(2001);
+slider.on('set', (y) => {
+  updateYear(y[0]);
+});
+
+/* INIT HERE */
+slider.set(2000);
 
 /* General functions */
 function updateYear(y) {
@@ -78,11 +84,6 @@ function mapLoading(show) {
     map.scrollWheelZoom.enable();
   }
 }
-
-/* Slider */
-slider.on('set', (y) => {
-  updateYear(y[0]);
-});
 
 /* Tile functions */
 
