@@ -75,6 +75,7 @@ main {
 
 .cone-guideline {
   stroke: rgba(244,67,54,0.8);
+  stroke-dasharray: 5, 5;
 }
 
 .cone-guidepolygon {

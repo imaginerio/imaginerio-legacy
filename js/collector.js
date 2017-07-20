@@ -73,6 +73,21 @@ var drawControl = new L.Control.Draw({
 });
 map.addControl(drawControl);
 
+/* Sidebar */
+document.querySelector('.sidebar--cancel').addEventListener('click', function (e) {
+  e.preventDefault();
+
+  // Clear cones
+  coneLayer.clearLayers();
+  tooling = null;
+  newCone();
+
+  // Clear form
+  document.querySelectorAll('.sidebar--input, .sidebar--textarea').forEach(function (input) {
+    input.value = '';
+  });
+});
+
 /* -------------------------*/
 /* Functions */
 /* -------------------------*/
