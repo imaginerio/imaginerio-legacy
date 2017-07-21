@@ -284,13 +284,9 @@ function thirdPointCreated(e) {
   let halfwayPoint = L.latLng((secondPoint.lat - thirdPoint.lat) / 2 + thirdPoint.lat, (secondPoint.lng - thirdPoint.lng) / 2 + thirdPoint.lng);
 
   // Draw polygon between points
-  finalCone = L.curve([
-    'M', [firstPoint.lat, firstPoint.lng],
-    'L', [secondPoint.lat, secondPoint.lng],
-    'Q', [halfwayPoint.lat, halfwayPoint.lng],
-    [thirdPoint.lat, thirdPoint.lng],
-    'Z'
-  ], { className: 'cone-guidepolygon' }).addTo(coneLayer);
+  let curveTension = 0.75;
+  let points = [[firstPoint.lat, firstPoint.lng]].concat(generateCurvePoints([secondPoint, halfwayPoint, thirdPoint], curveTension));
+  finalCone = L.polygon(points, { className: 'cone-guidepolygon' }).addTo(coneLayer);
 
   // Vars for determining whether we are in a drawable area
   let line1LLs = line1.getLatLngs();
@@ -312,13 +308,8 @@ function thirdPointCreated(e) {
       error = false;
     }
 
-    finalCone.setPath([
-      'M', [firstPoint.lat, firstPoint.lng],
-      'L', [secondPoint.lat, secondPoint.lng],
-      'Q', [pointToUse.lat, pointToUse.lng],
-      [thirdPoint.lat, thirdPoint.lng],
-      'Z'
-    ]);
+    let newPoints = [[firstPoint.lat, firstPoint.lng]].concat(generateCurvePoints([secondPoint, pointToUse, thirdPoint], curveTension));
+    finalCone.setLatLngs(newPoints);
     finalCone._path.classList.toggle('cone--error', error);
   });
 
@@ -364,6 +355,77 @@ function isLeft(all, bll, cll) {
   let b = map.latLngToLayerPoint(bll);
   let c = map.latLngToLayerPoint(cll);
   return ((b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x)) > 0;
+}
+
+function generateCurvePoints(ptsArray, tension) {
+  // use input value if provided, or use a default value
+  tension = typeof tension === 'number' ? tension : 0.5;
+  let numOfSegments = 32;
+
+  let _pts;
+  let result = [];
+  let pl = ptsArray.length;
+
+  // clone array so we don't change the original content
+  _pts = _.flatten(ptsArray.map((pt) => [pt.lng, pt.lat]));
+
+  // copy first point and insert at beginning
+  _pts.unshift(ptsArray[0].lat);
+  _pts.unshift(ptsArray[0].lng);
+
+  // copy last point and append
+  _pts.push(ptsArray[pl - 1].lng, ptsArray[pl - 1].lat);
+
+  // 1. loop goes through point array
+  // 2. loop goes through each segment between the two points + one point before and after
+  for (let i = 2; i < (_pts.length - 4); i += 2) {
+    let p0 = _pts[i];
+    let p1 = _pts[i + 1];
+    let p2 = _pts[i + 2];
+    let p3 = _pts[i + 3];
+
+    // calc tension vectors
+    let t1x = (p2 - _pts[i - 2]) * tension;
+    let t2x = (_pts[i + 4] - p0) * tension;
+
+    let t1y = (p3 - _pts[i - 1]) * tension;
+    let t2y = (_pts[i + 5] - p1) * tension;
+
+    for (let t = 0; t <= numOfSegments; t++) {
+      // calc step
+      let st = t / numOfSegments;
+
+      let pow2 = Math.pow(st, 2);
+      let pow3 = pow2 * st;
+      let pow23 = pow2 * 3;
+      let pow32 = pow3 * 2;
+
+      // calc cardinals
+      let c1 = pow32 - pow23 + 1;
+      let c2 = pow23 - pow32;
+      let c3 = pow3 - 2 * pow2 + st;
+      let c4 = pow3 - pow2;
+
+      // calc x and y cords with common control vectors
+      let x = c1 * p0 + c2 * p2 + c3 * t1x + c4 * t2x;
+      let y = c1 * p1 + c2 * p3 + c3 * t1y + c4 * t2y;
+
+      // store points in array
+      result.push([y, x]);
+    }
+  }
+
+  return result;
+}
+
+function lineDistance(point1, point2) {
+  let xs = point2[1] - point1[1];
+  xs = xs * xs;
+
+  let ys = point2[0] - point1[0];
+  ys = ys * ys;
+
+  return Math.sqrt(xs + ys);
 }
 
 /* -------------------------*/
