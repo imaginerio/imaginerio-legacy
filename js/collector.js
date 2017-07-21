@@ -5,6 +5,16 @@
 /* -------------------------*/
 
 let maxAngleAllowed = 170;
+let tooltips = {
+  firstPoint: 'Click map to place Focal point of Visual',
+  secondPoint: 'Click map to place one side of the view cone',
+  thirdPoint: 'Click map to place the other side of the view cone',
+  fourthPoint: 'Click map to place the curve control point',
+  edit: {
+    subtext: 'Click cancel to remove the cone and start again.',
+    text: 'Drag markers to adjust the visual cone.'
+  }
+};
 
 /* -------------------------*/
 /* Vars and Intialization */
@@ -204,8 +214,12 @@ let line2;
 let finalCone;
 
 function newCone() {
-  let firstPoinIcon = L.divIcon({ className: 'cone-point', iconSize: 10 });
-  tooling = new L.Draw.Marker(map, { icon: firstPoinIcon });
+  let firstPointIcon = L.divIcon({ className: 'cone-point', iconSize: 10 });
+
+  // Set tooltip text
+  L.drawLocal.draw.handlers.marker.tooltip.start = tooltips.firstPoint;
+
+  tooling = new L.Draw.Marker(map, { icon: firstPointIcon });
   tooling.enable();
 
   map.on('draw:created', firstPointCreated);
@@ -221,6 +235,9 @@ function firstPointCreated(e) {
 
   // Turn off old events
   map.off('draw:created');
+
+  // Set tooltip text
+  L.drawLocal.draw.handlers.marker.tooltip.start = tooltips.secondPoint;
 
   // Start new point
   tooling = new L.Draw.Marker(map, { icon: genericIcon });
@@ -246,6 +263,9 @@ function secondPointCreated(e) {
   map.off('draw:created');
   map.off('mousemove');
 
+  // Set tooltip text
+  L.drawLocal.draw.handlers.marker.tooltip.start = tooltips.thirdPoint;
+
   // Start new point
   tooling = new L.Draw.Marker(map, { icon: genericIcon });
   tooling.enable();
@@ -269,6 +289,9 @@ function thirdPointCreated(e) {
   // Turn off old events
   map.off('draw:created');
   map.off('mousemove');
+
+  // Set tooltip text
+  L.drawLocal.draw.handlers.marker.tooltip.start = tooltips.fourthPoint;
 
   // Start new point
   tooling = new L.Draw.Marker(map, { icon: genericIcon });
@@ -300,6 +323,10 @@ function fourthPointCreated(e) {
   map.off('draw:created');
   map.off('mousemove');
 
+  // Set tooltip text
+  L.drawLocal.edit.handlers.edit.tooltip.subtext = tooltips.edit.subtext;
+  L.drawLocal.edit.handlers.edit.tooltip.text = tooltips.edit.text;
+
   // Start editing
   editing = new L.EditToolbar.Edit(map, { featureGroup: editableLayer });
   editing.enable();
@@ -316,9 +343,11 @@ function fourthPointCreated(e) {
       if (dependentLayers.indexOf('line1') >= 0) updateLine(line1, newLinePoint);
       if (dependentLayers.indexOf('line2') >= 0) updateLine(line2, newLinePoint);
 
+      // update the control point - this depends on lines being already updated hence here
+      setControlPoint();
+
       // update the cone polygon
       if (dependentLayers.indexOf('finalCone') >= 0) {
-        setControlPoint();
         updatePolygon(majorPoints[3]);
       }
     });
