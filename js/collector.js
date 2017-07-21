@@ -281,28 +281,38 @@ function thirdPointCreated(e) {
   tooling = new L.Draw.Marker(map, { icon: genericIcon });
   tooling.enable();
 
+  // Vars for determining whether we are in a drawable area
+  let line1LLs = line1.getLatLngs();
+  let line2LLs = line2.getLatLngs();
+  let line3LLs = [line1LLs[1], line2LLs[1]]; // new line between both line points
+
+  let controlPoint;
+  let option1 = L.latLng(secondPoint.lat, thirdPoint.lng);
+  let option2 = L.latLng(thirdPoint.lat, secondPoint.lng);
+  if (isLeft(line3LLs[0], line3LLs[1], firstPoint) === isLeft(line3LLs[0], line3LLs[1], option1)) {
+    controlPoint = option2;
+  } else {
+    controlPoint = option1;
+  }
+
   let halfwayPoint = L.latLng((secondPoint.lat - thirdPoint.lat) / 2 + thirdPoint.lat, (secondPoint.lng - thirdPoint.lng) / 2 + thirdPoint.lng);
+
+  let controlPointLeftofLine1 = isLeft(line1LLs[0], line1LLs[line1LLs.length - 1], controlPoint);
+  let controlPointLeftofLine2 = isLeft(line2LLs[0], line2LLs[line2LLs.length - 1], controlPoint);
+  let controlPointLeftofLine3 = isLeft(line3LLs[0], line3LLs[1], controlPoint);
 
   // Draw polygon between points
   let curveTension = 0.75;
   let points = [[firstPoint.lat, firstPoint.lng]].concat(generateCurvePoints([secondPoint, halfwayPoint, thirdPoint], curveTension));
   finalCone = L.polygon(points, { className: 'cone-guidepolygon' }).addTo(coneLayer);
 
-  // Vars for determining whether we are in a drawable area
-  let line1LLs = line1.getLatLngs();
-  let line2LLs = line2.getLatLngs();
-  let line3LLs = [line1LLs[1], line2LLs[1]]; // new line between both line points
-  let halfwayPointLeftofLine1 = isLeft(line1LLs[0], line1LLs[line1LLs.length - 1], halfwayPoint);
-  let halfwayPointLeftofLine2 = isLeft(line2LLs[0], line2LLs[line2LLs.length - 1], halfwayPoint);
-  let halfwayPointLeftofLine3 = isLeft(line3LLs[0], line3LLs[1], halfwayPoint);
-
   // New events
   map.on('mousemove', (e) => {
     let pointToUse = halfwayPoint;
     let error = true;
-    if (isLeft(line1LLs[0], line1LLs[line1LLs.length - 1], e.latlng) === halfwayPointLeftofLine1 &&
-      isLeft(line2LLs[0], line2LLs[line2LLs.length - 1], e.latlng) === halfwayPointLeftofLine2 &&
-      isLeft(line3LLs[0], line3LLs[1], e.latlng) === halfwayPointLeftofLine3
+    if (isLeft(line1LLs[0], line1LLs[line1LLs.length - 1], e.latlng) === controlPointLeftofLine1 &&
+      isLeft(line2LLs[0], line2LLs[line2LLs.length - 1], e.latlng) === controlPointLeftofLine2 &&
+      isLeft(line3LLs[0], line3LLs[1], e.latlng) === controlPointLeftofLine3
     ) {
       pointToUse = e.latlng;
       error = false;
@@ -350,11 +360,8 @@ function getAngle(l1, l2) {
   return returnAngle > 180 ? 360 - returnAngle : returnAngle;
 }
 
-function isLeft(all, bll, cll) {
-  let a = map.latLngToLayerPoint(all);
-  let b = map.latLngToLayerPoint(bll);
-  let c = map.latLngToLayerPoint(cll);
-  return ((b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x)) > 0;
+function isLeft(a, b, c) {
+  return ((b.lng - a.lng) * (c.lat - a.lat) - (b.lat - a.lat) * (c.lng - a.lng)) > 0;
 }
 
 function generateCurvePoints(ptsArray, tension) {
@@ -416,16 +423,6 @@ function generateCurvePoints(ptsArray, tension) {
   }
 
   return result;
-}
-
-function lineDistance(point1, point2) {
-  let xs = point2[1] - point1[1];
-  xs = xs * xs;
-
-  let ys = point2[0] - point1[0];
-  ys = ys * ys;
-
-  return Math.sqrt(xs + ys);
 }
 
 /* -------------------------*/
