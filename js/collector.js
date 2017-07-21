@@ -1,6 +1,12 @@
 /* imagineRio Cone Collector */
 
 /* -------------------------*/
+/* Config Vars */
+/* -------------------------*/
+
+let maxAngleAllowed = 170;
+
+/* -------------------------*/
 /* Vars and Intialization */
 /* -------------------------*/
 
@@ -243,11 +249,19 @@ function secondPointCreated(e) {
   line2 = L.polyline([], { className: 'cone-guideline' }).addTo(coneLayer);
 
   // New events
+  let lastKnownLocation;
   map.on('mousemove', (e) => {
     let c = getMapEdgePoint(map.latLngToLayerPoint(firstPoint), e.layerPoint);
+    let previousLineLatLngs = line2.getLatLngs();
     line2.setLatLngs([firstPoint, e.latlng, map.layerPointToLatLng(c)]);
 
-    console.log(getAngle(line1, line2));
+    // Don't allow the line to extend beyond a given angle
+    if (getAngle(line1, line2) > maxAngleAllowed) {
+      line2.setLatLngs(previousLineLatLngs);
+      tooling._marker.setLatLng(lastKnownLocation);
+    } else {
+      lastKnownLocation = e.latlng;
+    }
   });
 
   map.on('draw:created', thirdPointCreated);
@@ -267,18 +281,45 @@ function thirdPointCreated(e) {
   tooling = new L.Draw.Marker(map, { icon: genericIcon });
   tooling.enable();
 
+  let halfwayPoint = L.latLng((secondPoint.lat - thirdPoint.lat) / 2 + thirdPoint.lat, (secondPoint.lng - thirdPoint.lng) / 2 + thirdPoint.lng);
+
   // Draw polygon between points
-  finalCone = L.curve([], { className: 'cone-guidepolygon' }).addTo(coneLayer);
+  finalCone = L.curve([
+    'M', [firstPoint.lat, firstPoint.lng],
+    'L', [secondPoint.lat, secondPoint.lng],
+    'Q', [halfwayPoint.lat, halfwayPoint.lng],
+    [thirdPoint.lat, thirdPoint.lng],
+    'Z'
+  ], { className: 'cone-guidepolygon' }).addTo(coneLayer);
+
+  // Vars for determining whether we are in a drawable area
+  let line1LLs = line1.getLatLngs();
+  let line2LLs = line2.getLatLngs();
+  let line3LLs = [line1LLs[1], line2LLs[1]]; // new line between both line points
+  let halfwayPointLeftofLine1 = isLeft(line1LLs[0], line1LLs[line1LLs.length - 1], halfwayPoint);
+  let halfwayPointLeftofLine2 = isLeft(line2LLs[0], line2LLs[line2LLs.length - 1], halfwayPoint);
+  let halfwayPointLeftofLine3 = isLeft(line3LLs[0], line3LLs[1], halfwayPoint);
 
   // New events
   map.on('mousemove', (e) => {
+    let pointToUse = halfwayPoint;
+    let error = true;
+    if (isLeft(line1LLs[0], line1LLs[line1LLs.length - 1], e.latlng) === halfwayPointLeftofLine1 &&
+      isLeft(line2LLs[0], line2LLs[line2LLs.length - 1], e.latlng) === halfwayPointLeftofLine2 &&
+      isLeft(line3LLs[0], line3LLs[1], e.latlng) === halfwayPointLeftofLine3
+    ) {
+      pointToUse = e.latlng;
+      error = false;
+    }
+
     finalCone.setPath([
       'M', [firstPoint.lat, firstPoint.lng],
       'L', [secondPoint.lat, secondPoint.lng],
-      'Q', [e.latlng.lat, e.latlng.lng],
+      'Q', [pointToUse.lat, pointToUse.lng],
       [thirdPoint.lat, thirdPoint.lng],
       'Z'
     ]);
+    finalCone._path.classList.toggle('cone--error', error);
   });
 
   map.on('draw:created', fourthPointCreated);
@@ -316,6 +357,13 @@ function getAngle(l1, l2) {
 
   let returnAngle = Math.round(Math.abs(angle1 - angle2) * 180 / Math.PI);
   return returnAngle > 180 ? 360 - returnAngle : returnAngle;
+}
+
+function isLeft(all, bll, cll) {
+  let a = map.latLngToLayerPoint(all);
+  let b = map.latLngToLayerPoint(bll);
+  let c = map.latLngToLayerPoint(cll);
+  return ((b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x)) > 0;
 }
 
 /* -------------------------*/
