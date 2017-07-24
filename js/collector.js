@@ -28,7 +28,7 @@ let tiles = {};
 let shown = {};
 
 /* General Map */
-let map = L.map('map', {
+let leafletMap = L.map('map', {
   center: [-22.9046, -43.1919],
   zoom: 15,
   minZoom: 13,
@@ -38,7 +38,7 @@ let map = L.map('map', {
   maxBounds: maxBounds
 });
 
-let base = L.tileLayer(tileserver + year + '/base/{z}/{x}/{y}.png').addTo(map);
+let base = L.tileLayer(tileserver + year + '/base/{z}/{x}/{y}.png').addTo(leafletMap);
 
 /* Slider */
 let pipValues = _.range(1500, 2025, 25);
@@ -78,8 +78,8 @@ slider.on('set', (y) => {
 /* Leaflet Draw */
 let editableLayer = new L.FeatureGroup();
 let nonEditableLayer = new L.FeatureGroup();
-map.addLayer(editableLayer);
-map.addLayer(nonEditableLayer);
+leafletMap.addLayer(editableLayer);
+leafletMap.addLayer(nonEditableLayer);
 
 var drawControl = new L.Control.Draw({
   draw: false,
@@ -89,7 +89,7 @@ var drawControl = new L.Control.Draw({
     remove: false
   }
 });
-map.addControl(drawControl);
+leafletMap.addControl(drawControl);
 
 /* Sidebar */
 document.querySelector('.sidebar--cancel').addEventListener('click', function (e) {
@@ -103,8 +103,8 @@ document.querySelector('.sidebar--cancel').addEventListener('click', function (e
   if (editing) editing.disable();
   editing = null;
 
-  map.off('draw:created');
-  map.off('mousemove');
+  leafletMap.off('draw:created');
+  leafletMap.off('mousemove');
 
   newCone();
 
@@ -133,40 +133,40 @@ function mapLoading(show) {
      $(document.createElement('div')).addClass('loading')
     );
 
-    map.dragging.disable();
-    map.touchZoom.disable();
-    map.doubleClickZoom.disable();
-    map.scrollWheelZoom.disable();
+    leafletMap.dragging.disable();
+    leafletMap.touchZoom.disable();
+    leafletMap.doubleClickZoom.disable();
+    leafletMap.scrollWheelZoom.disable();
   } else if (show === false) {
     $('.loading').remove();
-    map.dragging.enable();
-    map.touchZoom.enable();
-    map.doubleClickZoom.enable();
-    map.scrollWheelZoom.enable();
+    leafletMap.dragging.enable();
+    leafletMap.touchZoom.enable();
+    leafletMap.doubleClickZoom.enable();
+    leafletMap.scrollWheelZoom.enable();
   }
 }
 
 /* Tile functions */
 
 function loadBase() {
-  if (map.hasLayer(base)) map.removeLayer(base);
+  if (leafletMap.hasLayer(base)) leafletMap.removeLayer(base);
 
   if (year == maxYear) {
     base = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
       attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-    }).addTo(map);
+    }).addTo(leafletMap);
   } else {
-    base = L.tileLayer(tileserver + year + '/base/{z}/{x}/{y}.png').addTo(map);
+    base = L.tileLayer(tileserver + year + '/base/{z}/{x}/{y}.png').addTo(leafletMap);
   }
 }
 
 function loadTiles() {
   mapLoading(true);
   if (tiles[year]) {
-    map.addLayer(tiles[year].setOpacity(0));
+    leafletMap.addLayer(tiles[year].setOpacity(0));
   } else {
     var t = L.tileLayer(tileserver  + year + '/all/{z}/{x}/{y}.png')
-       .addTo(map)
+       .addTo(leafletMap)
        .setOpacity(0)
        .on('load', function () {
         showTiles(this);
@@ -178,7 +178,7 @@ function loadTiles() {
 
 function showTiles(tile) {
   if (!_.isEqual(shown.tiles, tile)) {
-    if (shown.tiles) map.removeLayer(tileFadeOut(shown.tiles));
+    if (shown.tiles) leafletMap.removeLayer(tileFadeOut(shown.tiles));
     shown.tiles = tileFadeIn(tile);
   }
 }
@@ -225,10 +225,10 @@ function newCone() {
   // Set tooltip text
   L.drawLocal.draw.handlers.marker.tooltip.start = tooltips.firstPoint;
 
-  tooling = new L.Draw.Marker(map, { icon: firstPointIcon });
+  tooling = new L.Draw.Marker(leafletMap, { icon: firstPointIcon });
   tooling.enable();
 
-  map.on('draw:created', firstPointCreated);
+  leafletMap.on('draw:created', firstPointCreated);
 }
 
 function firstPointCreated(e) {
@@ -240,21 +240,21 @@ function firstPointCreated(e) {
   tooling.disable();
 
   // Turn off old events
-  map.off('draw:created');
+  leafletMap.off('draw:created');
 
   // Set tooltip text
   L.drawLocal.draw.handlers.marker.tooltip.start = tooltips.secondPoint;
 
   // Start new point
-  tooling = new L.Draw.Marker(map, { icon: genericIcon });
+  tooling = new L.Draw.Marker(leafletMap, { icon: genericIcon });
   tooling.enable();
 
   // Draw line between points
   line1 = L.polyline([], { className: 'cone-guideline' }).addTo(nonEditableLayer);
 
   // New events
-  map.on('mousemove', (e) => updateLine(line1, e.latlng));
-  map.on('draw:created', secondPointCreated);
+  leafletMap.on('mousemove', (e) => updateLine(line1, e.latlng));
+  leafletMap.on('draw:created', secondPointCreated);
 }
 
 function secondPointCreated(e) {
@@ -266,22 +266,22 @@ function secondPointCreated(e) {
   tooling.disable();
 
   // Turn off old events
-  map.off('draw:created');
-  map.off('mousemove');
+  leafletMap.off('draw:created');
+  leafletMap.off('mousemove');
 
   // Set tooltip text
   L.drawLocal.draw.handlers.marker.tooltip.start = tooltips.thirdPoint;
 
   // Start new point
-  tooling = new L.Draw.Marker(map, { icon: genericIcon });
+  tooling = new L.Draw.Marker(leafletMap, { icon: genericIcon });
   tooling.enable();
 
   // Draw line between points
   line2 = L.polyline([], { className: 'cone-guideline' }).addTo(nonEditableLayer);
 
   // New events
-  map.on('mousemove', (e) => updateLine(line2, e.latlng));
-  map.on('draw:created', thirdPointCreated);
+  leafletMap.on('mousemove', (e) => updateLine(line2, e.latlng));
+  leafletMap.on('draw:created', thirdPointCreated);
 }
 
 function thirdPointCreated(e) {
@@ -293,14 +293,14 @@ function thirdPointCreated(e) {
   tooling.disable();
 
   // Turn off old events
-  map.off('draw:created');
-  map.off('mousemove');
+  leafletMap.off('draw:created');
+  leafletMap.off('mousemove');
 
   // Set tooltip text
   L.drawLocal.draw.handlers.marker.tooltip.start = tooltips.fourthPoint;
 
   // Start new point
-  tooling = new L.Draw.Marker(map, { icon: genericIcon });
+  tooling = new L.Draw.Marker(leafletMap, { icon: genericIcon });
   tooling.enable();
 
   // Control point is for determining drawable area
@@ -313,8 +313,8 @@ function thirdPointCreated(e) {
   finalCone = L.polygon(points, { className: 'cone-guidepolygon' }).addTo(nonEditableLayer);
 
   // New events
-  map.on('mousemove', (e) => updatePolygon(e.latlng));
-  map.on('draw:created', fourthPointCreated);
+  leafletMap.on('mousemove', (e) => updatePolygon(e.latlng));
+  leafletMap.on('draw:created', fourthPointCreated);
 }
 
 function fourthPointCreated(e) {
@@ -326,15 +326,15 @@ function fourthPointCreated(e) {
   tooling.disable();
 
   // Turn off old events
-  map.off('draw:created');
-  map.off('mousemove');
+  leafletMap.off('draw:created');
+  leafletMap.off('mousemove');
 
   // Set tooltip text
   L.drawLocal.edit.handlers.edit.tooltip.subtext = tooltips.edit.subtext;
   L.drawLocal.edit.handlers.edit.tooltip.text = tooltips.edit.text;
 
   // Start editing
-  editing = new L.EditToolbar.Edit(map, { featureGroup: editableLayer });
+  editing = new L.EditToolbar.Edit(leafletMap, { featureGroup: editableLayer });
   editing.enable();
 
   editableLayer.eachLayer(function (layer) {
@@ -364,9 +364,9 @@ let lastKnownLocation;
 function updateLine(line, newMidPoint) {
   if (!newMidPoint) newMidPoint = line.getLatLngs()[1]; // if no newMidPoint, then updated point was majorPoints[0]
 
-  let c = getMapEdgePoint(map.latLngToLayerPoint(majorPoints[0]), map.latLngToLayerPoint(newMidPoint));
+  let c = getMapEdgePoint(leafletMap.latLngToLayerPoint(majorPoints[0]), leafletMap.latLngToLayerPoint(newMidPoint));
   let previousLineLatLngs = line.getLatLngs();
-  line.setLatLngs([majorPoints[0], newMidPoint, map.layerPointToLatLng(c)]);
+  line.setLatLngs([majorPoints[0], newMidPoint, leafletMap.layerPointToLatLng(c)]);
 
   // Don't allow the line to extend beyond a given angle
   if (line1 && line2 && getAngle(line1, line2) > maxAngleAllowed) {
@@ -429,8 +429,8 @@ function getMapEdgePoint(a, b) {
 }
 
 function getAngle(l1, l2) {
-  let l1Points = l1.getLatLngs().map((ll) => map.latLngToLayerPoint(ll));
-  let l2Points = l2.getLatLngs().map((ll) => map.latLngToLayerPoint(ll));
+  let l1Points = l1.getLatLngs().map((ll) => leafletMap.latLngToLayerPoint(ll));
+  let l2Points = l2.getLatLngs().map((ll) => leafletMap.latLngToLayerPoint(ll));
   let angle1 = Math.atan2(l1Points[0].y - l1Points[1].y, l1Points[0].x - l1Points[1].x);
   let angle2 = Math.atan2(l2Points[0].y - l2Points[1].y, l2Points[0].x - l2Points[1].x);
 
