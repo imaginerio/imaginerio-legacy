@@ -44,7 +44,7 @@ let base = L.tileLayer(tileserver + year + '/base/{z}/{x}/{y}.png').addTo(leafle
 let pipValues = _.range(1500, 2025, 25);
 pipValues.push(maxYear);
 
-let slider = noUiSlider.create($('.slider')[0], {
+let slider = noUiSlider.create(document.querySelector('.slider'), {
   start: [1500],
   connect: false,
   step: 1,
@@ -128,17 +128,17 @@ function updateYear(y) {
 }
 
 function mapLoading(show) {
-  if (show && $('.loading').length == 0) {
-    $('.map').append(
-     $(document.createElement('div')).addClass('loading')
-    );
+  if (show && document.querySelector('.loading') == null) {
+    let loading = document.createElement('div');
+    loading.classList.add('loading');
+    document.querySelector('.map').appendChild(loading);
 
     leafletMap.dragging.disable();
     leafletMap.touchZoom.disable();
     leafletMap.doubleClickZoom.disable();
     leafletMap.scrollWheelZoom.disable();
   } else if (show === false) {
-    $('.loading').remove();
+    document.querySelector('.loading').remove();
     leafletMap.dragging.enable();
     leafletMap.touchZoom.enable();
     leafletMap.doubleClickZoom.enable();
