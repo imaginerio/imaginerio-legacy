@@ -437,7 +437,7 @@ function isLeft(a, b, c) {
 }
 
 function generateCurvePoints(ptsArray) {
-  let tension = 0.75;
+  let tension = 0.5;
   let numOfSegments = 32;
 
   let _pts;
