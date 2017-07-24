@@ -217,6 +217,7 @@ let majorPoints = [];
 let controlPoint;
 let line1;
 let line2;
+let line3;
 let finalCone;
 
 function newCone() {
@@ -282,7 +283,7 @@ function secondPointCreated(e) {
   // New events
   leafletMap.on('mousemove', (e) => {
     updateLine(line2, e.latlng);
-    tooling._marker.setLatLng(snapThirdPoint(e.layerPoint));
+    tooling._marker.setLatLng(snapSidePoint(e.layerPoint, line1.getLatLngs()[1], line2));
   });
   leafletMap.on('draw:created', thirdPointCreated);
 }
@@ -306,17 +307,20 @@ function thirdPointCreated(e) {
   tooling = new L.Draw.Marker(leafletMap, { icon: genericIcon });
   tooling.enable();
 
-  // Control point is for determining drawable area
-  setControlPoint();
-
+  // Draw invisble line between point 0 and halfwayPoint - used for snapping
   let halfwayPoint = L.latLng((majorPoints[1].lat - majorPoints[2].lat) / 2 + majorPoints[2].lat, (majorPoints[1].lng - majorPoints[2].lng) / 2 + majorPoints[2].lng);
+  line3 = L.polyline([], { className: 'cone-guideline--invisible' }).addTo(nonEditableLayer);
+  updateLine(line3, halfwayPoint);
 
   // Draw polygon between points
-  let points = [[majorPoints[0].lat, majorPoints[0].lng]].concat(generateCurvePoints([majorPoints[1], halfwayPoint, majorPoints[2]]));
-  finalCone = L.polygon(points, { className: 'cone-guidepolygon' }).addTo(nonEditableLayer);
+  finalCone = L.polygon([], { className: 'cone-guidepolygon' }).addTo(nonEditableLayer);
 
   // New events
-  leafletMap.on('mousemove', (e) => updatePolygon(e.latlng));
+  leafletMap.on('mousemove', (e) => {
+    let snappedPoint = snapFourthPoint(e.layerPoint);
+    tooling._marker.setLatLng(snappedPoint);
+    updatePolygon(snappedPoint);
+  });
   leafletMap.on('draw:created', fourthPointCreated);
 }
 
@@ -324,7 +328,7 @@ function fourthPointCreated(e) {
   // Add point
   editableLayer.addLayer(e.layer);
   majorPoints[3] = e.layer.getLatLng();
-  e.layer.dependentLayers = ['finalCone']; // for easier access during editing stage
+  e.layer.dependentLayers = ['line3', 'finalCone']; // for easier access during editing stage
   e.layer.pointIndex = 3;
   tooling.disable();
 
@@ -349,11 +353,31 @@ function fourthPointCreated(e) {
 
       // update any lines affected
       let newLinePoint = e.target.pointIndex ? e.target.getLatLng() : null;
-      if (dependentLayers.indexOf('line1') >= 0) updateLine(line1, newLinePoint);
-      if (dependentLayers.indexOf('line2') >= 0) updateLine(line2, newLinePoint);
 
-      // update the control point - this depends on lines being already updated hence here
-      setControlPoint();
+      if (dependentLayers.indexOf('line1') >= 0) {
+        updateLine(line1, newLinePoint);
+        let snappedPoint = snapSidePoint(e.layerPoint, line2.getLatLngs()[1], line1);
+        e.target.setLatLng(snappedPoint); // update visible marker
+        line1._latlngs[1] = snappedPoint; // update line
+        majorPoints[1] = snappedPoint; // update majorPoints for polygon drawing
+      }
+
+      if (dependentLayers.indexOf('line2') >= 0) {
+        updateLine(line2, newLinePoint);
+        let snappedPoint = snapSidePoint(e.layerPoint, line1.getLatLngs()[1], line2);
+        e.target.setLatLng(snappedPoint); // update visible marker
+        line2._latlngs[1] = snappedPoint; // update line
+        majorPoints[2] = snappedPoint; // update majorPoints for polygon drawing
+      }
+
+      if (dependentLayers.indexOf('line3') >= 0) {
+        let halfwayPoint = L.latLng((majorPoints[1].lat - majorPoints[2].lat) / 2 + majorPoints[2].lat, (majorPoints[1].lng - majorPoints[2].lng) / 2 + majorPoints[2].lng);
+        updateLine(line3, halfwayPoint);
+        let snappedPoint = snapFourthPoint(leafletMap.latLngToLayerPoint(e.latlng));
+        e.target.setLatLng(snappedPoint); // update visible marker
+        line3._latlngs[1] = snappedPoint; // update line
+        majorPoints[3] = snappedPoint; // update majorPoints for polygon drawing
+      }
 
       // update the cone polygon
       if (dependentLayers.indexOf('finalCone') >= 0) {
@@ -374,11 +398,22 @@ function updateLine(line, midPoint) {
   if (line1 && line2 && getAngle(line1, line2) > maxAngleAllowed) line.setLatLngs(previousLineLatLngs);
 }
 
-function snapThirdPoint(mousePoint) {
+function snapSidePoint(mousePoint, equivalentPoint, line) {
   let point0 = leafletMap.latLngToLayerPoint(majorPoints[0]);
-  let point1 = leafletMap.latLngToLayerPoint(majorPoints[1]);
+  let point1 = leafletMap.latLngToLayerPoint(equivalentPoint);
   let dist = Math.sqrt(Math.pow(point1.x - point0.x, 2) + Math.pow(point1.y - point0.y, 2));
-  return findPointAlongLine(line2, dist);
+  return leafletMap.layerPointToLatLng(findPointAlongLine(line, dist));
+}
+
+function snapFourthPoint(mousePoint) {
+  let point0 = leafletMap.latLngToLayerPoint(line3.getLatLngs()[0]);
+  let point1 = leafletMap.latLngToLayerPoint(line3.getLatLngs()[2]);
+  let snappedPoint = L.LineUtil.closestPointOnSegment(mousePoint, point0, point1);
+  let snappedLL = leafletMap.layerPointToLatLng(snappedPoint);
+
+  console.log(point0, point1, snappedPoint);
+  if (isLeft(majorPoints[1], majorPoints[2], majorPoints[0]) === isLeft(majorPoints[1], majorPoints[2], snappedLL)) snappedLL = line3.getLatLngs()[1];
+  return snappedLL;
 }
 
 // assumes that line[0] is the beginning point of distance
@@ -389,46 +424,12 @@ function findPointAlongLine(line, distance) {
   let unitVectorDenominator = Math.sqrt(Math.pow(originVector[0], 2) + Math.pow(originVector[1], 2));
   let unitVector = [originVector[0] / unitVectorDenominator, originVector[1] / unitVectorDenominator];
   let distanceVector = [distance * unitVector[0], distance * unitVector[1]];
-  return leafletMap.layerPointToLatLng(L.point(line0Point.x + distanceVector[0], line0Point.y + distanceVector[1]));
-}
-
-function setControlPoint() {
-  let option1 = L.latLng(majorPoints[1].lat, majorPoints[2].lng);
-  let option2 = L.latLng(majorPoints[2].lat, majorPoints[1].lng);
-  let line1LLs = line1.getLatLngs();
-  let line2LLs = line2.getLatLngs();
-  let line3LLs = [line1LLs[1], line2LLs[1]]; // new line between both line points
-
-  if (isLeft(line3LLs[0], line3LLs[1], majorPoints[0]) === isLeft(line3LLs[0], line3LLs[1], option1)) {
-    controlPoint = option2;
-  } else {
-    controlPoint = option1;
-  }
-
-  controlPoint.leftOfLine1 = isLeft(line1LLs[0], line1LLs[line1LLs.length - 1], controlPoint);
-  controlPoint.leftOfLine2 = isLeft(line2LLs[0], line2LLs[line2LLs.length - 1], controlPoint);
-  controlPoint.leftOfLine3 = isLeft(line3LLs[0], line3LLs[1], controlPoint);
+  return L.point(line0Point.x + distanceVector[0], line0Point.y + distanceVector[1]);
 }
 
 function updatePolygon(curvePoint) {
-  let halfwayPoint = L.latLng((majorPoints[1].lat - majorPoints[2].lat) / 2 + majorPoints[2].lat, (majorPoints[1].lng - majorPoints[2].lng) / 2 + majorPoints[2].lng);
-  let pointToUse = halfwayPoint;
-  let error = true;
-  let line1LLs = line1.getLatLngs();
-  let line2LLs = line2.getLatLngs();
-  let line3LLs = [line1LLs[1], line2LLs[1]]; // new line between both line points
-
-  if (isLeft(line1LLs[0], line1LLs[line1LLs.length - 1], curvePoint) === controlPoint.leftOfLine1 &&
-    isLeft(line2LLs[0], line2LLs[line2LLs.length - 1], curvePoint) === controlPoint.leftOfLine2 &&
-    isLeft(line3LLs[0], line3LLs[1], curvePoint) === controlPoint.leftOfLine3
-  ) {
-    pointToUse = curvePoint;
-    error = false;
-  }
-
-  let newPoints = [[majorPoints[0].lat, majorPoints[0].lng]].concat(generateCurvePoints([majorPoints[1], pointToUse, majorPoints[2]]));
+  let newPoints = [[majorPoints[0].lat, majorPoints[0].lng]].concat(generateCurvePoints([majorPoints[1], curvePoint, majorPoints[2]]));
   finalCone.setLatLngs(newPoints);
-  finalCone._path.classList.toggle('cone--error', error);
 }
 
 function getMapEdgePoint(a, b) {

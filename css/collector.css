@@ -78,6 +78,10 @@ main {
   stroke-dasharray: 5, 5;
 }
 
+.cone-guideline--invisible {
+  stroke: none;
+}
+
 .cone-guidepolygon {
   fill: #212121;
   fill-opacity: 0.4;
