@@ -280,7 +280,10 @@ function secondPointCreated(e) {
   line2 = L.polyline([], { className: 'cone-guideline' }).addTo(nonEditableLayer);
 
   // New events
-  leafletMap.on('mousemove', (e) => updateLine(line2, e.latlng));
+  leafletMap.on('mousemove', (e) => {
+    updateLine(line2, e.latlng);
+    tooling._marker.setLatLng(snapThirdPoint(e.layerPoint));
+  });
   leafletMap.on('draw:created', thirdPointCreated);
 }
 
@@ -360,25 +363,33 @@ function fourthPointCreated(e) {
   });
 }
 
-let lastKnownLocation;
-function updateLine(line, newMidPoint) {
-  if (!newMidPoint) newMidPoint = line.getLatLngs()[1]; // if no newMidPoint, then updated point was majorPoints[0]
+function updateLine(line, midPoint) {
+  if (!midPoint) midPoint = line.getLatLngs()[1]; // if no midPoint, then updated point was majorPoints[0]
 
-  let c = getMapEdgePoint(leafletMap.latLngToLayerPoint(majorPoints[0]), leafletMap.latLngToLayerPoint(newMidPoint));
+  let c = getMapEdgePoint(leafletMap.latLngToLayerPoint(majorPoints[0]), leafletMap.latLngToLayerPoint(midPoint));
   let previousLineLatLngs = line.getLatLngs();
-  line.setLatLngs([majorPoints[0], newMidPoint, leafletMap.layerPointToLatLng(c)]);
+  line.setLatLngs([majorPoints[0], midPoint, leafletMap.layerPointToLatLng(c)]);
 
   // Don't allow the line to extend beyond a given angle
-  if (line1 && line2 && getAngle(line1, line2) > maxAngleAllowed) {
-    line.setLatLngs(previousLineLatLngs);
+  if (line1 && line2 && getAngle(line1, line2) > maxAngleAllowed) line.setLatLngs(previousLineLatLngs);
+}
 
-    // console.log(tooling);
-    // console.log(editing);
-    if (editing) console.log('TODO - editing');
-    else if (tooling) tooling._marker.setLatLng(lastKnownLocation);
-  } else {
-    lastKnownLocation = newMidPoint;
-  }
+function snapThirdPoint(mousePoint) {
+  let point0 = leafletMap.latLngToLayerPoint(majorPoints[0]);
+  let point1 = leafletMap.latLngToLayerPoint(majorPoints[1]);
+  let dist = Math.sqrt(Math.pow(point1.x - point0.x, 2) + Math.pow(point1.y - point0.y, 2));
+  return findPointAlongLine(line2, dist);
+}
+
+// assumes that line[0] is the beginning point of distance
+function findPointAlongLine(line, distance) {
+  let line0Point = leafletMap.latLngToLayerPoint(line.getLatLngs()[0]);
+  let line1Point = leafletMap.latLngToLayerPoint(line.getLatLngs()[1]);
+  let originVector = [line1Point.x - line0Point.x, line1Point.y - line0Point.y];
+  let unitVectorDenominator = Math.sqrt(Math.pow(originVector[0], 2) + Math.pow(originVector[1], 2));
+  let unitVector = [originVector[0] / unitVectorDenominator, originVector[1] / unitVectorDenominator];
+  let distanceVector = [distance * unitVector[0], distance * unitVector[1]];
+  return leafletMap.layerPointToLatLng(L.point(line0Point.x + distanceVector[0], line0Point.y + distanceVector[1]));
 }
 
 function setControlPoint() {
