@@ -356,32 +356,59 @@ function fourthPointCreated(e) {
 
       if (dependentLayers.indexOf('line1') >= 0) {
         updateLine(line1, newLinePoint);
+
+        // snapPoint and update markers accordingly
         let snappedPoint = snapSidePoint(e.layerPoint, line2.getLatLngs()[1], line1);
-        e.target.setLatLng(snappedPoint); // update visible marker
+        editing._featureGroup.eachLayer(function (l) {
+          if (l.pointIndex === 1) l.setLatLng(snappedPoint); // update visible marker
+        });
+
         line1._latlngs[1] = snappedPoint; // update line
-        majorPoints[1] = snappedPoint; // update majorPoints for polygon drawing
+        majorPoints[1] = snappedPoint; // update majorPoints to snapped version
       }
 
       if (dependentLayers.indexOf('line2') >= 0) {
         updateLine(line2, newLinePoint);
+
+        // snapPoint and update markers accordingly
         let snappedPoint = snapSidePoint(e.layerPoint, line1.getLatLngs()[1], line2);
-        e.target.setLatLng(snappedPoint); // update visible marker
+        editing._featureGroup.eachLayer(function (l) {
+          if (l.pointIndex === 2) l.setLatLng(snappedPoint); // update visible marker
+        });
+
         line2._latlngs[1] = snappedPoint; // update line
-        majorPoints[2] = snappedPoint; // update majorPoints for polygon drawing
+        majorPoints[2] = snappedPoint; // update majorPoints to snapped version
+      }
+
+      // Update curve point based on the movement of the two lines
+      if (dependentLayers.indexOf('line1') || dependentLayers.indexOf('line2')) {
+        let halfwayPoint = L.latLng((majorPoints[1].lat - majorPoints[2].lat) / 2 + majorPoints[2].lat, (majorPoints[1].lng - majorPoints[2].lng) / 2 + majorPoints[2].lng);
+        updateLine(line3, halfwayPoint);
+
+        // snapPoint and update markers accordingly
+        let snappedPoint = snapFourthPoint(leafletMap.latLngToLayerPoint(majorPoints[3]));
+        editing._featureGroup.eachLayer(function (l) {
+          if (l.pointIndex === 3) l.setLatLng(snappedPoint); // update visible marker
+        });
+
+        line3._latlngs[1] = snappedPoint; // update line
+        majorPoints[3] = snappedPoint; // update majorPoints to snapped version
       }
 
       if (dependentLayers.indexOf('line3') >= 0) {
         let halfwayPoint = L.latLng((majorPoints[1].lat - majorPoints[2].lat) / 2 + majorPoints[2].lat, (majorPoints[1].lng - majorPoints[2].lng) / 2 + majorPoints[2].lng);
         updateLine(line3, halfwayPoint);
+
+        // snapPoint and update markers accordingly
         let snappedPoint = snapFourthPoint(leafletMap.latLngToLayerPoint(e.latlng));
         e.target.setLatLng(snappedPoint); // update visible marker
         line3._latlngs[1] = snappedPoint; // update line
-        majorPoints[3] = snappedPoint; // update majorPoints for polygon drawing
+        majorPoints[3] = snappedPoint; // update majorPoints to snapped version
       }
 
       // update the cone polygon
       if (dependentLayers.indexOf('finalCone') >= 0) {
-        updatePolygon(majorPoints[3]);
+        updatePolygon();
       }
     });
   });
@@ -411,7 +438,6 @@ function snapFourthPoint(mousePoint) {
   let snappedPoint = L.LineUtil.closestPointOnSegment(mousePoint, point0, point1);
   let snappedLL = leafletMap.layerPointToLatLng(snappedPoint);
 
-  console.log(point0, point1, snappedPoint);
   if (isLeft(majorPoints[1], majorPoints[2], majorPoints[0]) === isLeft(majorPoints[1], majorPoints[2], snappedLL)) snappedLL = line3.getLatLngs()[1];
   return snappedLL;
 }
@@ -428,6 +454,7 @@ function findPointAlongLine(line, distance) {
 }
 
 function updatePolygon(curvePoint) {
+  if (!curvePoint) curvePoint = majorPoints[3];
   let newPoints = [[majorPoints[0].lat, majorPoints[0].lng]].concat(generateCurvePoints([majorPoints[1], curvePoint, majorPoints[2]]));
   finalCone.setLatLngs(newPoints);
 }
