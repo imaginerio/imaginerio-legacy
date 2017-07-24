@@ -98,9 +98,14 @@ document.querySelector('.sidebar--cancel').addEventListener('click', function (e
   // Clear cones
   editableLayer.clearLayers();
   nonEditableLayer.clearLayers();
+  if (tooling) tooling.disable();
   tooling = null;
-  editing.disable();
+  if (editing) editing.disable();
   editing = null;
+
+  map.off('draw:created');
+  map.off('mousemove');
+
   newCone();
 
   // Clear form
@@ -206,6 +211,7 @@ function tileFadeIn(tileIn) {
 
 /* Leaflet Draw Functions */
 let tooling;
+let editing;
 let genericIcon = L.divIcon({ className: 'cone-guidepoint', iconSize: 10 });
 let majorPoints = [];
 let controlPoint;
