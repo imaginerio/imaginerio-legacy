@@ -493,12 +493,16 @@ function generateCurvePoints(ptsArray) {
   // clone array so we don't change the original content
   _pts = _.flatten(ptsArray.map((pt) => [pt.lng, pt.lat]));
 
-  // copy first point and insert at beginning
-  _pts.unshift(ptsArray[0].lat);
-  _pts.unshift(ptsArray[0].lng);
+  // Add control point
+  let halfwayPoint1 = [(ptsArray[0].lng - majorPoints[0].lng) / 2 + majorPoints[0].lng, (ptsArray[0].lat - majorPoints[0].lat) / 2 + majorPoints[0].lat];
+  let point01Dist = [ptsArray[1].lng - ptsArray[0].lng, ptsArray[1].lat - ptsArray[0].lat];
+  _pts.unshift(halfwayPoint1[1] - point01Dist[1]);
+  _pts.unshift(halfwayPoint1[0] - point01Dist[0]);
 
-  // copy last point and append
-  _pts.push(ptsArray[pl - 1].lng, ptsArray[pl - 1].lat);
+  // Add second control point
+  let halfwayPoint2 = [(ptsArray[2].lng - majorPoints[0].lng) / 2 + majorPoints[0].lng, (ptsArray[2].lat - majorPoints[0].lat) / 2 + majorPoints[0].lat];
+  let point12Dist = [ptsArray[1].lng - ptsArray[2].lng, ptsArray[1].lat - ptsArray[2].lat];
+  _pts.push(halfwayPoint2[0] - point12Dist[0], halfwayPoint2[1] - point12Dist[1]);
 
   // 1. loop goes through point array
   // 2. loop goes through each segment between the two points + one point before and after
