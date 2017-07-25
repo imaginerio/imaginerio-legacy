@@ -282,7 +282,7 @@ function secondPointCreated(e) {
   // New events
   leafletMap.on('mousemove', (e) => {
     updateLine(line2, e.latlng);
-    tooling._marker.setLatLng(snapSidePoint(e.layerPoint, line1.getLatLngs()[1], line2));
+    tooling._marker.setLatLng(snapSidePoint(e.layerPoint, majorPoints[1], line2));
   });
   leafletMap.on('draw:created', thirdPointCreated);
 }
@@ -357,7 +357,7 @@ function fourthPointCreated(e) {
         updateLine(line1, newLinePoint);
 
         // snapPoint and update markers accordingly
-        let snappedPoint = snapSidePoint(e.layerPoint, line2.getLatLngs()[1], line1);
+        let snappedPoint = snapSidePoint(e.layerPoint, majorPoints[2], line1);
         editing._featureGroup.eachLayer(function (l) {
           if (l.pointIndex === 1) l.setLatLng(snappedPoint); // update visible marker
         });
@@ -370,7 +370,7 @@ function fourthPointCreated(e) {
         updateLine(line2, newLinePoint);
 
         // snapPoint and update markers accordingly
-        let snappedPoint = snapSidePoint(e.layerPoint, line1.getLatLngs()[1], line2);
+        let snappedPoint = snapSidePoint(e.layerPoint, majorPoints[1], line2);
         editing._featureGroup.eachLayer(function (l) {
           if (l.pointIndex === 2) l.setLatLng(snappedPoint); // update visible marker
         });
