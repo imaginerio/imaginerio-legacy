@@ -170,3 +170,7 @@ input.button {
 input.button:hover {
   background-color: #388E3C;
 }
+
+.hidden-input {
+  display: none;
+}

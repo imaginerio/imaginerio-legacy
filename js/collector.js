@@ -214,7 +214,6 @@ let tooling;
 let editing;
 let genericIcon = L.divIcon({ className: 'cone-guidepoint', iconSize: 10 });
 let majorPoints = [];
-let controlPoint;
 let line1;
 let line2;
 let line3;
@@ -457,6 +456,8 @@ function updatePolygon(curvePoint) {
   if (!curvePoint) curvePoint = majorPoints[3];
   let newPoints = [[majorPoints[0].lat, majorPoints[0].lng]].concat(generateCurvePoints([majorPoints[1], curvePoint, majorPoints[2]]));
   finalCone.setLatLngs(newPoints);
+
+  savePolygonToForm();
 }
 
 function getMapEdgePoint(a, b) {
@@ -539,6 +540,11 @@ function generateCurvePoints(ptsArray) {
   }
 
   return result;
+}
+
+function savePolygonToForm() {
+  document.getElementById('form-polygon-data').value = JSON.stringify(finalCone.toGeoJSON());
+  document.getElementById('form-point-data').value = JSON.stringify(L.marker(majorPoints[0]).toGeoJSON());
 }
 
 /* -------------------------*/
