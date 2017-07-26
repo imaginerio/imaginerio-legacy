@@ -56,6 +56,7 @@ let slider = noUiSlider.create(document.querySelector('.slider'), {
     mode: 'values',
     filter: (val) => {
       if (val === maxYear) return 1;
+      else if (val === 2000) return 0;
       else if (val % 50) {
         if (val % 25) return 0;
         else return 2;
