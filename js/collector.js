@@ -96,17 +96,7 @@ leafletMap.addControl(drawControl);
 document.querySelector('.sidebar--cancel').addEventListener('click', function (e) {
   e.preventDefault();
 
-  // Clear cones
-  editableLayer.clearLayers();
-  nonEditableLayer.clearLayers();
-  if (tooling) tooling.disable();
-  tooling = null;
-  if (editing) editing.disable();
-  editing = null;
-
-  leafletMap.off('draw:created');
-  leafletMap.off('mousemove');
-
+  cancelEditing();
   newCone();
 
   // Clear form
@@ -220,6 +210,11 @@ let line2;
 let line3;
 let finalCone;
 
+leafletMap.on('draw:canceled', function (e) {
+  cancelEditing();
+  newCone();
+});
+
 function newCone() {
   let firstPointIcon = L.divIcon({ className: 'cone-point', iconSize: 10 });
 
@@ -230,6 +225,19 @@ function newCone() {
   tooling.enable();
 
   leafletMap.on('draw:created', firstPointCreated);
+}
+
+function cancelEditing() {
+  // Clear cones
+  editableLayer.clearLayers();
+  nonEditableLayer.clearLayers();
+  if (tooling) tooling.disable();
+  tooling = null;
+  if (editing) editing.disable();
+  editing = null;
+
+  leafletMap.off('draw:created');
+  leafletMap.off('mousemove');
 }
 
 function firstPointCreated(e) {
