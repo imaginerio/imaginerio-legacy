@@ -441,13 +441,21 @@ function snapSidePoint(mousePoint, equivalentPoint, line) {
 }
 
 function snapFourthPoint(mousePoint) {
-  let point0 = leafletMap.latLngToLayerPoint(line3.getLatLngs()[0]);
-  let point1 = leafletMap.latLngToLayerPoint(line3.getLatLngs()[2]);
-  let snappedPoint = L.LineUtil.closestPointOnSegment(mousePoint, point0, point1);
-  let snappedLL = leafletMap.layerPointToLatLng(snappedPoint);
+  const line3LLs = line3.getLatLngs();
 
-  if (isLeft(majorPoints[1], majorPoints[2], majorPoints[0]) === isLeft(majorPoints[1], majorPoints[2], snappedLL)) snappedLL = line3.getLatLngs()[1];
-  return snappedLL;
+  let point0 = leafletMap.latLngToLayerPoint(line3LLs[0]);
+  let point1 = leafletMap.latLngToLayerPoint(line3LLs[2]);
+  let snappedPoint = L.LineUtil.closestPointOnSegment(mousePoint, point0, point1);
+
+  let pointToUse = mousePoint;
+  if (mousePoint.distanceTo(snappedPoint) <= 10) pointToUse = snappedPoint;
+
+  let pointToUseLL = leafletMap.layerPointToLatLng(pointToUse);
+
+  if (isLeft(majorPoints[1], majorPoints[2], majorPoints[0]) === isLeft(majorPoints[1], majorPoints[2], pointToUseLL)) pointToUseLL = line3LLs[1];
+  if (isLeft(majorPoints[0], majorPoints[1], line3LLs[1]) !== isLeft(majorPoints[0], majorPoints[1], pointToUseLL)) pointToUseLL = line3LLs[1];
+  if (isLeft(majorPoints[0], majorPoints[2], line3LLs[1]) !== isLeft(majorPoints[0], majorPoints[2], pointToUseLL)) pointToUseLL = line3LLs[1];
+  return pointToUseLL;
 }
 
 // assumes that line[0] is the beginning point of distance
