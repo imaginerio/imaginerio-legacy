@@ -355,6 +355,7 @@ function fourthPointCreated(e) {
   editableLayer.eachLayer(function (layer) {
     layer.on('drag', function (e) {
       let dependentLayers = e.target.dependentLayers;
+      let layerPoint = leafletMap.latLngToLayerPoint(e.latlng);
 
       // update point location
       majorPoints[e.target.pointIndex] = e.target.getLatLng();
@@ -366,7 +367,7 @@ function fourthPointCreated(e) {
         updateLine(line1, newLinePoint);
 
         // snapPoint and update markers accordingly
-        let snappedPoint = snapSidePoint(e.layerPoint, majorPoints[2], line1);
+        let snappedPoint = snapSidePoint(layerPoint, majorPoints[2], line1);
         editing._featureGroup.eachLayer(function (l) {
           if (l.pointIndex === 1) l.setLatLng(snappedPoint); // update visible marker
         });
@@ -379,7 +380,7 @@ function fourthPointCreated(e) {
         updateLine(line2, newLinePoint);
 
         // snapPoint and update markers accordingly
-        let snappedPoint = snapSidePoint(e.layerPoint, majorPoints[1], line2);
+        let snappedPoint = snapSidePoint(layerPoint, majorPoints[1], line2);
         editing._featureGroup.eachLayer(function (l) {
           if (l.pointIndex === 2) l.setLatLng(snappedPoint); // update visible marker
         });
@@ -437,7 +438,11 @@ function snapSidePoint(mousePoint, equivalentPoint, line) {
   let point0 = leafletMap.latLngToLayerPoint(majorPoints[0]);
   let point1 = leafletMap.latLngToLayerPoint(equivalentPoint);
   let dist = Math.sqrt(Math.pow(point1.x - point0.x, 2) + Math.pow(point1.y - point0.y, 2));
-  return leafletMap.layerPointToLatLng(findPointAlongLine(line, dist));
+  let pointAlongLine = findPointAlongLine(line, dist);
+
+  let pointToUse = mousePoint;
+  if (mousePoint.distanceTo(pointAlongLine) <= 10 || getAngle(line1, line2) > maxAngleAllowed) pointToUse = pointAlongLine;
+  return leafletMap.layerPointToLatLng(pointToUse);
 }
 
 function snapFourthPoint(mousePoint) {
