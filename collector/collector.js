@@ -575,7 +575,8 @@ function generateCurvePoints(ptsArray) {
 
 function savePolygonToForm() {
   document.getElementById('form-polygon-data').value = JSON.stringify(finalCone.toGeoJSON());
-  document.getElementById('form-point-data').value = JSON.stringify(L.marker(majorPoints[0]).toGeoJSON());
+  document.getElementById('form-point-lat').value = majorPoints[0].lat;
+  document.getElementById('form-point-lon').value = majorPoints[0].lng;
 }
 
 /* -------------------------*/
