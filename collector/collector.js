@@ -93,6 +93,10 @@ var drawControl = new L.Control.Draw({
 leafletMap.addControl(drawControl);
 
 /* Sidebar */
+let formlocation = window.location.href.toString();
+formlocation = formlocation.replace('index.html', '');
+document.querySelector('.sidebar--form').setAttribute('action', formlocation);
+
 document.querySelector('.sidebar--cancel').addEventListener('click', function (e) {
   e.preventDefault();
 
