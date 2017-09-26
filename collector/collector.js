@@ -21,6 +21,7 @@ let tooltips = {
 /* -------------------------*/
 
 let maxBounds = [[-23.10243406, -44.04944719], [-22.63003187, -42.65988214]];
+let metaserver = 'http://imaginerio.axismaps.io:3000';
 let tileserver = 'http://imaginerio.axismaps.io:3001/tiles/';
 let year;
 let maxYear = 2017;
@@ -94,7 +95,7 @@ leafletMap.addControl(drawControl);
 
 /* Sidebar */
 let formlocation = window.location.href.toString();
-formlocation = formlocation.replace('index.html', '');
+formlocation = metaserver + '/collector/';
 document.querySelector('.sidebar--form').setAttribute('action', formlocation);
 
 document.querySelector('.sidebar--cancel').addEventListener('click', function (e) {
