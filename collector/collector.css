@@ -163,12 +163,22 @@ sidebar {
   background-color: #aaa;
 }
 
-input.button {
+.sidebar--submit {
   background-color: #4CAF50;
 }
 
-input.button:hover {
+.sidebar--submit:hover {
   background-color: #388E3C;
+}
+
+.sidebar--submit.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.sidebar--submit:hover {
+  background-color: #ccc;
 }
 
 .hidden-input {

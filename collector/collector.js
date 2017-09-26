@@ -83,7 +83,7 @@ let nonEditableLayer = new L.FeatureGroup();
 leafletMap.addLayer(editableLayer);
 leafletMap.addLayer(nonEditableLayer);
 
-var drawControl = new L.Control.Draw({
+let drawControl = new L.Control.Draw({
   draw: false,
   edit: {
     edit: false,
@@ -94,10 +94,20 @@ var drawControl = new L.Control.Draw({
 leafletMap.addControl(drawControl);
 
 /* Sidebar */
+
+// Set form submit location
 let formlocation = window.location.href.toString();
 formlocation = metaserver + '/collector/';
 document.querySelector('.sidebar--form').setAttribute('action', formlocation);
 
+let requiredInputs = document.querySelectorAll('.required');
+for (let i = 0; i < requiredInputs.length; i++) {
+  requiredInputs[i].addEventListener('change', function () {
+    checkForm();
+  });
+}
+
+// Cancel event
 document.querySelector('.sidebar--cancel').addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -577,6 +587,24 @@ function savePolygonToForm() {
   document.getElementById('form-polygon-data').value = JSON.stringify(finalCone.toGeoJSON());
   document.getElementById('form-point-lat').value = majorPoints[0].lat;
   document.getElementById('form-point-lon').value = majorPoints[0].lng;
+  checkForm();
+}
+
+function checkForm() {
+  let modifiedCount = 0
+
+  // check form
+  let required = document.querySelectorAll('.required');
+  for (let i = 0; i < required.length; i++) {
+    if (required[i].value !== '') modifiedCount += 1;
+  }
+
+  // check polygon is drawn
+  if (majorPoints[3]) modifiedCount += 1;
+
+  if (modifiedCount === 5) {
+    document.querySelector('.sidebar--submit').classList.remove('disabled');
+  }
 }
 
 /* -------------------------*/
