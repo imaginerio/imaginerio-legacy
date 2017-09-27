@@ -96,9 +96,7 @@ leafletMap.addControl(drawControl);
 /* Sidebar */
 
 // Set form submit location
-let formlocation = window.location.href.toString();
-formlocation = metaserver + '/collector/';
-document.querySelector('.sidebar--form').setAttribute('action', formlocation);
+document.querySelector('.sidebar--form').setAttribute('action', metaserver + '/collector/');
 
 let requiredInputs = document.querySelectorAll('.required');
 for (let i = 0; i < requiredInputs.length; i++) {
@@ -106,6 +104,48 @@ for (let i = 0; i < requiredInputs.length; i++) {
     checkForm();
   });
 }
+
+// Submit Event
+document.querySelector('.sidebar--submit').addEventListener('click', function (e) {
+  e.preventDefault();
+
+  let formEl = document.querySelector('.sidebar--form');
+
+  let request = new XMLHttpRequest();
+  request.open('POST', '/my/url', true);
+
+  // Success
+  request.addEventListener('load', function () {
+    document.querySelector('.success-message').classList.add('show');
+
+    setTimeout(function () {
+      document.querySelector('.success-message').classList.remove('show');
+    }, 3000);
+
+    cancelEditing();
+    newCone();
+
+    // Clear form
+    document.querySelectorAll('.sidebar--input, .sidebar--textarea').forEach(function (input) {
+      input.value = '';
+    });
+
+    // Return submit button back to disabled state
+    document.querySelector('.sidebar--submit').classList.add('disabled');
+  });
+
+  // Error
+  request.addEventListener('error', function (e) {
+    document.querySelector('.error-message > .message-response').textContent = e.responseText || 'There was an error submitting the viewcone to the server.';
+    document.querySelector('.error-message').classList.add('show');
+
+    setTimeout(function () {
+      document.querySelector('.error-message').classList.remove('show');
+    }, 3000);
+  });
+
+  request.send(new FormData(formEl));
+});
 
 // Cancel event
 document.querySelector('.sidebar--cancel').addEventListener('click', function (e) {
@@ -354,6 +394,9 @@ function fourthPointCreated(e) {
   e.layer.dependentLayers = ['line3', 'finalCone']; // for easier access during editing stage
   e.layer.pointIndex = 3;
   tooling.disable();
+
+  // Update form
+  checkForm();
 
   // Turn off old events
   leafletMap.off('draw:created');
