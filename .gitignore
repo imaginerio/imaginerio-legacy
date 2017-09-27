@@ -3,4 +3,5 @@ raster/*
 /raster
 Build/*
 *.log
+node_modules/*
 
