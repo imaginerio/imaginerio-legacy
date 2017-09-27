@@ -316,7 +316,7 @@ function build_layers()
 			);
 		}
 
-		swatch.css( style );
+		if( style.fill || style.stroke ) swatch.css( style );
 
 		return swatch;
 	}
