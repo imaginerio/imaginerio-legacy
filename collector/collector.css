@@ -123,11 +123,13 @@ sidebar {
   font-family: 'Roboto';
   font-size: 14px;
   font-weight: bold;
+  text-align: right;
   text-transform: uppercase;
 }
 
 .sidebar--input {
   border: 1px solid #ccc;
+  flex-shrink: 0;
   line-height: 1.5;
   margin-left: 10px;
   width: 70%;
